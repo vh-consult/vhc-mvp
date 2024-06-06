@@ -23,11 +23,18 @@ const config = {
           1: '#1c1f2e',
           2: '#161925'
         },
-        blue: {
-          1: '#0e78f9',
+        green: {
+          1: '#f4ffff',
+          2: '#00aea8',
         },
-        sky: {
-          1: '#c9ddff',
+        violet: {
+          1: '#5048F8',
+        },
+        blue: {
+          1: '#0186FD',
+        },
+        purple: {
+          1: '#14188B',
         },
       },
       backgroundImage: {
