@@ -5,11 +5,11 @@ import MobileNav from './MobileNav'
 
 const Navbar = () => {
   return (
-    <nav className='flex-between fixed z-50 w-full bg-dark-1 px-6 y-4 lg:px-10'>
+    <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 y-4 lg:px-10'>
       <Link href={"/"} className='flex items-center gap-1'>
         <Image
-          src=''
-          alt=''
+          src='/icons/logo.svg'
+          alt='logo'
           width={32}
           height={32}
           className='max-sm:size-10'
