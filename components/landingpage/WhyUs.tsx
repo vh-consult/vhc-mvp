@@ -2,6 +2,7 @@ import { landing } from "@/constants"
 import InsuranceCard from "./InsuranceCard"
 import { Button } from "../ui/button"
 import { AiOutlineCheck } from "react-icons/ai"
+import Image from "next/image"
 
 const WhyUs = () => {
     return (
@@ -42,7 +43,14 @@ const WhyUs = () => {
   
           </div>
           <div className='w-4/5 md:w-2/5 absolute md:right-0 h-2/3 md:h-full shadow-xl md:bottom-0'>
-            <img src={landing.whyUs.image} className=" rounded-t-2xl w-full object-cover  h-full" />
+            <Image 
+              src={landing.whyUs.image} 
+              alt=""
+              width={100}
+              height={100}
+              className=" rounded-t-2xl w-full 
+              object-cover  h-full" 
+            />
           </div>
         </section>
         <section className='mb-4 md:mb-8'>

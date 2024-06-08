@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface StoryProps {
     image: string;
     name: string;
@@ -12,7 +14,14 @@ interface StoryProps {
           {content}
         </div>
         <div className="flex flex-col items-center justify-center">
-          <img src={image} className="w-[60px] h-[60px] rounded-full object-cover object-center" />
+          <Image 
+            alt=""
+            src={image} 
+            width={100}
+            height={100}
+            className="w-[60px] h-[60px] rounded-full
+             object-cover object-center" 
+          />
           <div className="text-center">
             <h4 className="text-base font-medium">{name}</h4>
             <p className="text-xs md:text-sm font-semibold opacity-60">{role}</p>

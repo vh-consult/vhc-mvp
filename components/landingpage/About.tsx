@@ -1,6 +1,7 @@
 import { landing } from "@/constants"
 import { Button } from "../ui/button"
 import BlogCard from "./BlogCard"
+import Image from "next/image"
 
 const About = () => {
     return (
@@ -30,16 +31,25 @@ const About = () => {
                 </div>
                 
                 <div className={`relative w-[350px] h-[500px] overflow-hidden`}>
-                  <img src="/images/aboutpic.jpg" className='absolute inset-0 rounded-2xl w-full h-full object-cover object-center' alt="" />
+                  <Image 
+                    alt='' 
+                    src="/images/aboutpic.jpg" 
+                    className='absolute inset-0 rounded-2xl 
+                    w-full h-full object-cover object-center' 
+                    width={350}
+                    height={500}
+                  />
                 </div>
   
               </div>
   
               <div className='w-[90%] px-[5%] md:px-0 md:w-4/5 md:ml-2 '>
-                <img 
+                <Image 
                   src="/icons/streamline_insurance-hand.png" 
                   alt="" 
-                  className='w-[40px] h-[40px] md:w-[60px] md:h-[60px]'
+                  width={40}
+                  height={40}
+                  className=' md:w-[60px] md:h-[60px]'
                 />
                 <h3 className='md:text-xl font-semibold mt-2 md:mt-3'>
                   {landing.about.header}

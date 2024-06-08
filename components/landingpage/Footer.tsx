@@ -1,4 +1,6 @@
 import { landing } from "@/constants"
+import Image from "next/image"
+import Link from "next/link"
 
 const Footer = () => {
     return (
@@ -9,7 +11,12 @@ const Footer = () => {
             bg-green-4 text-white
           '>
           <div className='md:w-3/6 text-[12px] md:text-base'>
-            <img src={landing.footer.logo} alt=""/>
+            <Image 
+              src={landing.footer.logo} 
+              alt=""
+              width={120}
+              height={40}
+            />
             <p>
               {landing.footer.content}
             </p>
@@ -18,12 +25,15 @@ const Footer = () => {
                 landing.footer.socials.map((socialMedia, index) => {
                   return(
                     <span key={index} className='mr-4'>
-                      <a href={socialMedia.link}>
-                        <img 
+                      <Link href={socialMedia.link}>
+                        <Image 
+                          alt=""
+                          width={24}
+                          height={24}
                           src={socialMedia.icon} 
-                          className="w-[24px] h-[24px]" 
+                          className="w-full h-full object-cover" 
                         />
-                      </a>
+                      </Link>
                     </span>
                   )
                 })

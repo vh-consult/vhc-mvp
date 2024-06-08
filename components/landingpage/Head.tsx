@@ -4,6 +4,7 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 
 interface NavLink {
@@ -91,7 +92,13 @@ const Head = () => {
     return (
         <div className='header sticky z-50 top-0 left-0  h-16 bg-white w-full flex flex-row justify-between items-center p-6'>
           <div className='w-2/6 md:w-1/6 '>
-            <img src={landing.header.logo} alt="app-logo" />
+            <Image 
+              src={landing.header.logo} 
+              alt="app-logo" 
+              width={120}
+              height={40}
+              className="w-full h-full object-cover"
+            />
           </div>
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
