@@ -41,6 +41,7 @@ const Navbar = ({navigations}: NavBarProps) => {
               return(
                 <li>
                   <Link
+                    key={nav.label}
                     href={nav.route}
                     className={` font-normal text-sm ${activeLink ? `text-green-2 font-medium`: ``}`}
                   >
