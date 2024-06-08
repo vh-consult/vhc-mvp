@@ -3,7 +3,7 @@ import BlogCard from "./BlogCard"
 
 const Blogs = () => {
     return (
-      <div id="blogs" className="md:mb-8 w-full">
+      <section id="blogs" className="md:mb-8 w-full">
         <div className="text-center mb-4">
           <h2 className="text-xl font-semibold">{landing.blogs.title}</h2>
           <p className="text-base font-normal">{landing.blogs.content}</p>
@@ -27,7 +27,7 @@ const Blogs = () => {
             })
           }
         </div>
-      </div>
+      </section>
     )
   }
   

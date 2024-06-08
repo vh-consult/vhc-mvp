@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -18,18 +19,21 @@ interface NavBarProps {
 const Navbar = ({navigations}: NavBarProps) => {
   const pathname = usePathname()
   return (
-    <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 y-4 lg:px-10'>
+    <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
       <Link href={"/"} className='flex items-center gap-1'>
         <Image
-          src='/logo.svg'
+          src='/favicon.svg'
           alt='logo'
           width={32}
           height={32}
           className='max-sm:size-10'
         />
+        <p className='font-bold text-2xl text-white'>
+          V-Consultation
+        </p>
       </Link>
 
-      <div className="w-full flex flex-between">
+      <div className="flex flex-between">
         <ul>
           {
             navigations?.map((nav)=>{

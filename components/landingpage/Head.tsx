@@ -96,9 +96,9 @@ const Head = () => {
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
           <SignedIn>
-            <Button asChild className="bg-green-2 rounded-full text-green-1 animate-bounce">
-              <Link href="/patient/dashboard">
-                Dashboard
+            <Button className="bg-green-2 rounded-full text-green-1 mr-4">
+              <Link href="/consultation/home">
+                Consultation Room
               </Link>
             </Button>
             <UserButton afterSignOutUrl="/"/>

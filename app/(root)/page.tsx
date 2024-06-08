@@ -9,7 +9,7 @@ import WhyUs from "@/components/landingpage/WhyUs"
 
 const LandingPage = () => {
     return (
-      <div>
+      <div className="bg-green-3">
         <Head/>
         <Hero/>
         <About/>

@@ -3,7 +3,7 @@ import HeroCard from "./HeroCard"
 
 const Hero = () => {
     return (
-      <div className={` w-full text-green-4  h-[350px] bg-center bg-landingHero  bg-no-repeat bg-cover mb-6`}  id='home'
+      <section className={` w-full text-green-4  h-[350px] bg-center bg-landingHero  bg-no-repeat bg-cover mb-6`}  id='home'
       >
         <div className="w-full h-full relative"> 
         <div className="absolute inset-0 bg-green-4 bg-opacity-50"></div>
@@ -43,7 +43,7 @@ const Hero = () => {
           </div>
   
         </div>
-      </div>
+      </section>
     )
   }
   

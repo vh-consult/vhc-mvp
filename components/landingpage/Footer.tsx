@@ -2,7 +2,7 @@ import { landing } from "@/constants"
 
 const Footer = () => {
     return (
-      <div className='w-full flex flex-col h-[400px] '>
+      <section className='w-full flex flex-col h-[400px] '>
         <div 
           className='w-full h-[375px] px-5 md:px-20 flex 
             flex-col md:flex-row items-center md:justify-between 
@@ -37,7 +37,7 @@ const Footer = () => {
         <div className='md:h-[25px] bg-white text-green-4 text-[12px] md:text-sm text-center pt-2 opacity-50'>
           {landing.footer.copyright}
         </div>
-      </div>
+      </section>
     )
   }
   

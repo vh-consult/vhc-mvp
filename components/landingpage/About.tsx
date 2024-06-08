@@ -30,14 +30,14 @@ const About = () => {
                 </div>
                 
                 <div className={`relative w-[350px] h-[500px] overflow-hidden`}>
-                  <img src="/assets/images/aboutpic.jpg" className='absolute inset-0 rounded-2xl w-full h-full object-cover object-center' alt="" />
+                  <img src="/images/aboutpic.jpg" className='absolute inset-0 rounded-2xl w-full h-full object-cover object-center' alt="" />
                 </div>
   
               </div>
   
               <div className='w-[90%] px-[5%] md:px-0 md:w-4/5 md:ml-2 '>
                 <img 
-                  src="/assets/icons/streamline_insurance-hand.png" 
+                  src="/icons/streamline_insurance-hand.png" 
                   alt="" 
                   className='w-[40px] h-[40px] md:w-[60px] md:h-[60px]'
                 />
@@ -48,7 +48,9 @@ const About = () => {
                   {landing.about.body}
                 </p>
                 <Button 
-                  className='border border-green-4 flex flex-row items-center justify-between rounded-3xl hover:text-green-2 hover:border-green hover:shadow-md p-2 w-[120px] h-[40px]'
+                  className='border border-green-4 flex flex-row items-center justify-between 
+                  rounded-3xl hover:text-green-2 hover:border-green hover:shadow-md 
+                  p-2 w-[120px] h-[40px]'
                 > 
                   {landing.about.button.text}
                   <landing.about.button.icon/> 
