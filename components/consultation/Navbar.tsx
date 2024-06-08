@@ -36,12 +36,11 @@ const Navbar = ({navigations}: NavBarProps) => {
       <div className="flex flex-between">
         <ul>
           {
-            navigations?.map((nav)=>{
+            navigations?.map((nav,index)=>{
               const activeLink = pathname === nav.route
               return(
-                <li>
+                <li key={index}>
                   <Link
-                    key={nav.label}
                     href={nav.route}
                     className={` font-normal text-sm ${activeLink ? `text-green-2 font-medium`: ``}`}
                   >
