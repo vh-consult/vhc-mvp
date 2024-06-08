@@ -26,3 +26,10 @@ export const sidebarLinks = [
       label: 'Personal Room',
     },
   ];
+
+  export const avatarImages = [
+    '/images/doc-3.jpg',
+    '/images/patient-1.jpg',
+    '/images/patient-2.jpg',
+    '/images/patient-3.jpg',
+  ]
