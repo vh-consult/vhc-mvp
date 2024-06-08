@@ -53,7 +53,7 @@ const MeetingSetup = ({
 
   if (callHasEnded)
     return (
-      <Alert
+      <Alert 
         title="The call has been ended by the host"
         iconUrl="/icons/call-ended.svg"
       />
@@ -75,7 +75,7 @@ const MeetingSetup = ({
         <DeviceSettings />
       </div>
       <Button
-        className="rounded-md bg-green-500 px-4 py-2.5"
+        className="rounded-md bg-green-2 px-4 py-2.5"
         onClick={() => {
           call.join();
 

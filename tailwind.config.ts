@@ -21,7 +21,17 @@ const config = {
       colors: {
         dark: {
           1: '#1c1f2e',
-          2: '#161925'
+          2: '#161925',
+          3: '#252A41',
+          4: '#1E2757',
+        },
+        sky: {
+          1: '#C9DDFF',
+          2: '#ECF0FF',
+          3: '#F5FCFF',
+        },
+        orange: {
+          1: '#FF742E',
         },
         green: {
           1: '#f4ffff',
@@ -32,6 +42,9 @@ const config = {
         },
         blue: {
           1: '#0186FD',
+        },
+        yellow: {
+          1: '#F9A90E',
         },
         purple: {
           1: '#14188B',

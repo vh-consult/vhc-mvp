@@ -42,21 +42,17 @@ const MeetingCard = ({
         </div>
       </article>
       <article className={cn("flex justify-center relative", {})}>
-        <div className="relative flex w-full max-sm:hidden">
-          {avatarImages.map((img, index) => (
+        <div className="flex w-full items-center">
             <Image
-              key={index}
-              src={img}
+              src='/images/patient-1.jpg'
               alt="attendees"
-              width={40}
-              height={40}
-              className={cn("rounded-full", { absolute: index > 0 })}
-              style={{ top: 0, left: index * 28 }}
+              width={0}
+              height={0}
+              className={cn("rounded-full")}
             />
-          ))}
-          <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-dark-3 bg-dark-4">
-            +5
-          </div>
+            <span className="text-lg font-medium text-green-1">
+              With Patient
+            </span>
         </div>
         {!isPreviousMeeting && (
           <div className="flex gap-2">
