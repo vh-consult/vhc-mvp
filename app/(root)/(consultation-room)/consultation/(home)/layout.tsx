@@ -1,8 +1,8 @@
-import Navbar from '@/components/Navbar'
-import Sidebar from '@/components/Sidebar'
+import Navbar from '@/components/consultation/Navbar'
+import Sidebar from '@/components/consultation/Sidebar'
 import React, { ReactNode } from 'react'
 
-const HomeLayout = ({children}:{children:ReactNode}) => {
+const ConsultationLayout = ({children}:{children:ReactNode}) => {
   return (
     <main className='relative bg-dark-2'>
         <Navbar />
@@ -19,4 +19,4 @@ const HomeLayout = ({children}:{children:ReactNode}) => {
   )
 }
 
-export default HomeLayout
+export default ConsultationLayout

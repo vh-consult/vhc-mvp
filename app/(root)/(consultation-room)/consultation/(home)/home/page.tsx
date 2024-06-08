@@ -1,4 +1,4 @@
-import MeetingTypeList from '@/components/MeetingTypeList';
+import MeetingTypeList from '@/components/consultation/MeetingTypeList';
 import React from 'react'
 
 const Home = () => {

@@ -1,7 +1,21 @@
+import { 
+    AiOutlineLogout, 
+    AiOutlineSetting,
+    AiOutlineDashboard,
+    AiOutlineMail,
+    AiOutlineMenu,
+    AiOutlineArrowRight,
+    AiOutlineCheck
+  } from "react-icons/ai"
+import { BsDatabase, BsPeople } from "react-icons/bs";
+import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
+import { RxDashboard } from "react-icons/rx";
+  
+
 export const consultationSidebarLinks = [
     {
       imgURL: '/icons/Home.svg',
-      route: '/consultation/',
+      route: '/consultation/home',
       label: 'Home',
     },
   
@@ -25,7 +39,7 @@ export const consultationSidebarLinks = [
       route: '/consultation/personal-room',
       label: 'Personal Room',
     },
-  ];
+];
 
 export const avatarImages = [
   '/images/doc-3.jpg',
@@ -251,16 +265,6 @@ export const settingsNavElements = [
 
 ]
 
-import { 
-  AiOutlineLogout, 
-  AiOutlineSetting,
-  AiOutlineDashboard,
-  AiOutlineMail,
-  AiOutlineMenu,
-  AiOutlineArrowRight,
-  AiOutlineCheck
-} from "react-icons/ai"
-
 export const landing = {
   header: {
       logo: '/logo.svg',
@@ -288,11 +292,11 @@ export const landing = {
       ],
       login: {
           text: `Log in`,
-          link: `/login`
+          link: `/sig-in`
       },
       button: {
           text: `Sign up`,
-          link: `/register`
+          link: `/sign-up`
       },
       menuIcon: AiOutlineMenu
   },
@@ -652,150 +656,61 @@ export const landing = {
   }
 }
 
-export const sidebarElements = {
-  patient: {
-      up: [
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-      ],
-      down: [
-          {
-              icon: AiOutlineSetting,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineLogout,
-              label: '',
-              link: ''
-          },
-      ]
-  },
-  doctor: {
-      up: [
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-      ],
-      down: [
-          {
-              icon: AiOutlineSetting,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineLogout,
-              label: '',
-              link: ''
-          },
-      ]
-  },
-  hospital: {
-      up: [
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-      ],
-      down: [
-          {
-              icon: AiOutlineSetting,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineLogout,
-              label: '',
-              link: ''
-          },
-      ]
-  },
-  pharmacy: {
-      up: [
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineDashboard,
-              label: '',
-              link: ''
-          },
-      ],
-      down: [
-          {
-              icon: AiOutlineSetting,
-              label: '',
-              link: ''
-          },
-          {
-              icon: AiOutlineLogout,
-              label: '',
-              link: ''
-          },
-      ]
-  },
+export const patientSidebarElements = {
+    top: [
+        {
+            route: '/patient/dashboard',
+            label: 'Dashboard',
+            icon: RxDashboard
+        },
+        {
+            route: '/consultation/home',
+            label: 'Consultation',
+            icon: MdMeetingRoom
+        },
+        {
+            route: '/appointments/',
+            label: 'Appointments',
+            icon: MdOutlineSchedule
+        },
+        {
+            route: '/patient/record',
+            label: 'Appointments',
+            icon: BsDatabase
+        },
+    ],
+    bottom: [
+        {
+            route: '/patient/settings',
+            label: 'Settings',
+            icon: MdOutlineSettings
+        },
+    ]
 }
 
+export const doctorSidebarElements = {
+    top: [
+        {
+            route: '/doctor/dashboard',
+            label: 'Dashboard',
+            icon: RxDashboard
+        },
+        {
+            route: '/consultation/home',
+            label: 'Consultation',
+            icon: MdMeetingRoom
+        },
+        {
+            route: '/doctor/clients',
+            label: 'Clients',
+            icon: BsPeople
+        }
+    ],
+    bottom: [
+        {
+            route: '/patient/settings',
+            label: 'Settings',
+            icon: MdOutlineSettings
+        },
+    ]
+}

@@ -11,10 +11,10 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Consultation | V-Healthcare",
+  title: "V-Healthcare | Your health needs prioritized!",
   description: "Virtual Consultation Room",
   icons: {
-    icon: "/icons/logo.svg",
+    icon: "/favicon.svg",
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
         appearance={{
           layout: {
             socialButtonsVariant: "iconButton",
-            logoImageUrl: "/icons/yoom-logo.svg",
+            logoImageUrl: "/logo.svg",
           },
           variables: {
             colorText: "#fff",

@@ -1,5 +1,6 @@
 'use client'
 import { landing } from "@/constants";
+import { SignIn, SignInButton, SignUp, SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -93,7 +94,7 @@ const Head = () => {
           </div>
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
-              <Link 
+              {/* <Link 
                 href={landing.header.login.link}
                 className='text-green hover:underline hover:font-md'
               >
@@ -111,8 +112,9 @@ const Head = () => {
                         {landing.header.button.text}
                       </button>
                 }
-              </Link>
-  
+              </Link> */}
+            <SignIn />
+            <SignUp />
           </div>
           <div className='block md:hidden'>
               <landing.header.menuIcon/>
