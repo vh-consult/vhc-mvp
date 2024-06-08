@@ -12,7 +12,7 @@ const Stories = () => {
         bg-no-repeat bg-cover`
       }
     >
-      <div className="absolute inset-0 bg-blackish-green bg-opacity-80"></div>
+      <div className="absolute inset-0 bg-green-4 bg-opacity-80"></div>
       
       <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start md:justify-around w-full">
         <h3 

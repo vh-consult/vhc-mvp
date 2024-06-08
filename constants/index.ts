@@ -292,7 +292,7 @@ export const landing = {
       ],
       login: {
           text: `Log in`,
-          link: `/sig-in`
+          link: `/sign-in`
       },
       button: {
           text: `Sign up`,
@@ -449,7 +449,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green hover:border-0 hover:text-white hover:font-medium border border-blackish-green',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
 
           },
           {
@@ -465,7 +465,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Book A Call `,
-              buttonStyle: 'bg-white  hover:opacity-90 text-green font-medium',
+              buttonStyle: 'bg-white  hover:opacity-90 text-green-2 font-medium',
 
           },
           {
@@ -482,7 +482,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green hover:border-0 hover:text-white hover:font-medium border border-blackish-green',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
 
           },
       ]

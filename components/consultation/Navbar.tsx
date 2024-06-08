@@ -4,6 +4,7 @@ import React from 'react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 interface NavLinkProps {
   route: string;
@@ -37,6 +38,7 @@ const Navbar = ({navigations}: NavBarProps) => {
                 <li>
                   <Link
                     href={nav.route}
+                    className={` font-normal text-sm ${activeLink ? `text-green-2 font-medium`: ``}`}
                   >
                     {nav.label}
                   </Link>
@@ -53,7 +55,7 @@ const Navbar = ({navigations}: NavBarProps) => {
         </SignedIn>
 
 
-        <MobileNav />
+        <MobileNav usedAt='consultation-page' />
       </div>
     </nav>
   )

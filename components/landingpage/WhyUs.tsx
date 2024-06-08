@@ -8,7 +8,7 @@ const WhyUs = () => {
       <div id='why-us' className='md:mb-8'>
         <section className='w-full relative mb-8 flex flex-col-reverse md:flex-row items-center justify-center h-[450px]'>
           <div 
-            className='bg-green 
+            className='bg-green-2
             absolute bottom-0 left-0 md:w-3/5 h-[90%] flex 
             items-center justify-center '
           >
@@ -34,7 +34,7 @@ const WhyUs = () => {
                   }
                 </div>
                 <Button 
-                  className='bg-white text-green p-2 rounded-md font-medium hover:opacity-90 hover:shadow-lg'
+                  className='bg-white text-green-2 p-2 rounded-md font-medium hover:opacity-90 hover:shadow-lg'
                 > 
                   {landing.whyUs.buttonText} 
                 </Button>

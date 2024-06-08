@@ -3,10 +3,10 @@ import HeroCard from "./HeroCard"
 
 const Hero = () => {
     return (
-      <div className={` w-full text-blackish-green  h-[350px] bg-center bg-[url('/assets/images/herobg.jpg')]   bg-no-repeat bg-cover mb-6`}  id='home'
+      <div className={` w-full text-green-4  h-[350px] bg-center bg-landingHero  bg-no-repeat bg-cover mb-6`}  id='home'
       >
         <div className="w-full h-full relative"> 
-        <div className="absolute inset-0 bg-blackish-green bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-green-4 bg-opacity-50"></div>
           
           <div className="content w-4/5 md:w-2/5 absolute text-white top-6 md:top-12 right-10 md:right-48">
             <h5 className='text-sm md:text-lg font-medium text-start'>

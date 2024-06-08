@@ -36,22 +36,32 @@ const config = {
         green: {
           1: '#f4ffff',
           2: '#00aea8',
+          3: '#F4FFFF',
+          4: '#041F20'
         },
         violet: {
           1: '#5048F8',
+          2: '#EEEDFF',
+          3: '#F5F7FB'
         },
         blue: {
           1: '#0186FD',
+          2: '#DAEDFE',
+          3: '#F6F9FF',
+          4: '#03294B'
         },
         yellow: {
           1: '#F9A90E',
         },
         purple: {
           1: '#14188B',
+          2: '#525597',
         },
       },
       backgroundImage: {
-        hero: "url('/images/bg.jpeg')"
+        hero: "url('/images/bg.jpeg')",
+        landingHero: "url('/images/herobg.jpg')",
+
       },
       keyframes: {
         "accordion-down": {

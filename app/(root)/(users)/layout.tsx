@@ -1,10 +1,10 @@
 import React from 'react'
 
-const UserLayout = () => {
+const UserLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div>
-      
-    </div>
+    <main className=''>
+      {children}
+    </main>
   )
 }
 

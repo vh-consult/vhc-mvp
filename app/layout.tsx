@@ -26,19 +26,19 @@ export default function RootLayout({
       <ClerkProvider
         appearance={{
           layout: {
-            socialButtonsVariant: "iconButton",
+            socialButtonsVariant: "blockButton",
             logoImageUrl: "/logo.svg",
           },
           variables: {
-            colorText: "#fff",
-            colorPrimary: "#0E78F9",
-            colorBackground: "#1C1F2E",
-            colorInputBackground: "#252A41",
-            colorInputText: "#fff",
+            colorText: "#041F20",
+            colorPrimary: "#00AEA8",
+            colorBackground: "#F4FFFF",
+            colorInputBackground: "#F4FFFF",
+            colorInputText: "#041F20",
           },
         }}
       >
-        <body className={`${inter.className} `}>
+        <body className={`${inter.className}`}>
           <Toaster />
           {children}
         </body>

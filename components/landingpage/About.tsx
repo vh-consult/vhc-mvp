@@ -5,7 +5,7 @@ import BlogCard from "./BlogCard"
 const About = () => {
     return (
       <div id='about' className='md:mb-8'>
-        <section className='md:mt-0 w-full relative text-blackish-green flex flex-col items-center justify-start'>
+        <section className='md:mt-0 w-full relative text-green-4 flex flex-col items-center justify-start'>
             <div  className='md:w-1/2 h-auto mt-32 md:mt-24 mx-auto mb-4 '>
               <p className='text-sm md:text-base font-medium'>
                 {landing.about.subtitle}
@@ -48,7 +48,7 @@ const About = () => {
                   {landing.about.body}
                 </p>
                 <Button 
-                  className='border border-blackish-green flex flex-row items-center justify-between rounded-3xl hover:text-green hover:border-green hover:shadow-md p-2 w-[120px] h-[40px]'
+                  className='border border-green-4 flex flex-row items-center justify-between rounded-3xl hover:text-green-2 hover:border-green hover:shadow-md p-2 w-[120px] h-[40px]'
                 > 
                   {landing.about.button.text}
                   <landing.about.button.icon/> 
@@ -58,17 +58,17 @@ const About = () => {
         </section>
         <section className='mt-3 md:mt-[-30px]'>
           <div className='h-[350px]
-            bg-light-green w-full 
+            bg-green-1 w-full 
             flex flex-col md:flex-row justify-center md:pt-16 '
           >
             <div className='w-[90%] mx-auto md:mx-0 md:w-1/3 md:mr-52'>
               <p className='text-sm md:text-base 
-                text-green 
+                text-green-2
                 font-medium'
               >
                 {landing.awareness.subtitle}
               </p>
-              <h1 className='text-lg md:text-2xl text-blackish-green 
+              <h1 className='text-lg md:text-2xl text-green-4 
                 font-semibold'
               >
                 {landing.awareness.title}

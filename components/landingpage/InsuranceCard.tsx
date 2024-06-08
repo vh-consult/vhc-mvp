@@ -28,7 +28,7 @@ const InsuranceCard = ({
   return (
     <div
       className={`p-3 rounded-xl shadow-md relative ${
-        dominant ? "text-white bg-green mx-4" : "bg-white border"
+        dominant ? "text-white bg-green-2 mx-4" : "bg-white border"
       } ${className} `}
     >
       <h3 className="font-medium text-xl" >

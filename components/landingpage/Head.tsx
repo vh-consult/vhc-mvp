@@ -1,8 +1,9 @@
 'use client'
 import { landing } from "@/constants";
-import { SignIn, SignInButton, SignUp, SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 
 interface NavLink {
@@ -52,8 +53,8 @@ interface NavLink {
           <ul className='list-none flex flex-row justify-around'>
             {landing.header.navLinks.map((link: NavLink, index: number) => (
               <li key={index} className='mr-5'>
-                <a
-                  className={`font-normal ${activeLink === link.link ? 'text-green font-medium' : ''}`}
+                <Link
+                  className={`font-normal ${activeLink === link.link ? 'text-green-2 font-medium' : ''}`}
                   href={link.link}
                   onClick={(e) => {
                     e.preventDefault();
@@ -61,7 +62,7 @@ interface NavLink {
                   }}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -94,27 +95,35 @@ const Head = () => {
           </div>
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
-              {/* <Link 
-                href={landing.header.login.link}
-                className='text-green hover:underline hover:font-md'
-              >
-                {landing.header.login.text}
+          <SignedIn>
+            <Button asChild className="bg-green-2 rounded-full text-green-1 animate-bounce">
+              <Link href="/patient/dashboard">
+                Dashboard
               </Link>
-              <Link href={landing.header.button.link}>
-                {
-                      <button className='
-                        hidden md:block h-10 
-                        bg-green w-20 rounded-lg 
-                        hover:transition-all
-                        hover:shadow-lg
-                        text-white m-2'
-                      >
-                        {landing.header.button.text}
-                      </button>
-                }
-              </Link> */}
-            <SignIn />
-            <SignUp />
+            </Button>
+            <UserButton afterSignOutUrl="/"/>
+          </SignedIn>
+          <SignedOut>
+            <Link 
+              href={landing.header.login.link}
+              className='text-green-2 hover:underline hover:font-md'
+            >
+              {landing.header.login.text}
+            </Link>
+            <Link href={landing.header.button.link}>
+              {
+                    <button className='
+                      hidden md:block h-10 
+                      bg-green-2 w-20 rounded-lg 
+                      hover:transition-all
+                      hover:shadow-lg
+                      text-white m-2'
+                    >
+                      {landing.header.button.text}
+                    </button>
+              }
+            </Link>
+          </SignedOut>
           </div>
           <div className='block md:hidden'>
               <landing.header.menuIcon/>

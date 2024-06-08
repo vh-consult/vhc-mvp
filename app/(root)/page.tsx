@@ -6,11 +6,10 @@ import Head from "@/components/landingpage/Head"
 import Hero from "@/components/landingpage/Hero"
 import Stories from "@/components/landingpage/Stories"
 import WhyUs from "@/components/landingpage/WhyUs"
-import { UserButton } from "@clerk/nextjs"
 
 const LandingPage = () => {
     return (
-      <>
+      <div>
         <Head/>
         <Hero/>
         <About/>
@@ -19,8 +18,7 @@ const LandingPage = () => {
         <Faqs />
         <Blogs />
         <Footer/>
-        <UserButton afterSignOutUrl="/"/> 
-      </>
+      </div>
     )
   }
   
