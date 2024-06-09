@@ -49,26 +49,24 @@ interface NavLink {
     }, []);
   
     return (
-      <div className='hidden md:block'>
-        <nav>
-          <ul className='list-none flex flex-row justify-around'>
-            {landing.header.navLinks.map((link: NavLink, index: number) => (
-              <li key={index} className='mr-5'>
-                <Link
-                  className={`font-normal ${activeLink === link.link ? 'text-green-2 font-medium' : ''}`}
-                  href={link.link}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleClick(link.link);
-                  }}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <nav className='hidden md:block'>
+        <ul className='list-none flex flex-row justify-around'>
+          {landing.header.navLinks.map((link: NavLink, index: number) => (
+            <li key={index} className='mr-5'>
+              <Link
+                className={`font-normal ${activeLink === link.link ? 'text-green-2 font-medium' : ''}`}
+                href={link.link}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick(link.link);
+                }}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     );
   };
 
