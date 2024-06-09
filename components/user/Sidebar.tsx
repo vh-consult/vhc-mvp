@@ -1,5 +1,5 @@
 import { doctorSidebarElements, patientSidebarElements } from '@/constants'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -47,7 +47,8 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
             doctorSidebarElements.bottom.map((nav, index) => renderNavigation(nav, index)) : 
             patientSidebarElements.bottom.map((nav, index) => renderNavigation(nav, index))
         }
-        <UserButton afterSignOutUrl='/'/>
+        <SignOutButton redirectUrl='/'/>
+        {/* <UserButton afterSignOutUrl='/'/> */}
       </div>
     </aside>
   )

@@ -6,17 +6,19 @@ import { SignedIn, UserButton } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import SearchBar from '../SearchBar'
+import { AiOutlineMessage } from 'react-icons/ai'
 
 interface NavLinkProps {
   route: string;
   label: string;
 }
 
-interface NavBarProps {
+interface HeaderProps {
   navigations?: Array<NavLinkProps>
 }
 
-const Navbar = ({navigations}: NavBarProps) => {
+const Header = ({navigations}: HeaderProps) => {
   const pathname = usePathname()
   return (
     <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
@@ -55,14 +57,22 @@ const Navbar = ({navigations}: NavBarProps) => {
 
       <div className="flex-between gap-5">
         <SignedIn>
+          <SearchBar 
+            className='border border-gray-300 
+            rounded-lg'
+          />
+          <AiOutlineMessage 
+            className='text-patientTextColor 
+            cursor-pointer w-[24px] h-[24px]' 
+          />
           <UserButton/>
         </SignedIn>
 
 
-        <MobileNav usedAt='doctor-page' />
+        <MobileNav />
       </div>
     </nav>
   )
 }
 
-export default Navbar
+export default Header
