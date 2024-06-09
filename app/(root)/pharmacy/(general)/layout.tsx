@@ -1,10 +1,10 @@
 import { cn } from '@/lib/utils'
 import React from 'react'
 
-const PharmacyGeneralLayout = () => {
+const PharmacyGeneralLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <main children={cn('')}>
-      
+    <main className={cn('')}>
+      {children}
     </main>
   )
 }
