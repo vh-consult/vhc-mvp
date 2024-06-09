@@ -5,18 +5,9 @@ import React from 'react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 
-interface NavLinkProps {
-  route: string;
-  label: string;
-}
 
-interface NavBarProps {
-  navigations?: Array<NavLinkProps>
-}
-
-const Navbar = ({navigations}: NavBarProps) => {
+const Navbar = () => {
   const pathname = usePathname()
   return (
     <nav className='flex flex-between fixed z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
@@ -33,25 +24,6 @@ const Navbar = ({navigations}: NavBarProps) => {
         </p>
       </Link>
 
-      <div className="flex flex-between">
-        <ul>
-          {
-            navigations?.map((nav,index)=>{
-              const activeLink = pathname === nav.route
-              return(
-                <li key={index}>
-                  <Link
-                    href={nav.route}
-                    className={` font-normal text-sm ${activeLink ? `text-green-2 font-medium`: ``}`}
-                  >
-                    {nav.label}
-                  </Link>
-                </li>
-              )
-            })
-          }
-        </ul>
-      </div>
 
       <div className="flex-between gap-5">
         <SignedIn>
@@ -59,7 +31,7 @@ const Navbar = ({navigations}: NavBarProps) => {
         </SignedIn>
 
 
-        <MobileNav usedAt='consultation-page' />
+        <MobileNav />
       </div>
     </nav>
   )

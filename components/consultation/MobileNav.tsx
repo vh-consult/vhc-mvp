@@ -7,7 +7,7 @@ import { consultationSidebarLinks } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-const MobileNav = ({usedAt}: {usedAt: "consultation-page" | "doctor-page" | "patient-page"}) => {
+const MobileNav = () => {
   const pathname = usePathname()
   return (
     <section className='w-full max-w-[264px]'>
