@@ -7,11 +7,34 @@ declare type CreateUserParams = {
   photo: string;
 };
 
+declare type CreateDoctorParams = {
+  specialty: string;
+  assignedPatients: Array<CreateUserParams>;
+  affiliatedHospital?: string;
+  booked_appointments?: string;
+};
+
+declare type CreatePatientParams = {
+  record: string;
+  insurancePlan: string;
+  orders: string;
+  healthcareProvider?: string;
+  personalDoctor?: string;
+};
+
 declare type UpdateUserParams = {
   firstName: string;
   lastName: string;
   photo: string;
 };
+
+//==== COMPANY PARAMS
+declare type CreateCompanyParams = {
+  name: string;
+  location: string;
+  photo: string;
+  admin: Array<CreateCompanyParams>
+}
 
 // ====== URL QUERY PARAMS  
 declare type FormUrlQueryParams = {
