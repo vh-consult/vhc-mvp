@@ -64,8 +64,8 @@ const HistoryCard = ({
                 <div>
                   <p>{complaint}</p>
                   {
-                    meds && meds.map(med => {return (
-                      <span>{med}</span>
+                    meds && meds.map((med, index) => {return (
+                      <span key={index}>{med}</span>
                     )})
                   }
                 </div>
@@ -73,8 +73,8 @@ const HistoryCard = ({
                 (
                   <div>
                   {
-                    orders && orders.map(med => {return (
-                      <span>{med}</span>
+                    orders && orders.map((med, index) => {return (
+                      <span key={index}>{med}</span>
                     )})
                   }
                   <p>{paymentMethod}</p>
@@ -83,8 +83,8 @@ const HistoryCard = ({
                 (
                   <div>
                   {
-                    tests_results && tests_results.map(test => {return (
-                      <div>
+                    tests_results && tests_results.map((test, index) => {return (
+                      <div key={index}>
                         <span>{test.test}:{test.result}</span>
                         <p>{test.lab_technician}</p>
                       </div>
@@ -96,8 +96,8 @@ const HistoryCard = ({
                   <div>
                   <p>{review}</p>
                   {
-                    meds && meds.map(med => {return (
-                      <div>
+                    meds && meds.map((med, index) => {return (
+                      <div key={index}>
                         <span>{med}</span>
                       </div>
                     )})

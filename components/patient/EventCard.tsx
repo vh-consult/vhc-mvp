@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '../ui/button'
+import Image from 'next/image'
 
 interface EventCardProps {
     header: string,
@@ -56,7 +57,14 @@ const EventCard = ({
       </div>
     </div>
     <div className='w-[40%] h-[270px]'>
-      <img src={imageSrc} className="w-full h-full object-cover" />
+      {imageSrc && 
+      <Image
+        alt=''
+        width={100}
+        height={100}
+        src={imageSrc} 
+        className="w-full h-full object-cover" 
+      />}
     </div>
   </div>
   )

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 import { BiCalendar } from 'react-icons/bi';
 import { BsChat } from 'react-icons/bs';
@@ -22,7 +23,9 @@ const PatientList = ({
   return (
     <div className="flex  border-t h-[45px] px-5 bg-white w-full items-center justify-between">
         <span className="w-[30px]  h-[30px] rounded-full">
-            <img 
+            <Image
+                width={30}
+                height={30} 
                 src={imageSrc} 
                 alt="" 
                 className="w-full h-full rounded-full object-cover" 
