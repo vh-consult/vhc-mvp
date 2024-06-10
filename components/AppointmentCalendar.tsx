@@ -129,6 +129,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { Button } from './ui/button';
 
 const AppointmentCalendar = ({ color }: {color: string}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -213,8 +214,8 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
           {currentDate.toLocaleString('default', { month: 'long' })}, {currentDate.getFullYear()}
         </span>
         <div>
-          <button onClick={handlePreviousMonth}>Prev</button>
-          <button onClick={handleNextMonth}>Next</button>
+          <Button variant="outline" onClick={handlePreviousMonth}>Prev</Button>
+          <Button variant="outline" onClick={handleNextMonth}>Next</Button>
         </div>
       </div>
       <table className="w-full h-[98%]">

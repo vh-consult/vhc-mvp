@@ -59,7 +59,8 @@ const About = () => {
                   {landing.about.body}
                 </p>
                 <Button 
-                  className='border border-green-4 flex flex-row items-center justify-between 
+                  variant="outline"
+                  className=' flex flex-row items-center justify-between 
                   rounded-3xl hover:text-green-2 hover:border-green-2 hover:shadow-md 
                   p-2 w-[120px] h-[40px]'
                 > 

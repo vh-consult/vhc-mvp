@@ -11,7 +11,11 @@ const HomePage = () => {
   if (!isLoaded) return <Loader />;
 
   return (
-    <main>{user?.fullName}</main>
+    <main className='size-full bg-dark-2'>
+      {id}
+      {user?.fullName}
+      {user?.id}
+    </main>
   )
 }
 
