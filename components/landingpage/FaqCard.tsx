@@ -26,7 +26,7 @@ const FaqCard = ({ question, answer }: FCProps) => {
         </span>
       </div>
       {expand && (
-        <div className="p-2 md:p-4 text-sm md:text-base border-t border-gray-300">
+        <div className="p-2 md:p-4 text-sm md:text-base border-t border-gray-200">
           <p>{answer}</p>
         </div>
       )}

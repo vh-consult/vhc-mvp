@@ -58,7 +58,7 @@ const Header = ({navigations}: HeaderProps) => {
       <div className="flex-between gap-5">
         <SignedIn>
           <SearchBar 
-            className='border border-gray-300 
+            className='border border-gray-200 
             rounded-lg'
           />
           <AiOutlineMessage 

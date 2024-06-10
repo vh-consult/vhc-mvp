@@ -2,6 +2,7 @@ import { landing } from "@/constants"
 import { Button } from "../ui/button"
 import BlogCard from "./BlogCard"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 const About = () => {
     return (
@@ -59,7 +60,7 @@ const About = () => {
                 </p>
                 <Button 
                   className='border border-green-4 flex flex-row items-center justify-between 
-                  rounded-3xl hover:text-green-2 hover:border-green hover:shadow-md 
+                  rounded-3xl hover:text-green-2 hover:border-green-2 hover:shadow-md 
                   p-2 w-[120px] h-[40px]'
                 > 
                   {landing.about.button.text}
@@ -95,7 +96,7 @@ const About = () => {
                     return(
                       <Button
                         key={index} 
-                        className={`mt-3 hover:shadow-md ${button.style}`}
+                        className={cn(`mt-3  hover:shadow-md`, `${button.style}`)}
                       >
                         {button.text}
                       </Button>

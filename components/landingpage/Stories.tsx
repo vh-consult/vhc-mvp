@@ -5,7 +5,7 @@ const Stories = () => {
   return (
     <section 
       id='reactions' 
-      className={`relative w-full h-[80vh] md:h-[400px] -z-0 flex flex-row items-start justify-around pt-8 bg-center 
+      className={`relative w-full h-[80vh] md:h-[400px] -z-10 flex flex-row items-start justify-around pt-8 bg-center 
         bg-story bg-no-repeat bg-cover`
       }
     >

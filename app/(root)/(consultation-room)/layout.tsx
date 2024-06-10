@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 
 const ConsultationLayout = ({children}:{children:ReactNode}) => {
   return (
-    <main className='bg-dark-1'>
+    <main className=''>
       <StreamVideoProvider>
         {children}
       </StreamVideoProvider>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MedicardCard = () => {
+const MedicationCard = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const MedicardCard = () => {
   )
 }
 
-export default MedicardCard
+export default MedicationCard

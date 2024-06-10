@@ -115,7 +115,7 @@ const DrugOverview = ({
             <span>
               <Input 
                 className="border outline-none 
-                border-gray-300 rounded-md w-[70px] h-[30px] 
+                border-gray-200 rounded-md w-[70px] h-[30px] 
                 p-1 text-sm font-medium"
                 type="number"
                 min={1}
@@ -125,7 +125,7 @@ const DrugOverview = ({
           </div>
           <Textarea 
             className="w-full border h-[100px] p-2 
-            rounded-lg border-gray-300 outline-none text-sm" 
+            rounded-lg border-gray-200 outline-none text-sm" 
             placeholder="Anything we need to know before 
             we assign the doses?"
           />

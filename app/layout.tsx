@@ -31,13 +31,13 @@ export default function RootLayout({
 
           },
           variables: {
-            colorText: "#1C1F2E",
+            colorText: "#fff",
             colorPrimary: "#00AEA8",
-            colorBackground: "#f5f5f5",
-            colorInputBackground: "#ff",
-            colorInputText: "#1C1F2E",
-            // colorTextOnPrimaryBackground: "#1C1F2E",
-            // colorNeutral: "#f5f5f5"
+            colorBackground: "#1C1F2E",
+            colorInputBackground: "#252A41",
+            colorInputText: "#fff",
+            colorTextOnPrimaryBackground: "#fff",
+            colorNeutral: "#f5f5f5"
           },
         }}
       >

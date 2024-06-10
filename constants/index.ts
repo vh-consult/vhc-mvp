@@ -373,12 +373,12 @@ export const landing = {
       buttons: [
           {
               text: 'Register',
-              style: 'bg-[#00AEA8] w-[100px] h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
+              style: 'bg-green-2 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
               
           },
           {
               text: 'Watch Demo',
-              style: 'border border-[#041F20] ml-3 hover:border-[#00AEA8] hover:text-[#00AEA8] w-[110px] h-[35px] p-1 text-[#041F20] rounded-md',
+              style: 'border border-gray-300 hover:border-green-2 hover:text-green-2 w-[110px] h-[35px] p-1 text-green-4 rounded-md',
           }
       ],
       cards: [

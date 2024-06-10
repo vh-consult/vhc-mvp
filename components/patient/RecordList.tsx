@@ -26,8 +26,8 @@ const RecordList = ({
     consultationType
 }: HealthRecordProps) => {
   return (
-    <div className="w-full min-h-[150px] even:bg-red-100  flex justify-between border border-gray-600">
-    <div className="w-1/12 flex flex-col justify-between p-1 border-r border-r-gray-400">
+    <div className="w-full min-h-[150px] even:bg-red-100  flex justify-between border border-gray-300">
+    <div className="w-1/12 flex flex-col justify-between p-1 border-r border-r-gray-200">
         <span className="">
             {date}
         </span>
@@ -35,7 +35,7 @@ const RecordList = ({
             {time}
         </span>
     </div>
-    <div className="w-2/12 flex flex-col  p-1 border-r border-r-gray-400">
+    <div className="w-2/12 flex flex-col  p-1 border-r border-r-gray-200">
         <span className="text-lg font-medium">
             {provider}
         </span>
@@ -46,7 +46,7 @@ const RecordList = ({
             {consultationType}
         </span>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-400">
+    <div className="w-2/12 p-1 border-r border-r-gray-200">
         <ul className="list-disc pl-5">
             {
                 complaint.map((issue,index)=> {
@@ -57,7 +57,7 @@ const RecordList = ({
             }
         </ul>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-400">
+    <div className="w-2/12 p-1 border-r border-r-gray-200">
         <ul className="list-disc pl-5">
             {
                 diagnosis.map((diagnosis,index)=> {
@@ -68,7 +68,7 @@ const RecordList = ({
             }
         </ul>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-400">
+    <div className="w-2/12 p-1 border-r border-r-gray-200">
         <ul className="list-disc pl-5">
             {
                 medications.map((med,index)=> {
