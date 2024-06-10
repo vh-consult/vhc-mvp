@@ -378,7 +378,7 @@ export const landing = {
           },
           {
               text: 'Watch Demo',
-              style: 'border border-gray-300 hover:border-green-2 hover:text-green-2 w-[110px] h-[35px] p-1 text-green-4 rounded-md',
+              style: 'border border-green-4 hover:border-green-2 hover:text-green-2 w-[110px] h-[35px] p-1 text-green-4 rounded-md',
           }
       ],
       cards: [

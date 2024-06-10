@@ -22,6 +22,13 @@ const UserSchema = new Schema({
   lastName: {
     type: String,
   },
+  location: {
+    type: String,
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female"],
+  },
   planId: {
     type: String,
     enum: ["personal-care", "family-care", "unlimited"],

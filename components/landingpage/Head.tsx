@@ -130,9 +130,7 @@ const Head = () => {
             </Link>
           </SignedOut>
           </div>
-          <div className='block md:hidden'>
-              <landing.header.menuIcon/>
-          </div>
+          <landing.header.menuIcon className="block md:hidden"/>
         </div>
     )
   }
