@@ -102,8 +102,8 @@ const Head = () => {
           <div className='hidden md:flex items-center justify-center button w-1/6'>
           <SignedIn>
             <Button className="bg-green-2 rounded-full text-green-1 mr-4">
-              <Link href="/consultation/home">
-                Consultation Room
+              <Link href="/user/landing">
+                Go to Home
               </Link>
             </Button>
             <UserButton afterSignOutUrl="/"/>

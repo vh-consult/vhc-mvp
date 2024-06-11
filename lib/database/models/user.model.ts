@@ -22,6 +22,12 @@ const UserSchema = new Schema({
   lastName: {
     type: String,
   },
+  dateOfBirth: {
+    type: Date,
+  },
+  country: {
+    type: String,
+  },
   location: {
     type: String,
   },
@@ -29,13 +35,13 @@ const UserSchema = new Schema({
     type: String,
     enum: ["male", "female"],
   },
-  planId: {
-    type: String,
-    enum: ["personal-care", "family-care", "unlimited"],
+  insurance_plan: {
+    type: Schema.Types.ObjectId,
+    ref: 'Insurance'
   },
   role: {
     type: String,
-    enum: ["doctor", "patient", "hospital-admin", "pharmacy-admin"],
+    enum: ["doctor", "patient", "hospitaAdmin", "pharmacAdmin"],
   },
 },{
     discriminatorKey: 'userRole'
@@ -72,10 +78,6 @@ const PatientSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-    insurance_plan: {
-        type: Schema.Types.ObjectId,
-        ref: 'Insurance'
-    },
     healthcare_provider: {
         type: Schema.Types.ObjectId,
         ref: 'Hospital'

@@ -21,21 +21,55 @@ import {
 import { Button } from './ui/button';
 import axios from 'axios';
 import { useUser } from '@clerk/nextjs';
+import { toast } from './ui/use-toast';
+import { useRouter } from 'next/navigation';
 
-const initialValues = {
-  dateOfBirth: new Date(),
-  role: '',
-  location: '',
-  gender: '',
-  country: ''
-};
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  
+}
 
 const RegisterationForm = () => {
   const { user } = useUser();
+  const router = useRouter();
+
+  const initialValues = {
+    dateOfBirth: new Date(),
+    role: '',
+    location: '',
+    gender: '',
+    country: ''
+  };
   const [values, setValues] = useState(initialValues);
+  
+  const handleClick = async (e: FormEvent) => {
+    const formData = {
+      dateOfBirth: values.dateOfBirth,
+      clerkId: user?.id,
+      country: values.country,
+      gender: values.gender,
+      role: values.role,
+      location: values.location
+    }
+      const response = await fetch('/api/user', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
 
-  const handleClick = (e: FormEvent) => {
-
+      const data: ApiResponse = await response.json()
+      console.log(response.json())
+      toast({
+        title: data.message
+      })
+      if (data.success === true) {
+        router.push('/user/landing')
+      } else {
+        router.push('/user/activate-account')
+      }
   };
 
   return (
