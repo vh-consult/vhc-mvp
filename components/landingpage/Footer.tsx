@@ -1,6 +1,8 @@
 import { landing } from "@/constants"
 import Image from "next/image"
 import Link from "next/link"
+import SupportCard from "../pharmacy/SupportCard"
+import { BiPhone } from "react-icons/bi"
 
 const Footer = () => {
     return (
@@ -40,9 +42,13 @@ const Footer = () => {
               }
             </div>
           </div>
-          <div className='w-[80%] h-[50%] md:w-[300px] md:h-[250px] pr-20 bg-green-1 p-2 text-green-4 rounded-xl'>
-            Contact us on
-          </div>
+          <SupportCard
+            className="w-[80%] h-[50%] md:w-[300px] md:h-[250px] bg-green-1 p-2 text-green-4 rounded-xl"
+            content="Reach us on"
+            icon={<BiPhone/>}
+            title_1="0555284923"
+            title_2="0207565990"
+          />
         </div>
         <div className='md:h-[25px] bg-white text-green-4 text-[12px] md:text-sm text-center pt-2 opacity-50'>
           {landing.footer.copyright}

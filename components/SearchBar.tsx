@@ -11,7 +11,7 @@ const SearchBar = ({className}:{className: string}) => {
         <Input
             type='text'
             placeholder='Search here'
-            className=''
+            className='border-none w-[90%] focus-visible:ring-0 focus-visible:ring-offset-0'
         />
     </div>
   )
