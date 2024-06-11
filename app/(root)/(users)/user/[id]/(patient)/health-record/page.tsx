@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PrescriptionForm = () => {
+const HealthRecordPage = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const PrescriptionForm = () => {
   )
 }
 
-export default PrescriptionForm
+export default HealthRecordPage

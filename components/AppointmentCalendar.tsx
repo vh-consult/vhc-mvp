@@ -112,7 +112,7 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
 
   return (
     <div className="w-full h-screen rounded-t-xl p-4 text-white">
-      <div className="w-full my-[2%] flex items-center justify-between">
+      <div className="w-full mt-[1%] mb-[2%] flex items-center justify-between">
         <span className="text-lg font-medium">Calendar</span>
         <span className="">
           {currentDate.toLocaleString('default', { month: 'long' })}, {currentDate.getFullYear()}
@@ -130,7 +130,7 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
           </span>
         </div>
       </div>
-      <table className="w-full h-[90%]">
+      <table className="w-full ">
         <thead className="w-full text-sm font-semibold opacity-80 h-[30px]">
           <tr className="w-full h-full items-center flex justify-between">
             <td className="w-full h-full text-center">Monday</td>

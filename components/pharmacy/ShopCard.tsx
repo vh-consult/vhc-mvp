@@ -9,8 +9,8 @@ interface PharmacyShopCardProps {
   imageSrc: string;
   name: string;
   location: string;
-  distance_by_car: string;
-  distance_by_walk: string;
+  distance_by_car: number;
+  distance_by_walk: number;
   number_of_stars: number;
 }
 
@@ -54,11 +54,11 @@ const ShopCard = ({
         <div className="flex items-center ">
             <span className="flex items-center mr-2">
                 <PiPerson className="mr-1"/> 
-                {distance_by_walk}
+                {distance_by_walk} mins
             </span>
             <span className="flex items-center">
                 <BiCar className="mr-1"/> 
-                {distance_by_car}
+                {distance_by_car} mins
             </span>
         </div>
       <span className="flex items-center">

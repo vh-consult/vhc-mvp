@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
-import MobileNav from './MobileNav'
+import MobileNav from './user/MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import SearchBar from '../SearchBar'
+import SearchBar from './SearchBar'
 import { AiOutlineMessage } from 'react-icons/ai'
 
 interface NavLinkProps {
