@@ -5,6 +5,7 @@ declare type CreateUserParams = {
   firstName: string;
   lastName: string;
   photo: string;
+  contact: string;
 };
 
 declare type CreateDoctorParams = {

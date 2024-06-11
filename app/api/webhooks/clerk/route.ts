@@ -66,7 +66,9 @@ export async function POST(req: Request) {
       email_addresses, 
       image_url, 
       first_name, 
-      last_name 
+      last_name,
+      phone_numbers
+
     } = evt.data;
 
     const user = {
@@ -75,6 +77,8 @@ export async function POST(req: Request) {
       firstName: first_name!,
       lastName: last_name!,
       photo: image_url,
+      contact: phone_numbers[0].phone_number
+
     };
 
     const newUser = await createUser(user);
@@ -93,12 +97,13 @@ export async function POST(req: Request) {
 
   // UPDATE
   if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name } = evt.data;
+    const { id, image_url, first_name, last_name, phone_numbers } = evt.data;
 
     const user = {
       firstName: first_name!,
       lastName: last_name!,
       photo: image_url,
+      contact: phone_numbers[0].phone_number
     };
 
     const updatedUser = await updateUser(id, user);
