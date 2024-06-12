@@ -48,6 +48,6 @@ const ConsultationSchema = new Schema({
 
 
 const Appointment = models?.Appointment || model("Appointment", AppointmentSchema);
-const Consultation = Appointment?.discriminator("Consultation", ConsultationSchema);
+const Consultation = Appointment.discriminator("Consultation", ConsultationSchema);
 
 export {Appointment, Consultation}

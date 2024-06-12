@@ -103,10 +103,10 @@ const HospitalAdminSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
-const Doctor = User?.discriminator("Doctor", DoctorSchema);
-const Patient = User?.discriminator("Patient", PatientSchema);
-const HospitalAdmin = User?.discriminator("HospitalAdmin", HospitalAdminSchema);
-const PharmacyAdmin = User?.discriminator("PharmacyAdmin", PharmacyAdminSchema);
+const Doctor = User.discriminator("Doctor", DoctorSchema);
+const Patient = User.discriminator("Patient", PatientSchema);
+const HospitalAdmin = User.discriminator("HospitalAdmin", HospitalAdminSchema);
+const PharmacyAdmin = User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
 
 export {
     User, 

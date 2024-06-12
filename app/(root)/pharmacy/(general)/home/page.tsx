@@ -1,17 +1,21 @@
+import Loader from '@/components/Loader'
 import ShopCard from '@/components/pharmacy/ShopCard'
-import React from 'react'
+import ShopListings from '@/components/pharmacy/ShopListings'
+import React, { Suspense } from 'react'
 
-const PharmacyHomePage = () => {
+const PharmacyHomePage = async () => {
+  const response = await fetch('',{
+    next: {
+      revalidate: 3600,
+    }
+  })
+  const data = await response.json()
   return (
     <div>
-      <ShopCard
-        distance_by_car={12}
-        distance_by_walk={10}
-        imageSrc='/images/hosp-1.jpg'
-        location='Aydeuase'
-        name='K-Pharma'
-        number_of_stars={3.8}
-      />
+      All pharmacies
+      <Suspense fallback={<Loader/>}>
+        <ShopListings/>
+      </Suspense>
     </div>
   )
 }

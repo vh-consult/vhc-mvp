@@ -82,3 +82,35 @@ export const PUT = async (req: NextRequest) => {
         handleError(error);
       }
 }
+
+export const PATCH = async (req: NextRequest) => {
+    try {
+        await connectToDatabase();
+        
+        const body = await req.json();
+        const { insuranceId, clerkId, debitAccountNumber, paymentMethod } = body;
+
+        const userBuyingInsurance = await User.findOne({ clerkId });
+    
+        if (!userBuyingInsurance) {
+          throw new Error("User not found");
+        }
+        userBuyingInsurance.insurance_plan = insuranceId
+        await userBuyingInsurance.save()
+
+
+        return new NextResponse(
+            JSON.stringify({
+              success: true,
+              message: 'Insurance successfully purchased!',
+            }),
+            {
+              headers: { 'Content-Type': 'application/json' },
+              status: 200,
+            }
+          );
+        
+      } catch (error) {
+        handleError(error);
+      }
+}
