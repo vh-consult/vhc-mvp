@@ -1,11 +1,14 @@
 import React from 'react'
 import { Input } from '../ui/input';
-import { Company } from '@/lib/database/models/company.model';
+import { Company, Hospital, Pharmacy } from '@/lib/database/models/company.model';
 import { revalidatePath } from 'next/cache';
 import SubmitButton from '../SubmitButton';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { User } from '@/lib/database/models/user.model';
+import { 
+  Select, SelectContent, 
+  SelectItem, SelectTrigger, SelectValue 
+} from '../ui/select';
 import { currentUser } from '@clerk/nextjs/server';
+import { getUserById } from '@/lib/actions/user.actions';
 
 const RegisterCompany = async () => {
   const createCompany = async (formData: FormData) => {
@@ -13,13 +16,31 @@ const RegisterCompany = async () => {
     const user = await currentUser();
     if (!user) {
       throw new Error('User not logged in')
-    }
-    await Company.create({
+      }
+    const userFromDB:UserParams = await getUserById(user?.id as string)
+    if (userFromDB.role === "hospitalAdmin") {
+      await Hospital.create({
+          name: formData.get("name") as string,
+          location: formData.get("location") as string,
+          image: formData.get("image") as File,
+          type: "hospital"
+      })
+    } else if (userFromDB.role === "pharmacyAdmin") {
+      await Pharmacy.create({
         name: formData.get("name") as string,
         location: formData.get("location") as string,
         image: formData.get("image") as File,
-        type: formData.get("type") as "pharmacy" | "hospital"
-    })
+        type: "pharmacy"
+      })
+    } else {
+      const typeOfCompany = formData.get("type") as "pharmacy" | "hospital"
+      await Company.create({
+        name: formData.get("name") as string,
+        location: formData.get("location") as string,
+        image: formData.get("image") as File,
+        type: typeOfCompany
+      })
+    }
     
 
     revalidatePath("/")

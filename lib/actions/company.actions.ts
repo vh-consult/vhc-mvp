@@ -14,6 +14,7 @@ export async function updateCompany(userId: string){
 
         if (!user) throw new Error("User not found");
         
+        const companyToUpdate = await Company.findOne({})
 
         return JSON.parse(JSON.stringify(user));
     } catch (error) {

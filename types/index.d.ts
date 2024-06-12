@@ -7,6 +7,16 @@ declare type CreateUserParams = {
   photo: string;
   contact: string;
 };
+declare type UserParams = {
+  clerkId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  contact: string;
+  role: "patient" | "doctor" | "hospitalAdmin" | "pharmacyAdmin";
+  country: string;
+};
 
 declare type CreateDoctorParams = {
   specialty: string;

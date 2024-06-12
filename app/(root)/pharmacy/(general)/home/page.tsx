@@ -4,18 +4,149 @@ import ShopListings from '@/components/pharmacy/ShopListings'
 import React, { Suspense } from 'react'
 
 const PharmacyHomePage = async () => {
-  const response = await fetch('',{
-    next: {
-      revalidate: 3600,
-    }
-  })
-  const data = await response.json()
+
   return (
-    <div>
-      All pharmacies
-      <Suspense fallback={<Loader/>}>
+    <div className='px-10 grid grid-cols-5
+      gap-10 pt-20'>
+        <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+                <ShopCard
+          name={'K-Pharma Limited'}
+          distance_by_car={6}
+          distance_by_walk={10}
+          imageSrc={'/images/hosp-7.jpg'}
+          location={'Ayeduase'}
+          number_of_stars={3.8}
+        />
+      {/* <Suspense fallback={<Loader/>}>
         <ShopListings/>
-      </Suspense>
+      </Suspense> */}
     </div>
   )
 }

@@ -23,7 +23,7 @@ const ShopCard = ({
   number_of_stars
 }: PharmacyShopCardProps) => {
   return (
-    <div className="w-[200px] h-[225px] border border-gray
+    <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-sky-2 
     -200 rounded-xl hover:shadow-lg">
     <div className="h-[55%] w-full">
         <Image
@@ -36,18 +36,23 @@ const ShopCard = ({
         />
     </div>
     <div className="p-2 flex items-center justify-between">
-        <div className="">
+        <div className="w-full">
             <h4 className="text-lg font-bold">
               {name}
             </h4>
-            <p className="text-sm font-medium opacity-75">
-              {location}
-            </p>
+            <div className="flex flex-between ">
+              <p className="text-sm flex items-center
+              font-medium opacity-75">
+                <GoLocation className='w-4 mr-1 h-4'/>
+                {location}
+              </p>
+              <span className="flex text-sm items-center">
+                <BsStarFill className="mr-1 text-yellow-500"/>  
+                {number_of_stars} 
+              </span>
+            </div>
         </div>
-        <span className="w-7 h-7 rounded-full border 
-        flex items-center justify-center">
-            <GoLocation/>
-        </span>
+
     </div>
     <div className="px-2 flex items-center justify-between 
     text-[12px]">
@@ -61,10 +66,7 @@ const ShopCard = ({
                 {distance_by_car} mins
             </span>
         </div>
-      <span className="flex items-center">
-        {number_of_stars} 
-        <BsStarFill className="ml-1 text-yellow-500"/>  
-      </span>
+
     </div>
   </div>
   )

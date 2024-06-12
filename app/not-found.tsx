@@ -10,10 +10,10 @@ const NotFoundPage = () => {
         alt=''
         width={50}
         height={50}
-        className='w-full h-full'
+        className='w-[400px] h-[100px]'
       />
       <div className='font-bold text-2xl my-10'>
-        Page Not found please
+        Page Not Found
       </div>
       <Link href={'/'} className='text-sm text-blue-1 underline'>  Return back to homepage </Link>
     </div>

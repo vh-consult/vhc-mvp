@@ -57,7 +57,7 @@ const CompanySchema = new Schema<CompanyParams>({
     type: {
         type: String,
         required: [true, "Please the type of company is required"],
-        enum: ["hospital", "pharmacy"]
+        enum: ["hospital", "pharmacy"],
     }
 }, { discriminatorKey: 'companyType' });
 
@@ -107,8 +107,8 @@ const HospitalSchema = new Schema<HospitalParams>({
 
 
 const Company = models?.Company || model("Company", CompanySchema);
-const Hospital = Company.discriminator("Hospital", HospitalSchema);
-const Pharmacy = Company.discriminator("Pharmacy", PharmacySchema);
+const Hospital = models?.Hospital || Company.discriminator("Hospital", HospitalSchema);
+const Pharmacy = models?.Pharmacy || Company.discriminator("Pharmacy", PharmacySchema);
 
 export {Company, Hospital, Pharmacy}
 
