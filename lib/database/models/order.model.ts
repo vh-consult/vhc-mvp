@@ -23,7 +23,10 @@ const OrderSchema = new Schema({
     }],
     delivery_mode: {
         type: String,
-        enum: ["home delivery", "in person"]
+        enum: ["homeDelivery", "inPerson"]
+    },
+    shipping_address: {
+        
     },
     note: {
         type: String,

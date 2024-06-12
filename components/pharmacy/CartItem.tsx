@@ -21,7 +21,7 @@ const CartItem = () => {
       </div>
       <span className="text-xl">2</span>
       <span className="text-xl">$27.50</span>
-      <span className='hover:cursor-pointer border-2 border-dark-4 hover:bg-dark-4 w-[45px] h-[45px] flex flex-center rounded-full bg-dark-3'>
+      <span className='hover:cursor-pointer border-2 border-dark-3 hover:bg-dark-3 w-[45px] h-[45px] flex flex-center rounded-full bg-dark-1'>
         <BiTrash/>
       </span>
     </div>

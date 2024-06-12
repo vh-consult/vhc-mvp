@@ -10,22 +10,22 @@ type PaymentFormProps = {
 const paymentMethods = [
     {
         label: 'MTN Mobile Money',
-        imageSrc: '/assets/images/drug 4.jpg'
+        imageSrc: '/images/drug 4.jpg'
 
     },
     {
         label: 'AT Money',
-        imageSrc: '/assets/images/drug 4.jpg'
+        imageSrc: '/images/drug 4.jpg'
 
     },
     {
         label: 'Telecel Cash',
-        imageSrc: '/assets/images/drug 4.jpg'
+        imageSrc: '/images/drug 4.jpg'
 
     },
     {
         label: 'Debit Card',
-        imageSrc: '/assets/images/drug 4.jpg'
+        imageSrc: '/images/drug 4.jpg'
     },
 ]
 
@@ -33,7 +33,7 @@ const PaymentForm = ({
     amount,
 }: PaymentFormProps) => {
   return (
-    <div className='p-3 rounded-lg border w-[325px] bg-white'>
+    <div className='p-3 rounded-lg w-full mb-3 h-[325px] bg-dark-1'>
         <h2 className='w-full text-lg font-medium mb-2'>Select Your Preferred Payment Method</h2>
         {
             paymentMethods.map((method, index) => {
@@ -44,7 +44,7 @@ const PaymentForm = ({
                                 type='radio'
                                 value={method.label}
                                 name='paymentMethod'
-                                className='w-4 h-4 mr-2 rounded-full border'
+                                className='w-4 h-4 mr-2 bg-blue-1 rounded-full border'
                             />
                             <label htmlFor={method.label}>
                                 {method.label}
@@ -64,7 +64,7 @@ const PaymentForm = ({
         <div className='w-full mt-4'>
             <Input 
                 type='text' 
-                className='w-full border mb-2' 
+                className='w-full bg-dark-3 border-none mb-2' 
                 placeholder='Enter phone number'
             />
         </div>

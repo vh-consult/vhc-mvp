@@ -1,11 +1,13 @@
+import PaymentForm from '@/components/PaymentForm'
 import CheckoutSummary from '@/components/pharmacy/CheckoutSummary'
 import DeliveryInfoCard from '@/components/pharmacy/DeliveryInfoCard'
 import ItemsInCart from '@/components/pharmacy/ItemsInCart'
+import ShippingForm from '@/components/pharmacy/ShippingForm'
 import React from 'react'
 
 const CartPage = () => {
   return (
-    <div className='pt-20 px-10'>
+    <div className='pt-20 px-10 flex flex-between'>
       <div className="w-[60%] flex flex-col flex-between">
         <ItemsInCart/>
         <div className="w-full flex flex-between gap-4">
@@ -17,6 +19,12 @@ const CartPage = () => {
           />
           <DeliveryInfoCard/>
         </div>
+      </div>
+      <div className="flex flex-col flex-between w-[30%]">
+        <PaymentForm
+          amount={120}
+        />
+        <ShippingForm/>
       </div>
     </div>
   )
