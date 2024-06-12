@@ -6,6 +6,7 @@ export interface CompanyParams extends Document {
     isVerified: boolean;
     admins: Schema.Types.ObjectId[];
     image: string;
+    type: "hospital" | "pharmacy"
   }
 
   export interface PharmacyParams extends Document {
@@ -14,11 +15,30 @@ export interface CompanyParams extends Document {
     isVerified: boolean;
     admins: Schema.Types.ObjectId[];
     image: string;
+    inventory: Schema.Types.ObjectId[];
+    orders: Schema.Types.ObjectId[];
+    opens_at: string;
+    closes_at: string
+  }
+
+  export interface HospitalParams extends Document {
+    name: string;
+    location: string;
+    isVerified: boolean;
+    admins: Schema.Types.ObjectId[];
+    image: string;
+    doctors: Schema.Types.ObjectId[];
+    clients: Schema.Types.ObjectId[];
+    description: string;
+    specialties: Array<string>;
+    booked_appointments: Schema.Types.ObjectId[];
   }
 
 const CompanySchema = new Schema<CompanyParams>({
     name: {
         type: String,
+        required: [true, "Please provide the company's name."],
+        minlength: [2, "Name cannot be less than 2 characters"]
     },
     location: {
         type: String,
@@ -30,10 +50,19 @@ const CompanySchema = new Schema<CompanyParams>({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+    type: {
+        type: String,
+        required: [true, "Please the type of company is required"],
+        enum: ["hospital", "pharmacy"]
+    }
 }, { discriminatorKey: 'companyType' });
 
 
-const PharmacySchema = new Schema({
+const PharmacySchema = new Schema<PharmacyParams>({
     inventory: [{
         type: Schema.Types.ObjectId,
         ref: 'Drug'
@@ -42,13 +71,18 @@ const PharmacySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-    working_hours: {
+    opens_at: {
         type: String,
+        required: [true, "Please state opening time."],
+    },
+    closes_at: {
+        type: String,
+        required: [true, "Please state closing time."],
     },
     
 });
 
-const HospitalSchema = new Schema({
+const HospitalSchema = new Schema<HospitalParams>({
     doctors: [{
         type: Schema.Types.ObjectId,
         ref: 'Doctor'
@@ -93,8 +127,6 @@ export {Company, Hospital, Pharmacy}
 //     /* The name of this pet */
 
 //     type: String,
-//     required: [true, "Please provide a name for this pet."],
-//     maxlength: [60, "Name cannot be more than 60 characters"],
 //   },
 //   owner_name: {
 //     /* The owner of this pet */

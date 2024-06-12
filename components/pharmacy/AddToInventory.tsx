@@ -5,7 +5,7 @@ import SubmitButton from '../SubmitButton';
 import Drug from '@/lib/database/models/drug.model';
 
 const AddToInventory = () => {
-  const createCompany = async (formData: FormData) => {
+  const postDrug = async (formData: FormData) => {
     "use server"
     
     await Drug.create({
@@ -18,7 +18,7 @@ const AddToInventory = () => {
   }
   return (
     <form
-      action={createCompany}
+      action={postDrug}
     >
       <Input
         type='text'

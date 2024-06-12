@@ -7,7 +7,7 @@ const ShopListings = async () => {
   return (
     <div className='w-[80%] flex flex-wrap'>
       {
-        shops.map((shop, index) => {
+        shops.map((shop: { name: string; image: string; location: string }, index: React.Key | null | undefined) => {
             return(
                 <ShopCard
                     name={shop.name}

@@ -1,6 +1,13 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
-const InsuranceSchema = new Schema({
+export interface InsuranceParams extends Document {
+    plan: "personal-care" | "family-care" | "unlimited";
+    renewal_date: Date;
+    start_date: Date;
+    user: Schema.Types.ObjectId
+} 
+
+const InsuranceSchema = new Schema<InsuranceParams>({
     plan: {
         type: String,
         enum: ["personal-care", "family-care", "unlimited"],
