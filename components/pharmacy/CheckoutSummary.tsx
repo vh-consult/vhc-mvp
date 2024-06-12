@@ -9,24 +9,24 @@ interface CheckoutSummaryParams {
 
 const CheckoutSummary = ({subtotalPrice, shippingFee, tax, totalCost}: CheckoutSummaryParams) => {
   return (
-    <div>
-      <h2 className=''>
+    <div className='bg-dark-3 w-[350px] h-[200px] rounded-lg p-2'>
+      <h2 className='text-xl font-semibold'>
         Checkout Summary
       </h2>
-      <div className="">
-        <p>
+      <div className="w-full flex flex-col flex-center gap-y-2 h-[60%] border-b border-dark-1">
+        <p className='w-full flex flex-between'>
             Subtotal <b>{subtotalPrice}</b>
         </p>
-        <p>
+        <p className='w-full flex flex-between'>
             Shipping <b>{shippingFee}</b>
         </p>
-        <p>
+        <p className='w-full flex flex-between'>
             Tax <b>{tax}</b>
         </p>
       </div>
-      <p>
+      <p className='w-full py-2 flex flex-between'>
             Total ($) <b>{totalCost}</b>
-    </p>
+      </p>
     </div>
   )
 }

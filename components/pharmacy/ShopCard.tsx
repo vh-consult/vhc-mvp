@@ -25,7 +25,7 @@ const ShopCard = ({
   return (
     <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-sky-2 
     -200 rounded-xl hover:shadow-lg">
-    <div className="h-[55%] w-full">
+    <div className="h-[55%] w-full ">
         <Image
           alt='' 
           width={100}

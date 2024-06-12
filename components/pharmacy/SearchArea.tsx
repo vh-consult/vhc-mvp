@@ -13,7 +13,7 @@ const SearchArea = () => {
       Browse our catalog or search our inventory for your solution
     </p>
     <SearchBar 
-      className="w-[60%] bg-white h-[50px] border rounded-3xl flex items-center justify-center"
+      className="w-[60%] bg-white h-[50px] border rounded-3xl "
     />
   </div>
   )
