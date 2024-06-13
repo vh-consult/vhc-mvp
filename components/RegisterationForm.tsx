@@ -1,5 +1,5 @@
-"use client"
-import React, { FormEvent, useState } from 'react'
+'use client'
+import React, { useState } from 'react'
 import { Input } from './ui/input'
 import ReactDatePicker from 'react-datepicker';
 import { Label } from "@/components/ui/label"
@@ -18,22 +18,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Button } from './ui/button';
-import axios from 'axios';
+import SubmitButton from './SubmitButton';
+import { revalidatePath } from 'next/cache';
+import { updateUser } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
-import { toast } from './ui/use-toast';
-import { useRouter } from 'next/navigation';
 
-interface ApiResponse {
-  success: boolean;
-  message: string;
-  
-}
 
 const RegisterationForm = () => {
-  const { user } = useUser();
-  const router = useRouter();
-
   const initialValues = {
     dateOfBirth: new Date(),
     role: '',
@@ -43,35 +34,14 @@ const RegisterationForm = () => {
   };
   const [values, setValues] = useState(initialValues);
   
-  const handleClick = async (e: FormEvent) => {
-    const formData = {
-      dateOfBirth: values.dateOfBirth,
-      clerkId: user?.id,
-      country: values.country,
-      gender: values.gender,
-      role: values.role,
-      location: values.location
-    }
-      const response = await fetch('/api/user', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-
-      const data: ApiResponse = await response.json()
-      console.log(response.json())
-      toast({
-        title: data.message
-      })
-      if (data.success === true) {
-        router.push('/user/landing')
-      } else {
-        router.push('/user/activate-account')
-      }
+  const handleClick = async () => {
+    const {user} = useUser()
+    console.log(user, values)
+    await updateUser(user?.id as string, values)
+    revalidatePath("/user/landing")
   };
 
+  
   return (
     <div className='bg-dark-2 h-screen w-screen flex flex-center'>
       <Card className="w-[400px] border-none bg-dark-1 text-sky-2">
@@ -80,12 +50,14 @@ const RegisterationForm = () => {
           <CardDescription>Fill the forms to activate your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form
+            action={handleClick}
+          >
             <div className="grid w-full items-center gap-4">
               <div className="flex w-full flex-col gap-2.5">
-                <label className="text-base font-normal leading-[22.4px] text-green-1">
+                <Label className="text-base font-normal leading-[22.4px] text-green-1">
                   Select Date and Time
-                </label>
+                </Label>
                 <ReactDatePicker
                   selected={values.dateOfBirth}
                   onChange={(date) => setValues({ ...values, dateOfBirth: date! })}
@@ -146,7 +118,7 @@ const RegisterationForm = () => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button onClick={handleClick} className='bg-green-2 w-full'>Activate</Button>
+          <SubmitButton buttonText='Activate' className='w-full bg-green-2'/>
         </CardFooter>
       </Card>
     </div>

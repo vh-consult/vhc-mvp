@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 
 const DeliveryInfoCard = () => {
   return (
-    <main className='bg-dark-1 w-[310px] h-[200px] rounded-lg p-2'>
+    <main className='bg-dark-1 w-[340px] h-[200px] rounded-lg p-2'>
       <h2 className='text-xl font-semibold'>
         Delivery
       </h2>

@@ -106,7 +106,7 @@ const Head = () => {
                 Go to Home
               </Link>
             </Button>
-            <UserButton afterSignOutUrl="/"/>
+            <UserButton/>
           </SignedIn>
           <SignedOut>
             <Link 

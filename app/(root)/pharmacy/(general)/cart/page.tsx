@@ -8,7 +8,7 @@ import React from 'react'
 const CartPage = () => {
   return (
     <div className='pt-20 px-10 flex flex-between'>
-      <div className="w-[60%] flex flex-col flex-between">
+      <div className="w-[65%] flex flex-col flex-between">
         <ItemsInCart/>
         <div className="w-full flex flex-between gap-4">
           <CheckoutSummary

@@ -48,7 +48,6 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
             patientSidebarElements.bottom.map((nav, index) => renderNavigation(nav, index))
         }
         <SignOutButton redirectUrl='/'/>
-        {/* <UserButton afterSignOutUrl='/'/> */}
       </div>
     </aside>
   )

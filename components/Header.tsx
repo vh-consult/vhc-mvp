@@ -78,7 +78,7 @@ const Header = ({navigations}: HeaderProps) => {
       <div className="flex flex-between gap-5 w-2/5 ">
 
         <SearchBar 
-          className='border border-dark-4 
+          className='border border-dark-1 bg-dark-3 
             w-[80%]'
         />
         <AiOutlineMessage 

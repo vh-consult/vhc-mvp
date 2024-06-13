@@ -26,13 +26,13 @@ const ShippingForm = async () => {
         type='text'
         placeholder='Active phone number'
         name='contact'
-        className='w-[90%] bg-inherit bg-dark-1 border-none'
+        className='w-[90%] bg-dark-3 border-none'
       />
       <Input
         type='text'
         placeholder='Home address'
         name='homeAddress'
-        className='w-[90%] bg-inherit border-dark-4'
+        className='w-[90%] bg-dark-3 border-none'
 
       />
       {  

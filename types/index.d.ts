@@ -34,9 +34,14 @@ declare type CreatePatientParams = {
 };
 
 declare type UpdateUserParams = {
-  firstName: string;
-  lastName: string;
-  photo: string;
+  firstName?: string;
+  lastName?: string;
+  photo?: string;
+  country?: string,
+  gender?: string,
+  role?: string,
+  location?: string,
+  dateOfBirth?: Date,
 };
 
 //==== COMPANY PARAMS
