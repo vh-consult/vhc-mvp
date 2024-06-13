@@ -89,14 +89,14 @@ const PatientSchema = new Schema({
 });
 
 const PharmacyAdminSchema = new Schema({
-    pharmacy: {
+    company: {
         type: Schema.Types.ObjectId,
         ref: 'Pharmacy'
     }
 });
 
 const HospitalAdminSchema = new Schema({
-    hospital: {
+    company: {
         type: Schema.Types.ObjectId,
         ref: 'Hospital'
     }
