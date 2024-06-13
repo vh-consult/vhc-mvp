@@ -24,7 +24,6 @@ const RegisterCompany = async () => {
     const userFromDB: UserParams = await getUserById(user?.id as string)
     userRole = userFromDB.role
 
-
     if ( userRole === "patient" 
       || userRole === "doctor"
     ) {
@@ -62,20 +61,20 @@ const RegisterCompany = async () => {
       <h1 className="text-2xl font-semibold">Company Registration Form</h1>
       <Input
         type='file'
-        placeholder='Add image'
+        placeholder='Upload company logo'
         name='image'
         className='border-sky-1 bg-dark-3 '
       />
       <Input
         type='text'
-        placeholder='Add name'
+        placeholder="Company's name"
         name='name'
         className='border-none bg-dark-3 text-sky-1'
 
       />
       <Input
         type='text'
-        placeholder='Add location'
+        placeholder="Company's location"
         name='location'
         className='border-none bg-dark-3 text-sky-1'
 
