@@ -44,7 +44,7 @@ const PaymentForm = ({
                                 type='radio'
                                 value={method.label}
                                 name='paymentMethod'
-                                className='w-4 h-4 mr-2 bg-blue-1 rounded-full border'
+                                className='w-4 h-4 mr-2 bg-green-2 rounded-full border'
                             />
                             <label htmlFor={method.label}>
                                 {method.label}
@@ -79,7 +79,7 @@ const PaymentForm = ({
             </span>
         </div>
         <Button 
-            className={`bg-blue-1 w-full h-[35px] rounded-md text-sm 
+            className={`bg-green-2 w-full h-[35px] rounded-md text-sm 
             font-medium text-white hover:shadow-md hover:opacity-90`}>
                 Pay now!
         </Button>

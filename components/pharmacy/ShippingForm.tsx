@@ -37,17 +37,17 @@ const ShippingForm = async () => {
       />
       {  
         <Select name="pickup">
-        <SelectTrigger className='w-[90%] border border-dark-4 text-sky-1' id="companyType">
+        <SelectTrigger className='w-[90%] border border-dark-4 text-green-1' id="companyType">
           <SelectValue  placeholder="Preferred delivery choice" />
         </SelectTrigger>
-        <SelectContent position="popper" className='bg-dark-3  text-sky-2'>
+        <SelectContent position="popper" className='bg-dark-3  text-green-1'>
           <SelectItem  value="homeDelivery">Home Delivery</SelectItem>
           <SelectItem value="inPerson ">In person </SelectItem>
         </SelectContent>
       </Select>
       }
       <SubmitButton
-        className='bg-blue-1 w-[90%]'
+        className='bg-green-2 w-[90%]'
         buttonText='Save'
       />
     </form>

@@ -56,7 +56,7 @@ const RegisterCompany = async () => {
   return (
     <form
       action={handleSubmit}
-      className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-sky-3'
+      className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
     >
       <h1 className="text-2xl font-semibold">Company Registration Form</h1>
       <Input
@@ -69,20 +69,20 @@ const RegisterCompany = async () => {
         type='text'
         placeholder="Company's name"
         name='name'
-        className='border-none bg-dark-3 text-sky-1'
+        className='border-none bg-dark-3 text-green-1'
 
       />
       <Input
         type='text'
         placeholder="Company's location"
         name='location'
-        className='border-none bg-dark-3 text-sky-1'
+        className='border-none bg-dark-3 text-green-1'
 
       />
       <Textarea
         placeholder='Add description'
         name='location'
-        className='border-none bg-dark-3 text-sky-1'
+        className='border-none bg-dark-3 text-green-1'
 
       />
       {  userRole === "patient" || userRole === "doctor"?
@@ -90,7 +90,7 @@ const RegisterCompany = async () => {
         <SelectTrigger id="companyType">
           <SelectValue placeholder="Select" />
         </SelectTrigger>
-        <SelectContent position="popper" className='bg-dark-3  text-sky-2'>
+        <SelectContent position="popper" className='bg-dark-3  text-green-1'>
           <SelectItem  value="pharmacy">Pharmacy</SelectItem>
           <SelectItem value="hospital">Hospital</SelectItem>
         </SelectContent>

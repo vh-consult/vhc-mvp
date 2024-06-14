@@ -57,7 +57,7 @@
   
 //   return (
 //     <div className='bg-dark-2 h-screen w-screen flex flex-center'>
-//       <Card className={`relative w-[400px] ${loading? 'hidden': ''} border-none bg-dark-1 text-sky-2`}>
+//       <Card className={`relative w-[400px] ${loading? 'hidden': ''} border-none bg-dark-1 text-green-1`}>
 //         <CardHeader>
 //           <CardTitle>Account Activation</CardTitle>
 //           <CardDescription>Fill the forms to activate your account</CardDescription>
@@ -85,7 +85,7 @@
 //                   <SelectTrigger id="country">
 //                     <SelectValue placeholder="Select" />
 //                   </SelectTrigger>
-//                   <SelectContent position="popper" className='bg-dark-3  text-sky-2'>
+//                   <SelectContent position="popper" className='bg-dark-3  text-green-1'>
 //                     <SelectItem value="ghana">Ghana</SelectItem>
 //                     <SelectItem value="dubai">Dubai</SelectItem>
 //                     <SelectItem value="usa">USA</SelectItem>
@@ -109,7 +109,7 @@
 //                   <SelectTrigger id="gender">
 //                     <SelectValue placeholder="Select" />
 //                   </SelectTrigger>
-//                   <SelectContent position="popper" className='bg-dark-3  text-sky-2'>
+//                   <SelectContent position="popper" className='bg-dark-3  text-green-1'>
 //                     <SelectItem value="male">Male</SelectItem>
 //                     <SelectItem value="female">Female</SelectItem>
 //                   </SelectContent>
@@ -121,7 +121,7 @@
 //                   <SelectTrigger id="role">
 //                     <SelectValue placeholder="Select" />
 //                   </SelectTrigger>
-//                   <SelectContent position="popper" className='bg-dark-3 text-sky-2'>
+//                   <SelectContent position="popper" className='bg-dark-3 text-green-1'>
 //                     <SelectItem value="patient">Patient</SelectItem>
 //                     <SelectItem value="doctor">Doctor</SelectItem>
 //                     <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem>
@@ -249,7 +249,7 @@ const RegisterationForm = () => {
 
   return (
     <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-      <Card className={`relative w-[400px] ${loading ? 'hidden' : ''} border-none bg-dark-1 text-sky-2`}>
+      <Card className={`relative w-[400px] ${loading ? 'hidden' : ''} border-none bg-dark-1 text-green-1`}>
         <CardHeader>
           <CardTitle>Account Activation</CardTitle>
           <CardDescription>Fill the forms to activate your account</CardDescription>
@@ -278,7 +278,7 @@ const RegisterationForm = () => {
                   <SelectTrigger id="country">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-sky-2'>
+                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
                     <SelectItem value="ghana">Ghana</SelectItem>
                     <SelectItem value="dubai">Dubai</SelectItem>
                     <SelectItem value="usa">USA</SelectItem>
@@ -304,7 +304,7 @@ const RegisterationForm = () => {
                   <SelectTrigger id="gender">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-sky-2'>
+                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
                     <SelectItem value="male">Male</SelectItem>
                     <SelectItem value="female">Female</SelectItem>
                   </SelectContent>
@@ -317,7 +317,7 @@ const RegisterationForm = () => {
                   <SelectTrigger id="role">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-sky-2'>
+                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
                     <SelectItem value="patient">Patient</SelectItem>
                     <SelectItem value="doctor">Doctor</SelectItem>
                     <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem>

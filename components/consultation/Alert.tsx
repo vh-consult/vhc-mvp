@@ -24,8 +24,8 @@ const Alert = ({ title, iconUrl }: PermissionCardProps) => {
               <p className="text-center text-xl font-semibold">{title}</p>
             </div>
 
-            <Button asChild className="bg-blue-1">
-              <Link href="/">Back to Home</Link>
+            <Button asChild className="bg-green-2">
+              <Link href="/consultatiion/home">Back to Home</Link>
             </Button>
           </div>
         </CardContent>

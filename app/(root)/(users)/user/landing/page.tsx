@@ -21,7 +21,7 @@ const LandingPage = () => {
         userRole === ""? 
         (
           <HomeCard 
-            className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+            className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
             description='Activate to start'
             title='Account Activation'
             imgURL='/icons/Home.svg'
@@ -30,14 +30,14 @@ const LandingPage = () => {
       ): (
         <>
           <HomeCard 
-            className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+            className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
             description='Enter your dashboard '
             title='Dashboard'
             imgURL='/icons/Home.svg'
             handleClick={()=>{router.push(`/user/${user?.id}/overview`)}}
           />
           <HomeCard 
-            className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+            className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
             description='Consult with real-time and trusted physicians'
             title='Visit Hospital'
             imgURL='/icons/Home.svg'
@@ -47,14 +47,14 @@ const LandingPage = () => {
       )
       }
       <HomeCard 
-        className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+        className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
         description='Seek medical assistance'
         title='Consultation Room'
         imgURL='/icons/Video.svg'
         handleClick={()=>{router.push(`/consultation/home`)}}
       />
       <HomeCard 
-        className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+        className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
         description='Purchase your drugs here'
         title='Visit Pharmacy'
         imgURL='/icons/mdi_drugs.png'

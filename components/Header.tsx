@@ -53,7 +53,7 @@ const Header = ({navigations}: HeaderProps) => {
         }
 
         <div className=" w-2/5 ">
-          <ul className='flex flex-row flex-between text-sky-3'>
+          <ul className='flex flex-row flex-between text-green-1'>
             {
               navigations?.map((nav,index)=>{
                 const activeLink = pathname === nav.route
@@ -82,7 +82,7 @@ const Header = ({navigations}: HeaderProps) => {
             w-[80%]'
         />
         <AiOutlineMessage 
-          className='text-sky-3 
+          className='text-green-1 
           cursor-pointer w-[30px] h-[30px]' 
         />
         <SignedIn>

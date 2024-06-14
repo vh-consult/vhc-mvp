@@ -21,8 +21,8 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
             key={index} 
             className={`flex flex-col mb-4 items-center py-3 hover:w-[85%] 
               hover:rounded-lg hover:mx-auto hover:bg-white 
-              hover:${type === "patient"? `bg-blue-1`: 'bg-purple-1'}
-              ${isActive? `bg-white ${type === "patient"? `bg-blue-1`: 'bg-purple-1'} w-[85%] mx-auto rounded-lg`:
+              hover:${type === "patient"? `bg-green-2`: 'bg-purple-1'}
+              ${isActive? `bg-white ${type === "patient"? `bg-green-2`: 'bg-purple-1'} w-[85%] mx-auto rounded-lg`:
              'text-white'}
             `}
           >
@@ -32,7 +32,7 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
         );
       };
   return (
-    <aside className={`w-[80px] h-full fixed top-0 left-0 ${type === "patient"? `bg-blue-1`: 'bg-purple-1'}
+    <aside className={`w-[80px] h-full fixed top-0 left-0 bg-dark-1
     py-6 flex flex-col items-center justify-between`}>
       <div className='w-full'>
         {
