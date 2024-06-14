@@ -23,35 +23,19 @@ const Header = ({navigations}: HeaderProps) => {
   return (
     <nav className='flex flex-between h-16 fixed z-50 w-full bg-dark-2 px-6 py-4 lg:px-10'>
       <div className="w-2/5 flex flex-between ">
-        {
-          pathname.startsWith('/pharmacy/') ? (
-            <Link href={"/"} className='flex items-center gap-1'>
-              <div className="w-5/6">
-                <Image
-                  src='/logo.svg'
-                  alt='logo'
-                  width={32}
-                  height={32}
-                  className='max-sm:size-10 w-full object-cover'
-                />
-              
-              </div>
-          </Link>
-          ): 
-          <Link href={"/"} className='flex items-center gap-1'>
-          <Image
-            src='/favicon.svg'
-            alt='logo'
-            width={32}
-            height={32}
-            className='max-sm:size-10'
-          />
-          <p className='font-bold text-2xl text-white'>
-            V-Consultation
-          </p>
+        <Link href={"/"} className='flex items-center gap-1'>
+          <div className="w-5/6">
+            <Image
+              src='/logo.svg'
+              alt='logo'
+              width={32}
+              height={32}
+              className='max-sm:size-10 w-full object-cover'
+            />
+          
+          </div>
         </Link>
-        }
-
+        
         <div className=" w-2/5 ">
           <ul className='flex flex-row flex-between text-green-1'>
             {

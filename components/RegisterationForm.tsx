@@ -168,7 +168,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { updateUser } from '@/lib/actions/user.actions';
+import { activateAccount } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
@@ -176,17 +176,6 @@ import Loader from './Loader';
 import { toast } from './ui/use-toast';
 import { z } from 'zod';
 
-// Define Zod schema
-const registrationSchema = z.object({
-  dateOfBirth: z.date().max(new Date(), 'Enter your date of birth').min(new Date(1960, 0, 1)),
-  role: z.string().min(5, 'Please select your purpose on this app'),
-  location: z.string().min(1, 'Location is required'),
-  gender: z.string().min(4, 'Please select gender').max(6),
-  country: z.string().min(1, 'Please select your country'),
-});
-
-// Define type for form values
-type FormValues = z.infer<typeof registrationSchema>;
 
 const RegisterationForm = () => {
   const router = useRouter();
@@ -231,14 +220,16 @@ const RegisterationForm = () => {
 
     setLoading(true);
     try {
-      const userToUpdate = await updateUser(user?.id as string, values);
+      const userToUpdate = await activateAccount(user?.id as string, values);
       switch (userToUpdate.role) {
         case 'patient':
         case 'doctor':
+          toast({title: 'Account activated successfully, you are being redirected'})
           router.push('/user/landing');
           break;
         case 'hospitalAdmin':
         case 'pharmacyAdmin':
+          toast({title: 'Account activated successfully, you have to set your company up next'})
           router.push('/company/set-up');
           break;
       }

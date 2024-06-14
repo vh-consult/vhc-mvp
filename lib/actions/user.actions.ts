@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import {User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import { cookies } from "next/headers";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -27,7 +28,7 @@ export async function getUserById(userId: string) {
     const user = await User.findOne({ clerkId: userId });
 
     if (!user) throw new Error("User not found");
-
+    console.log(user)
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
@@ -48,6 +49,25 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
+  }
+}
+
+//Activate account
+export async function activateAccount(clerkId: string, user:ActivateAccountParams) {
+  try {
+    await connectToDatabase();
+
+    const findUserInDB = await User.findOne({clerkId});
+
+    if (!findUserInDB) {
+      throw new Error("User not found")
+    };
+
+    const userToActivateAccount = await User.findOneAndUpdate({clerkId}, user, {new: true});
+
+    return JSON.parse(JSON.stringify(userToActivateAccount));
+  } catch (error) {
+    handleError(error)
   }
 }
 

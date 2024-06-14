@@ -33,6 +33,14 @@ declare type CreatePatientParams = {
   personalDoctor?: string;
 };
 
+declare type ActivateAccountParams = {
+  dateOfBirth: Date;
+  role: "patient" | "doctor" | "hospitalAdmin" | "pharmacyAdmin" | string;
+  location: string;
+  gender: "male" | "female" | string;
+  country: string;
+}
+
 declare type UpdateUserParams = {
   firstName?: string;
   lastName?: string;
