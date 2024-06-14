@@ -16,7 +16,7 @@ const LandingPage = () => {
     userRole = userInDB.role
   }
   return (
-    <div className='bg-dark-2 h-screen w-screen flex flex-center gap-10'>
+    <div className='bg-dark-2 h-screen w-screen px-10 py-10 grid grid-cols-3 flex-wrap gap-10'>
       {
         userRole === ""? 
         (
@@ -28,13 +28,22 @@ const LandingPage = () => {
             handleClick={()=>{router.push(`/user/${user?.id}/overview`)}}
           />
       ): (
-        <HomeCard 
-          className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
-          description='Enter your dashboard '
-          title='Dashboard'
-          imgURL='/icons/Home.svg'
-          handleClick={()=>{router.push(`/user/${user?.id}/overview`)}}
-        />
+        <>
+          <HomeCard 
+            className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+            description='Enter your dashboard '
+            title='Dashboard'
+            imgURL='/icons/Home.svg'
+            handleClick={()=>{router.push(`/user/${user?.id}/overview`)}}
+          />
+          <HomeCard 
+            className='bg-dark-1 hover:bg-dark-4 text-sky-2 w-[350px]'
+            description='Consult with real-time and trusted physicians'
+            title='Visit Hospital'
+            imgURL='/icons/Home.svg'
+            handleClick={()=>{router.push(`/hospital/home`)}}
+          />
+        </>
       )
       }
       <HomeCard 

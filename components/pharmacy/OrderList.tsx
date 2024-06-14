@@ -4,7 +4,7 @@ import { BiTrash } from 'react-icons/bi'
 
 const OrderList = () => {
   return (
-    <div className='w-full py-2 flex flex-between'>
+    <div className='w-[90%] mx-auto py-2 flex flex-between'>
       <div className="flex items-center">
         <Image
           alt='drug image'

@@ -39,18 +39,3 @@ export async function createCompany(userId: string, companyData: CompanyProps){
     }
 }
 
-export async function updateCompany(userId: string){
-    try {
-        await connectToDatabase();
-
-        const user = await User.findOne({ clerkId: userId });
-
-        if (!user) throw new Error("User not found");
-        
-        const companyToUpdate = await Company.findOne({})
-
-        return JSON.parse(JSON.stringify(user));
-    } catch (error) {
-        handleError(error);
-    }
-}
