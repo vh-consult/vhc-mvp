@@ -1,3 +1,4 @@
+"use client"
 import { doctorSidebarElements, patientSidebarElements } from '@/constants'
 import { SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
@@ -20,19 +21,17 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
             href={nav.route} 
             key={index} 
             className={`flex flex-col mb-4 items-center py-3 hover:w-[85%] 
-              hover:rounded-lg hover:mx-auto hover:bg-white 
-              hover:${type === "patient"? `bg-green-2`: 'bg-purple-1'}
-              ${isActive? `bg-white ${type === "patient"? `bg-green-2`: 'bg-purple-1'} w-[85%] mx-auto rounded-lg`:
-             'text-white'}
+              hover:rounded-lg hover:mx-auto hover:bg-dark-4 ${isActive? `bg-dark-3 w-[85%] mx-auto rounded-lg`:
+             'text-green-1'}
             `}
           >
-            <div>{<nav.icon/>}</div>
-            <span className={`${isActive? 'font-medium' : ''} text-[12px] `}>{nav.label}</span>
+            <div>{<nav.icon className='w-[20px] h-[20px]'/>}</div>
+            <span className={`${isActive? 'font-medium' : ''} mt-1 text-[10px] `}>{nav.label}</span>
           </Link>
         );
       };
   return (
-    <aside className={`w-[80px] h-full fixed top-0 left-0 bg-dark-1
+    <aside className={`w-[80px] h-[calc(100vh-64px)] fixed top-16 left-0 bg-dark-1
     py-6 flex flex-col items-center justify-between`}>
       <div className='w-full'>
         {

@@ -18,7 +18,7 @@ const setupSchema = z.object({
   role: z.string().min(5, 'Please select your purpose on this app'),
   location: z.string().min(1, 'Location is required'),
   description: z.string().min(4, 'Please select gender').max(6),
-  specialties: z.sting().min(1, 'Please select your country'),
+  specialties: z.string().min(1, 'Please select your country'),
 });
 
 // Define type for form values
@@ -26,42 +26,66 @@ type FormValues = z.infer<typeof setupSchema>;
 
 
 const RegisterCompany = async () => {
-  const handleSubmit = async () => {
-    let companyData:CompanyProps
-    const user = await currentUser();
-    if (!user) {
-      throw new Error('User not logged in')
-    }
-    const userFromDB: UserParams = await getUserById(user?.id as string)
+  const router = useRouter();
+  const { user } = useUser();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
 
-    if ( userFromDB.role === "patient" 
-      || userFromDB.role === "doctor"
-    ) {
-      companyData = {
-        name: formData.get("name") as string,
-        location: formData.get("location") as string,
-        image: formData.get("image") as string,
-        type: formData.get("type") as "pharmacy" | "hospital"
-        }
-      } else if (userFromDB.role === "hospitalAdmin") {
-        companyData = {
-          name: formData.get("name") as string,
-          location: formData.get("location") as string,
-          image: formData.get("image") as string,
-          type: "hospital"
-          }
-      }else if (userFromDB.role === "pharmacyAdmin") {
-        companyData = {
-          name: formData.get("name") as string,
-          location: formData.get("location") as string,
-          image: formData.get("image") as string,
-          type: "pharmacy"
-          }
+  const initialValues: FormValues = {
+    name: '',
+    role: '',
+    location: '',
+    description: '',
+    specialties: '',
+  };
+  
+  const [values, setValues] = useState<FormValues>(initialValues);
+  
+  const validateForm = (): boolean => {
+    try {
+      setupSchema.parse(values);
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const formattedErrors: Partial<Record<keyof FormValues, string>> = err.errors.reduce(
+          (acc, curr) => {
+            if (curr.path.length > 0 && typeof curr.path[0] === 'string') {
+              acc[curr.path[0] as keyof FormValues] = curr.message;
+            }
+            return acc;
+          },
+          {} as Partial<Record<keyof FormValues, string>>
+        );
+        setErrors(formattedErrors);
       }
-      const company = await createCompany(user?.id, companyData)
-      toast({title: 'Company setup successful'})
-      redirect(`/company/${company?.id}/home`)
-  }
+      return false;
+    }
+  };
+
+  const handleClick = async () => {
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      const userToUpdate = await createCompany(user?.id as string, values);
+      switch (userToUpdate.role) {
+        case 'patient':
+        case 'doctor':
+          toast({title: 'Account activated successfully, you are being redirected'})
+          router.push('/user/landing');
+          break;
+        case 'hospitalAdmin':
+        case 'pharmacyAdmin':
+          toast({title: 'Account activated successfully, you have to set your company up next'})
+          router.push('/company/set-up');
+          break;
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <form
       className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
@@ -93,8 +117,7 @@ const RegisterCompany = async () => {
         className='border-none bg-dark-3 text-green-1'
 
       />
-      {  userRole === "patient" || userRole === "doctor"?
-        (<Select name="type">
+        <Select name="type">
         <SelectTrigger id="companyType">
           <SelectValue placeholder="Select" />
         </SelectTrigger>
@@ -102,12 +125,8 @@ const RegisterCompany = async () => {
           <SelectItem  value="pharmacy">Pharmacy</SelectItem>
           <SelectItem value="hospital">Hospital</SelectItem>
         </SelectContent>
-      </Select>) : ``
-      }
-      <SubmitButton
-        className='bg-green-2 text-white w-full'
-        buttonText='Create Company'
-      />
+      </Select>
+
     </form>
   )
 }

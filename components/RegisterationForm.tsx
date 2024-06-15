@@ -176,6 +176,18 @@ import Loader from './Loader';
 import { toast } from './ui/use-toast';
 import { z } from 'zod';
 
+// Define Zod schema
+const registrationSchema = z.object({
+  dateOfBirth: z.date().max(new Date(), 'Enter your date of birth').min(new Date(1960, 0, 1)),
+  role: z.string().min(5, 'Please select your purpose on this app'),
+  location: z.string().min(1, 'Location is required'),
+  gender: z.string().min(4, 'Please select gender').max(6),
+  country: z.string().min(1, 'Please select your country'),
+});
+
+// Define type for form values
+type FormValues = z.infer<typeof registrationSchema>;
+
 
 const RegisterationForm = () => {
   const router = useRouter();
@@ -184,7 +196,7 @@ const RegisterationForm = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
 
   const initialValues: FormValues = {
-    dateOfBirth: new Date(1960, 0, 1),
+    dateOfBirth: new Date(1990, 0, 1),
     role: '',
     location: '',
     gender: '',

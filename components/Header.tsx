@@ -21,7 +21,7 @@ interface HeaderProps {
 const Header = ({navigations}: HeaderProps) => {
   const pathname = usePathname()
   return (
-    <nav className='flex flex-between h-16 fixed z-50 w-full bg-dark-2 px-6 py-4 lg:px-10'>
+    <nav className='flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
       <div className="w-2/5 flex flex-between ">
         <Link href={"/"} className='flex items-center gap-1'>
           <div className="w-5/6">
