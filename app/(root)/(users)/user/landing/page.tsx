@@ -103,14 +103,14 @@ const UserHomePage = () => {
             <HomeCard 
               className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
               description='Consult with real-time and trusted physicians'
-              title='Visit Hospital'
+              title='Manage Staff'
               imgURL='/icons/Home.svg'
               handleClick={() => { router.push(`/hospital/home`) }}
             />
             <HomeCard 
               className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
               description='Seek medical assistance'
-              title='Consultation Room'
+              title='Consultations'
               imgURL='/icons/Video.svg'
               handleClick={() => { router.push(`/consultation/home`) }}
             />
