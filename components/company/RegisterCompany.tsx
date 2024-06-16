@@ -25,7 +25,7 @@ const setupSchema = z.object({
 type FormValues = z.infer<typeof setupSchema>;
 
 
-const RegisterCompany = async () => {
+const RegisterCompany =  () => {
   const router = useRouter();
   const { user } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
