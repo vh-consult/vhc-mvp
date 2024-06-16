@@ -21,7 +21,7 @@ const PatientList = ({
     age, imageSrc
 }: PatientProps) => {
   return (
-    <div className="flex  border-t h-[45px] px-5 bg-white w-full items-center justify-between">
+    <div className="flex  border-t border-t-dark-3 h-[45px] px-5 bg-dark-3 w-full items-center justify-between">
         <span className="w-[30px]  h-[30px] rounded-full">
             <Image
                 width={30}

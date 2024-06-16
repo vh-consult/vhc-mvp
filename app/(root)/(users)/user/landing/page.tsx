@@ -7,7 +7,7 @@ import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-const LandingPage = () => {
+const UserHomePage = () => {
   const { user } = useUser()
   const router = useRouter()
   const [userRole, setUserRole] = useState(null)
@@ -167,4 +167,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default UserHomePage

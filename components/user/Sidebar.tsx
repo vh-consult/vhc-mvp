@@ -1,6 +1,5 @@
 "use client"
-import { doctorSidebarElements, patientSidebarElements } from '@/constants'
-import { SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SidebarBbottomNavs, doctorSidebarElements, patientSidebarElements } from '@/constants'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -41,12 +40,7 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
         }
       </div>
       <div className='w-full'>
-        {
-            type === "doctor"? 
-            doctorSidebarElements.bottom.map((nav, index) => renderNavigation(nav, index)) : 
-            patientSidebarElements.bottom.map((nav, index) => renderNavigation(nav, index))
-        }
-        <SignOutButton redirectUrl='/'/>
+            { SidebarBbottomNavs.map((nav, index) => renderNavigation(nav, index)) }
       </div>
     </aside>
   )

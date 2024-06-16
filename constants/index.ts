@@ -5,7 +5,8 @@ import {
     AiOutlineMail,
     AiOutlineMenu,
     AiOutlineArrowRight,
-    AiOutlineCheck
+    AiOutlineCheck,
+    AiOutlineHistory
   } from "react-icons/ai"
 import { BsDatabase, BsPeople } from "react-icons/bs";
 import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
@@ -670,22 +671,15 @@ export const patientSidebarElements = {
         },
         {
             route: '/appointments/',
-            label: 'Appointments',
+            label: 'Schedule',
             icon: MdOutlineSchedule
         },
         {
             route: '/patient/record',
-            label: 'Appointments',
+            label: 'Record',
             icon: BsDatabase
         },
     ],
-    bottom: [
-        {
-            route: '/patient/settings',
-            label: 'Settings',
-            icon: MdOutlineSettings
-        },
-    ]
 }
 
 export const doctorSidebarElements = {
@@ -706,11 +700,17 @@ export const doctorSidebarElements = {
             icon: BsPeople
         }
     ],
-    bottom: [
-        {
-            route: '/patient/settings',
-            label: 'Settings',
-            icon: MdOutlineSettings
-        },
-    ]
 }
+
+export const SidebarBbottomNavs = [
+    {
+        route: '/patient/history',
+        label: 'History',
+        icon: AiOutlineHistory
+    },
+    {
+        route: '/patient/settings',
+        label: 'Settings',
+        icon: MdOutlineSettings
+    },
+]

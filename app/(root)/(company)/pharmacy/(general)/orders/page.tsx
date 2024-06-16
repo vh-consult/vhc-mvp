@@ -1,7 +1,7 @@
 'use client'
-import OrderList from '@/components/pharmacy/OrderList'
+import List from '@/components/pharmacy/List'
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const OrdersPage = () => {
   const [isClicked, setIsClicked] = useState<boolean>()
@@ -26,6 +26,13 @@ const OrdersPage = () => {
   const filterOrders = async (route: string) => {
 
   }
+  useEffect(()=>{
+    const fetchOrders = async () => {
+  
+    }
+    fetchOrders()
+
+  }, [])
   return (
     <main className='w-[80%] mx-auto min-h-screen pt-20 bg-dark-1'>
       <div className="flex px-11 flex-between">
@@ -46,11 +53,6 @@ const OrdersPage = () => {
         </div>
       </div>
       <div className="">
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
-        <OrderList/>
 
       </div>
     </main>

@@ -6,7 +6,7 @@ interface HealthRecordProps {
     time: string;
     provider?: string;
     physician: string;
-    consultationinterface: string;
+    // consultationinterface: string;
     complaint: Array<string>;
     diagnosis: Array<string>;
     medications: Array<{drug: string, dose: string}>;
@@ -26,27 +26,27 @@ const RecordList = ({
     consultationType
 }: HealthRecordProps) => {
   return (
-    <div className="w-full min-h-[150px] even:bg-red-100  flex justify-between border border-gray-300">
-    <div className="w-1/12 flex flex-col justify-between p-1 border-r border-r-gray-200">
-        <span className="">
+    <div className="w-full min-h-[125px] even:bg-dark-1  flex justify-between border border-dark-3">
+    <div className="w-1/12 flex flex-col  p-1 border-r border-r-dark-3">
+        <span className="text-sm mb-4">
             {date}
         </span>
-        <span className="">
+        <span className="text-xs">
             {time}
         </span>
     </div>
-    <div className="w-2/12 flex flex-col  p-1 border-r border-r-gray-200">
+    <div className="w-2/12 flex flex-col  p-1 border-r border-r-dark-3">
         <span className="text-lg font-medium">
             {provider}
         </span>
-        <span className="text-base font-normal">
+        <span className="text-base font-normal my-1">
             {physician}
         </span>
-        <span className="text-sm font-normal">
+        <span className="text-sm font-normal opacity-75">
             {consultationType}
         </span>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-200">
+    <div className="w-2/12 p-1 border-r border-r-dark-3">
         <ul className="list-disc pl-5">
             {
                 complaint.map((issue,index)=> {
@@ -57,7 +57,7 @@ const RecordList = ({
             }
         </ul>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-200">
+    <div className="w-2/12 p-1 border-r border-r-dark-3">
         <ul className="list-disc pl-5">
             {
                 diagnosis.map((diagnosis,index)=> {
@@ -68,7 +68,7 @@ const RecordList = ({
             }
         </ul>
     </div>
-    <div className="w-2/12 p-1 border-r border-r-gray-200">
+    <div className="w-2/12 p-1 border-r border-r-dark-3">
         <ul className="list-disc pl-5">
             {
                 medications.map((med,index)=> {
