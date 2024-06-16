@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const cardsContent = {
@@ -105,7 +106,9 @@ const Account = () => {
           }
         </h2>
         <div className="flex w-[80%]">
-          <img 
+          <Image
+            width={150}
+            height={150} 
             src="/assets/images/doc-3.jpg" 
             alt="" 
             className='w-[150px] h-[150px] object-cover border

@@ -63,28 +63,28 @@ const RegisterCompany = async () => {
     }
   };
 
-  const handleClick = async () => {
-    if (!validateForm()) return;
+  // const handleClick = async () => {
+  //   if (!validateForm()) return;
 
-    setLoading(true);
-    try {
-      const userToUpdate = await createCompany(user?.id as string, values);
-      switch (userToUpdate.role) {
-        case 'patient':
-        case 'doctor':
-          toast({title: 'Account activated successfully, you are being redirected'})
-          router.push('/user/landing');
-          break;
-        case 'hospitalAdmin':
-        case 'pharmacyAdmin':
-          toast({title: 'Account activated successfully, you have to set your company up next'})
-          router.push('/company/set-up');
-          break;
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   setLoading(true);
+  //   try {
+  //     const userToUpdate = await createCompany(user?.id as string, values);
+  //     switch (userToUpdate.role) {
+  //       case 'patient':
+  //       case 'doctor':
+  //         toast({title: 'Account activated successfully, you are being redirected'})
+  //         router.push('/user/landing');
+  //         break;
+  //       case 'hospitalAdmin':
+  //       case 'pharmacyAdmin':
+  //         toast({title: 'Account activated successfully, you have to set your company up next'})
+  //         router.push('/company/set-up');
+  //         break;
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <form

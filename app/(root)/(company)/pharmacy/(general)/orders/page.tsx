@@ -1,5 +1,5 @@
 'use client'
-import List from '@/components/pharmacy/List'
+import List from '@/components/List'
 import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 
@@ -43,6 +43,7 @@ const OrdersPage = () => {
           {
             filters.map(filter => (
               <Button 
+              key={filter.route}
                 onClick={()=>filterOrders(filter.route)}
                 className={`${isClicked? 'bg-green-2 text-green-1': 'border-2 border-green-2'} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
               >
