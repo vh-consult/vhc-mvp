@@ -48,10 +48,10 @@ const HistoryCard = ({
         <div 
           className={`
             ${className} 
-            ${eventType==='consultation'? 'bg-blue-2': 
-            eventType==='lab'? 'bg-yellow-100':
-            eventType==='check-up'? 'bg-green-3':
-            eventType==='purchase'? 'bg-violet-2': ``
+            ${eventType==='consultation'? 'bg-blue-4': 
+            eventType==='lab'? 'bg-green-4':
+            eventType==='check-up'? 'bg-dark-4':
+            eventType==='purchase'? 'bg-purple-2': ``
             }`}>
           <h3>{activity}</h3>
           <p>
@@ -65,7 +65,7 @@ const HistoryCard = ({
                   <p>{complaint}</p>
                   {
                     meds && meds.map((med, index) => {return (
-                      <span key={index}>{med}</span>
+                      <span key={index} className='mr-2 capitalize'>{med}</span>
                     )})
                   }
                 </div>
@@ -74,7 +74,7 @@ const HistoryCard = ({
                   <div>
                   {
                     orders && orders.map((med, index) => {return (
-                      <span key={index}>{med}</span>
+                      <span key={index} className='mr-2 capitalize'>{med}</span>
                     )})
                   }
                   <p>{paymentMethod}</p>

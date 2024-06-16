@@ -6,6 +6,7 @@ import {User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import { cookies } from "next/headers";
+import { currentUser } from "@clerk/nextjs/server";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -70,6 +71,15 @@ export async function activateAccount(clerkId: string, user:ActivateAccountParam
     handleError(error)
   }
 }
+
+//get user by role
+export async function getUserRole(id: string) {
+ const user = await getUserById(id)
+
+ return user.role;
+  
+}
+
 
 // DELETE
 export async function deleteUser(clerkId: string) {

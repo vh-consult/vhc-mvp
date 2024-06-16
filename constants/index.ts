@@ -682,6 +682,56 @@ export const patientSidebarElements = {
     ],
 }
 
+export const pharmacySidebarElements = {
+    top: [
+        {
+            route: '/patient/dashboard',
+            label: 'Dashboard',
+            icon: RxDashboard
+        },
+        {
+            route: '/consultation/home',
+            label: 'Consultation',
+            icon: MdMeetingRoom
+        },
+        {
+            route: '/appointments/',
+            label: 'Schedule',
+            icon: MdOutlineSchedule
+        },
+        {
+            route: '/patient/record',
+            label: 'Record',
+            icon: BsDatabase
+        },
+    ],
+}
+
+export const hospitalSidebarElements = {
+    top: [
+        {
+            route: '/patient/dashboard',
+            label: 'Dashboard',
+            icon: RxDashboard
+        },
+        {
+            route: '/consultation/home',
+            label: 'Consultation',
+            icon: MdMeetingRoom
+        },
+        {
+            route: '/appointments/',
+            label: 'Schedule',
+            icon: MdOutlineSchedule
+        },
+        {
+            route: '/patient/record',
+            label: 'Record',
+            icon: BsDatabase
+        },
+    ],
+}
+
 export const doctorSidebarElements = {
     top: [
         {

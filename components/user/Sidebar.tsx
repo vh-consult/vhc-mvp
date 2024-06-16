@@ -1,9 +1,10 @@
 "use client"
-import { SidebarBbottomNavs, doctorSidebarElements, patientSidebarElements } from '@/constants'
+import { SidebarBbottomNavs, doctorSidebarElements, hospitalSidebarElements, patientSidebarElements, pharmacySidebarElements } from '@/constants'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { IconType } from 'react-icons'
+import { BiMenu } from 'react-icons/bi'
 
 interface SideNavProps {
     icon: IconType;
@@ -33,10 +34,16 @@ const Sidebar = ({type} : {type: "patient" | "doctor"}) => {
     <aside className={`w-[80px] h-[calc(100vh-64px)] fixed top-16 left-0 bg-dark-1
     py-6 flex flex-col items-center justify-between`}>
       <div className='w-full'>
+        <BiMenu/>
         {
             type === "doctor"? 
             doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index))
+            type === "patient"? 
+            patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) :
+            type === "hospitalAdmin"?
+            hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
+            pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) 
+
         }
       </div>
       <div className='w-full'>

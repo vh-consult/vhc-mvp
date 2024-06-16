@@ -98,9 +98,9 @@ const cardsContent = {
 
 const Account = () => {
   return (
-    <div className=''>
-      <div className="w-full h-[225px] rounded-lg p-3 border border-gray-400 ">
-        <h2 className="text-xl capitalize font-medium">
+    <div className='w-[90%] mx-auto'>
+      <div className="w-full h-[225px] rounded-lg p-3 border border-dark-3 ">
+        <h2 className="text-lg capitalize font-medium">
           {
             cardsContent.personalDetails.header
           }
@@ -109,10 +109,10 @@ const Account = () => {
           <Image
             width={150}
             height={150} 
-            src="/assets/images/doc-3.jpg" 
+            src="/images/doc-3.jpg" 
             alt="" 
             className='w-[150px] h-[150px] object-cover border
-            border-gray-400 rounded-full'
+            border-dark-3 rounded-full'
             />
           <div className="w-2/3 flex flex-wrap">
             {
@@ -137,8 +137,8 @@ const Account = () => {
       </div>
       <div className="w-full flex justify-between mt-3">
 
-        <div className="w-[300px] rounded-lg p-2 h-[315px] border border-gray-400">
-          <h2 className='text-xl capitalize font-medium'>
+        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+          <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.healthcare.header
             }
@@ -164,8 +164,8 @@ const Account = () => {
           </div>
         </div>
 
-        <div className="w-[300px] rounded-lg p-2 h-[315px] border border-gray-400">
-          <h2 className='text-xl capitalize font-medium'>
+        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+          <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.contact.header
             }
@@ -190,8 +190,8 @@ const Account = () => {
             }
           </div>
         </div>
-        <div className="w-[300px] rounded-lg p-2 h-[315px] border border-gray-400">
-          <h2 className='text-xl capitalize font-medium'>
+        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+          <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.address.header
             }

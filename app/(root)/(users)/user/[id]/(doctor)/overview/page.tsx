@@ -7,7 +7,7 @@ const OverviewPage = () => {
       <PatientList 
         age={4}
         gender='Male'
-        imageSrc='/images/doc 1.jpg'
+        imageSrc='/images/doc-1.jpg'
         name='Ayisi Nana' 
       />
     </>

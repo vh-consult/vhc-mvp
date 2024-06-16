@@ -99,23 +99,94 @@ const userHistoryList = [
       orders: ['G - 50mg', 'paracetamol 25mg'],
       eventType: 'purchase'
     },
+    {
+      activity: 'Visit To K-Pharma Drug Store',
+      date: new Date('2024-06-12T12:30'),
+      host: 'MC Pharma',
+      paymentMethod: 'Mobile Money',
+      orders: ['G - 50mg', 'paracetamol 25mg'],
+      eventType: 'purchase'
+    },
+    {
+      activity: 'In-person Appointment',
+      date: new Date('2024-06-12T12:30'),
+      host: 'Dr Mensah Oteh',
+      review: 'Ulcer diagnosis',
+      meds: ['G - 50mg', 'paracetamol 25mg'],
+      summary: 'Medications changed based on patients reaction',
+      eventType: 'check-up'
+    },
+    {
+      activity: 'Visit To K-Pharma Drug Store',
+      date: new Date('2024-06-12T12:30'),
+      host: 'MC Pharma',
+      paymentMethod: 'Mobile Money',
+      orders: ['G - 50mg', 'paracetamol 25mg'],
+      eventType: 'purchase'
+    },
+    {
+      activity: 'Check up',
+      date: new Date('2024-06-12T12:30'),
+      host: 'Serwise Hospital',
+      complaint: 'Abdominal pains after eating banku and pepper without fish',
+      meds: ['G - 50mg', 'paracetamol 25mg'],
+      eventType: 'consultation'
+    },
+    {
+      activity: 'Visit To K-Pharma Drug Store',
+      date: new Date('2024-06-12T12:30'),
+      host: 'MC Pharma',
+      paymentMethod: 'Mobile Money',
+      orders: ['G - 50mg', 'paracetamol 25mg'],
+      eventType: 'purchase'
+    },
   ]
-
+  const historyHeadbar = [
+    {
+      title: 'Virtual Consultation',
+      count: 23,
+      circleColor: 'bg-dark-4'
+    },
+    {
+      title: 'Pharrmacy Visits',
+      count: 12,
+      circleColor: 'bg-purple-2'
+    },
+    {
+      title: 'Check-ups',
+      count: 6,
+      circleColor: 'bg-blue-4 '
+    },
+    {
+      title: 'In-person Visitations',
+      count: 6,
+      circleColor: 'bg-green-4'
+    },
+  ]
 const UserHistoryPage = () => {
   return (
     <div>
-      <div 
-        className='
-        w-1/2  md:w-1/4 flex flex-row rounded-lg
-        items-center
-        ' 
-      >
-        <div className={`w-[30px] h-[30px] border mr-2 bg-blue-1 rounded-full `}></div>
-        <div>
-          <h3 className='font-medium text-sm'>Age</h3>
-          <p className='font-medium text-2xl'>45</p>
-        </div>
-      </div>
+    <div className='w-full flex  items-center px-6 sticky top-[64px]  h-[70px] mb-2 bg-dark-1 rounded-lg'>
+      {
+        historyHeadbar.map((highlight, index) => {
+            return(
+                <div 
+                    className='
+                        w-1/2  md:w-1/4 flex flex-row rounded-lg
+                        items-center
+                    ' 
+                    key={index}
+                >
+                    <div className={`w-[30px] h-[30px] border mr-2 rounded-full ${highlight.circleColor}`}></div>
+                    <div>
+                        <h3 className='font-medium text-sm'>{highlight.title}</h3>
+                        <p className='font-medium text-2xl'>{highlight.count}</p>
+                    </div>
+                </div>
+            )
+        })
+      }
+    </div>
       <div className=' flex justify-between flex-wrap'>
         {
             userHistoryList.map((history, index) => {
