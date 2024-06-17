@@ -1,11 +1,9 @@
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 const defaultPage = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+    // redirect('/')
+    <>gg</>
 }
 
 export default defaultPage

@@ -32,21 +32,21 @@ const UserHomePage = () => {
     <div className='bg-dark-2 min-h-screen w-full px-10 pt-20 pb-10 grid grid-cols-3 flex-wrap gap-10'>
       <Suspense fallback={<Loader/>}>
         {
-          userRole === "doctor" ? (
+          userRole === "doctor" || userRole === "patient" ? (
             <>
               <HomeCard 
                 className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
                 description='Enter your dashboard '
                 title='Dashboard'
                 imgURL='/icons/Home.svg'
-                handleClick={() => { router.push(`/user/${user?.id}/dashboard`) }}
+                handleClick={() => { router.push(`/user/dashboard`) }}
               />
               <HomeCard 
                 className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
                 description='Manage your contacts'
                 title='Affiliation'
                 imgURL='/icons/Home.svg'
-                handleClick={() => { router.push(`/affiliation/home`) }}
+                handleClick={() => { router.push(`/user/affiliation`) }}
               />
               <HomeCard 
                 className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
@@ -63,45 +63,14 @@ const UserHomePage = () => {
                 handleClick={() => { router.push(`/pharmacy/home`) }}
               />
             </>
-          ) : userRole === "patient" ? (
+          )  : userRole === "hospitalAdmin" ? (
             <>
               <HomeCard 
                 className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
                 description='Enter your dashboard '
                 title='Dashboard'
                 imgURL='/icons/Home.svg'
-                handleClick={() => { router.push(`/patient/${user?.id}/overview`) }}
-              />
-              <HomeCard 
-                className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
-                description='Consult with real-time and trusted physicians'
-                title='Visit Hospital'
-                imgURL='/icons/Home.svg'
-                handleClick={() => { router.push(`/hospital/home`) }}
-              />
-              <HomeCard 
-                className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
-                description='Seek medical assistance'
-                title='Consultation Room'
-                imgURL='/icons/Video.svg'
-                handleClick={() => { router.push(`/consultation/home`) }}
-              />
-              <HomeCard 
-                className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
-                description='Purchase drugs here'
-                title='Visit Pharmacy'
-                imgURL='/icons/mdi_drugs.png'
-                handleClick={() => { router.push(`/pharmacy/home`) }}
-              />
-            </>
-          ) : userRole === "hospitalAdmin" ? (
-            <>
-              <HomeCard 
-                className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
-                description='Enter your dashboard '
-                title='Dashboard'
-                imgURL='/icons/Home.svg'
-                handleClick={() => { router.push(`/${user?.id}/overview`) }}
+                handleClick={() => { router.push(`/user/dashboard`) }}
               />
               <HomeCard 
                 className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
@@ -162,7 +131,7 @@ const UserHomePage = () => {
               description='Activate to start'
               title='Account Activation'
               imgURL='/icons/Home.svg'
-              handleClick={() => { router.push(`/user/${user?.id}/overview`) }}
+              handleClick={() => { router.push(`/user/overview`) }}
             />
           ) : null
         }
