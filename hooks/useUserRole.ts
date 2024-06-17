@@ -1,25 +1,22 @@
-"use client"
 import { getUserById } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const UserRoleProvider = ({children}: {children:React.ReactNode}) => {
+const useUserRole = () => {
     const {user} = useUser()
-
+    const [userRole, setUserRole] = useState<
+    "doctor"|"patient"|
+    "hospitalAdmin"|"pharmacyAdmin">()
     useEffect(() => {        
         if(!user) return;
 
         async function getUserRole() {
             const userFromDB:UserParams = await getUserById(user?.id as string)
-            return userFromDB.role;
+            return setUserRole(userFromDB.role);
         }
         getUserRole()
     }, [user])
-  return (
-    <>
-      {children}
-    </>
-  )
+  return {userRole}
 }
 
-export default UserRoleProvider
+export default useUserRole

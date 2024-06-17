@@ -1,5 +1,6 @@
 "use client"
 import { SidebarBbottomNavs, doctorSidebarElements, hospitalSidebarElements, patientSidebarElements, pharmacySidebarElements } from '@/constants'
+import useUserRole from '@/hooks/useUserRole'
 import { getUserById } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
@@ -16,10 +17,8 @@ interface SideNavProps {
 
 const Sidebar = () => {
     const pathname = usePathname()
-    const [userRole, setUserRole] = useState<string | null>(null)
-    const { user } = useUser()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-
+    const {userRole} = useUserRole()
 
     const renderNavigation = (nav: SideNavProps, index: number) => {
         const isActive = pathname === nav.route || pathname.startsWith(`${nav.route}/`);
@@ -45,16 +44,6 @@ const Sidebar = () => {
           </Link>
         );
       };
-      useEffect(() => {
-        const getUser = async () => {
-          if (user?.id) {
-            const userFromDB = await getUserById(user.id)
-            setUserRole(userFromDB.role)
-            console.log(userFromDB.role)
-          }
-        }
-        getUser()
-      }, [user])
   return (
     <aside className={`${isExpanded? `w-[170px]`: `w-[80px]`} h-[calc(100vh-64px)]  fixed top-16 left-0 bg-dark-1
     py-3 flex flex-col items-center justify-between`}

@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import MobileNav from './user/MobileNav'
 import { usePathname } from 'next/navigation'
@@ -69,9 +69,14 @@ const Header = ({navigations}: HeaderProps) => {
           className='text-green-1 
           cursor-pointer w-[30px] h-[30px]' 
         />
-        <SignedIn>
-          <UserButton/>
-        </SignedIn>
+          <Suspense 
+            fallback={<div 
+              className='w-[30px] h-[30px] bg-dark-4 animate-in rounded-full'
+            >hyr</div>}>
+          <SignedIn>
+              <UserButton/>
+          </SignedIn>
+          </Suspense>
         
         <div className="hidden">
         <MobileNav />
