@@ -45,3 +45,4 @@ const BlogSchema = new Schema<BlogParams>({
 }, { timestamps: true });
 
 const Blog = models?.Blog || model("Blog", BlogSchema);
+export default Blog

@@ -43,6 +43,14 @@ const UserSchema = new Schema({
     type: String,
     enum: ["doctor", "patient", "hospitaAdmin", "pharmacAdmin"],
   },
+  blogsAuthored: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Blog'
+  }],
+  savedBlogs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Blog'
+  }]
 },{
     discriminatorKey: 'userRole'
 });

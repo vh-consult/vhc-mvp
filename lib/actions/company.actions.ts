@@ -59,3 +59,54 @@ export async function createCompany(userId: string, companyData: CompanyProps){
     }
 }
 
+export async function getAllPharmacyShops() {
+    try {
+        await connectToDatabase();
+        const allPharmacies = await Pharmacy.find();
+        return JSON.parse(JSON.stringify(allPharmacies))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function getPharmacyById(pharmacyId: string) {
+    try {
+        await connectToDatabase();
+        const pharmacyFromDB = await Pharmacy.findById({_id: pharmacyId});
+        if (!pharmacyFromDB) throw new Error("pharmacy shop not found!");
+        return JSON.parse(JSON.stringify(pharmacyFromDB))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function getHospitalById(hospitalId: string) {
+    try {
+        await connectToDatabase();
+        const hospitalFromDB = await Hospital.findById({_id: hospitalId});
+        if (!hospitalFromDB) throw new Error("hospital shop not found!");
+        return JSON.parse(JSON.stringify(hospitalFromDB))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function getAllHospitals() {
+    try {
+        await connectToDatabase();
+        const allHospitals = await Hospital.find();
+        return JSON.parse(JSON.stringify(allHospitals))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function getAllCompanies() {
+    try {
+        await connectToDatabase();
+        const allCompanies = await Company.find();
+        return JSON.parse(JSON.stringify(allCompanies))
+    } catch (error) {
+        handleError(error)
+    }
+}
