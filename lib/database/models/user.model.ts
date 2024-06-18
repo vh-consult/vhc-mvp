@@ -1,7 +1,23 @@
 
-import { Schema, model, models } from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
-const UserSchema = new Schema({
+export interface UserParams {
+  clerkId: string;
+  email: string;
+  photo: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  country: string;
+  location: string;
+  gender: "male"|"female";
+  insurance_plan: Schema.Types.ObjectId;
+  role: "doctor"|"patient"|"pharmacyAdmin"|"hospitalAdmin";
+  blogsAuthored: Schema.Types.ObjectId;
+  savedBlogs: Schema.Types.ObjectId;
+}
+
+const UserSchema = new Schema<UserParams>({
   clerkId: {
     type: String,
     required: true,

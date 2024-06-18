@@ -8,7 +8,13 @@ import { User } from "../database/models/user.model";
 export async function createBlog(clerkId:string, blogData:BlogParams) {
     try {
         await connectToDatabase();
+        const author = await User.findOne({clerkId})
+        if (!author) throw new Error("user not found")
         
+        const newBlog = await Blog.create(blogData)
+        author.blogsAuthored.append(newBlog._id)
+        await author.save()
+
     } catch (error) {
         handleError(error)
     }
@@ -77,7 +83,23 @@ export async function deleteBlog(clerkId:string, blogId:string) {
 export async function shareBlog(senderId:string, blogId:string, receiverId: string) {
     try {
         await connectToDatabase();
+        const sender = await User.findOne({clerkId: senderId})
+        if(!sender) throw new Error("sender not found!")
         
+        const receiver = await User.findOne({clerkId: receiverId})
+        if(!receiver) throw new Error("receiver not found!")
+        
+            
+        const blog = await Blog.findOne({blogId})
+        if(!blog) throw new Error("blog not found!")
+                
+        receiver.savedBlogs.append(blog._id)
+        await receiver.save()
+
+        blog.shares += 1
+        await blog.save()
+
+        return blog.shares
     } catch (error) {
         handleError(error)
     }
@@ -86,7 +108,16 @@ export async function shareBlog(senderId:string, blogId:string, receiverId: stri
 export async function likeBlog(clerkId:string, blogId:string) {
     try {
         await connectToDatabase();
+        const user = await User.findOne({clerkId})
+        if(!user) throw new Error("User not found!")
         
+        const blog = await Blog.findOne({blogId})
+        if(!blog) throw new Error("blog not found!")
+            
+        blog.likes += 1
+        await blog.save()
+
+        return blog.likes
     } catch (error) {
         handleError(error)
     }
@@ -118,6 +149,9 @@ export async function saveBlog(clerkId:string, blogId:string) {
         if(!blog) throw new Error("blog not found!")
         
         user.savedBlogs.append(blog._id)
+        await user.save()
+
+        return "Blog saved"
             
     } catch (error) {
         handleError(error)

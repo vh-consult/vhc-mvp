@@ -35,9 +35,11 @@ const BlogSchema = new Schema<BlogParams>({
     },
     likes: {
         type: Number,
+        default: 0
     },
     shares: {
         type: Number,
+        default: 0
     },
     comments: [{
         type: Array<CommentProps>
