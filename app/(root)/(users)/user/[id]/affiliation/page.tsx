@@ -1,11 +1,11 @@
 import React from 'react'
 
-const defaultPage = () => {
+const page = () => {
   return (
     <div>
-      
+      affiliation page
     </div>
   )
 }
 
-export default defaultPage
+export default page
