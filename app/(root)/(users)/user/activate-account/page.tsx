@@ -1,4 +1,4 @@
-import RegisterationForm from '@/components/RegisterationForm'
+import RegisterationForm from '@/components/AccountActivationForm'
 import React from 'react'
 
 const AccountSetupPage = () => {

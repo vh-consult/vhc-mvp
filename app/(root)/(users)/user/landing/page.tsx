@@ -10,23 +10,9 @@ import { useRouter } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
 
 const UserHomePage = () => {
-  const { user } = useUser()
   const router = useRouter()
-  // const [userRole, setUserRole] = useState(null)
-  // const [companyId, setCompanyId] = useState('')
+
   const {userRole} = useUserRole()
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     if (user?.id) {
-  //       const userFromDB = await getUserById(user.id)
-  //       setUserRole(userFromDB.role)
-  //       console.log(userFromDB.role)
-  //       // Assuming companyId is also fetched from the user
-  //       setCompanyId(userFromDB.companyId)
-  //     }
-  //   }
-  //   getUser()
-  // }, [user])
    
   return (
     <div className='bg-dark-2 min-h-screen w-full px-10 pt-20 pb-10 grid grid-cols-3 flex-wrap gap-10'>
