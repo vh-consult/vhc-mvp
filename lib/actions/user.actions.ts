@@ -21,12 +21,30 @@ export async function createUser(user: CreateUserParams) {
   }
 }
 
-// READ
-export async function getUserById(userId: string) {
+//BUY INSURANCE
+
+export async function buyInsurance(clerkId: string, insurancePlanChosen: string) {
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerkId: userId });
+    const userBuyingInsurance = await User.findOne({clerkId});
+    if (!userBuyingInsurance) throw new Error("User not found");
+
+    userBuyingInsurance.insurance_plan = insurancePlanChosen
+    userBuyingInsurance.save()
+    
+    return JSON.parse(JSON.stringify(userBuyingInsurance));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// READ
+export async function getUserById(clerkId: string) {
+  try {
+    await connectToDatabase();
+
+    const user = await User.findOne({ clerkId });
 
     if (!user) throw new Error("User not found");
     return JSON.parse(JSON.stringify(user));

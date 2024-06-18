@@ -6,30 +6,20 @@ export interface CompanyParams extends Document {
     isVerified: boolean;
     admins: Schema.Types.ObjectId[];
     image: string;
+    description: string;
     type: "hospital" | "pharmacy"
   }
 
-  export interface PharmacyParams extends Document {
-    name: string;
-    location: string;
-    isVerified: boolean;
-    admins: Schema.Types.ObjectId[];
-    image: string;
+  export interface PharmacyParams extends CompanyParams {
     inventory: Schema.Types.ObjectId[];
     orders: Schema.Types.ObjectId[];
     opens_at: string;
     closes_at: string
   }
 
-  export interface HospitalParams extends Document {
-    name: string;
-    location: string;
-    isVerified: boolean;
-    admins: Schema.Types.ObjectId[];
-    image: string;
+  export interface HospitalParams extends CompanyParams {
     doctors: Schema.Types.ObjectId[];
     clients: Schema.Types.ObjectId[];
-    description: string;
     specialties: Array<string>;
     booked_appointments: Schema.Types.ObjectId[];
   }
@@ -50,6 +40,9 @@ const CompanySchema = new Schema<CompanyParams>({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
+    description: {
+        type: String,
+    },
     isVerified: {
         type: Boolean,
         default: false

@@ -61,7 +61,7 @@ const CreateBlogPostPage = () => {
     }
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setLoading(true);
@@ -150,7 +150,7 @@ const CreateBlogPostPage = () => {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button
-            onClick={handleClick}
+            onClick={handleSubmit}
             className='w-full bg-green-2'
           >
             Activate

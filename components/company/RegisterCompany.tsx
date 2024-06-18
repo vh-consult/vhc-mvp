@@ -1,26 +1,26 @@
 'use client'
 import React, { useState } from 'react'
 import { Input } from '../ui/input';
-import { 
-  Select, SelectContent, 
-  SelectItem, SelectTrigger, SelectValue 
-} from '../ui/select';
 import { useUser } from '@clerk/nextjs';
 import { Textarea } from '../ui/textarea';
-import { CompanyProps, createCompany } from '@/lib/actions/company.actions';
+import { createCompany } from '@/lib/actions/company.actions';
 import { toast } from '../ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import Loader from '../Loader';
 import useUserRole from '@/hooks/useUserRole';
+import { Checkbox } from "@/components/ui/checkbox"
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Label } from '../ui/label';
+import { Button } from '../ui/button';
 
 // Define Zod schema
 const setupSchema = z.object({
-  name: z.string().min(1, 'Location is required'),
-  role: z.string().min(5, 'Please select your purpose on this app'),
+  name: z.string().min(1, 'company\'s is required'),
+  logo: z.any(),
   location: z.string().min(1, 'Location is required'),
   description: z.string().min(4, 'Please select gender').max(6),
-  specialties: z.string().min(1, 'Please select your country'),
+  type: z.enum(["pharmacy", "hospital"])
 });
 
 // Define type for form values
@@ -32,12 +32,14 @@ const RegisterCompany =  () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const {userRole} =useUserRole()
+  const [file, setFile] = useState<File>()
+  const {user} = useUser()
   const initialValues: FormValues = {
     name: '',
-    role: '',
     location: '',
+    logo: file,
     description: '',
-    specialties: '',
+    type: userRole==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
   };
   
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -64,7 +66,20 @@ const RegisterCompany =  () => {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!validateForm()) return;
 
+    setLoading(true);
+    try {
+      const companyToCreate = await createCompany(
+        user?.id as string, values)
+        toast({title: 'Company registered successfully'})
+        router.push(`/company/${companyToCreate._id}/home`)
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <form
@@ -75,12 +90,16 @@ const RegisterCompany =  () => {
         type='file'
         placeholder='Upload company logo'
         name='image'
+        onChange={(e) => setFile(e.target.files?.[0])}
+        accept='image/*'
         className='border-sky-1 bg-dark-3 '
       />
+      {errors.logo && <span className="text-red-500">{errors.logo}</span>}
       <Input
         type='text'
         placeholder="Company's name"
         name='name'
+        onChange={(e) => setValues({ ...values, name: e.target.value })}
         className='border-none bg-dark-3 text-green-1'
 
       />
@@ -88,6 +107,7 @@ const RegisterCompany =  () => {
         type='text'
         placeholder="Company's location"
         name='location'
+        onChange={(e) => setValues({ ...values, location: e.target.value })}
         className='border-none bg-dark-3 text-green-1'
 
       />
@@ -95,22 +115,28 @@ const RegisterCompany =  () => {
         placeholder='Add description'
         name='location'
         className='border-none bg-dark-3 text-green-1'
-
+        onChange={(e) => setValues({ ...values, description: e.target.value })}
       />
       {
         userRole==="patient" || userRole==="doctor"? (
-          <Select name="type">
-            <SelectTrigger id="companyType">
-              <SelectValue placeholder="Select" />
-            </SelectTrigger>
-            <SelectContent position="popper" className='bg-dark-3  text-green-1'>
-              <SelectItem  value="pharmacy">Pharmacy</SelectItem>
-              <SelectItem value="hospital">Hospital</SelectItem>
-            </SelectContent>
-          </Select>
+          <RadioGroup defaultValue="pharmacy" 
+          onValueChange={(value) => setValues({
+            ...values, type: value as "pharmacy"| "hospital"
+          })}>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="pharmacy" id="pharmacy" />
+              <Label htmlFor="pharmacy">Pharmacy</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="hospital" id="hospital" />
+              <Label htmlFor="hospital">Hospital</Label>
+            </div>
+          </RadioGroup>
         ): ''
       }
-
+      <Button onClick={handleSubmit} className='w-full bg-green-2 text-green-1'>
+        Register Company
+      </Button>
       {loading && <Loader />}
     </form>
   )
