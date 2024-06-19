@@ -9,14 +9,18 @@ import { useUser } from '@clerk/nextjs'
 import React, { useState } from 'react'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation';
+import { Textarea } from '@/components/ui/textarea'
 
 // Define Zod schema
 const blogPostSchema = z.object({
   blogTitle: z.string().min(5, 'Please select your purpose on this app'),
   blogType: z.string().min(5, 'Please select your purpose on this app'),
-  description: z.string().min(1, 'description is required'),
+  introduction: z.string().min(1, 'intro is required'),
+  content: z.string().min(1, 'content is required'),
+  conclusion: z.string().min(1, 'conclusion is required'),
   author: z.string().min(4, 'Please select author').max(6),
   postCategory: z.string().min(1, 'Please select your postCategory'),
+  coverImage: z.any()
 });
 
 // Define type for form values
@@ -33,9 +37,12 @@ const CreateBlogPostPage = () => {
   const initialValues: FormValues = {
     blogTitle: '',
     blogType: '',
-    description: '',
+    introduction: '',
+    content: '',
+    conclusion: '',
     author: '',
     postCategory: '',
+    coverImage: File
   };
 
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -76,12 +83,8 @@ const CreateBlogPostPage = () => {
 
   return (
 <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-      <Card className={`relative w-[400px] ${loading ? 'hidden' : ''} border-none bg-dark-1 text-green-1`}>
-        <CardHeader>
-          <CardTitle>Create Post</CardTitle>
-        </CardHeader>
-        <CardContent>
           <form>
+            <h1 className="text-xl font-medium">Create Post</h1>
             <div className="grid w-full items-center gap-4">
               <div className="flex w-full flex-col gap-2.5">
                 <Label className="text-base font-normal leading-[22.4px] text-green-1">
@@ -92,7 +95,7 @@ const CreateBlogPostPage = () => {
                 />
                 {errors.blogTitle && <span className="text-red-500">{errors.blogTitle}</span>}
               </div>
-              <div className="flex flex-col space-y-1.5">
+              {/* <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="postCategory">postCategory</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, postCategory: value })}>
                   <SelectTrigger id="postCategory">
@@ -107,31 +110,35 @@ const CreateBlogPostPage = () => {
                   </SelectContent>
                 </Select>
                 {errors.postCategory && <span className="text-red-500">{errors.postCategory}</span>}
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor='description'>Content</Label>
-                <Input
-                  required
-                  id='description'
+                <Label htmlFor='introduction'>Introduction</Label>
+                <Textarea
+                  id='introduction'
                   className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  onChange={(e) => setValues({ ...values, description: e.target.value })}
+                  onChange={(e) => setValues({ ...values, introduction: e.target.value })}
                 />
-                {errors.description && <span className="text-red-500">{errors.description}</span>}
+                {errors.introduction && <span className="text-red-500">{errors.introduction}</span>}
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="author">author</Label>
-                <Select required onValueChange={(value) => setValues({ ...values, author: value })}>
-                  <SelectTrigger id="author">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
-                    <SelectItem value=""></SelectItem>
-                    <SelectItem value=""></SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.author && <span className="text-red-500">{errors.author}</span>}
+                <Label htmlFor='content'>content</Label>
+                <Textarea
+                  id='content'
+                  className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  onChange={(e) => setValues({ ...values, content: e.target.value })}
+                />
+                {errors.content && <span className="text-red-500">{errors.content}</span>}
               </div>
               <div className="flex flex-col space-y-1.5">
+                <Label htmlFor='conclusion'>conclusion</Label>
+                <Textarea
+                  id='conclusion'
+                  className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  onChange={(e) => setValues({ ...values, conclusion: e.target.value })}
+                />
+                {errors.conclusion && <span className="text-red-500">{errors.conclusion}</span>}
+              </div>
+              {/* <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="blogType">What are you?</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, blogType: value })}>
                   <SelectTrigger id="blogType">
@@ -145,20 +152,15 @@ const CreateBlogPostPage = () => {
                   </SelectContent>
                 </Select>
                 {errors.blogType && <span className="text-red-500">{errors.blogType}</span>}
-              </div>
+              </div> */}
             </div>
           </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
           <Button
             onClick={handleSubmit}
             className='w-full bg-green-2'
           >
-            Activate
-          </Button>
-        </CardFooter>
-      </Card>
-      {loading && <Loader />}
+             {loading? <Loader />: `Upload Content`}
+          </Button>      
     </div>
   )
 }

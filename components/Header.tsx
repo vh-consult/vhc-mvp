@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
-import { SignedIn, UserButton } from '@clerk/nextjs'
+import { SignedIn, UserButton, useUser } from '@clerk/nextjs'
 import MobileNav from './user/MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -18,8 +18,10 @@ interface HeaderProps {
   navigations?: Array<NavLinkProps>
 }
 
+
 const Header = ({navigations}: HeaderProps) => {
   const pathname = usePathname()
+  const {isLoaded} = useUser()
   return (
     <nav className='flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
       <div className="w-2/5 flex flex-between ">
@@ -59,24 +61,29 @@ const Header = ({navigations}: HeaderProps) => {
 
 
 
-      <div className="flex flex-between gap-5 w-2/5 ">
+      <div className="flex items-center justify-end gap-3 w-2/5 ">
 
         <SearchBar 
           className='border border-dark-1 bg-dark-3 
-            w-[80%]'
+            w-[250px]'
         />
         <AiOutlineMessage 
           className='text-green-1 
           cursor-pointer w-[30px] h-[30px]' 
         />
-          <Suspense 
-            fallback={<div 
-              className='w-[30px] h-[30px] bg-dark-4 animate-in rounded-full'
-            >hyr</div>}>
+        {
+          isLoaded? (
           <SignedIn>
               <UserButton/>
           </SignedIn>
-          </Suspense>
+          ):
+          (
+            <div 
+            className='w-[30px] h-[30px] bg-dark-3 rounded-full'
+          >
+          </div>
+          )
+        }
         
         <div className="hidden">
         <MobileNav />

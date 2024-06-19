@@ -7,6 +7,7 @@ import Loader from './Loader'
 import { useUser } from '@clerk/nextjs'
 import { subscribeToNewsletter } from '@/lib/actions/user.actions'
 import { toast } from './ui/use-toast'
+import { ToastTitle } from './ui/toast'
 
 const NewsLetterSubscription = () => {
     const {user} = useUser()
@@ -16,18 +17,20 @@ const NewsLetterSubscription = () => {
             setIsLoading(true)
             const response = await subscribeToNewsletter(user?.id as string)
             toast({title: response?.message})
-        } finally{
+        } catch{
+          toast({title: 'failed to add you to newsletter'})
+        } 
+        finally{
             setIsLoading(false)
         }
     }
   return (
-    <div className='w-full bg-dark-1 px-2 py-3 rounded-xl'>
+    <div className='w-full bg-dark-1 px-2 py-3 mb-6 rounded-xl'>
       <h2 className='text-xl font-medium leading-[24px]'>
-        Subscribe to our newslettter for exclusive updates and insights
-      </h2>
-      <p className="text-base leading-[20px]">
-        Unlock a world of valuable information by
-        subscribing to our newsletter today! Stay ahead
+      Unlock a world of valuable information by
+      subscribing to our newsletter today!      </h2>
+      <p className="text-base my-2">
+        Stay ahead
         of the curve with access to exclusive updates,
         expert insights, and actionable tips devlivered straight to your inbox.
       </p>
@@ -35,7 +38,7 @@ const NewsLetterSubscription = () => {
         <AiOutlineMail className='w-[24px] h-[24px]'/>
         <Input
           placeholder='Enter email address'
-          className='border-none '
+          className='border-none focus-visible:ring-0 outline-none '
         />
       </div>
       <Button

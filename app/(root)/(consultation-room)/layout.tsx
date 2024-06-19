@@ -1,4 +1,4 @@
-import { StreamVideoProvider } from '@/providers/StreamClientProvider'
+import { StreamVideoProvider } from '@/providers/StreamVideoProvider'
 import React, { ReactNode } from 'react'
 
 const ConsultationLayout = ({children}:{children:ReactNode}) => {

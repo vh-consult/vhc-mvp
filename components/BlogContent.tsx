@@ -15,24 +15,27 @@ const BlogContent = ({
     author, authorImg, coverImg
 }: BlogContentProps) => {
   return (
-    <div className='w-full'>
-      <span className="">{datePublished.toDateString()}</span>
-      <h1 className="text-4xl">{title}</h1>
-      <span className="">
+    <div className='w-[90%]'>
+      <span className="opacity-75">Date Published: {datePublished.toDateString()}</span>
+      <h1 className="text-4xl font font-semibold my-2">{title}</h1>
+      <span className="flex text-sm font-medium opacity-75">
+      Posted by: 
         <Image
           src={authorImg}
           alt=''
           width={30}
           height={30}
+          className='w-[24px] h-[24px] object-cover ml-2 mr-[2px] rounded-full mb-3'
         />
         <span className="">{author}</span>
       </span>
-      <div className="">
+      <div className="mb-3">
         <Image 
             src={coverImg}
             alt=''
-            width={30}
-            height={30}
+            width={500}
+            height={300}
+            className='w-full h-[40%] object-cover'
         />
       </div>
       <p>

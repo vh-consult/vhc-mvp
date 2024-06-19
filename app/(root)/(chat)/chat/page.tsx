@@ -57,7 +57,7 @@ export default function () {
                     className="min-h-[100px] w-full"
                 />
                 <Button 
-                    className="max-w-max"
+                    className=""
                     onClick={() => {
                         if (channel) {
                         channel.sendMessage({
