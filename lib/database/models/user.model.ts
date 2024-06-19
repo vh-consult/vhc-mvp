@@ -15,6 +15,7 @@ export interface UserParams {
   role: "doctor"|"patient"|"pharmacyAdmin"|"hospitalAdmin";
   blogsAuthored: Schema.Types.ObjectId;
   savedBlogs: Schema.Types.ObjectId;
+  subscribedToNewsletter: boolean
 }
 
 const UserSchema = new Schema<UserParams>({
@@ -66,7 +67,11 @@ const UserSchema = new Schema<UserParams>({
   savedBlogs: [{
     type: Schema.Types.ObjectId,
     ref: 'Blog'
-  }]
+  }],
+  subscribedToNewsletter: {
+    type: Boolean,
+    default: false
+  }
 },{
     discriminatorKey: 'userRole'
 });

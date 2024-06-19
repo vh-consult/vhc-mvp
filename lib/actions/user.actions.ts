@@ -21,8 +21,24 @@ export async function createUser(user: CreateUserParams) {
   }
 }
 
-//BUY INSURANCE
+//subscribe to newsletter
+export async function subscribeToNewsletter(clerkId:string) {
+  try {
+    await connectToDatabase();
 
+    const userSubscribing = await User.findOne({clerkId});
+    if (!userSubscribing) throw new Error("User not found");
+
+    userSubscribing.subscribedToNewsletter = true
+    userSubscribing.save()
+    
+    return {message: "User added to newsletter"}
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+//BUY INSURANCE
 export async function buyInsurance(clerkId: string, insurancePlanChosen: string) {
   try {
     await connectToDatabase();
