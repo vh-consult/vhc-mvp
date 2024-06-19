@@ -31,10 +31,14 @@ const DeliveryInfoCard = () => {
         </span>
       </div>
       <div className="w-full flex flex-col">
-        <Button className='bg-dark-2 text-sm mt-2 mb-1 hover:bg-dark-4'>
+        <Button 
+        className='bg-dark-2 text-sm mt-2 mb-1 
+        hover:bg-dark-4'>
             View Delivery Details
         </Button>
-        <Button variant={'outline'} className='text-bg-dark-2 text-sm hover:bg-dark-4 border-2 border-dark-4'>
+        <Button variant={'outline'} 
+        className='text-bg-dark-2 text-sm hover:bg-dark-4
+         border-2 border-dark-4'>
             Change Delivery Service
         </Button>
       </div>

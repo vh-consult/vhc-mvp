@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import List from '../List'
 import { BiTrash } from 'react-icons/bi'
