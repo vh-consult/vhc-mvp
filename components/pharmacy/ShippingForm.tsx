@@ -7,14 +7,7 @@ import Order from '@/lib/database/models/order.model'
 
 const ShippingForm = async () => {
     const postForm = async (formData: FormData) => {
-        "use server"
-        const address = await Order.create({
-            name: formData.get("contact") as string,
-            location: formData.get("location") as string,
-            image: formData.get("image") as File,
-            type: "hospital"
-        })
-        revalidatePath("/")
+      "use server"
 }
   return (
     <form

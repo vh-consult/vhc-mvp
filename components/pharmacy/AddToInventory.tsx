@@ -6,15 +6,7 @@ import Drug from '@/lib/database/models/drug.model';
 
 const AddToInventory = () => {
   const postDrug = async (formData: FormData) => {
-    "use server"
-    
-    await Drug.create({
-        name: formData.get("name") as string,
-        location: formData.get("location") as string,
-        image: formData.get("image") as File,
-    })
 
-    revalidatePath("/")
   }
   return (
     <form

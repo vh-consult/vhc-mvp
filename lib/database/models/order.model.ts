@@ -1,6 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const OrderSchema = new Schema({
+    reference: { type: String },
     payment: {
         type: Schema.Types.ObjectId,
         ref: 'Payment'
