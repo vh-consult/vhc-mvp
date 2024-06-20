@@ -13,15 +13,14 @@ const Blogs = () => {
             landing.blogs.cards.map((card, index) => {
               return(
                 <BlogCard 
-                type="blog"
-                key={index}
-                buttonText={card.buttonText}
-                buttonType='no-border'
-                content={card.description}
-                imageSrc={card.image}
-                title={card.title}
-                author={card.author}
-                date={card.date}
+                  type="blog"
+                  key={index}
+                  buttonText={card.buttonText}
+                  content={card.description}
+                  imageSrc={card.image}
+                  title={card.title}
+                  author={card.author}
+                  date={card.date}
               />
               )
             })

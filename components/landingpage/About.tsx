@@ -116,7 +116,6 @@ const About = () => {
                       type='card'
                       key={index}
                       buttonText={card.buttonText}
-                      buttonType='no-border'
                       content={card.description}
                       imageSrc={card.image}
                       title={card.title}
