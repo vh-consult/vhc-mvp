@@ -98,23 +98,23 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
 
-function CustomChannelHeader (){
-  const { channel} = useChatContext()
+// function CustomChannelHeader (){
+//   const { channel} = useChatContext()
 
-  const {data} = channel
+//   const {data} = channel
 
-  return(
-    <header 
-      className='h-[40px] bg-dark-1 mb-5 rounded-lg p-2.5 flex items-center' >
-        {
-          data.image && (
-            <Image className='w-5 h-5 rounded-full mr-2.5' width={20} height={20} src={data.image} alt=""/>
-          )
-        }
-        {data.name}
-    </header>
-  )
-}
+//   return(
+//     <header 
+//       className='h-[40px] bg-dark-1 mb-5 rounded-lg p-2.5 flex items-center' >
+//         {
+//           data.image && (
+//             <Image className='w-5 h-5 rounded-full mr-2.5' width={20} height={20} src={data.image} alt=""/>
+//           )
+//         }
+//         {data.name}
+//     </header>
+//   )
+// }
 
 
 function CustomChannelPreview (props: any | undefined) {
