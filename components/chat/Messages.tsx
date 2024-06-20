@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useChannelStateContext } from "stream-chat-react";
 import { Message, MessageList } from "@chatscope/chat-ui-kit-react";
 
-export default function () {
+const Messages = () => {
     const { messages } = useChannelStateContext();
     return (
     <MessageList>
@@ -25,3 +25,5 @@ export default function () {
     </MessageList>
     );
 }
+
+export default Messages

@@ -8,7 +8,7 @@ import Messages from "@/components/chat/Messages";
 import { DevToken, StreamChat } from "stream-chat";
 import { generateUsername } from "unique-username-generator";
 
-export default function () {
+const page = () => {
     const [channel, setChannel] = useState<any>();
     const [chatClient, setChatClient] = useState<any>();
     const [text, setText] = useState<string>('')
@@ -73,3 +73,5 @@ export default function () {
         </div>
     );
 }
+
+export default page
