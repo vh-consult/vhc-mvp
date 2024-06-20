@@ -2,18 +2,15 @@ import { Schema, model, models } from "mongoose";
 
 
 const AppointmentSchema = new Schema({
-    client: {
+    doctor: {
         type: Schema.Types.ObjectId,
-        ref: 'Appointment',
+        ref: 'Doctor',
         required: true
     },
-    physician: {
+    patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Doctor'
-    },
-    hospital: {
-        type: Schema.Types.ObjectId,
-        ref: 'Hospital'
+        ref: 'User',
+        required: true
     },
     problem_statement: {
         type: String,

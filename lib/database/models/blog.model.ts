@@ -7,7 +7,9 @@ export interface CommentProps {
 
 export interface BlogParams extends Document {
     title: string;
+    introduction: string;
     content: string;
+    conclusion: string;
     likes: number;
     shares: number;
     author: Schema.Types.ObjectId;
@@ -19,12 +21,22 @@ const BlogSchema = new Schema<BlogParams>({
     title: {
         type: String,
         required: [true, "Please provide the title."],
-        minlength: [2, "title cannot be less than 2 characters"]
+        minlength: [5, "title cannot be less than 2 characters"]
     },
+    introduction: {
+        type: String,
+        required: [true, "Please provide the content."],
+        minlength: [20, "content cannot be less than 100 characters"]
+    },    
     content: {
         type: String,
         required: [true, "Please provide the content."],
         minlength: [100, "content cannot be less than 100 characters"]
+    },
+    conclusion: {
+        type: String,
+        required: [true, "Please provide the content."],
+        minlength: [10, "content cannot be less than 100 characters"]
     },
     coverImage: {
         type: String,

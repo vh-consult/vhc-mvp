@@ -252,7 +252,7 @@ const RegisterationForm = () => {
 
   return (
     <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-      <Card className={`relative w-[400px] ${loading ? 'hidden' : ''} border-none bg-dark-1 text-green-1`}>
+      <Card className={`relative w-[400px] border-none bg-dark-1 text-green-1`}>
         <CardHeader>
           <CardTitle>Account Activation</CardTitle>
           <CardDescription>Fill the forms to activate your account</CardDescription>
@@ -337,11 +337,10 @@ const RegisterationForm = () => {
             onClick={handleClick}
             className='w-full bg-green-2'
           >
-            Activate
+            {loading ? <Loader /> : `Activate`}
           </Button>
         </CardFooter>
       </Card>
-      {loading && <Loader />}
     </div>
   );
 }

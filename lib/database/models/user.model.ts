@@ -132,15 +132,15 @@ const HospitalAdminSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
-const Doctor =  models?.Doctor || User.discriminator("Doctor", DoctorSchema);
-const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
-const HospitalAdmin =  models?.HospitalAdmin || User.discriminator("HospitalAdmin", HospitalAdminSchema);
-const PharmacyAdmin =  models?.PharmacyAdmin || User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
+// const Doctor =  models?.Doctor || User.discriminator("Doctor", DoctorSchema);
+// const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
+// const HospitalAdmin =  models?.HospitalAdmin || User.discriminator("HospitalAdmin", HospitalAdminSchema);
+// const PharmacyAdmin =  models?.PharmacyAdmin || User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
 
 export {
     User, 
-    Doctor, 
-    Patient, 
-    HospitalAdmin, 
-    PharmacyAdmin
+    // Doctor, 
+    // Patient, 
+    // HospitalAdmin, 
+    // PharmacyAdmin
 };

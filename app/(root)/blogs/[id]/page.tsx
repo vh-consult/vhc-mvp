@@ -1,5 +1,5 @@
-import BlogContent from '@/components/BlogContent'
-import BlogPostSnippet from '@/components/BlogPostSnippet'
+import BlogContent from '@/components/blog/BlogContent'
+import BlogPostSnippet from '@/components/blog/BlogPostSnippet'
 import NewsLetterSubscription from '@/components/NewsLetterSubscription'
 import React from 'react'
 

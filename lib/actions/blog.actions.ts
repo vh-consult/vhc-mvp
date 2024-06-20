@@ -4,8 +4,18 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import Blog, { BlogParams } from "../database/models/blog.model";
 import { User } from "../database/models/user.model";
+import { WriteStream } from "fs";
+import { File } from "buffer";
 
-export async function createBlog(clerkId:string, blogData:BlogParams) {
+interface BlogDataFromFrontend {
+    blogTitle: string;
+    introduction: string;
+    content: string;
+    conclusion: string;
+    coverImage?: File
+}
+
+export async function createBlog(clerkId:string, blogData:BlogDataFromFrontend) {
     try {
         await connectToDatabase();
         const author = await User.findOne({clerkId})
@@ -14,6 +24,8 @@ export async function createBlog(clerkId:string, blogData:BlogParams) {
         const newBlog = await Blog.create(blogData)
         author.blogsAuthored.append(newBlog._id)
         await author.save()
+
+        return JSON.parse(JSON.stringify(newBlog))
 
     } catch (error) {
         handleError(error)
