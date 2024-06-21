@@ -130,7 +130,7 @@ function CustomChannelPreview (props: any | undefined) {
   )
 }
 
-const page = () => {
+const ChatPage = () => {
   const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
   
   const {isLoaded, user} = useUser()
@@ -175,5 +175,5 @@ const page = () => {
   )
 }
 
-export default page
+export default ChatPage
 

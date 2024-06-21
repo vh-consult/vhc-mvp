@@ -1,4 +1,4 @@
-import Header, { NavLinkProps } from '@/components/Header'
+import Header, { NavLinkProps } from '@/components/user/Header'
 import React, { ReactNode } from 'react'
 
 const navs:Array<NavLinkProps> = [

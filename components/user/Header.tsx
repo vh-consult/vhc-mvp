@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import { SignedIn, UserButton, useUser } from '@clerk/nextjs'
-import MobileNav from './user/MobileNav'
+import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import SearchBar from './SearchBar'
+import SearchBar from '../SearchBar'
 import { AiOutlineMessage } from 'react-icons/ai'
 
 export interface NavLinkProps {
@@ -14,7 +14,7 @@ export interface NavLinkProps {
   label: string;
 }
 
-interface HeaderProps {
+export interface HeaderProps {
   navigations?: Array<NavLinkProps>
 }
 
@@ -65,7 +65,7 @@ const Header = ({navigations}: HeaderProps) => {
 
         <SearchBar 
           className='border border-dark-1 bg-dark-3 
-            w-[250px]'
+           hidden md:block md:w-[250px]'
         />
         <AiOutlineMessage 
           className='text-green-1 

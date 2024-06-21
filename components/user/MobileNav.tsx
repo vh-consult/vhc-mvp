@@ -3,11 +3,11 @@
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
-import { consultationSidebarLinks } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { HeaderProps } from "./Header"
 
-const MobileNav = () => {
+const MobileNav = ({navigations}: HeaderProps) => {
   const pathname = usePathname()
   return (
     <section className='w-full max-w-[264px] '>
@@ -37,7 +37,7 @@ const MobileNav = () => {
           <div className="flex h-[calc(100vh-72px)] flex-col gap-6 pt-16 text-white">
             <section className="flex h-full flex-col gap-6 pt-16 text-white">
             {
-            consultationSidebarLinks.map((link)=>{
+            navigations && navigations.map((link)=>{
               const isActive = pathname === link.route;
               return(
                 <SheetClose asChild key={link.route}>
@@ -53,15 +53,9 @@ const MobileNav = () => {
                             )
                         }
                     >
-                        <Image 
-                            src={link.imgURL}
-                            alt={link.label}
-                            width={18}
-                            height={18}
-                        />
-                        <p className="font-semibold">
-                            {link.label}
-                        </p>
+                      <p className="font-semibold">
+                          {link.label}
+                      </p>
                     </Link>
                 </SheetClose>
               )
