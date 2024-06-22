@@ -13,10 +13,28 @@ export interface UserParams {
   gender: "male"|"female";
   insurance_plan: Schema.Types.ObjectId;
   role: "doctor"|"patient"|"pharmacyAdmin"|"hospitalAdmin";
-  blogsAuthored: Schema.Types.ObjectId;
-  savedBlogs: Schema.Types.ObjectId;
+  blogsAuthored: Array<Schema.Types.ObjectId>;
+  savedBlogs:  Array<Schema.Types.ObjectId>;
+  healthRecord:  Array<Schema.Types.ObjectId>;
+  orders:  Array<Schema.Types.ObjectId>;
   subscribedToNewsletter: boolean
 }
+
+interface PatientParams extends UserParams {
+  consultationSessions: Array<Schema.Types.ObjectId>;
+  appointments: Array<Schema.Types.ObjectId>;
+  affiliateHospital: Schema.Types.ObjectId;
+  personalPhysician: Schema.Types.ObjectId
+}
+
+interface DoctorParams extends UserParams {
+  bookings: Array<Schema.Types.ObjectId>;
+  specialty: string;
+  clients: Array<Schema.Types.ObjectId>;
+  reminders: Array<Schema.Types.ObjectId>
+  affiliateHospital: Schema.Types.ObjectId;
+}
+
 
 const UserSchema = new Schema<UserParams>({
   clerkId: {
@@ -71,47 +89,51 @@ const UserSchema = new Schema<UserParams>({
   subscribedToNewsletter: {
     type: Boolean,
     default: false
-  }
+  },
+  healthRecord: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Consultation'
+  }],
+  orders: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Order'
+  }],
 },{
-    discriminatorKey: 'userRole'
+    timestamps: true
 });
 
-const DoctorSchema = new Schema({
+const DoctorSchema = new Schema<DoctorParams>({
     specialty: {
         type: String,
     },
-    affiliatedHospital: {
+    affiliateHospital: {
         type: Schema.Types.ObjectId,
         ref: 'Hospital',
     },
-    assignedPatients: [{
+    clients: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    booked_appointments: [{
+    bookings: [{
         type: Schema.Types.ObjectId,
         ref: 'Appointment'
     }], 
 });
 
-const PatientSchema = new Schema({
+const PatientSchema = new Schema<PatientParams>({
     appointments: [{
         type: Schema.Types.ObjectId,
         ref: 'Appointment'
-    }],
-    health_record: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Consultation'
     }],
     orders: [{
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-    healthcare_provider: {
+    affiliateHospital: {
         type: Schema.Types.ObjectId,
         ref: 'Hospital'
     },
-    personal_doctor: {
+    personalPhysician: {
         type: Schema.Types.ObjectId,
         ref: 'Doctor'
     },
@@ -132,15 +154,15 @@ const HospitalAdminSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
-// const Doctor =  models?.Doctor || User.discriminator("Doctor", DoctorSchema);
-// const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
-// const HospitalAdmin =  models?.HospitalAdmin || User.discriminator("HospitalAdmin", HospitalAdminSchema);
-// const PharmacyAdmin =  models?.PharmacyAdmin || User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
+const Doctor =  models?.Doctor || model("Doctor", DoctorSchema);
+const Patient =  models?.Patient || model("Patient", PatientSchema);
+const HospitalAdmin =  models?.HospitalAdmin || model("HospitalAdmin", HospitalAdminSchema);
+const PharmacyAdmin =  models?.PharmacyAdmin || model("PharmacyAdmin", PharmacyAdminSchema);
 
 export {
     User, 
-    // Doctor, 
-    // Patient, 
-    // HospitalAdmin, 
-    // PharmacyAdmin
+    Doctor, 
+    Patient, 
+    HospitalAdmin, 
+    PharmacyAdmin
 };

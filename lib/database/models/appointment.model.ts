@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 
-const AppointmentSchema = new Schema({
+const ConsultationSchema = new Schema({
     doctor: {
         type: Schema.Types.ObjectId,
         ref: 'Doctor',
@@ -24,12 +24,7 @@ const AppointmentSchema = new Schema({
         type: String,
         enum: ["pending", "canceled", "completed"],
         default: 'pending'
-    }
-},{
-    discriminatorKey: 'appointmentStatus'
-})
-
-const ConsultationSchema = new Schema({
+    },
     medication: [{
         type: Schema.Types.ObjectId,
         ref: 'Medication'
@@ -41,10 +36,54 @@ const ConsultationSchema = new Schema({
         type: String,
         required: true
     }]
+},{
+    timestamps: true
 })
 
 
-const Appointment = models?.Appointment || model("Appointment", AppointmentSchema);
-const Consultation = Appointment.discriminator("Consultation", ConsultationSchema);
+const ReminderSchema = new Schema({
+    client: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    time: {
+        type: Date,
+        required: true
+    },
+    purpose: {
+        type: String,
+    }
+},{
+    timestamps: true
+})
 
-export {Appointment, Consultation}
+const BookingSchema = new Schema({
+    client: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    host: {
+        type: Schema.Types.ObjectId,
+        enum: ['Doctor', 'Company']
+    },
+    time: {
+        type: Date,
+        required: true
+    },
+    purpose: {
+        type: String,
+    },
+    channel: {
+        type: String,
+        enum: ['virtual', 'inPerson']
+    }
+},{
+    timestamps: true
+})
+
+const Consultation = models?.Consultation || model("Consultation", ConsultationSchema);
+const Reminder = models?.Reminder ||  model("Reminder", ReminderSchema);
+const Booking = models?.Booking ||  model("Booking", BookingSchema);
+
+
+export {Consultation, Reminder, Booking}
