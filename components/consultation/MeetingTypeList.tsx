@@ -12,6 +12,8 @@ import { Textarea } from '../ui/textarea';
 import { useToast } from '../ui/use-toast';
 import { Input } from '../ui/input';
 import ReactDatePicker from 'react-datepicker';
+import { Label } from '../ui/label';
+import { Consultation } from '@/lib/database/models/appointment.model';
 
 const initialValues = {
   dateTime: new Date(),
@@ -51,6 +53,7 @@ const MeetingTypeList = () => {
           },
         },
       });
+      // await 
       setCallDetail(call);
       if (!values.description) {
         router.push(`/meeting/${call.id}`);
@@ -107,9 +110,9 @@ const MeetingTypeList = () => {
           handleClick={createMeeting}
         >
           <div className="flex flex-col gap-2.5">
-            <label className="text-base font-normal leading-[22.4px] text-green-1">
+            <Label className="text-base font-normal leading-[22.4px] text-green-1">
               Add a description
-            </label>
+            </Label>
             <Textarea
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) =>
@@ -118,9 +121,9 @@ const MeetingTypeList = () => {
             />
           </div>
           <div className="flex w-full flex-col gap-2.5">
-            <label className="text-base font-normal leading-[22.4px] text-green-1">
+            <Label className="text-base font-normal leading-[22.4px] text-green-1">
               Select Date and Time
-            </label>
+            </Label>
             <ReactDatePicker
               selected={values.dateTime}
               onChange={(date) => setValues({ ...values, dateTime: date! })}
@@ -131,6 +134,9 @@ const MeetingTypeList = () => {
               dateFormat="MMMM d, yyyy h:mm aa"
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
             />
+          </div>
+          <div className="">
+
           </div>
         </MeetingModal>
       ) : (

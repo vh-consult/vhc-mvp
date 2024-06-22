@@ -5,7 +5,6 @@ const ConsultationSchema = new Schema({
     doctor: {
         type: Schema.Types.ObjectId,
         ref: 'Doctor',
-        required: true
     },
     patient: {
         type: Schema.Types.ObjectId,
@@ -18,7 +17,6 @@ const ConsultationSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        unique: true
     },
     status: {
         type: String,

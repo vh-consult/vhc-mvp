@@ -1,4 +1,4 @@
-import { Consultation } from "../database/models/appointment.model";
+import { Booking, Consultation } from "../database/models/appointment.model";
 import { Doctor, User } from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
@@ -47,6 +47,18 @@ export async function fetchAllConsultationSummary() {
         await connectToDatabase()
         const sessions = Consultation.find()
         if(sessions.countDocuments.length > 0) throw new Error("No consultation sessions yet")
+        return JSON.parse(JSON.stringify(sessions))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function createBooking(clerkId: string) {
+    try {
+        await connectToDatabase()
+        const creator = await User.findOne({clerkId})
+        if(!creator) throw new Error("No consultation sessions yet")
+        const sessions = Booking.create()
         return JSON.parse(JSON.stringify(sessions))
     } catch (error) {
         handleError(error)
