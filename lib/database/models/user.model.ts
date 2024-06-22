@@ -4,28 +4,25 @@ import { Schema, model, models, Document } from "mongoose";
 export interface UserParams {
   clerkId: string;
   email: string;
-  photo: string;
+  photo?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
   country: string;
   location: string;
   gender: "male"|"female";
-  insurance_plan: Schema.Types.ObjectId;
+  insurancePlan?: Schema.Types.ObjectId;
   role: "doctor"|"patient"|"pharmacyAdmin"|"hospitalAdmin";
-  blogsAuthored: Array<Schema.Types.ObjectId>;
-  savedBlogs:  Array<Schema.Types.ObjectId>;
-  healthRecord:  Array<Schema.Types.ObjectId>;
-  orders:  Array<Schema.Types.ObjectId>;
+  blogsAuthored?: Array<Schema.Types.ObjectId>;
+  savedBlogs?:  Array<Schema.Types.ObjectId>;
+  healthRecord?:  Array<Schema.Types.ObjectId>;
+  appointments?:  Array<Schema.Types.ObjectId>;
+  affiliateHospital?: Schema.Types.ObjectId;
+  personalPhysician?: Schema.Types.ObjectId;
+  orders?:  Array<Schema.Types.ObjectId>;
   subscribedToNewsletter: boolean
 }
 
-interface PatientParams extends UserParams {
-  consultationSessions: Array<Schema.Types.ObjectId>;
-  appointments: Array<Schema.Types.ObjectId>;
-  affiliateHospital: Schema.Types.ObjectId;
-  personalPhysician: Schema.Types.ObjectId
-}
 
 interface DoctorParams extends UserParams {
   bookings: Array<Schema.Types.ObjectId>;
@@ -33,6 +30,7 @@ interface DoctorParams extends UserParams {
   clients: Array<Schema.Types.ObjectId>;
   reminders: Array<Schema.Types.ObjectId>
   affiliateHospital: Schema.Types.ObjectId;
+  consultationHistory: Array<Schema.Types.ObjectId>
 }
 
 
@@ -70,7 +68,7 @@ const UserSchema = new Schema<UserParams>({
     type: String,
     enum: ["male", "female"],
   },
-  insurance_plan: {
+  insurancePlan: {
     type: Schema.Types.ObjectId,
     ref: 'Insurance'
   },
@@ -98,6 +96,18 @@ const UserSchema = new Schema<UserParams>({
     type: Schema.Types.ObjectId,
     ref: 'Order'
   }],
+  appointments: [{
+    type: Schema.Types.ObjectId,
+    enum: ['Consultation','Booking']
+  }],
+  affiliateHospital: {
+      type: Schema.Types.ObjectId,
+      ref: 'Hospital'
+  },
+  personalPhysician: {
+      type: Schema.Types.ObjectId,
+      ref: 'Doctor'
+  },
 },{
     timestamps: true
 });
@@ -116,27 +126,12 @@ const DoctorSchema = new Schema<DoctorParams>({
     }],
     bookings: [{
         type: Schema.Types.ObjectId,
-        ref: 'Appointment'
+        ref: 'Booking'
     }], 
-});
-
-const PatientSchema = new Schema<PatientParams>({
-    appointments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Appointment'
-    }],
-    orders: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
-    }],
-    affiliateHospital: {
-        type: Schema.Types.ObjectId,
-        ref: 'Hospital'
-    },
-    personalPhysician: {
-        type: Schema.Types.ObjectId,
-        ref: 'Doctor'
-    },
+    consultationHistory: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Consultation'
+  }], 
 });
 
 const PharmacyAdminSchema = new Schema({
@@ -155,14 +150,12 @@ const HospitalAdminSchema = new Schema({
 
 const User = models?.User || model("User", UserSchema);
 const Doctor =  models?.Doctor || model("Doctor", DoctorSchema);
-const Patient =  models?.Patient || model("Patient", PatientSchema);
 const HospitalAdmin =  models?.HospitalAdmin || model("HospitalAdmin", HospitalAdminSchema);
 const PharmacyAdmin =  models?.PharmacyAdmin || model("PharmacyAdmin", PharmacyAdminSchema);
 
 export {
     User, 
     Doctor, 
-    Patient, 
     HospitalAdmin, 
     PharmacyAdmin
 };

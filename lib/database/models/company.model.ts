@@ -93,14 +93,14 @@ const HospitalSchema = new Schema<HospitalParams>({
     booked_appointments: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Appointment'
+            ref: 'Booking'
         }
     ]
 });
 
 
 const Company = models?.Company || model("Company", CompanySchema);
-const Hospital = models?.Hospital || Company.discriminator("Hospital", HospitalSchema);
-const Pharmacy = models?.Pharmacy || Company.discriminator("Pharmacy", PharmacySchema);
+const Hospital = models?.Hospital || model("Hospital", HospitalSchema);
+const Pharmacy = models?.Pharmacy || model("Pharmacy", PharmacySchema);
 
 export {Company, Hospital, Pharmacy}
