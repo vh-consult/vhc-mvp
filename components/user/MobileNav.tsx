@@ -6,8 +6,21 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
+import { useUser } from "@clerk/nextjs"
+
 
 const MobileNav = ({navigations}: HeaderProps) => {
+  const {user} = useUser()
+  const generalNavs = [
+    {
+      route: `/user/${user?.id}/account`,
+      label: 'Account'
+    },
+    {
+      route: `/user/${user?.id}/history`,
+      label: 'History'
+    },
+  ]
   const pathname = usePathname()
   return (
     <section className='w-full max-w-[264px] '>
@@ -36,31 +49,53 @@ const MobileNav = ({navigations}: HeaderProps) => {
           </Link>
           <div className="flex h-[calc(100vh-72px)] flex-col gap-6 pt-16 text-white">
             <section className="flex h-full flex-col gap-6 pt-16 text-white">
-            {
-            navigations && navigations.map((link)=>{
-              const isActive = pathname === link.route;
-              return(
-                <SheetClose asChild key={link.route}>
-                    <Link
-                        href={link.route}
-                        key={link.label}
-                        className={
-                            cn(
-                                'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
-                                {
-                                    'bg-green-2': isActive
-                                }
-                            )
-                        }
-                    >
-                      <p className="font-semibold">
-                          {link.label}
-                      </p>
-                    </Link>
-                </SheetClose>
-              )
-            })
-        }
+              <SheetClose asChild>
+              {
+                navigations && navigations.map((link)=>{
+                  const isActive = pathname === link.route;
+                  return(
+                        <Link
+                            href={link.route}
+                            key={link.label}
+                            className={
+                                cn(
+                                    'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
+                                    {
+                                        'bg-green-2': isActive
+                                    }
+                                )
+                            }
+                        >
+                          <p className="font-semibold">
+                              {link.label}
+                          </p>
+                        </Link>
+                )})
+              }
+              {
+                generalNavs.map((link)=> {
+                  const isActive = pathname === link.route;
+                  return(
+                  <Link
+                    key={link.label}
+                      href={link.route}
+                      className={
+                          cn(
+                              'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
+                              {
+                                  'bg-green-2': isActive
+                              }
+                          )
+                      }
+                  >
+                    <p className="font-semibold">
+                        {link.label}
+                    </p>
+                  </Link>
+                  )
+                })
+              }
+              </SheetClose>
             </section>
           </div>
         </SheetContent>
