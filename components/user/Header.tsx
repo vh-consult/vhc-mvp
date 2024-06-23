@@ -65,7 +65,7 @@ const Header = ({navigations}: HeaderProps) => {
 
         <SearchBar 
           className='border border-dark-1 bg-dark-3 
-           hidden md:block md:w-[250px]'
+           hidden md:flex md:w-[250px]'
         />
         <AiOutlineMessage 
           className='text-green-1 

@@ -1,11 +1,8 @@
 "use client"
 
-import AppointmentCalendar from '@/components/AppointmentCalendar'
 import Loader from '@/components/Loader'
 import HomeCard from '@/components/consultation/HomeCard'
 import useUserRole from '@/hooks/useUserRole'
-import { getUserById } from '@/lib/actions/user.actions'
-import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import React, { Suspense, useEffect, useState } from 'react'
 
