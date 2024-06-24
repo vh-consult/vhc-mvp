@@ -20,6 +20,7 @@ export interface UserParams {
   affiliateHospital?: Schema.Types.ObjectId;
   personalPhysician?: Schema.Types.ObjectId;
   orders?:  Array<Schema.Types.ObjectId>;
+  currentMeds?:  Array<Schema.Types.ObjectId>;
   subscribedToNewsletter: boolean
 }
 
@@ -100,6 +101,12 @@ const UserSchema = new Schema<UserParams>({
     type: Schema.Types.ObjectId,
     enum: ['Consultation','Booking']
   }],
+  currentMeds: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Medication'
+    }
+  ],
   affiliateHospital: {
       type: Schema.Types.ObjectId,
       ref: 'Hospital'
