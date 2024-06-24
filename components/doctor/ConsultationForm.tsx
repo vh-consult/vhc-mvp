@@ -20,7 +20,8 @@ const ConsultationForm = () => {
   const addConsultationPost = async () => {
       try{
         setLoading(true)
-        const message = await postConsultationForm(user?.id as string, values)
+        //not the correct implementation. I need to pass in the client's id somehow
+        const message = await postConsultationForm(user?.id as string, values, user?.id!)
       }finally{
         setLoading(false)
       }
