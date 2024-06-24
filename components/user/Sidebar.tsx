@@ -29,10 +29,11 @@ const Sidebar = () => {
             className={`flex ${isExpanded? ` flex-row items-center p-3 ` : 
               `flex-col mb-4 hover:rounded-lg hover:mx-auto 
               items-center py-3 hover:w-[85%] `}  
-                hover:bg-dark-4 ${isActive? `bg-dark-3 w-[85%] 
-              mx-auto rounded-lg hover:w-[85%]`:
+                hover:bg-dark-3 ${isActive? `bg-green-2 w-[85%] 
+              mx-auto rounded-lg hover:w-[100%]   hover:bg-green-2 hover:opacity-90`:
              'text-green-1'}
             `}
+            
           >
             <div>{<nav.icon className={`w-[20px] h-[20px]`}/>}</div>
 
@@ -51,7 +52,7 @@ const Sidebar = () => {
     >
       <div className='w-full'>
         <div 
-          className={` w-[30px] h-[30px] flex flex-center mt-[-15px] ml-6 cursor-pointer`}
+          className={` w-[30px] h-[30px] flex flex-center mt-[-20px] ml-6 cursor-pointer`}
           onClick={()=>setIsExpanded(!isExpanded)}
         >
           <BiMenu className='w-[24px] h-[24px]' />

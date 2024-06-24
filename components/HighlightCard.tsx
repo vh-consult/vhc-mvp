@@ -16,10 +16,10 @@ const HighlightCard = ({
     className
 }: HighlightCardProps) => {
   return (
-    <div className={cn("flex items-center px-6", className)}>
+    <div className={cn("flex items-center px-2", className)}>
     <div 
       className="w-[45px] h-[45px] flex items-center text-[24px]
-      justify-center mr-4 rounded-full border border-dark-4"
+      justify-center mr-2 rounded-full border border-dark-4"
     >
       {icon }
     </div>

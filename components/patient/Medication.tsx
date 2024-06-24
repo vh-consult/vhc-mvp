@@ -40,13 +40,20 @@ const MedCard = ({
   )
 }
 
+const medsPrescribed = [
+  {
+
+  }
+]
+
 const Medication = () => {
   const [currentDrugs, setCurrentDrugs] = useState()
   const {user} = useUser()
-  const fetchDrugs = async () => {
-    const medDrugs = await fetchMeds(user?.id!)
-    // setCurrentDrugs(medDrugs)
-  }
+
+  // const fetchDrugs = async () => {
+  //   const medDrugs = await fetchMeds(user?.id!)
+  //   setCurrentDrugs(medDrugs)
+  // }
   const drugs = [
     {
       imageSrc: '/images/drug 1.jpg',
@@ -62,7 +69,20 @@ const Medication = () => {
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Current Medication
         </h3>
-
+        <div className="w-full">
+          {
+            medsPrescribed.map((medication, index) => (
+              <MedCard 
+                condition='e'
+                drug='w'
+                imageSrc=''
+                quantity={4}
+                time={new Date()}
+                key={index}
+              />
+            ))
+          }
+        </div>
       </div>
     </div>
   )

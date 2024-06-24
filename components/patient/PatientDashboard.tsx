@@ -28,7 +28,7 @@ const PatientDashboard = () => {
       },
     ]
     return(
-      <main className="w-[90%] mx-auto">
+      <main className="w-[95%] mx-auto">
         <div className="w-full flex flex-between">
           {
             vitals.map(vital => (

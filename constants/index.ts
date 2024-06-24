@@ -735,7 +735,7 @@ export const hospitalSidebarElements = {
 export const doctorSidebarElements = {
     top: [
         {
-            route: '/overview',
+            route: '/user/dashboard',
             label: 'Dashboard',
             icon: RxDashboard
         },
@@ -745,7 +745,7 @@ export const doctorSidebarElements = {
             icon: MdMeetingRoom
         },
         {
-            route: '/clients',
+            route: '/affiliation/clients',
             label: 'Clients',
             icon: BsPeople
         }
