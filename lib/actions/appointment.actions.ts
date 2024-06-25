@@ -53,13 +53,21 @@ export async function fetchAllConsultationSummary() {
     }
 }
 
-export async function createBooking(clerkId: string) {
+export async function createAppointment(clerkId: string, formData: any) {
     try {
         await connectToDatabase()
         const creator = await User.findOne({clerkId})
-        if(!creator) throw new Error("No consultation sessions yet")
-        const sessions = Booking.create()
-        return JSON.parse(JSON.stringify(sessions))
+        if(!creator) throw new Error("Can't book an appointment | Invalid User")
+        
+        let appointment
+        if (formData.appointmentType === "virtual"){
+            appointment = await Consultation.create(formData)
+        } else {
+            appointment = await Booking.create(formData)
+        }
+        creator.appointments.append(appointment._id)
+        await creator.save()
+        return JSON.parse(JSON.stringify(appointment))
     } catch (error) {
         handleError(error)
     }

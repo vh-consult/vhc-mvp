@@ -14,11 +14,14 @@ import { Input } from '../ui/input';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
 import { Consultation } from '@/lib/database/models/appointment.model';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const initialValues = {
   dateTime: new Date(),
   description: '',
   link: '',
+  appointmentType: '',
+  doctor: ''
 };
 
 const MeetingTypeList = () => {
@@ -110,14 +113,29 @@ const MeetingTypeList = () => {
           handleClick={createMeeting}
         >
           <div className="flex flex-col gap-2.5">
+            <Label className="text-base font-normal leading-[22.4px] text-green-1" htmlFor="appointmentType">Appointment type</Label>
+            <Select required onValueChange={(value) => setValues({ ...values, appointmentType: value })}>
+              <SelectTrigger id="appointmentType">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+                <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
+                <SelectItem value="virtual">Virtual Consultation</SelectItem>
+                <SelectItem value="lab">Lab Session</SelectItem>
+                <SelectItem value="specialBooking">Special Booking</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2.5">
             <Label className="text-base font-normal leading-[22.4px] text-green-1">
-              Add a description
+              What are some of your symptoms
             </Label>
             <Textarea
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) =>
                 setValues({ ...values, description: e.target.value })
               }
+              placeholder='e.g: Headache and severe back pain...'
             />
           </div>
           <div className="flex w-full flex-col gap-2.5">
@@ -135,9 +153,14 @@ const MeetingTypeList = () => {
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
             />
           </div>
-          <div className="">
 
-          </div>
+          {
+            values.appointmentType === "specialBooking"? (
+              <>
+                <Label></Label>
+              </>
+            ) : ``
+          }
         </MeetingModal>
       ) : (
         <MeetingModal
