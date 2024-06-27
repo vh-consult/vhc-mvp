@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 
@@ -11,12 +11,17 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  manifest: '/manifest.json',
   title: "V-Healthcare | Your health needs prioritized!",
   description: "Virtual Consultation Room",
   icons: {
     icon: "/favicon.svg",
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: '#161925'
+}
 
 export default function RootLayout({
   children,
