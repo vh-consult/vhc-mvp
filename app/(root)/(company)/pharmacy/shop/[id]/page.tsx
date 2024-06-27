@@ -1,19 +1,25 @@
 import DrugCard from '@/components/pharmacy/DrugCard'
+import DrugListings from '@/components/pharmacy/DrugListings'
 import SearchArea from '@/components/pharmacy/SearchArea'
+import { getPharmacyInventory } from '@/lib/actions/company.actions'
 import React from 'react'
 
-const ShopPage = () => {
+const ShopPage = async ({  
+  params,
+  searchParams
+}: {
+  searchParams?: {
+    query?: string;
+    ShopPage?: string
+  },
+  params: {id: string}
+}
+) => {
+  const query = searchParams?.query || ''
   return (
     <div>
       <SearchArea/>
-      <div className="">
-        <DrugCard
-          imageSRC='/images/drug 1.jpg'
-          name='Luzart FC'
-          numberInStock={200}
-          price={120}
-        />
-      </div>
+      <DrugListings pharmacyId={params.id} query={query}/>
     </div>
   )
 }

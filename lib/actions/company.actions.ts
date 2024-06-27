@@ -69,6 +69,31 @@ export async function getAllPharmacyShops() {
     }
 }
 
+export async function getPharmacyInventory(pharmacyId: string) {
+    try {
+        await connectToDatabase()
+        const inventory = await Pharmacy.findById(pharmacyId).populate('inventory')
+        if (!inventory) throw new Error('No pharmacy drugs found')
+        
+        return JSON.parse(JSON.stringify(inventory))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
+    try {
+        await connectToDatabase()
+        const filteredInventory = await Pharmacy.findById(pharmacyId).populate('inventory')
+        if (!filteredInventory) throw new Error('No pharmacy drugs found')
+        
+        
+        return JSON.parse(JSON.stringify(filteredInventory))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function getPharmacyById(pharmacyId: string) {
     try {
         await connectToDatabase();

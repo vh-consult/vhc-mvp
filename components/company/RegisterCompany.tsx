@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
-
+import {CldUploadWidget} from "next-cloudinary"
 // Define Zod schema
 const setupSchema = z.object({
   name: z.string().min(1, 'company\'s is required'),
@@ -94,6 +94,20 @@ const RegisterCompany =  () => {
         accept='image/*'
         className='border-sky-1 bg-dark-3 '
       />
+      <CldUploadWidget signatureEndpoint="/api/sign-image">
+      {
+        ({open}) => {
+          return(
+            <Button 
+              className=""
+              onClick={()=> open()}
+            >
+              Upload company logo
+            </Button>
+          )
+        }
+      }
+      </CldUploadWidget>
       {errors.logo && <span className="text-red-500">{errors.logo}</span>}
       <Input
         type='text'

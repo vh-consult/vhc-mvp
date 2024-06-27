@@ -66,9 +66,13 @@ export async function createAppointment(clerkId: string, formData: any) {
             appointment = await Booking.create(formData)
         }
         creator.appointments.append(appointment._id)
-        await creator.save()
+        await creator.save()  
         return JSON.parse(JSON.stringify(appointment))
     } catch (error) {
         handleError(error)
     }
+}
+
+export async function searchDoctor() {
+    
 }

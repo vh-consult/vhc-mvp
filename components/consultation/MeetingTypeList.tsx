@@ -15,6 +15,7 @@ import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
 import { Consultation } from '@/lib/database/models/appointment.model';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { HomeCardProps } from '../user/RenderUserLanding';
 
 const initialValues = {
   dateTime: new Date(),
@@ -24,11 +25,32 @@ const initialValues = {
   doctor: ''
 };
 
+const HomeCards: Array<HomeCardProps> = [
+  {
+    title: 'New Meeting',
+    description: 'Start an instant meeting',
+    imageSrc: '/icons/add-meeting.svg',
+    action: 'isInstantMeeting'
+  },
+  {
+    title: 'Join Meeting',
+    description: 'via invitation link',
+    imageSrc: '/icons/join-meeting.svg',
+    action: 'isJoiningMeeting'
+  },
+  {
+    title: 'Schedule Meeting',
+    description: 'Plan your meeting',
+    imageSrc: '/icons/schedule.svg',
+    action: 'isScheduleMeeting'
+  }
+]
+
+type MeetingStateProps = 'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined
+
 const MeetingTypeList = () => {
   const router = useRouter();
-  const [meetingState, setMeetingState] = useState<
-    'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined
-  >(undefined);
+  const [meetingState, setMeetingState] = useState<MeetingStateProps>(undefined);
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call>();
   const client = useStreamVideoClient();
@@ -76,27 +98,18 @@ const MeetingTypeList = () => {
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-      <HomeCard
-        imgURL="/icons/add-meeting.svg"
-        title="New Meeting"
-        description="Start an instant meeting"
-        handleClick={() => setMeetingState('isInstantMeeting')} 
-        className='bg-dark-3 hover:bg-dark-4'   
-      />
-      <HomeCard
-        imgURL="/icons/join-meeting.svg"
-        title="Join Meeting"
-        description="via invitation link"
-        className="bg-dark-3 hover:bg-dark-4"
-        handleClick={() => setMeetingState('isJoiningMeeting')}
-      />
-      <HomeCard
-        imgURL="/icons/schedule.svg"
-        title="Schedule Meeting"
-        description="Plan your meeting"
-        className="bg-dark-3 hover:bg-dark-4"
-        handleClick={() => setMeetingState('isScheduleMeeting')}
-      />
+      {
+        HomeCards.map((card, index) => (
+            <HomeCard
+              key={index}
+              imgURL={card.imageSrc}
+              title={card.title}
+              description={card.description}
+              handleClick={() => setMeetingState(card.action as MeetingStateProps)} 
+              className='bg-dark-3 hover:bg-dark-4'   
+            />
+        ))
+      }
       <HomeCard
         imgURL="/icons/recordings.svg"
         title="View Recordings"
@@ -156,9 +169,16 @@ const MeetingTypeList = () => {
 
           {
             values.appointmentType === "specialBooking"? (
-              <>
-                <Label></Label>
-              </>
+              <div>
+                <Label>Add Physician</Label>
+                <Input 
+                  placeholder='Type name...' 
+                  onChange={(e)=>setValues({...values, doctor: e.target.value})}
+                />
+                <datalist>
+
+                </datalist>
+              </div>
             ) : ``
           }
         </MeetingModal>

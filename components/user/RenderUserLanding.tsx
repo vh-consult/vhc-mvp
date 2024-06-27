@@ -6,14 +6,14 @@ import React, { Suspense } from 'react'
 import Loader from '../Loader'
 import HomeCard from '../consultation/HomeCard'
 
-interface HomeCardProps {
+export interface HomeCardProps {
     title: string;
     description: string;
     imageSrc: string;
-    redirectUrl: string;
+    action: string;
 }
 
-interface HomeCardDataStructure {
+export interface HomeCardDataStructure {
     user: HomeCardProps[];
     company: HomeCardProps[];
 }
@@ -24,25 +24,25 @@ const HomeCardData: HomeCardDataStructure = {
             title: 'Dashboard',
             description: 'Enter your dashboard',
             imageSrc: '/icons/dashboard.svg',
-            redirectUrl: '/user/dashboard'
+            action: '/user/dashboard'
         },
         {
             title: 'Affiliation',
             description: 'Manage your contacts',
             imageSrc: '/icons/userlist.svg',
-            redirectUrl: '/user/affiliation'
+            action: '/user/affiliation'
         },
         {
             title: 'Pharmacy',
             description: 'Order for drugs',
             imageSrc: '/icons/Pill.svg',
-            redirectUrl: '/pharmacy/home'
+            action: '/pharmacy/home'
         },
         {
             title: 'Consultation',
             description: 'Visit consultation room',
             imageSrc: '/icons/consultation.svg',
-            redirectUrl: '/consultation/home'
+            action: '/consultation/home'
         },
     ],
     company: [
@@ -50,7 +50,7 @@ const HomeCardData: HomeCardDataStructure = {
             title: 'Company',
             description: 'Manage your company',
             imageSrc: '/icons/Company.svg',
-            redirectUrl: '/company/home'
+            action: '/company/home'
         },
     ]
 };
@@ -69,7 +69,7 @@ const RenderUserLanding = () => {
                         title={card.title}
                         description={card.description}
                         imgURL={card.imageSrc}
-                        handleClick={() => { router.push(card.redirectUrl)}}
+                        handleClick={() => { router.push(card.action)}}
                         className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
                         key={index}
                     />
@@ -83,7 +83,7 @@ const RenderUserLanding = () => {
                             title={card.title}
                             description={card.description}
                             imgURL={card.imageSrc}
-                            handleClick={() => { router.push(card.redirectUrl)}}
+                            handleClick={() => { router.push(card.action)}}
                             className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[350px]'
                             key={index}
                         />
