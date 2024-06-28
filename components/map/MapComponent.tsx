@@ -9,8 +9,8 @@ import {
     useMap
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"
-import "leaflet-defaulticon-compatibility";
+// import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"
+// import "leaflet-defaulticon-compatibility";
 import { handleError } from '@/lib/utils';
 import Loader from '../Loader';
 import { Input } from '../ui/input';
@@ -66,7 +66,7 @@ const MapComponent: FC = () => {
         const data = await response.json();
         setMarkerData(data)
     } catch (error) {
-        handleError(error)
+        console.log(error)
     }
   }
   return (
@@ -76,8 +76,8 @@ const MapComponent: FC = () => {
       {
         markerData && markerData.coordinates && 
            ( 
-            <div className="flex flex
-            -center absolute top-3 right-3 z-[100000]">
+            <div className="flex flex-center 
+            absolute top-3 right-3 z-[100000]">
                 <h1 className="text-3xl font-bold text-black p-2 
                 bg-white rounded-md z-[100000]">
                     {markerData.title}
@@ -88,12 +88,12 @@ const MapComponent: FC = () => {
 
       <MapContainer 
         style={{
-            height: "100vh",
+            height: "100%",
             width: "100vw"
         }}
 
-        // zoom={11} 
-        // center={[43.6426, -79.3871]} 
+        zoom={11} 
+        center={[43.6426, -79.3871]} 
       >
         <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
 
