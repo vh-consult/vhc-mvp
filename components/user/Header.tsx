@@ -67,10 +67,12 @@ const Header = ({navigations}: HeaderProps) => {
           className='border border-dark-1 bg-dark-3 
            hidden md:flex md:w-[250px]'
         />
-        <AiOutlineMessage 
-          className='text-green-1 
-          cursor-pointer w-[30px] h-[30px]' 
-        />
+        <Link href={'/chat'}>        
+          <AiOutlineMessage 
+            className='text-green-1 
+            cursor-pointer w-[30px] h-[30px]' 
+          />
+        </Link>
         {
           isLoaded? (
           <SignedIn>
