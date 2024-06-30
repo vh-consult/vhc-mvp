@@ -1,5 +1,5 @@
 "use client"
-import React, {useState, useEffect, useRef, FC} from 'react'
+import React, {useState, useEffect, useRef, FC, useMemo} from 'react'
 import {
     MapContainer,
     TileLayer,
@@ -8,9 +8,10 @@ import {
     useMapEvents,
     useMap
 } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-// import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"
-// import "leaflet-defaulticon-compatibility";
+import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import "leaflet-defaulticon-compatibility";
+
 import { handleError } from '@/lib/utils';
 import Loader from '../Loader';
 import { Input } from '../ui/input';
@@ -28,9 +29,26 @@ const MapComponent: FC = () => {
   const [submittedQuestion, setSubmittedQuestion] = useState<string | null>(null)
 
   const mapRef = useRef<any | null>(null)
+  const markerRef = useRef(null)
+  const eventHandlers = useMemo(
+      () => ({
+          dragend() {
+              const marker = markerRef.current
+              if (marker != null) {
+                  // setPosition(marker.getLatLng())
+                //   console.log(marker.getLatLng())
+                return
+              }
+          },
+      }),
+      [],
+  )
   const ZoomHandler: FC = () => {
     const map = useMap()
 
+ useEffect(() => {
+        console.log(markerRef.current)
+    }, [markerRef.current])
     const flyToMarker = (coordinates: [number, number], zoom: number) => {
         if (coordinates && typeof coordinates[0] !== "undefined") {
             map.flyTo(coordinates, zoom, {
@@ -39,6 +57,12 @@ const MapComponent: FC = () => {
             })
         }
     }
+
+    useMapEvents({
+        zoomend: () => {
+            setLoading(false)
+        }
+    })
 
     useEffect(() => {   
         if (markerData) {
@@ -71,7 +95,9 @@ const MapComponent: FC = () => {
   }
   return (
     <>
+    <span className="w-[60px] h-[60px] flex flex-center absolute top-[50%] left-[50%] bg-green-2">
       {loading && <Loader/>}
+    </span>
 
       {
         markerData && markerData.coordinates && 
@@ -88,18 +114,25 @@ const MapComponent: FC = () => {
 
       <MapContainer 
         style={{
-            height: "100%",
+            height: "100vh",
             width: "100vw"
         }}
 
         zoom={11} 
         center={[43.6426, -79.3871]} 
       >
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-
+        <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
         {
             markerData && markerData.coordinates && (
-                <Marker position={markerData.coordinates}>
+                <Marker 
+                    position={markerData.coordinates}
+                    eventHandlers={eventHandlers}
+                    ref={markerRef}
+
+                >
                     <Popup>
                         {markerData.title}
                     </Popup>
@@ -109,21 +142,25 @@ const MapComponent: FC = () => {
 
         <ZoomHandler/>
       </MapContainer>
-      <Input 
-        type='text'
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        className='flex-grow p-2 border rounded-md'
-        onKeyPress={(e) => {
-            if (e.key === "Enter") handleSubmit();
-        }}
-      />
-      <Button 
-      onClick={handleSubmit} 
-      className='p-2 ml-2 bg-green-2 text-green-1 rounded-md'
-      >
-        Search
-      </Button>
+      <div className="flex w-1/2 z-[1000000] absolute left-[25%] bottom-8">
+        <Input 
+            type='text'
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className='flex-grow p-2 border rounded-md bg-green-1 '
+            onKeyPress={(e) => {
+                if (e.key === "Enter") handleSubmit();
+            }}
+        />
+        <Button 
+        onClick={handleSubmit} 
+        className='ml-4 px-4 py-2 bg-green-2 
+        text-green-1 rounded-md'
+        >
+            Search
+        </Button>
+
+      </div>
     </>
   )
 }
