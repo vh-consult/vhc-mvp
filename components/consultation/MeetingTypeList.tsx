@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 
 import ClickableCard from '../ClickableCard';
 import MeetingModal from './MeetingModal';
-import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
 import Loader from '../Loader';
 import { Textarea } from '../ui/textarea';
@@ -16,6 +15,7 @@ import { Label } from '../ui/label';
 import { Consultation } from '@/lib/database/models/appointment.model';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { ClickableCardProps } from '../user/RenderUserLanding';
+import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 
 const initialValues = {
   dateTime: new Date(),
@@ -56,7 +56,7 @@ const MeetingTypeList = () => {
   const client = useStreamVideoClient();
   const { user } = useUser();
   const { toast } = useToast();
-
+  console.log(client)
   const createMeeting = async () => {
     if (!client || !user) return;
     try {
@@ -94,7 +94,7 @@ const MeetingTypeList = () => {
 
   if (!client || !user) return <Loader />;
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/meeting/${callDetail?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -175,9 +175,6 @@ const MeetingTypeList = () => {
                   placeholder='Type name...' 
                   onChange={(e)=>setValues({...values, doctor: e.target.value})}
                 />
-                <datalist>
-
-                </datalist>
               </div>
             ) : ``
           }

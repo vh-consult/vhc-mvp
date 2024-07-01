@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  manifest: '/manifest.json',
+  // manifest: '/manifest.json',
   title: "V-Healthcare | Your health needs prioritized!",
   description: "Virtual Consultation Room",
   icons: {

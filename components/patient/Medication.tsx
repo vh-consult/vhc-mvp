@@ -73,8 +73,8 @@ const Medication = () => {
           {
             medsPrescribed.map((medication, index) => (
               <MedCard 
-                condition='e'
-                drug='w'
+                condition='30mins Before Meal'
+                drug='Paracetamol 50mg'
                 imageSrc=''
                 quantity={4}
                 time={new Date()}
