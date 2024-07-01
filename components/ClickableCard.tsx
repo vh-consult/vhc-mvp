@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image'
 import React from 'react'
 
-interface HomeCardProps {
+interface ClickableCardProps {
     imgURL: string;
     title: string;
     description: string;
@@ -10,7 +10,7 @@ interface HomeCardProps {
     className: string;
 }
 
-const HomeCard = ({imgURL, className, title, description, handleClick}:HomeCardProps) => {
+const ClickableCard = ({imgURL, className, title, description, handleClick}:ClickableCardProps) => {
   return (
     <div 
         className={cn(`px-4 py-4 flex 
@@ -35,4 +35,4 @@ const HomeCard = ({imgURL, className, title, description, handleClick}:HomeCardP
   )
 }
 
-export default HomeCard
+export default ClickableCard

@@ -4,21 +4,21 @@ import useUserRole from '@/hooks/useUserRole'
 import { useRouter } from 'next/navigation'
 import React, { Suspense } from 'react'
 import Loader from '../Loader'
-import HomeCard from '../consultation/HomeCard'
+import ClickableCard from '../ClickableCard'
 
-export interface HomeCardProps {
+export interface ClickableCardProps {
     title: string;
     description: string;
     imageSrc: string;
     action: string;
 }
 
-export interface HomeCardDataStructure {
-    user: HomeCardProps[];
-    company: HomeCardProps[];
+export interface ClickableCardDataStructure {
+    user: ClickableCardProps[];
+    company: ClickableCardProps[];
 }
 
-const HomeCardData: HomeCardDataStructure = {
+const ClickableCardData: ClickableCardDataStructure = {
     user: [
         {
             title: 'Dashboard',
@@ -42,7 +42,7 @@ const HomeCardData: HomeCardDataStructure = {
             title: 'Consultation',
             description: 'Visit consultation room',
             imageSrc: '/icons/consultation.svg',
-            action: '/consultation/home'
+            action: '/user/consultation/home'
         },
     ],
     company: [
@@ -64,8 +64,8 @@ const RenderUserLanding = () => {
 
         <>
             {
-                HomeCardData.user.map((card, index) => (
-                    <HomeCard 
+                ClickableCardData.user.map((card, index) => (
+                    <ClickableCard 
                         title={card.title}
                         description={card.description}
                         imgURL={card.imageSrc}
@@ -78,8 +78,8 @@ const RenderUserLanding = () => {
             }
             {
                 userRole === "hospitalAdmin" || userRole === "pharmacyAdmin" ? (
-                    HomeCardData.company.map((card, index) => (
-                        <HomeCard 
+                    ClickableCardData.company.map((card, index) => (
+                        <ClickableCard 
                             title={card.title}
                             description={card.description}
                             imgURL={card.imageSrc}

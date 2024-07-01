@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import HomeCard from './HomeCard';
+import ClickableCard from '../ClickableCard';
 import MeetingModal from './MeetingModal';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
@@ -15,7 +15,7 @@ import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
 import { Consultation } from '@/lib/database/models/appointment.model';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { HomeCardProps } from '../user/RenderUserLanding';
+import { ClickableCardProps } from '../user/RenderUserLanding';
 
 const initialValues = {
   dateTime: new Date(),
@@ -25,7 +25,7 @@ const initialValues = {
   doctor: ''
 };
 
-const HomeCards: Array<HomeCardProps> = [
+const ClickableCards: Array<ClickableCardProps> = [
   {
     title: 'New Meeting',
     description: 'Start an instant meeting',
@@ -81,7 +81,7 @@ const MeetingTypeList = () => {
       // await 
       setCallDetail(call);
       if (!values.description) {
-        router.push(`/meeting/${call.id}`);
+        router.push(`/user/meeting/${call.id}`);
       }
       toast({
         title: 'Meeting Created',
@@ -99,8 +99,8 @@ const MeetingTypeList = () => {
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
       {
-        HomeCards.map((card, index) => (
-            <HomeCard
+        ClickableCards.map((card, index) => (
+            <ClickableCard
               key={index}
               imgURL={card.imageSrc}
               title={card.title}
@@ -110,7 +110,7 @@ const MeetingTypeList = () => {
             />
         ))
       }
-      <HomeCard
+      <ClickableCard
         imgURL="/icons/recordings.svg"
         title="View Recordings"
         description="Meeting Recordings"

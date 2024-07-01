@@ -16,30 +16,30 @@ import { RxDashboard } from "react-icons/rx";
 export const consultationSidebarLinks = [
     {
       imgURL: '/icons/Home.svg',
-      route: '/consultation/home',
+      route: '/user/consultation/home',
       label: 'Home',
     },
   
     {
       imgURL: '/icons/upcoming.svg',
-      route: '/consultation/upcoming',
+      route: '/user/consultation/upcoming',
       label: 'Upcoming',
     },
-    {
-      imgURL: '/icons/previous.svg',
-      route: '/consultation/previous',
-      label: 'Previous',
-    },
+    // {
+    //   imgURL: '/icons/previous.svg',
+    //   route: '/consultation/previous',
+    //   label: 'Previous',
+    // },
     {
       imgURL: '/icons/Video.svg',
-      route: '/consultation/recordings',
+      route: '/user/consultation/recordings',
       label: 'Recordings',
     },
-    {
-      imgURL: '/icons/add-personal.svg',
-      route: '/consultation/personal-room',
-      label: 'Personal Room',
-    },
+    // {
+    //   imgURL: '/icons/add-personal.svg',
+    //   route: '/user/consultation/personal-room',
+    //   label: 'Personal Room',
+    // },
 ];
 
 export const avatarImages = [
@@ -665,7 +665,7 @@ export const patientSidebarElements = {
             icon: RxDashboard
         },
         {
-            route: '/consultation/home',
+            route: '/user/consultation/home',
             label: 'Consultation',
             icon: MdMeetingRoom
         },
@@ -690,7 +690,7 @@ export const pharmacySidebarElements = {
             icon: RxDashboard
         },
         {
-            route: '/consultation/home',
+            route: '/user/consultation/home',
             label: 'Consultation',
             icon: MdMeetingRoom
         },
@@ -715,7 +715,7 @@ export const hospitalSidebarElements = {
             icon: RxDashboard
         },
         {
-            route: '/consultation/home',
+            route: '/user/consultation/home',
             label: 'Consultation',
             icon: MdMeetingRoom
         },
@@ -740,7 +740,7 @@ export const doctorSidebarElements = {
             icon: RxDashboard
         },
         {
-            route: '/consultation/home',
+            route: '/user/consultation',
             label: 'Consultation',
             icon: MdMeetingRoom
         },

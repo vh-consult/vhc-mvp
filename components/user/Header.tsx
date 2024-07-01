@@ -10,6 +10,7 @@ import SearchBar from '../SearchBar'
 import { AiOutlineMessage } from 'react-icons/ai'
 
 export interface NavLinkProps {
+  imageURL?: string;
   route: string;
   label: string;
 }
@@ -38,7 +39,7 @@ const Header = ({navigations}: HeaderProps) => {
           </div>
         </Link>
         
-        <div className=" w-2/5 ">
+        <div className=" w-1/2 ">
           <ul className='flex flex-row flex-between text-green-1'>
             {
               navigations?.map((nav,index)=>{
