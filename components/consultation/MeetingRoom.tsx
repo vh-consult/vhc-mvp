@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import Loader from '../Loader';
+import Loader from '../general/Loader';
 import { cn } from '@/lib/utils';
 import EndCallButton from './EndCallButton';
 import { FaStethoscope } from 'react-icons/fa';

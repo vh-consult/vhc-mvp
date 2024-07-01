@@ -7,7 +7,7 @@ import { createCompany } from '@/lib/actions/company.actions';
 import { toast } from '../ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import Loader from '../Loader';
+import Loader from '../general/Loader';
 import useUserRole from '@/hooks/useUserRole';
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';

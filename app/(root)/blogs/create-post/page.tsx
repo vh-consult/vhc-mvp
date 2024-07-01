@@ -1,5 +1,5 @@
 "use client"
-import Loader from '@/components/Loader'
+import Loader from '@/components/general/Loader'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

@@ -3,8 +3,8 @@
 import useUserRole from '@/hooks/useUserRole'
 import { useRouter } from 'next/navigation'
 import React, { Suspense } from 'react'
-import Loader from '../Loader'
-import ClickableCard from '../ClickableCard'
+import Loader from '../general/Loader'
+import ClickableCard from '../general/ClickableCard'
 
 export interface ClickableCardProps {
     title: string;

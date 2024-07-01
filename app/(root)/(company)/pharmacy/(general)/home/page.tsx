@@ -1,4 +1,4 @@
-import Loader from '@/components/Loader'
+import Loader from '@/components/general/Loader'
 import ShopCard from '@/components/pharmacy/ShopCard'
 import ShopListings from '@/components/pharmacy/ShopListings'
 import React, { Suspense } from 'react'

@@ -76,3 +76,13 @@ export async function createAppointment(clerkId: string, formData: any) {
 export async function searchDoctor() {
     
 }
+
+export async function getReminders(clerkId: string) {
+    const user = await User.findOne({clerkId})
+    if (!user) throw new Error("User not found")
+    const reminders = user.populate('reminder')
+    // reminders.forEach(reminder  => {
+        
+    // });
+    return JSON.parse(JSON.stringify(reminders))
+}

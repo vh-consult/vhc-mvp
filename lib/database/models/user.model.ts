@@ -21,6 +21,7 @@ export interface UserParams {
   personalPhysician?: Schema.Types.ObjectId;
   orders?:  Array<Schema.Types.ObjectId>;
   currentMeds?:  Array<Schema.Types.ObjectId>;
+  reminders?:  Array<Schema.Types.ObjectId>;
   subscribedToNewsletter: boolean
 }
 
@@ -115,6 +116,12 @@ const UserSchema = new Schema<UserParams>({
       type: Schema.Types.ObjectId,
       ref: 'Doctor'
   },
+  reminders: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Reminder'
+    }
+  ]
 },{
     timestamps: true
 });

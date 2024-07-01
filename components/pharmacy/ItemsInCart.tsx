@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import List from '../List'
+import List from '../general/List'
 import { BiTrash } from 'react-icons/bi'
 
 const ItemsInCart = () => {

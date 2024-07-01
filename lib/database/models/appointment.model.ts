@@ -40,16 +40,17 @@ const ConsultationSchema = new Schema({
 
 
 const ReminderSchema = new Schema({
-    client: {
+    sender: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    time: {
-        type: Date,
+    message: {
+        type: String,
         required: true
     },
-    purpose: {
-        type: String,
+    isRead: {
+        type: Boolean,
+        default: false
     }
 },{
     timestamps: true

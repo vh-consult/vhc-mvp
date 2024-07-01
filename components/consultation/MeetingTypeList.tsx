@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import ClickableCard from '../ClickableCard';
+import ClickableCard from '../general/ClickableCard';
 import MeetingModal from './MeetingModal';
 import { useUser } from '@clerk/nextjs';
-import Loader from '../Loader';
+import Loader from '../general/Loader';
 import { Textarea } from '../ui/textarea';
 import { useToast } from '../ui/use-toast';
 import { Input } from '../ui/input';
@@ -56,7 +56,6 @@ const MeetingTypeList = () => {
   const client = useStreamVideoClient();
   const { user } = useUser();
   const { toast } = useToast();
-  console.log(client)
   const createMeeting = async () => {
     if (!client || !user) return;
     try {

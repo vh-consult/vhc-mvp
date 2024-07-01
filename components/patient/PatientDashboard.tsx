@@ -1,8 +1,9 @@
 import React from 'react'
 import { FaLevelUpAlt, FaWeight } from 'react-icons/fa'
 import { MdHeight, MdScale } from 'react-icons/md'
-import HighlightCard from '@/components/HighlightCard'
+import HighlightCard from '@/components/general/HighlightCard'
 import Medication from './Medication'
+import Reminder from './Reminder'
 
 const PatientDashboard = () => {
     const vitals = [
@@ -42,8 +43,9 @@ const PatientDashboard = () => {
             ))
           }
         </div>
-        <div className="w-full mt-4">
+        <div className="w-full mt-4 flex flex-between">
             <Medication/>
+            <Reminder/>
         </div>
       </main>
     )

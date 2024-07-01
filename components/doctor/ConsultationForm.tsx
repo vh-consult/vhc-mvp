@@ -2,7 +2,7 @@
 import React, { FormEvent, useState } from 'react'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
-import Loader from '../Loader'
+import Loader from '../general/Loader'
 import { postConsultationForm } from '@/lib/actions/appointment.actions'
 import { useUser } from '@clerk/nextjs'
 

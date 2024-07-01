@@ -1,5 +1,5 @@
 'use client'
-import List from '@/components/List'
+import List from '@/components/general/List'
 import { Button } from '@/components/ui/button'
 import React, { useEffect, useState } from 'react'
 

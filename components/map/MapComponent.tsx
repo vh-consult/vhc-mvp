@@ -13,7 +13,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 import { handleError } from '@/lib/utils';
-import Loader from '../Loader';
+import Loader from '../general/Loader';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 

@@ -2,7 +2,7 @@
 "use client"
 
 import { tokenProvider } from '@/lib/actions/stream.actions';
-import Loader from '@/components/Loader';
+import Loader from '@/components/general/Loader';
 import { useUser } from '@clerk/nextjs';
 import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
 import { ReactNode, useEffect, useState } from 'react';

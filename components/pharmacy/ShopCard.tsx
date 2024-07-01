@@ -3,7 +3,7 @@ import { BiCar } from 'react-icons/bi'
 import { BsStarFill } from 'react-icons/bs';
 import { GoLocation } from 'react-icons/go'
 import { PiPerson } from 'react-icons/pi'
-import CldImage from '../CldImage';
+import CldImage from '../general/CldImage';
 
 interface PharmacyShopCardProps {
   imageSrc: string;
