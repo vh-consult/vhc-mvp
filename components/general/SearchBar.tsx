@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Input } from './ui/input'
+import { Input } from '../ui/input'
 import { BiSearch } from 'react-icons/bi'
 import { cn } from '@/lib/utils'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'

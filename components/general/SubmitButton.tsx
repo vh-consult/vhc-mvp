@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useFormStatus } from 'react-dom' 
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 
 const SubmitButton = ({

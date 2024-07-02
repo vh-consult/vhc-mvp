@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 const AppointmentCalendar = ({ color }: {color: string}) => {

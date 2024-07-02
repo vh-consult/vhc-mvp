@@ -2,8 +2,8 @@ import React from 'react'
 import { FaLevelUpAlt, FaWeight } from 'react-icons/fa'
 import { MdHeight, MdScale } from 'react-icons/md'
 import HighlightCard from '@/components/general/HighlightCard'
-import Medication from './Medication'
-import Reminder from './Reminder'
+import Medication from '../patient/Medication'
+import Reminder from '../patient/Reminder'
 
 const PatientDashboard = () => {
     const vitals = [
@@ -29,12 +29,12 @@ const PatientDashboard = () => {
       },
     ]
     return(
-      <main className="w-[95%] mx-auto">
+      <main className="w-full">
         <div className="w-full flex flex-between">
           {
             vitals.map(vital => (
               <HighlightCard 
-                className='bg-dark-1 rounded-lg w-[225px] h-[125px]'
+                className='bg-dark-1 rounded-lg w-[24%] h-[125px]'
                 icon={vital.icon}
                 title={vital.title}
                 value={vital.value}

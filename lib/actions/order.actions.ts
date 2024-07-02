@@ -66,11 +66,8 @@ export async function placeOrder(
             
             userOrderingItem.orders.append(drug)
             await userOrderingItem.save()
-
-            
         });
-
-
+        
     } catch (error) {
         handleError(error)
     }

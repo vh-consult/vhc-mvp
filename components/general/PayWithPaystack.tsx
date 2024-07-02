@@ -1,9 +1,9 @@
 "use client"
 import React, { useState, ChangeEvent } from 'react';
 import { PaystackButton } from 'react-paystack';
-import { toast } from './ui/use-toast';
-import { Label } from './ui/label';
-import { Input } from './ui/input';
+import { toast } from '../ui/use-toast';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
 
 const PayWithPaystack: React.FC<number> = (amount) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;

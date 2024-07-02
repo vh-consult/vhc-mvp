@@ -6,8 +6,8 @@ import { SignedIn, UserButton, useUser } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import SearchBar from '../SearchBar'
 import { AiOutlineMessage } from 'react-icons/ai'
+import SearchBar from '../general/SearchBar'
 
 export interface NavLinkProps {
   imageURL?: string;

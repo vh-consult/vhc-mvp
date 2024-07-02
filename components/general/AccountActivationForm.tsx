@@ -150,7 +150,7 @@
 
 'use client'
 import React, { useState } from 'react'
-import { Input } from './ui/input'
+import { Input } from '../ui/input'
 import ReactDatePicker from 'react-datepicker';
 import { Label } from "@/components/ui/label"
 import {
@@ -170,11 +170,11 @@ import {
 } from "@/components/ui/select"
 import { activateAccount } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
-import Loader from './Loader';
-import { toast } from './ui/use-toast';
+import { toast } from '../ui/use-toast';
 import { z } from 'zod';
+import Loader from './Loader';
 
 // Define Zod schema
 const registrationSchema = z.object({

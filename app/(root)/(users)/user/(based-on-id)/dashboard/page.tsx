@@ -1,15 +1,9 @@
 "use client"
+import DoctorDashboard from '@/components/doctor/DoctorDashboard'
 import PatientDashboard from '@/components/patient/PatientDashboard'
 import useUserRole from '@/hooks/useUserRole'
 import React from 'react'
 
-
-
-const DoctorDashboard = () => {
-  return(
-    <main className="w-full">This is the doctor dashboard</main>
-  )
-}
 
 const PharmacyAdminDashboard = () => {
   return(
@@ -26,13 +20,13 @@ const HospitalAdminDashboard = () => {
 
 const DashboardPage = () => {
   // const {userRole} = useUserRole()
-  const userRole = "patient"
+  let userRole = "pharmacyAdmin"
   return (
     <div>
       {
+        userRole === "pharmacyAdmin"? (<PharmacyAdminDashboard/>) :
         userRole === "patient"? (<PatientDashboard/>) : 
         userRole === "doctor"? (<DoctorDashboard/>) :
-        userRole === "pharmacyAdmin"? (<PharmacyAdminDashboard/>) :
         userRole === "hospitalAdmin"? (<HospitalAdminDashboard/>) : `Nothing to show you`
       }
     </div>
