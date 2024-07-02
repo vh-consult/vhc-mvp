@@ -1,5 +1,9 @@
 "use client"
-import { SidebarBbottomNavs, doctorSidebarElements, hospitalSidebarElements, patientSidebarElements, pharmacySidebarElements } from '@/constants'
+import { 
+  SidebarBbottomNavs, doctorSidebarElements,
+  hospitalSidebarElements, patientSidebarElements, 
+  pharmacySidebarElements 
+} from '@/constants'
 import useUserRole from '@/hooks/useUserRole'
 import { getUserById } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
@@ -47,7 +51,7 @@ const Sidebar = () => {
       };
   return (
     <aside className={`${isExpanded? `w-[170px]`: `w-[80px]`} h-[calc(100vh-64px)]  fixed top-16 left-0 bg-dark-1
-    py-3 flex flex-col items-center justify-between`}
+    py-3 flex flex-col items-center justify-between z-[1000000]`}
     onMouseLeave={()=>setIsExpanded(false)}
     >
       <div className='w-full'>
@@ -65,8 +69,8 @@ const Sidebar = () => {
             patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) :
             userRole === "hospitalAdmin"?
             hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) 
-
+            userRole === "pharmacyAdmin"?
+            pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ``
         }
       </div>
       <div className='w-full'>

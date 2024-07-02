@@ -1,3 +1,4 @@
+import { LazyResult } from "postcss";
 import { 
     AiOutlineLogout, 
     AiOutlineSetting,
@@ -9,7 +10,7 @@ import {
     AiOutlineHistory
   } from "react-icons/ai"
 import { BsDatabase, BsPeople } from "react-icons/bs";
-import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
+import { MdBlurOn, MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
   
 
@@ -751,6 +752,7 @@ export const doctorSidebarElements = {
         }
     ],
 }
+
 
 export const SidebarBbottomNavs = [
     {

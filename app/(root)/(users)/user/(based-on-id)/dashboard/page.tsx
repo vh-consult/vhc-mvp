@@ -1,26 +1,15 @@
 "use client"
-import DoctorDashboard from '@/components/doctor/DoctorDashboard'
-import PatientDashboard from '@/components/patient/PatientDashboard'
-import useUserRole from '@/hooks/useUserRole'
 import React from 'react'
-
-
-const PharmacyAdminDashboard = () => {
-  return(
-    <main className="w-full">This is the pharmacy admin dashboard</main>
-  )
-}
-
-const HospitalAdminDashboard = () => {
-  return(
-    <main className="w-full">This is the hospital admin dashboard</main>
-  )
-}
+import DoctorDashboard from '@/components/user/DoctorDashboard'
+import PatientDashboard from '@/components/user/PatientDashboard'
+import PharmacyAdminDashboard from '@/components/user/PharmacyAdminDashboard'
+import useUserRole from '@/hooks/useUserRole'
+import HospitalAdminDashboard from '@/components/user/HospitalAdminDashboard'
 
 
 const DashboardPage = () => {
   // const {userRole} = useUserRole()
-  let userRole = "pharmacyAdmin"
+  let userRole = "hospitalAdmin"
   return (
     <div>
       {
