@@ -22,7 +22,9 @@ export interface UserParams {
   orders?:  Array<Schema.Types.ObjectId>;
   currentMeds?:  Array<Schema.Types.ObjectId>;
   reminders?:  Array<Schema.Types.ObjectId>;
-  subscribedToNewsletter: boolean
+  subscribedToNewsletter: boolean;
+  cart?: Array<Schema.Types.ObjectId>;
+  
 }
 
 
@@ -121,7 +123,13 @@ const UserSchema = new Schema<UserParams>({
       type: Schema.Types.ObjectId,
       ref: 'Reminder'
     }
-  ]
+  ],
+  cart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Drug'
+    }
+  ],
 },{
     timestamps: true
 });

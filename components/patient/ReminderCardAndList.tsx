@@ -31,7 +31,7 @@ const ReminderList = () => {
           <ReminderCard 
             sender= {reminder.sender}
             message= {reminder.message}
-
+            
           />
         ))
       }
