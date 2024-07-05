@@ -741,7 +741,7 @@ export const doctorSidebarElements = {
             icon: RxDashboard
         },
         {
-            route: '/user/consultation',
+            route: '/user/consultation/home',
             label: 'Consultation',
             icon: MdMeetingRoom
         },
