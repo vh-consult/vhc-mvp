@@ -14,7 +14,7 @@ const DrugSchema = new Schema({
         type: String,
         required: [true, "Please drug's name is required"],
     },
-    batch_ID: {
+    batchId: {
         type: String,
         required: [true, "Please  is required"],
         unique: [true, "Please batch id  is required"]
@@ -35,6 +35,10 @@ const DrugSchema = new Schema({
         type: Number,
         required: [true, "Please state the quantity being added"],
     },
+    shop: {
+        type: Schema.Types.ObjectId,
+        ref: 'Pharmacy'
+    }
 });
 
 const Drug = models?.Drug || model("Drug", DrugSchema)

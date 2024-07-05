@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 
 import ClickableCard from '../general/ClickableCard';
 import MeetingModal from './MeetingModal';
-import { useUser } from '@clerk/nextjs';
 import Loader from '../general/Loader';
 import { Textarea } from '../ui/textarea';
 import { useToast } from '../ui/use-toast';
@@ -16,6 +15,7 @@ import { Consultation } from '@/lib/database/models/appointment.model';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { ClickableCardProps } from '../user/RenderUserLanding';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { useUser } from '@clerk/nextjs';
 
 const initialValues = {
   dateTime: new Date(),
@@ -91,6 +91,8 @@ const MeetingTypeList = () => {
     }
   };
 
+  console.log(client)
+  console.log(user)
   if (!client || !user) return <Loader />;
 
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/meeting/${callDetail?.id}`;

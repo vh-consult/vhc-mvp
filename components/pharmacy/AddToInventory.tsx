@@ -1,8 +1,8 @@
 import React from 'react'
 import { Input } from '../ui/input';
 import { revalidatePath } from 'next/cache';
-import SubmitButton from '../SubmitButton';
 import Drug from '@/lib/database/models/drug.model';
+import SubmitButton from '../general/SubmitButton';
 
 const AddToInventory = () => {
   const postDrug = async (formData: FormData) => {

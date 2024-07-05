@@ -9,7 +9,7 @@ import { writeFile } from 'fs/promises'
 export interface CompanyProps {
     name: string;
     location: string;
-    logo?: File;
+    logo?: string;
     description: string;
     type: string;
 }
@@ -131,6 +131,18 @@ export async function getAllCompanies() {
         await connectToDatabase();
         const allCompanies = await Company.find();
         return JSON.parse(JSON.stringify(allCompanies))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function fetchCompanyData (companyId: string) {
+    try {
+        await connectToDatabase()
+        const company = await Company.findById({_id: companyId})
+        if (!company) throw new Error("Company not found")
+
+        return JSON.parse(JSON.stringify(company))
     } catch (error) {
         handleError(error)
     }

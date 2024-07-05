@@ -5,7 +5,7 @@ export interface CompanyParams extends Document {
     location: string;
     isVerified: boolean;
     admins: Schema.Types.ObjectId[];
-    image: string;
+    logo: string;
     description: string;
     type: "hospital" | "pharmacy"
   }
@@ -33,7 +33,7 @@ const CompanySchema = new Schema<CompanyParams>({
     location: {
         type: String,
     },
-    image: {
+    logo: {
         type: String,
     },
     admins: [{
