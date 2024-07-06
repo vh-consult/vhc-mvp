@@ -92,13 +92,17 @@ const CompanyProfile = () => {
 }
 
 const CompanyPage =  ({params}: {params: {id: string}}) => {
-    // const
-    // const company = await fetchCompanyData(params.id)
-    let type = "pharmacy"
+    const [companyData, setCompanyData] = useState()
+
+    const request = async () => {
+      const company = await fetchCompanyData(params.id)
+      setCompanyData(company)
+    }
+    
   return (
+    
     <main className='w-full min-h-screen'>
-      <AddToInventory/>
-        <CompanyProfile/>
+      <CompanyProfile/>
     </main>
   )
 }

@@ -14,6 +14,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
 import {CldUploadWidget} from "next-cloudinary"
+import { CloudinaryProvider } from '@/providers/CloudinaryProvider';
 // Define Zod schema
 const setupSchema = z.object({
   name: z.string().min(1, 'company\'s is required'),
@@ -82,77 +83,79 @@ const RegisterCompany =  () => {
   };
 
   return (
-    <form
-      className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
-    >
-      <h1 className="text-2xl font-semibold">Company Registration Form</h1>
-      <Input
-        type='file'
-        placeholder='Upload company logo'
-        name='image'
-        // onChange={(e) => setFile(e.target.files?.[0])}
-        accept='image/*'
-        className='border-sky-1 bg-dark-3 '
-      />
-      <CldUploadWidget signatureEndpoint="/api/sign-image">
-      {
-        ({open}) => {
-          return(
-            <Button 
-              className=""
-              onClick={()=> open()}
-            >
-              Upload company logo
-            </Button>
-          )
+    <CloudinaryProvider>
+      <form
+        className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
+      >
+        <h1 className="text-2xl font-semibold">Company Registration Form</h1>
+        <Input
+          type='file'
+          placeholder='Upload company logo'
+          name='image'
+          // onChange={(e) => setFile(e.target.files?.[0])}
+          accept='image/*'
+          className='border-sky-1 bg-dark-3 '
+        />
+        <CldUploadWidget signatureEndpoint="/api/sign-image">
+        {
+          ({open}) => {
+            return(
+              <Button 
+                className=""
+                onClick={()=> open()}
+              >
+                Upload company logo
+              </Button>
+            )
+          }
         }
-      }
-      </CldUploadWidget>
-      {errors.logo && <span className="text-red-500">{errors.logo}</span>}
-      <Input
-        type='text'
-        placeholder="Company's name"
-        name='name'
-        onChange={(e) => setValues({ ...values, name: e.target.value })}
-        className='border-none bg-dark-3 text-green-1'
+        </CldUploadWidget>
+        {errors.logo && <span className="text-red-500">{errors.logo}</span>}
+        <Input
+          type='text'
+          placeholder="Company's name"
+          name='name'
+          onChange={(e) => setValues({ ...values, name: e.target.value })}
+          className='border-none bg-dark-3 text-green-1'
 
-      />
-      <Input
-        type='text'
-        placeholder="Company's location"
-        name='location'
-        onChange={(e) => setValues({ ...values, location: e.target.value })}
-        className='border-none bg-dark-3 text-green-1'
+        />
+        <Input
+          type='text'
+          placeholder="Company's location"
+          name='location'
+          onChange={(e) => setValues({ ...values, location: e.target.value })}
+          className='border-none bg-dark-3 text-green-1'
 
-      />
-      <Textarea
-        placeholder='Add description'
-        name='location'
-        className='border-none bg-dark-3 text-green-1'
-        onChange={(e) => setValues({ ...values, description: e.target.value })}
-      />
-      {
-        userRole==="patient" || userRole==="doctor"? (
-          <RadioGroup defaultValue="pharmacy" 
-          onValueChange={(value) => setValues({
-            ...values, type: value as "pharmacy"| "hospital"
-          })}>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="pharmacy" id="pharmacy" />
-              <Label htmlFor="pharmacy">Pharmacy</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="hospital" id="hospital" />
-              <Label htmlFor="hospital">Hospital</Label>
-            </div>
-          </RadioGroup>
-        ): ''
-      }
-      <Button onClick={handleSubmit} className='w-full bg-green-2 text-green-1'>
-        Register Company
-      </Button>
-      {loading && <Loader />}
-    </form>
+        />
+        <Textarea
+          placeholder='Add description'
+          name='location'
+          className='border-none bg-dark-3 text-green-1'
+          onChange={(e) => setValues({ ...values, description: e.target.value })}
+        />
+        {
+          userRole==="patient" || userRole==="doctor"? (
+            <RadioGroup defaultValue="pharmacy" 
+            onValueChange={(value) => setValues({
+              ...values, type: value as "pharmacy"| "hospital"
+            })}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="pharmacy" id="pharmacy" />
+                <Label htmlFor="pharmacy">Pharmacy</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="hospital" id="hospital" />
+                <Label htmlFor="hospital">Hospital</Label>
+              </div>
+            </RadioGroup>
+          ): ''
+        }
+        <Button onClick={handleSubmit} className='w-full bg-green-2 text-green-1'>
+          Register Company
+        </Button>
+        {loading && <Loader />}
+      </form>
+    </CloudinaryProvider>
   )
 }
 
