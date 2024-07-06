@@ -746,7 +746,7 @@ export const doctorSidebarElements = {
             icon: MdMeetingRoom
         },
         {
-            route: '/affiliation/clients',
+            route: '/user/clients',
             label: 'Clients',
             icon: BsPeople
         }

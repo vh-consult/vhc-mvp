@@ -21,29 +21,27 @@ const PatientList = ({
     age, imageSrc
 }: PatientProps) => {
   return (
-    <div className="flex  border-t border-t-dark-3 h-[45px] px-5 bg-dark-3 w-full items-center justify-between">
-        <span className="w-[30px]  h-[30px] rounded-full">
+    <div className="flex  border-t border-t-dark-1 h-[45px] px-5 bg-dark-2 w-full items-center justify-between">
+        <span className="flex rounded-full w-2/6">
             <Image
                 width={30}
                 height={30} 
                 src={imageSrc} 
                 alt="" 
-                className="w-full h-full rounded-full object-cover" 
+                className="w-[30px] h-[30px] rounded-full object-cover mr-4" 
             />
-        </span>
-        <span className="">
             {name}
         </span>
-        <span className="">
+        <span className="w-1/12">
             {gender}
         </span>
-        <span className="">
+        <span className="w-1/12">
             {age}
         </span>
-        <span className="">
+        <span className="w-1/6">
             {email && email}
         </span>
-        <span className="">
+        <span className="w-1/6">
             {insurancePlan && insurancePlan}
         </span>
         <div className="flex ">
