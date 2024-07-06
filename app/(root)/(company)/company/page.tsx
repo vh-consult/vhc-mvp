@@ -3,6 +3,7 @@ import AboutComponent from '@/components/company/AboutComponent'
 import AdminsComponent from '@/components/company/AdminsComponent'
 import PostsComponent from '@/components/company/PostsComponent'
 import ServicesComponent from '@/components/company/ServicesComponent'
+import AddToInventory from '@/components/pharmacy/AddToInventory'
 import { CompanyProps, fetchCompanyData } from '@/lib/actions/company.actions'
 import { linkSync } from 'fs'
 import Image from 'next/image'
@@ -38,9 +39,6 @@ const navsForRendering = [
 const CompanyProfile = () => {
   const [active, setActive] = useState(navsForRendering[0].label)
   
-  const handleNavSelect = () => {
-    //  setActive(label)
-  }
   return(
     <section>
       <div className="w-full">
@@ -48,13 +46,13 @@ const CompanyProfile = () => {
         <div className="w-full flex">
           <Image 
             alt=''
-            src={'/images/'}
+            src={'/favicon.svg'}
             width={100}
             height={100}
           />
           <div className="">
             <h2 className="text-2xl font-medium">
-              K-Pharma Co. Ltd
+              Virtual Healthcare Co.
             </h2>
             <p className="text-base">
               Your healthcare in one place
@@ -67,23 +65,27 @@ const CompanyProfile = () => {
         <div className="w-2/6 flex flex-between" >
           {
             navsForRendering.map((component, index) => (
-              <>
                 <span 
                   key={index} 
-                  onClick={handleNavSelect} 
+                  onClick={()=> setActive(component.label)} 
                   className={`
                     ${active === component.label? 'text-blue-1': ''} 
                     hover:cursor-pointer`
                   }>
                     {component.label}
                 </span>
-                <div className="">
-                  {component.componentToRender}
-                </div>
-              </>
               ))
           }
         </div>
+      </div>
+      <div className="">
+      {
+            navsForRendering.map((component, index) => (
+                <div className="">
+                  {active === component.label? component.componentToRender : ``}
+                </div>
+              ))
+          }
       </div>
     </section>
   )
@@ -94,6 +96,7 @@ const CompanyPage = async ({params}: {params: {id: string}}) => {
     let type = "pharmacy"
   return (
     <main className='w-full min-h-screen'>
+      <AddToInventory/>
         <CompanyProfile/>
     </main>
   )

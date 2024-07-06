@@ -2,14 +2,8 @@ import Loader from '@/components/general/Loader'
 import ShopCard from '@/components/pharmacy/ShopCard'
 import ShopListings from '@/components/pharmacy/ShopListings'
 import React, { Suspense } from 'react'
-import {v2 as cloudinary} from 'cloudinary'
 import { getAllPharmacyShops } from '@/lib/actions/company.actions'
 
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
 
 interface ShopProps {
   image: string;

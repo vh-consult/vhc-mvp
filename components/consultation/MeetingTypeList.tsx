@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import ClickableCard from '../general/ClickableCard';
-import MeetingModal from './MeetingModal';
+import FormModal from './FormModal';
 import Loader from '../general/Loader';
 import { Textarea } from '../ui/textarea';
 import { useToast } from '../ui/use-toast';
@@ -120,7 +120,7 @@ const MeetingTypeList = () => {
       />
 
       {!callDetail ? (
-        <MeetingModal
+        <FormModal
           isOpen={meetingState === 'isScheduleMeeting'}
           onClose={() => setMeetingState(undefined)}
           title="Create Meeting"
@@ -179,9 +179,9 @@ const MeetingTypeList = () => {
               </div>
             ) : ``
           }
-        </MeetingModal>
+        </FormModal>
       ) : (
-        <MeetingModal
+        <FormModal
           isOpen={meetingState === 'isScheduleMeeting'}
           onClose={() => setMeetingState(undefined)}
           title="Meeting Created"
@@ -196,7 +196,7 @@ const MeetingTypeList = () => {
         />
       )}
 
-      <MeetingModal
+      <FormModal
         isOpen={meetingState === 'isJoiningMeeting'}
         onClose={() => setMeetingState(undefined)}
         title="Type the link here"
@@ -209,9 +209,9 @@ const MeetingTypeList = () => {
           onChange={(e) => setValues({ ...values, link: e.target.value })}
           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
-      </MeetingModal>
+      </FormModal>
 
-      <MeetingModal
+      <FormModal
         isOpen={meetingState === 'isInstantMeeting'}
         onClose={() => setMeetingState(undefined)}
         title="Start an Instant Meeting"

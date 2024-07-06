@@ -6,7 +6,7 @@ import Drug from "../database/models/drug.model";
 
 export interface DrugParams {
     name: string;
-    batchId: string;
+    // batchId: string;
     catalog: string;
     price: number;
     description: string;
@@ -32,7 +32,7 @@ export async function addToInventory(
             if(
                 drug.shop === shop._id && 
                 drug.name === drugData.name && 
-                drug.batchId === drugData.batchId
+                drug.catalog === drugData.catalog
             ) {
                 drugToAdd = await Drug.findById({_id: drug._id})
                 drugToAdd.quantity += drugData.quantity

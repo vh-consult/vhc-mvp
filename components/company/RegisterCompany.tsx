@@ -32,12 +32,12 @@ const RegisterCompany =  () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const {userRole} =useUserRole()
-  const [file, setFile] = useState<File>()
+  // const [file, setFile] = useState<File>()
   const {user} = useUser()
   const initialValues: FormValues = {
     name: '',
     location: '',
-    logo: file,
+    logo: '',
     description: '',
     type: userRole==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
   };
@@ -90,7 +90,7 @@ const RegisterCompany =  () => {
         type='file'
         placeholder='Upload company logo'
         name='image'
-        onChange={(e) => setFile(e.target.files?.[0])}
+        // onChange={(e) => setFile(e.target.files?.[0])}
         accept='image/*'
         className='border-sky-1 bg-dark-3 '
       />

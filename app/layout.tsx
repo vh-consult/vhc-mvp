@@ -7,6 +7,7 @@ import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import {CloudinaryProvider} from "@/providers/CloudinaryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,10 +47,12 @@ export default function RootLayout({
           },
         }}
       >
-        <body className={`${inter.className} `}>
-          <Toaster />
-          {children}
-        </body>
+        <CloudinaryProvider>
+          <body className={`${inter.className} `}>
+            <Toaster />
+            {children}
+          </body>
+        </CloudinaryProvider>
       </ClerkProvider>
     </html>
   );

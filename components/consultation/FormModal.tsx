@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 
-interface MeetingModalProps {
+interface FormModalProps {
     isOpen: boolean;
     onClose: () => void;
     buttonText?: string;
@@ -20,10 +20,10 @@ interface MeetingModalProps {
     image?: string;
 }
 
-const MeetingModal = ({
+const FormModal = ({
     isOpen, onClose, buttonText, title, image, 
     className, children, handleClick, buttonIcon
-}: MeetingModalProps) => {
+}: FormModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="flex w-full max-w-[520px] flex-col 
@@ -51,7 +51,7 @@ const MeetingModal = ({
                             {buttonIcon && (
                                 <Image src={buttonIcon} alt='icon' width={13} height={13} />
                             )} &nbsp;
-                            {buttonText || 'Schedule Session'}
+                            {buttonText || 'Done'}
                         </Button>
         </div>
       </DialogContent>
@@ -59,4 +59,4 @@ const MeetingModal = ({
   )
 }
 
-export default MeetingModal
+export default FormModal
