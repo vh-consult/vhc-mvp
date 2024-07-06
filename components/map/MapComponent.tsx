@@ -35,8 +35,10 @@ const MapComponent: FC = () => {
           dragend() {
               const marker = markerRef.current
               if (marker != null) {
-                  // setPosition(marker.getLatLng())
-                //   console.log(marker.getLatLng())
+                    // @ts-ignore
+                  setPosition(marker.getLatLng()) 
+                  // @ts-ignore
+                  console.log(marker.getLatLng())
                 return
               }
           },

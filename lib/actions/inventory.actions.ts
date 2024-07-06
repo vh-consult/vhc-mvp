@@ -50,6 +50,7 @@ export async function addToInventory(
         await shop.save()
 
         // return JSON.parse(JSON.stringify())
+        return {message: 'drug added to inventory'}
 
     } catch (error) {
         handleError(error)

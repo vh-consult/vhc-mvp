@@ -5,7 +5,7 @@ import { toast } from '../ui/use-toast';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 
-const PayWithPaystack: React.FC<number> = (amount) => {
+const PayWithPaystack = ({amount}: {amount: number}) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');

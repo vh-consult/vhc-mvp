@@ -9,7 +9,7 @@ import { StreamChat } from 'stream-chat';
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
-const StreamChatProvider = () => {
+const StreamChatProvider = ({children}: {children: ReactNode}) => {
     const {isLoaded, user} = useUser()
     const chatClient = new StreamChat(apiKey!)
     if(!isLoaded || !user) return;

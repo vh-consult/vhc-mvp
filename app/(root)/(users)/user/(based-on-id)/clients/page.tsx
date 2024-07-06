@@ -1,4 +1,4 @@
-import SearchBar from '@/components/SearchBar'
+import SearchBar from '@/components/general/SearchBar'
 import PatientList from '@/components/doctor/PatientList'
 import React from 'react'
 

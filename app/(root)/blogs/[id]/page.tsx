@@ -1,6 +1,6 @@
 import BlogContent from '@/components/blog/BlogContent'
 import BlogPostSnippet from '@/components/blog/BlogPostSnippet'
-import NewsLetterSubscription from '@/components/NewsLetterSubscription'
+import NewsLetterSubscription from '@/components/general/NewsLetterSubscription'
 import React from 'react'
 
 const BlogPage = () => {

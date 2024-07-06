@@ -1,13 +1,9 @@
 "use client"
 import React, { useState } from 'react'
 import { Input } from '../ui/input';
-import { revalidatePath } from 'next/cache';
-import Drug from '@/lib/database/models/drug.model';
-import SubmitButton from '../general/SubmitButton';
 import { Textarea } from '../ui/textarea';
 import FormModal from '../consultation/FormModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Label } from '../ui/label';
 import { CldUploadWidget } from 'next-cloudinary';
 import { Button } from '../ui/button';
 import { addToInventory } from '@/lib/actions/inventory.actions';

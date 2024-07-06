@@ -1,5 +1,4 @@
-import PayWithPaystack from '@/components/PayWithPaystack'
-import PaymentForm from '@/components/PaymentForm'
+import PayWithPaystack from '@/components/general/PayWithPaystack'
 import CheckoutSummary from '@/components/pharmacy/CheckoutSummary'
 import DeliveryInfoCard from '@/components/pharmacy/DeliveryInfoCard'
 import ItemsInCart from '@/components/pharmacy/ItemsInCart'
@@ -22,7 +21,7 @@ const CartPage = () => {
         </div>
       </div>
       <div className="flex flex-col flex-between w-[30%]">
-        <PayWithPaystack/>
+        <PayWithPaystack amount={12}/>
         <ShippingForm/>
       </div>
     </div>

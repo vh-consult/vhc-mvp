@@ -1,7 +1,5 @@
-import DrugCard from '@/components/pharmacy/DrugCard'
 import DrugListings from '@/components/pharmacy/DrugListings'
 import SearchArea from '@/components/pharmacy/SearchArea'
-import { getPharmacyInventory } from '@/lib/actions/company.actions'
 import React from 'react'
 
 const ShopPage = async ({  

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Input } from '../ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import SubmitButton from '../SubmitButton'
 import { revalidatePath } from 'next/cache'
 import Order from '@/lib/database/models/order.model'
+import SubmitButton from '../general/SubmitButton'
 
 const ShippingForm = async () => {
     const postForm = async (formData: FormData) => {

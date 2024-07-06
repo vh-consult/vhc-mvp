@@ -29,6 +29,7 @@ const ReminderList = () => {
       {
         reminders && reminders.map((reminder, index) => (
           <ReminderCard 
+            key={index}
             sender= {reminder.sender}
             message= {reminder.message}
             

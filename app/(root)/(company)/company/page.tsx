@@ -81,7 +81,7 @@ const CompanyProfile = () => {
       <div className="">
       {
             navsForRendering.map((component, index) => (
-                <div className="">
+                <div className="" key={index}>
                   {active === component.label? component.componentToRender : ``}
                 </div>
               ))
@@ -91,7 +91,8 @@ const CompanyProfile = () => {
   )
 }
 
-const CompanyPage = async ({params}: {params: {id: string}}) => {
+const CompanyPage =  ({params}: {params: {id: string}}) => {
+    // const
     // const company = await fetchCompanyData(params.id)
     let type = "pharmacy"
   return (
