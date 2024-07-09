@@ -56,6 +56,7 @@ const MeetingTypeList = () => {
   const client = useStreamVideoClient();
   const { user } = useUser();
   const { toast } = useToast();
+  
   const createMeeting = async () => {
     if (!client || !user) return;
     try {

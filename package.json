@@ -1,5 +1,5 @@
 {
-  "name": "video-chat",
+  "name": "vhealthcare-consult",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,9 +26,9 @@
     "@stream-io/video-react-sdk": "^1.1.4",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
-    "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",
     "crypto": "^1.0.1",
+    "fs": "^0.0.1-security",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "leaflet-geosearch": "^4.0.0",
