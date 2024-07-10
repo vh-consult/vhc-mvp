@@ -1,3 +1,4 @@
+"use server"
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { PharmacyAdmin } from "../database/models/user.model";

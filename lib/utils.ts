@@ -5,7 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-
 // ERROR HANDLER
 export const handleError = (error: unknown) => {
   if (error instanceof Error) {
@@ -22,3 +21,4 @@ export const handleError = (error: unknown) => {
     throw new Error(`Unknown error: ${JSON.stringify(error)}`);
   }
 };
+

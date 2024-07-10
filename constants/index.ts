@@ -661,7 +661,7 @@ export const landing = {
 export const patientSidebarElements = {
     top: [
         {
-            route: '/patient/dashboard',
+            route: '/user/dashboard',
             label: 'Dashboard',
             icon: RxDashboard
         },
@@ -671,12 +671,12 @@ export const patientSidebarElements = {
             icon: MdMeetingRoom
         },
         {
-            route: '/appointments/',
+            route: '/user/appointments/',
             label: 'Schedule',
             icon: MdOutlineSchedule
         },
         {
-            route: '/patient/record',
+            route: '/user/record',
             label: 'Record',
             icon: BsDatabase
         },
@@ -686,7 +686,7 @@ export const patientSidebarElements = {
 export const pharmacySidebarElements = {
     top: [
         {
-            route: '/patient/dashboard',
+            route: '/user/dashboard',
             label: 'Dashboard',
             icon: RxDashboard
         },
@@ -696,12 +696,12 @@ export const pharmacySidebarElements = {
             icon: MdMeetingRoom
         },
         {
-            route: '/appointments/',
+            route: '/user/appointments/',
             label: 'Schedule',
             icon: MdOutlineSchedule
         },
         {
-            route: '/patient/record',
+            route: '/user/record',
             label: 'Record',
             icon: BsDatabase
         },

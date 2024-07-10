@@ -74,7 +74,7 @@ const BookingSchema = new Schema({
     },
     channel: {
         type: String,
-        enum: ['virtual', 'inPerson']
+        enum: ['virtual', 'inPerson', 'lab']
     }
 },{
     timestamps: true

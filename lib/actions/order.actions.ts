@@ -68,6 +68,7 @@ export async function placeOrder(
             await userOrderingItem.save()
         });
         
+        
     } catch (error) {
         handleError(error)
     }

@@ -1,3 +1,5 @@
+"use server"
+
 import { Booking, Consultation } from "../database/models/appointment.model";
 import { Doctor, User } from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";

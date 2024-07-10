@@ -55,13 +55,13 @@ const Sidebar = () => {
     onMouseLeave={()=>setIsExpanded(false)}
     >
       <div className='w-full'>
-        <div 
+        {/* <div 
           className={` w-[30px] h-[30px] flex flex-center mt-[-20px] ml-6 cursor-pointer`}
           onClick={()=>setIsExpanded(!isExpanded)}
         >
           <BiMenu className='w-[24px] h-[24px]' />
 
-        </div>
+        </div> */}
         {
             userRole === "doctor"? 
             doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
