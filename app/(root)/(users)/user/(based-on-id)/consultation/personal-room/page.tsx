@@ -33,14 +33,14 @@ const PersonalRoom = () => {
   const client = useStreamVideoClient();
   const { toast } = useToast();
 
-  const meetingId = user?.id;
+  const consultationId = user?.id;
 
-  const { call } = useGetCallById(meetingId!);
+  const { call } = useGetCallById(consultationId!);
 
   const startRoom = async () => {
     if (!client || !user) return;
 
-    const newCall = client.call("default", meetingId!);
+    const newCall = client.call("default", consultationId!);
 
     if (!call) {
       await newCall.getOrCreate({
@@ -50,27 +50,27 @@ const PersonalRoom = () => {
       });
     }
 
-    router.push(`/meeting/${meetingId}?personal=true`);
+    router.push(`/user/consultation/room/${consultationId}?personal=true`);
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`;
+  const consultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/consultation/room/${consultationId}?personal=true`;
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
-      <h1 className="text-xl font-bold lg:text-3xl">Personal Meeting Room</h1>
+      <h1 className="text-xl font-bold lg:text-3xl">Personal Consultation Room</h1>
       <div className="flex w-full flex-col gap-8 xl:max-w-[900px]">
-        <Table title="Topic" description={`${user?.firstName}'s Meeting Room`} />
-        <Table title="Meeting ID" description={meetingId!} />
-        <Table title="Invite Link" description={meetingLink} />
+        <Table title="Topic" description={`${user?.firstName}'s consultation Room`} />
+        <Table title="Consultation ID" description={consultationId!} />
+        <Table title="Invite Link" description={consultationLink} />
       </div>
       <div className="flex gap-5">
         <Button className="bg-green-2" onClick={startRoom}>
-          Start Meeting
+          Start Consultation
         </Button>
         <Button
           className="bg-dark-3"
           onClick={() => {
-            navigator.clipboard.writeText(meetingLink);
+            navigator.clipboard.writeText(consultationLink);
             toast({
               title: "Link Copied",
             });

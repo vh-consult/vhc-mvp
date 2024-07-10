@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import { useParams } from 'next/navigation';
-import { Loader } from 'lucide-react';
 
 import { useGetCallById } from '@/hooks/useGetCallById';
 import Alert from '@/components/consultation/Alert';
-import MeetingSetup from '@/components/consultation/MeetingSetup';
-import MeetingRoom from '@/components/consultation/MeetingRoom';
+import ConsultationSetup from '@/components/consultation/ConsultationSetup';
+import ConsultationRoom from '@/components/consultation/ConsultationRoom';
+import Loader from '@/components/general/Loader';
 
-const MeetingPage = () => {
+const ConsultationPage = () => {
   const { id } = useParams();
   const { isLoaded, user } = useUser();
   const { call, isCallLoading } = useGetCallById(id);
@@ -20,7 +20,7 @@ const MeetingPage = () => {
   if (!isLoaded || isCallLoading) return <Loader />;
 
   if (!call) return (
-    <p className="text-center text-3xl font-bold text-white">
+    <p className="text-center text-3xl font-bold text-green-1">
       Call Not Found
     </p>
   );
@@ -28,7 +28,7 @@ const MeetingPage = () => {
   // get more info about custom call type:  https://getstream.io/video/docs/react/guides/configuring-call-types/
   const notAllowed = call.type === 'invited' && (!user || !call.state.members.find((m) => m.user.id === user.id));
 
-  if (notAllowed) return <Alert title="You are not allowed to join this meeting" />;
+  if (notAllowed) return <Alert title="You are not allowed to join this Consultation" />;
 
   return (
     <main className="h-screen w-full">
@@ -36,9 +36,9 @@ const MeetingPage = () => {
         <StreamTheme>
 
         {!isSetupComplete ? (
-          <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
+          <ConsultationSetup setIsSetupComplete={setIsSetupComplete} />
         ) : (
-          <MeetingRoom />
+          <ConsultationRoom />
         )}
         </StreamTheme>
       </StreamCall>
@@ -46,4 +46,4 @@ const MeetingPage = () => {
   );
 };
 
-export default MeetingPage;
+export default ConsultationPage;

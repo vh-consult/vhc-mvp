@@ -18,12 +18,12 @@ const EndCallButton = () => {
   const { useLocalParticipant } = useCallStateHooks();
   const localParticipant = useLocalParticipant();
 
-  const isMeetingOwner =
+  const isConsultationScheduler =
     localParticipant &&
     call.state.createdBy &&
     localParticipant.userId === call.state.createdBy.id;
 
-  if (!isMeetingOwner) return null;
+  if (!isConsultationScheduler) return null;
 
   const endCall = async () => {
     await call.endCall();

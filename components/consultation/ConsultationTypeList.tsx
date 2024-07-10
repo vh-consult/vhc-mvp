@@ -26,37 +26,37 @@
 
 // const ClickableCards: Array<ClickableCardProps> = [
 //   {
-//     title: 'New Meeting',
-//     description: 'Start an instant meeting',
-//     imageSrc: '/icons/add-meeting.svg',
-//     action: 'isInstantMeeting'
+//     title: 'New Consultation',
+//     description: 'Start an instant Consultation',
+//     imageSrc: '/icons/add-Consultation.svg',
+//     action: 'isInstantConsultation'
 //   },
 //   {
-//     title: 'Join Meeting',
+//     title: 'Join Consultation',
 //     description: 'via invitation link',
-//     imageSrc: '/icons/join-meeting.svg',
-//     action: 'isJoiningMeeting'
+//     imageSrc: '/icons/join-Consultation.svg',
+//     action: 'isJoiningConsultation'
 //   },
 //   {
-//     title: 'Schedule Meeting',
-//     description: 'Plan your meeting',
+//     title: 'Schedule Consultation',
+//     description: 'Plan your Consultation',
 //     imageSrc: '/icons/schedule.svg',
-//     action: 'isScheduleMeeting'
+//     action: 'isSchedulingConsultation'
 //   }
 // ]
 
-// type MeetingStateProps = 'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined
+// type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isInstantConsultation' | undefined
 
-// const MeetingTypeList = () => {
+// const ConsultationTypeList = () => {
 //   const router = useRouter();
-//   const [meetingState, setMeetingState] = useState<MeetingStateProps>(undefined);
+//   const [ConsultationState, setConsultationState] = useState<ConsultationStateProps>(undefined);
 //   const [values, setValues] = useState(initialValues);
 //   const [callDetail, setCallDetail] = useState<Call>();
 //   const client = useStreamVideoClient();
 //   const { user } = useUser();
 //   const { toast } = useToast();
   
-//   const createMeeting = async () => {
+//   const createConsultation = async () => {
 //     if (!client || !user) return;
 //     try {
 //       if (!values.dateTime) {
@@ -65,10 +65,10 @@
 //       }
 //       const id = crypto.randomUUID();
 //       const call = client.call('default', id);
-//       if (!call) throw new Error('Failed to create meeting');
+//       if (!call) throw new Error('Failed to create Consultation');
 //       const startsAt =
 //         values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-//       const description = values.description || 'Instant Meeting';
+//       const description = values.description || 'Instant Consultation';
 //       await call.getOrCreate({
 //         data: {
 //           starts_at: startsAt,
@@ -80,14 +80,14 @@
 //       // await 
 //       setCallDetail(call);
 //       if (!values.description) {
-//         router.push(`/user/meeting/${call.id}`);
+//         router.push(`/user/Consultation/${call.id}`);
 //       }
 //       toast({
-//         title: 'Meeting Created',
+//         title: 'Consultation Created',
 //       });
 //     } catch (error) {
 //       console.error(error);
-//       toast({ title: 'Failed to create Meeting' });
+//       toast({ title: 'Failed to create Consultation' });
 //     }
 //   };
 
@@ -95,7 +95,7 @@
 //   console.log(user?.id)
 //   if (!client || !user) return <Loader />;
 
-//   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/meeting/${callDetail?.id}`;
+//   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/Consultation/${callDetail?.id}`;
 
 //   return (
 //     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -106,7 +106,7 @@
 //               imgURL={card.imageSrc}
 //               title={card.title}
 //               description={card.description}
-//               handleClick={() => setMeetingState(card.action as MeetingStateProps)} 
+//               handleClick={() => setConsultationState(card.action as ConsultationStateProps)} 
 //               className='bg-dark-3 hover:bg-dark-4'   
 //             />
 //         ))
@@ -114,17 +114,17 @@
 //       <ClickableCard
 //         imgURL="/icons/recordings.svg"
 //         title="View Recordings"
-//         description="Meeting Recordings"
+//         description="Consultation Recordings"
 //         className="bg-dark-3 hover:bg-dark-4"
 //         handleClick={() => router.push('/recordings')}
 //       />
 
 //       {!callDetail ? (
 //         <FormModal
-//           isOpen={meetingState === 'isScheduleMeeting'}
-//           onClose={() => setMeetingState(undefined)}
-//           title="Create Meeting"
-//           handleClick={createMeeting}
+//           isOpen={ConsultationState === 'isSchedulingConsultation'}
+//           onClose={() => setConsultationState(undefined)}
+//           title="Create Consultation"
+//           handleClick={createConsultation}
 //         >
 //           <div className="flex flex-col gap-2.5">
 //             <Label className="text-base font-normal leading-[22.4px] text-green-1" htmlFor="appointmentType">Appointment type</Label>
@@ -182,48 +182,48 @@
 //         </FormModal>
 //       ) : (
 //         <FormModal
-//           isOpen={meetingState === 'isScheduleMeeting'}
-//           onClose={() => setMeetingState(undefined)}
-//           title="Meeting Created"
+//           isOpen={ConsultationState === 'isSchedulingConsultation'}
+//           onClose={() => setConsultationState(undefined)}
+//           title="Consultation Created"
 //           handleClick={() => {
-//             navigator.clipboard.writeText(meetingLink);
+//             navigator.clipboard.writeText(ConsultationLink);
 //             toast({ title: 'Link Copied' });
 //           }}
 //           image={'/icons/checked.svg'}
 //           buttonIcon="/icons/copy.svg"
 //           className="text-center"
-//           buttonText="Copy Meeting Link"
+//           buttonText="Copy Consultation Link"
 //         />
 //       )}
 
 //       <FormModal
-//         isOpen={meetingState === 'isJoiningMeeting'}
-//         onClose={() => setMeetingState(undefined)}
+//         isOpen={ConsultationState === 'isJoiningConsultation'}
+//         onClose={() => setConsultationState(undefined)}
 //         title="Type the link here"
 //         className="text-center"
-//         buttonText="Join Meeting"
+//         buttonText="Join Consultation"
 //         handleClick={() => router.push(values.link)}
 //       >
 //         <Input
-//           placeholder="Meeting link"
+//           placeholder="Consultation link"
 //           onChange={(e) => setValues({ ...values, link: e.target.value })}
 //           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
 //         />
 //       </FormModal>
 
 //       <FormModal
-//         isOpen={meetingState === 'isInstantMeeting'}
-//         onClose={() => setMeetingState(undefined)}
-//         title="Start an Instant Meeting"
+//         isOpen={ConsultationState === 'isInstantConsultation'}
+//         onClose={() => setConsultationState(undefined)}
+//         title="Start an Instant Consultation"
 //         className="text-center"
-//         buttonText="Start Meeting"
-//         handleClick={createMeeting}
+//         buttonText="Start Consultation"
+//         handleClick={createConsultation}
 //       />
 //     </section>
 //   );
 // };
 
-// export default MeetingTypeList;
+// export default ConsultationTypeList;
 
 "use client"
 import { useState, useEffect } from 'react';
@@ -249,16 +249,16 @@ const initialValues = {
 };
 
 const ClickableCards = [
-  { title: 'New Meeting', description: 'Start an instant meeting', imageSrc: '/icons/add-meeting.svg', action: 'isInstantMeeting' },
-  { title: 'Join Meeting', description: 'via invitation link', imageSrc: '/icons/join-meeting.svg', action: 'isJoiningMeeting' },
-  { title: 'Schedule Meeting', description: 'Plan your meeting', imageSrc: '/icons/schedule.svg', action: 'isScheduleMeeting' }
+  { title: 'New Consultation', description: 'Start an instant Consultation', imageSrc: '/icons/add-Consultation.svg', action: 'isInstantConsultation' },
+  { title: 'Join Consultation', description: 'via invitation link', imageSrc: '/icons/join-Consultation.svg', action: 'isJoiningConsultation' },
+  { title: 'Schedule Consultation', description: 'Plan your Consultation', imageSrc: '/icons/schedule.svg', action: 'isSchedulingConsultation' }
 ];
 
-type MeetingStateProps = 'isScheduleMeeting' | 'isJoiningMeeting' | 'isInstantMeeting' | undefined;
+type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isInstantConsultation' | undefined;
 
-const MeetingTypeList = () => {
+const ConsultationTypeList = () => {
   const router = useRouter();
-  const [meetingState, setMeetingState] = useState<MeetingStateProps>(undefined);
+  const [ConsultationState, setConsultationState] = useState<ConsultationStateProps>(undefined);
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call | null>(null);
   const client = useStreamVideoClient();
@@ -270,7 +270,7 @@ const MeetingTypeList = () => {
     console.log('User:', user);
   }, [client, user]);
 
-  const createMeeting = async () => {
+  const createConsultation = async () => {
     if (!client || !user) return;
     try {
       if (!values.dateTime) {
@@ -279,9 +279,9 @@ const MeetingTypeList = () => {
       }
       const id = crypto.randomUUID();
       const call = client.call('default', id);
-      if (!call) throw new Error('Failed to create meeting');
+      if (!call) throw new Error('Failed to create Consultation');
       const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-      const description = values.description || 'Instant Meeting';
+      const description = values.description || 'Instant Consultation';
       await call.getOrCreate({
         data: {
           starts_at: startsAt,
@@ -290,12 +290,12 @@ const MeetingTypeList = () => {
       });
       setCallDetail(call);
       if (!values.description) {
-        router.push(`/user/meeting/${call.id}`);
+        router.push(`/user/Consultation/room/${call.id}`);
       }
-      toast({ title: 'Meeting Created' });
+      toast({ title: 'Consultation Created' });
     } catch (error) {
       console.error(error);
-      toast({ title: 'Failed to create Meeting' });
+      toast({ title: 'Failed to create Consultation' });
     }
   };
 
@@ -304,7 +304,7 @@ const MeetingTypeList = () => {
     return <Loader />;
   }
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/meeting/${callDetail?.id}`;
+  const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/consultation/room/${callDetail?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -314,24 +314,24 @@ const MeetingTypeList = () => {
           imgURL={card.imageSrc}
           title={card.title}
           description={card.description}
-          handleClick={() => setMeetingState(card.action as MeetingStateProps)}
+          handleClick={() => setConsultationState(card.action as ConsultationStateProps)}
           className='bg-dark-3 hover:bg-dark-4'
         />
       ))}
       <ClickableCard
         imgURL="/icons/recordings.svg"
         title="View Recordings"
-        description="Meeting Recordings"
+        description="Consultation Recordings"
         className="bg-dark-3 hover:bg-dark-4"
         handleClick={() => router.push('/recordings')}
       />
 
       {!callDetail ? (
         <FormModal
-          isOpen={meetingState === 'isScheduleMeeting'}
-          onClose={() => setMeetingState(undefined)}
-          title="Create Meeting"
-          handleClick={createMeeting}
+          isOpen={ConsultationState === 'isSchedulingConsultation'}
+          onClose={() => setConsultationState(undefined)}
+          title="Create Consultation"
+          handleClick={createConsultation}
         >
           <div className="flex flex-col gap-2.5">
             <Label className="text-base font-normal leading-[22.4px] text-green-1" htmlFor="appointmentType">Appointment type</Label>
@@ -380,45 +380,45 @@ const MeetingTypeList = () => {
         </FormModal>
       ) : (
         <FormModal
-          isOpen={meetingState === 'isScheduleMeeting'}
-          onClose={() => setMeetingState(undefined)}
-          title="Meeting Created"
+          isOpen={ConsultationState === 'isSchedulingConsultation'}
+          onClose={() => setConsultationState(undefined)}
+          title="Consultation Created"
           handleClick={() => {
-            navigator.clipboard.writeText(meetingLink);
+            navigator.clipboard.writeText(ConsultationLink);
             toast({ title: 'Link Copied' });
           }}
           image={'/icons/checked.svg'}
           buttonIcon="/icons/copy.svg"
           className="text-center"
-          buttonText="Copy Meeting Link"
+          buttonText="Copy Consultation Link"
         />
       )}
 
       <FormModal
-        isOpen={meetingState === 'isJoiningMeeting'}
-        onClose={() => setMeetingState(undefined)}
+        isOpen={ConsultationState === 'isJoiningConsultation'}
+        onClose={() => setConsultationState(undefined)}
         title="Type the link here"
         className="text-center"
-        buttonText="Join Meeting"
+        buttonText="Join Consultation"
         handleClick={() => router.push(values.link)}
       >
         <Input
-          placeholder="Meeting link"
+          placeholder="Consultation link"
           onChange={(e) => setValues({ ...values, link: e.target.value })}
           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
       </FormModal>
 
       <FormModal
-        isOpen={meetingState === 'isInstantMeeting'}
-        onClose={() => setMeetingState(undefined)}
-        title="Start an Instant Meeting"
+        isOpen={ConsultationState === 'isInstantConsultation'}
+        onClose={() => setConsultationState(undefined)}
+        title="Start an Instant Consultation"
         className="text-center"
-        buttonText="Start Meeting"
-        handleClick={createMeeting}
+        buttonText="Start Consultation"
+        handleClick={createConsultation}
       />
     </section>
   );
 };
 
-export default MeetingTypeList;
+export default ConsultationTypeList;

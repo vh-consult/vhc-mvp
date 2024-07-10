@@ -6,27 +6,27 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
 
-interface MeetingCardProps {
+interface ConsultationCardProps {
   title: string;
   date: string;
   icon: string;
-  isPreviousMeeting?: boolean;
+  isPreviousConsultation?: boolean;
   buttonIcon1?: string;
   buttonText?: string;
   handleClick: () => void;
   link: string;
 }
 
-const MeetingCard = ({
+const ConsultationCard = ({
   icon,
   title,
   date,
-  isPreviousMeeting,
+  isPreviousConsultation,
   buttonIcon1,
   handleClick,
   link,
   buttonText,
-}: MeetingCardProps) => {
+}: ConsultationCardProps) => {
   const { toast } = useToast();
 
   return (
@@ -53,7 +53,7 @@ const MeetingCard = ({
               With Patient
             </span>
         </div>
-        {!isPreviousMeeting && (
+        {!isPreviousConsultation && (
           <div className="flex gap-2">
             <Button onClick={handleClick} className="rounded bg-green-2 px-6">
               {buttonIcon1 && (
@@ -85,4 +85,4 @@ const MeetingCard = ({
   );
 };
 
-export default MeetingCard;
+export default ConsultationCard;

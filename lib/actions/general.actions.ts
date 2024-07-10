@@ -19,7 +19,8 @@ export const uploader = async (image: File) => {
           reject(error)
           return
         }
-        resolve(result)
+        resolve(result) 
+        //@ts-ignore
       }).emit(buffer)
     })
 }

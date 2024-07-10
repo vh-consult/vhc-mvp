@@ -10,7 +10,7 @@ import {
 import { Button } from '../ui/button';
 import Alert from './Alert';
 
-const MeetingSetup = ({
+const ConsultationSetup = ({
   setIsSetupComplete,
 }: {
   setIsSetupComplete: (value: boolean) => void;
@@ -47,7 +47,7 @@ const MeetingSetup = ({
   if (callTimeNotArrived)
     return (
       <Alert
-        title={`Your Meeting has not started yet. It is scheduled for ${callStartsAt.toLocaleString()}`}
+        title={`Your Consultation has not started yet. It is scheduled for ${callStartsAt.toLocaleString()}`}
       />
     );
 
@@ -82,10 +82,10 @@ const MeetingSetup = ({
           setIsSetupComplete(true);
         }}
       >
-        Join meeting
+        Join Consultation
       </Button>
     </div>
   );
 };
 
-export default MeetingSetup;
+export default ConsultationSetup;

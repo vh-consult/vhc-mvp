@@ -6,6 +6,7 @@ import Loader from '@/components/general/Loader';
 import { useUser } from '@clerk/nextjs';
 import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
 import { ReactNode, useEffect, useState } from 'react';
+import { StreamChat } from 'stream-chat';
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY; 
 
@@ -18,7 +19,7 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
     useEffect(() => {
         if(!isLoaded || !user) return;
         if(!apiKey) throw new Error('Stream key not found')
-
+ 
         const client = new StreamVideoClient({
             apiKey,
             user: {
@@ -37,5 +38,27 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
         <StreamVideo client={videoClient}>
             {children}
         </StreamVideo>
+    )
+}
+
+export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
+    const {user, isLoaded} = useUser();
+    if(!isLoaded || !user) return;
+    if(!apiKey) throw new Error('Stream key not found')
+
+    const chatClient = new StreamChat(apiKey!)
+    chatClient.setUser(
+        {
+          id: user?.id!,
+          name: user?.fullName || user?.id,
+          image: user?.imageUrl
+        }, tokenProvider
+      )  
+    useEffect(() => {
+
+    }, [])
+
+    return(
+    <></>
     )
 }

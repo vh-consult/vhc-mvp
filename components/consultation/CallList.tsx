@@ -4,7 +4,7 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk';
 
 import Loader from '../general/Loader';
 import { useGetCalls } from '@/hooks/useGetCalls';
-import MeetingCard from './MeetingCard';
+import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -43,7 +43,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   useEffect(() => {
     const fetchRecordings = async () => {
       const callData = await Promise.all(
-        callRecordings?.map((meeting) => meeting.queryRecordings()) ?? [],
+        callRecordings?.map((Consultation) => Consultation.queryRecordings()) ?? [],
       );
 
       const recordings = callData
@@ -66,9 +66,9 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
   return (
     <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
       {calls && calls.length > 0 ? (
-        calls.map((meeting: Call | CallRecording) => (
-          <MeetingCard
-            key={(meeting as Call).id}
+        calls.map((consultation: Call | CallRecording) => (
+          <ConsultationCard
+            key={(consultation as Call).id}
             icon={
               type === 'ended'
                 ? '/icons/previous.svg'
@@ -77,26 +77,26 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
                   : '/icons/recordings.svg'
             }
             title={
-              (meeting as Call).state?.custom?.description ||
-              (meeting as CallRecording).filename?.substring(0, 20) ||
+              (consultation as Call).state?.custom?.description ||
+              (consultation as CallRecording).filename?.substring(0, 20) ||
               'No Description'
             }
             date={
-              (meeting as Call).state?.startsAt?.toLocaleString() ||
-              (meeting as CallRecording).start_time?.toLocaleString()
+              (consultation as Call).state?.startsAt?.toLocaleString() ||
+              (consultation as CallRecording).start_time?.toLocaleString()
             }
-            isPreviousMeeting={type === 'ended'}
+            isPreviousConsultation={type === 'ended'}
             link={
               type === 'recordings'
-                ? (meeting as CallRecording).url
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${(meeting as Call).id}`
+                ? (consultation as CallRecording).url
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/user/Consultation/room/${(consultation as Call).id}`
             }
             buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
             buttonText={type === 'recordings' ? 'Play' : 'Start'}
             handleClick={
               type === 'recordings'
-                ? () => router.push(`${(meeting as CallRecording).url}`)
-                : () => router.push(`/meeting/${(meeting as Call).id}`)
+                ? () => router.push(`${(consultation as CallRecording).url}`)
+                : () => router.push(`/Consultation/${(consultation as Call).id}`)
             }
           />
         ))
