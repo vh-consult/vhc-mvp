@@ -79,7 +79,7 @@ const PayWithPaystack = ({amount}: {amount: number}) => {
         />
     </div>
     <PaystackButton 
-        className="w-[90%] rounded-lg h-[40px] text-sm font-medium mt-3 bg-green-2" 
+        className="w-[90%] rounded-lg h-[40px] text-sm font-medium mt-3 bg-blue-1" 
         {...componentProps} 
     />
     </div>

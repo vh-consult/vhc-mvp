@@ -375,12 +375,12 @@ export const landing = {
       buttons: [
           {
               text: 'Register',
-              style: 'bg-green-2 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
+              style: 'bg-blue-1 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
               
           },
           {
               text: 'Watch Demo',
-              style: 'border border-green-4 hover:border-green-2 hover:text-green-2 w-[110px] h-[35px] p-1 text-green-4 rounded-md',
+              style: 'border border-blue-4 hover:border-blue-1 hover:text-blue-1 w-[110px] h-[35px] p-1 text-blue-4 rounded-md',
           }
       ],
       cards: [
@@ -451,7 +451,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
+              buttonStyle: ' hover:bg-blue-1 hover:border-0 hover:text-white hover:font-medium border border-blue-4',
 
           },
           {
@@ -467,7 +467,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Book A Call `,
-              buttonStyle: 'bg-white  hover:opacity-90 text-green-2 font-medium',
+              buttonStyle: 'bg-white  hover:opacity-90 text-blue-1 font-medium',
 
           },
           {
@@ -484,7 +484,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
+              buttonStyle: ' hover:bg-blue-1 hover:border-0 hover:text-white hover:font-medium border border-green-4',
 
           },
       ]

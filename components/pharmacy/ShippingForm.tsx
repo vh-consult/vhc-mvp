@@ -40,7 +40,7 @@ const ShippingForm = async () => {
       </Select>
       }
       <SubmitButton
-        className='bg-green-2 w-[90%]'
+        className='bg-blue-1 w-[90%]'
         buttonText='Save'
       />
     </form>

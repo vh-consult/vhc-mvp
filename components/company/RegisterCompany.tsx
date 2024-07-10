@@ -14,7 +14,6 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
 import {CldUploadWidget} from "next-cloudinary"
-import { CloudinaryProvider } from '@/providers/CloudinaryProvider';
 // Define Zod schema
 const setupSchema = z.object({
   name: z.string().min(1, 'company\'s is required'),
@@ -83,7 +82,6 @@ const RegisterCompany =  () => {
   };
 
   return (
-    <CloudinaryProvider>
       <form
         className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
       >
@@ -155,7 +153,6 @@ const RegisterCompany =  () => {
         </Button>
         {loading && <Loader />}
       </form>
-    </CloudinaryProvider>
   )
 }
 

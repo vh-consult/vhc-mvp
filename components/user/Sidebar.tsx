@@ -33,8 +33,8 @@ const Sidebar = () => {
             className={`flex ${isExpanded? ` flex-row items-center p-3 ` : 
               `flex-col mb-4 hover:rounded-lg hover:mx-auto 
               items-center py-3 hover:w-[85%] `}  
-                hover:bg-dark-3 ${isActive? `bg-green-2 w-[85%] 
-              mx-auto rounded-lg hover:w-[100%]   hover:bg-green-2 hover:opacity-90`:
+                hover:bg-dark-3 ${isActive? `bg-blue-1 w-[85%] 
+              mx-auto rounded-lg hover:w-[100%]   hover:bg-blue-1 hover:opacity-90`:
              'text-green-1'}
             `}
             

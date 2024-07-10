@@ -45,7 +45,7 @@ const OrdersPage = () => {
               <Button 
               key={filter.route}
                 onClick={()=>filterOrders(filter.route)}
-                className={`${isClicked? 'bg-green-2 text-green-1': 'border-2 border-green-2'} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
+                className={`${isClicked? 'bg-blue-1 text-green-1': 'border-2 border-blue-1'} hover:bg-blue-1 hover:text-green-1 mx-1 rounded-full`}
               >
                 {filter.displayText}
               </Button>
