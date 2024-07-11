@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 import React from 'react'
 
 const page = () => {
-  const handleClick = async () => {
-    
+  const handleClick = () => {
+    toast({title: 'yo'})
   }
   return (
     <div>
