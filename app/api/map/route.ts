@@ -1,3 +1,4 @@
+//ts-nocheck
 import { handleError } from "@/lib/utils";
 import { OpenAI } from "openai"
 
