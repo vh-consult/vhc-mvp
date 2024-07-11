@@ -15,7 +15,7 @@ const ClickableCard = ({imgURL, className, title, description, handleClick}:Clic
     <div 
         className={cn(`px-4 py-4 flex 
         flex-col justify-between w-full 
-        xl:max-w-[270px] min-h-[260px] rounded-[14px] 
+        xl:max-w-[350px] min-h-[260px] rounded-[14px] 
         cursor-pointer`, className)}
         onClick={handleClick}
     >

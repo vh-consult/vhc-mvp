@@ -273,23 +273,23 @@ export const landing = {
       navLinks: [
           {
               label: `Home`,
-              link: `#home`
+              route: `#home`
           },
           {
               label: `About Us`,
-              link: `#about`
+              route: `#about`
           },
           {
               label: `Why Us`,
-              link: `#why-us`
+              route: `#why-us`
           },
           {
               label: `Reactions`,
-              link: `#reactions`
+              route: `#reactions`
           },
           {
               label: `Blogs`,
-              link: `#blogs`
+              route: `#blogs`
           },
       ],
       login: {
@@ -375,12 +375,12 @@ export const landing = {
       buttons: [
           {
               text: 'Register',
-              style: 'bg-blue-1 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
+              style: 'bg-green-2 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
               
           },
           {
               text: 'Watch Demo',
-              style: 'border border-blue-4 hover:border-blue-1 hover:text-blue-1 w-[110px] h-[35px] p-1 text-blue-4 rounded-md',
+              style: 'border border-green-4 hover:border-green-2 hover:text-green-2 w-[110px] h-[35px] p-1 text-green-4 rounded-md',
           }
       ],
       cards: [

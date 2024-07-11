@@ -6,18 +6,16 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
-import { useUser } from "@clerk/nextjs"
 
 
 const MobileNav = ({navigations}: HeaderProps) => {
-  const {user} = useUser()
   const generalNavs = [
     {
-      route: `/user/${user?.id}/account`,
+      route: `/user/account`,
       label: 'Account'
     },
     {
-      route: `/user/${user?.id}/history`,
+      route: `/user/history`,
       label: 'History'
     },
   ]
@@ -61,7 +59,7 @@ const MobileNav = ({navigations}: HeaderProps) => {
                                 cn(
                                     'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
                                     {
-                                        'bg-blue-1': isActive
+                                        'bg-green-2': isActive
                                     }
                                 )
                             }
@@ -83,7 +81,7 @@ const MobileNav = ({navigations}: HeaderProps) => {
                           cn(
                               'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
                               {
-                                  'bg-blue-1': isActive
+                                  'bg-green-2': isActive
                               }
                           )
                       }

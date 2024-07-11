@@ -249,8 +249,8 @@ const initialValues = {
 };
 
 const ClickableCards = [
-  { title: 'New Consultation', description: 'Start an instant Consultation', imageSrc: '/icons/add-Consultation.svg', action: 'isInstantConsultation' },
-  { title: 'Join Consultation', description: 'via invitation link', imageSrc: '/icons/join-Consultation.svg', action: 'isJoiningConsultation' },
+  { title: 'New Consultation', description: 'Start an instant Consultation', imageSrc: '/icons/add-meeting.svg', action: 'isInstantConsultation' },
+  { title: 'Join Consultation', description: 'via invitation link', imageSrc: '/icons/join-meeting.svg', action: 'isJoiningConsultation' },
   { title: 'Schedule Consultation', description: 'Plan your Consultation', imageSrc: '/icons/schedule.svg', action: 'isSchedulingConsultation' }
 ];
 
@@ -290,7 +290,7 @@ const ConsultationTypeList = () => {
       });
       setCallDetail(call);
       if (!values.description) {
-        router.push(`/user/Consultation/room/${call.id}`);
+        router.push(`/user/consultation/room/${call.id}`);
       }
       toast({ title: 'Consultation Created' });
     } catch (error) {

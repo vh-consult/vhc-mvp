@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import MobileNav from "../user/MobileNav";
 
 
 interface NavLink {
     label: string;
-    link: string;
+    route: string;
   }
   
   const Navigation = () => {
@@ -25,7 +26,7 @@ interface NavLink {
   
     const handleScroll = () => {
       const sections = landing.header.navLinks.map((link: NavLink) =>
-        document.querySelector(link.link) as HTMLElement
+        document.querySelector(link.route) as HTMLElement
       );
       const scrollPos = window.scrollY + window.innerHeight / 2;
   
@@ -54,11 +55,11 @@ interface NavLink {
           {landing.header.navLinks.map((link: NavLink, index: number) => (
             <li key={index} className='mr-5'>
               <Link
-                className={`font-normal ${activeLink === link.link ? 'text-green-2 font-medium' : ''}`}
-                href={link.link}
+                className={`font-normal ${activeLink === link.route ? 'text-green-2 font-medium' : ''}`}
+                href={link.route}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleClick(link.link);
+                  handleClick(link.route);
                 }}
               >
                 {link.label}
@@ -117,21 +118,23 @@ const Head = () => {
             </Link>
             <Link href={landing.header.button.link}>
               {
-                    <button className='
-                      hidden md:block h-10 
-                      bg-green-2 w-20 rounded-lg 
-                      hover:transition-all
-                      hover:shadow-lg
-                      text-white m-2'
-                    >
-                      {landing.header.button.text}
-                    </button>
+                <button className='
+                  hidden md:block h-10 
+                  bg-green-2 w-20 rounded-lg 
+                  hover:transition-all
+                  hover:shadow-lg
+                  text-white m-2'
+                >
+                  {landing.header.button.text}
+                </button>
               }
             </Link>
           </SignedOut>
           </div>
-          <landing.header.menuIcon className="block md:hidden"/>
-        </div>
+          <div className="hidden">
+            <MobileNav navigations={landing.header.navLinks} />
+          </div>
+      </div>
     )
   }
   
