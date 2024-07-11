@@ -467,7 +467,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Book A Call `,
-              buttonStyle: 'bg-white  hover:opacity-90 text-blue-1 font-medium',
+              buttonStyle: 'bg-white  hover:opacity-90 text-green-2 font-medium',
 
           },
           {
@@ -484,7 +484,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-blue-1 hover:border-0 hover:text-white hover:font-medium border border-green-4',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
 
           },
       ]
