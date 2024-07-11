@@ -1,7 +1,7 @@
 import { handleError } from "@/lib/utils";
 import { OpenAI } from "openai"
 
-const openai = new OpenAI();
+const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
 export async function POST(req: any, res:any) {
     try {
