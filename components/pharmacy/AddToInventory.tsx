@@ -8,9 +8,7 @@ import { CldUploadWidget } from 'next-cloudinary';
 import { Button } from '../ui/button';
 import { addToInventory } from '@/lib/actions/inventory.actions';
 import { useUser } from '@clerk/nextjs';
-import { toast } from '../ui/use-toast';
-import { CloudinaryProvider } from '@/providers/CloudinaryProvider';
- 
+import { toast } from '../ui/use-toast'; 
 
 const initialValues = {
   name: '',
@@ -31,7 +29,6 @@ const AddToInventory = () => {
     toast({title: 'Drug uploaded successfully'})
   }
   return (
-    <CloudinaryProvider>
       <FormModal
         isOpen={show}
         onClose={() => setShow(false)}
@@ -97,8 +94,6 @@ const AddToInventory = () => {
       </div>
       
     </FormModal>
-  </CloudinaryProvider>
-
   )
 }
 
