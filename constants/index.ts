@@ -451,7 +451,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-blue-1 hover:border-0 hover:text-white hover:font-medium border border-blue-4',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-blue-4',
 
           },
           {
