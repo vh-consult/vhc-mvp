@@ -8,8 +8,7 @@ import HospitalAdminDashboard from '@/components/user/HospitalAdminDashboard'
 
 
 const DashboardPage = () => {
-  // const {userRole} = useUserRole()
-  let userRole = "hospitalAdmin"
+  const {userRole} = useUserRole()
   return (
     <div>
       {
