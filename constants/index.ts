@@ -375,7 +375,7 @@ export const landing = {
       buttons: [
           {
               text: 'Register',
-              style: 'bg-green-2 w-[100px] mr-3 h-[35px] hover:opacity-90 text-white p-1 font-medium rounded-md',
+              style: 'bg-green-2 w-[100px] mr-3 h-[35px] hover:opacity-90 text-green-1 p-1 font-medium rounded-md',
               
           },
           {
@@ -451,7 +451,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-blue-4',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-green-1 hover:font-medium border border-blue-4',
 
           },
           {
@@ -484,7 +484,7 @@ export const landing = {
                   `Renewed every 12 months`
               ],
               buttonText: `Get Started`,
-              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-white hover:font-medium border border-green-4',
+              buttonStyle: ' hover:bg-green-2 hover:border-0 hover:text-green-4 hover:font-medium border border-green-4',
 
           },
       ]

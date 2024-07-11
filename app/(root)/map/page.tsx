@@ -1,29 +1,17 @@
-// "use client"
+"use client"
 
-// import dynamic from 'next/dynamic'
-// import React from 'react'
-
-// const DynamicMapComponent = dynamic(()=> import('@/components/map/MapComponent'), {ssr: false})
-
-// const MapPage = () => {
-//   return (
-//     <div>
-//         <DynamicMapComponent/>      
-//     </div>
-// )
-
-// }
-
-// export default MapPage
-
+import dynamic from 'next/dynamic'
 import React from 'react'
 
-const page = () => {
+const DynamicMapComponent = dynamic(()=> import('@/components/map/MapComponent'), {ssr: false})
+
+const MapPage = () => {
   return (
     <div>
-      maps page
+        <DynamicMapComponent/>      
     </div>
-  )
+)
+
 }
 
-export default page
+export default MapPage
