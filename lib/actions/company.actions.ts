@@ -16,16 +16,20 @@ export interface CompanyProps {
 export async function createCompany(userId: string, companyData: CompanyProps){
     try {
         await connectToDatabase();
+        
+        const userCreatingCompany = await User.findOne({ clerkId: userId });
+        if (!userCreatingCompany) throw new Error("User not found");
+        
+        console.log('ereach here')
         const file: File | null = companyData.logo as unknown as File
         if (!file) {
           throw new Error('No logo uploaded')
         }
+        console.log('shebi i no see error nah')
+
         const bytes = await file.arrayBuffer()
         const buffer = Buffer.from(bytes)
-
-        
-        const userCreatingCompany = await User.findOne({ clerkId: userId });
-        if (!userCreatingCompany) throw new Error("User not found");
+        console.log(buffer)
         
         let company;
         switch (companyData.type) {

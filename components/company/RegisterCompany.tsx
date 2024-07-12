@@ -38,13 +38,11 @@ const RegisterCompany = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const {userRole} =useUserRole()
-  const [file, setFile] = useState<File>()
-  const {user} = useUser()
-
+  const {clerkId} = useUserRole()  
   const initialValues: FormValues = {
     name: '',
     location: '',
-    logo: file,
+    logo: null,
     description: '',
     type: userRole==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
   };
@@ -73,17 +71,16 @@ const RegisterCompany = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validateForm()) return;
+  const handleSubmit = async () => {
+    console.log(values)
     alert('i dey work')
+    if (!validateForm()) return;
 
     setLoading(true);
     try {
-      const companyToCreate = await createCompany(
-        user?.id as string, values)
-        toast({title: 'Company registered successfully'})
-        router.push(`/company/${companyToCreate._id}/home`)
+      const companyToCreate = await createCompany(clerkId, values)
+      toast({title: 'Company registered successfully'})
+      router.push(`/company/${companyToCreate._id}/home`)
     } finally {
       setLoading(false);
     }
@@ -91,34 +88,34 @@ const RegisterCompany = () => {
 
   return (
     <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-    <Card className={`relative w-[400px] border-none bg-dark-1 text-green-1`}>
+    <Card className={`relative w-[600px] border-none bg-dark-1 text-green-1`}>
       <CardHeader>
         <CardTitle>Company Registration Form</CardTitle>
         <CardDescription>Fill the forms to register your company</CardDescription>
       </CardHeader>
       <CardContent>
       <div className="grid w-full items-center gap-4">
-        <div className="">
-          <Label>
+        <div className="flex flex-col">
+          <Label className='mb-2'>
             Upload company logo
           </Label>
           <Input
               type='file'
               placeholder='Upload company logo'
               name='logo'
-              onChange={(e) => setFile(e.target.files?.[0])}
+              onChange={(e) => setValues({...values, logo: e.target.files?.[0]})}
               accept='image/*'
               className='border-sky-1 bg-dark-3 '
             />
-            {errors.logo && 
+            {/* {errors.logo && 
               <span className="text-red-500">
                 {errors.logo}
               </span>
-            }
+            } */}
         </div>
-        <div className="">
-        <Label className="text-sm font-normal leading-[22.4px] text-green-1">
-          Company's Name
+        <div className="flex flex-col">
+          <Label className='mb-2'>
+            Company's Name
           </Label>
           <Input
             type='text'
@@ -127,26 +124,45 @@ const RegisterCompany = () => {
             onChange={(e) => setValues({ ...values, name: e.target.value })}
             className='border-none bg-dark-3 text-green-1'
           />
-            {errors.logo && 
+            {errors.name && 
               <span className="text-red-500">
-                {errors.logo}
+                {errors.name}
               </span>
             }
         </div>
-        <Input
-          type='text'
-          placeholder="Company's location"
-          name='location'
-          onChange={(e) => setValues({ ...values, location: e.target.value })}
-          className='border-none bg-dark-3 text-green-1'
-
-        />
-        <Textarea
-          placeholder='Add description'
-          name='location'
-          className='border-none bg-dark-3 text-green-1'
-          onChange={(e) => setValues({ ...values, description: e.target.value })}
-        />
+        <div className="flex flex-col">
+          <Label className='mb-2'>
+          Company's location
+          </Label>
+          <Input
+            type='text'
+            placeholder=""
+            name='location'
+            onChange={(e) => setValues({ ...values, location: e.target.value })}
+            className='border-none bg-dark-3 text-green-1'
+          />
+          {errors.location && 
+            <span className="text-red-500">
+              {errors.location}
+            </span>
+          }
+        </div>
+        <div className="flex flex-col">
+          <Label className='mb-2'>
+            About Company
+          </Label>
+          <Textarea
+            placeholder=''
+            name='description'
+            className='border-none bg-dark-3 text-green-1'
+            onChange={(e) => setValues({ ...values, description: e.target.value })}
+          />
+          {errors.description && 
+            <span className="text-red-500">
+              {errors.description}
+            </span>
+          }
+        </div>
         {
           userRole==="patient" || userRole==="doctor"? (
             <RadioGroup defaultValue="pharmacy" 

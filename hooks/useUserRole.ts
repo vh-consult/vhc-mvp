@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 const useUserRole = () => {
     const {user} = useUser()
+    const clerkId = user?.id as string
     const [userRole, setUserRole] = useState<
     "doctor"|"patient"|
     "hospitalAdmin"|"pharmacyAdmin">()
@@ -11,12 +12,12 @@ const useUserRole = () => {
         if(!user) return;
 
         async function getUserRole() {
-            const userFromDB:UserParams = await getUserById(user?.id as string)
+            const userFromDB:UserParams = await getUserById(clerkId)
             return setUserRole(userFromDB.role);
         }
         getUserRole()
     }, [user])
-  return {userRole}
+  return {userRole, clerkId}
 }
 
 export default useUserRole

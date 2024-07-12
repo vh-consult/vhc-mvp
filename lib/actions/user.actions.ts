@@ -2,11 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
-import {User} from "../database/models/user.model";
+import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
-import { cookies } from "next/headers";
-import { currentUser } from "@clerk/nextjs/server";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -14,7 +12,6 @@ export async function createUser(user: CreateUserParams) {
     await connectToDatabase();
 
     const newUser = await User.create(user);
-
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
     handleError(error);
@@ -87,7 +84,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
 }
 
 //Activate account
-export async function activateAccount(clerkId: string, user:ActivateAccountParams) {
+export async function activateAccount(clerkId: string, userData:ActivateAccountParams) {
   try {
     await connectToDatabase();
 
@@ -96,8 +93,28 @@ export async function activateAccount(clerkId: string, user:ActivateAccountParam
     if (!findUserInDB) {
       throw new Error("User not found")
     };
+    let userToActivateAccount;
 
-    const userToActivateAccount = await User.findOneAndUpdate({clerkId}, user, {new: true});
+    switch (userData.role) {
+      case 'patient':
+        userToActivateAccount = await Patient.create({ ...findUserInDB.toObject(), ...userData });
+        break;
+      case 'pharmacyAdmin':
+        userToActivateAccount = await PharmacyAdmin.create({ ...findUserInDB.toObject(), ...userData });
+        break;
+      case 'hospitalAdmin':
+        userToActivateAccount = await HospitalAdmin.create({ ...findUserInDB.toObject(), ...userData });
+        break;
+      case 'doctor':
+        userToActivateAccount = await Doctor.create({ ...findUserInDB.toObject(), ...userData });
+        break;
+      default:
+        throw new Error("Invalid role");
+    }
+
+    if (userData.role !== 'patient') {
+      await User.findOneAndDelete({ clerkId });
+    }
 
     return JSON.parse(JSON.stringify(userToActivateAccount));
   } catch (error) {

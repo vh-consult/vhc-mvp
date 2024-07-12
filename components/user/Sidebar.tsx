@@ -1,9 +1,4 @@
 "use client"
-import { 
-  SidebarBbottomNavs, doctorSidebarElements,
-  hospitalSidebarElements, patientSidebarElements, 
-  pharmacySidebarElements 
-} from '@/constants'
 import useUserRole from '@/hooks/useUserRole'
 import { getUserById } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
@@ -11,7 +6,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
+import { AiOutlineHistory } from 'react-icons/ai'
 import { BiMenu } from 'react-icons/bi'
+import { BsDatabase, BsPeople } from 'react-icons/bs'
+import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
+import { RxDashboard } from 'react-icons/rx'
 
 interface SideNavProps {
     icon: IconType;
@@ -22,8 +21,113 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {userRole} = useUserRole()
-
+    const {userRole, clerkId} = useUserRole()
+    
+    const patientSidebarElements = {
+      top: [
+          {
+              route: `/user/${clerkId}/dashboard`,
+              label: 'Dashboard',
+              icon: RxDashboard
+          },
+          {
+              route: `/user/${clerkId}/consultation`,
+            label: `Consultation`,
+              icon: MdMeetingRoom
+          },
+          {
+              route: `/user/${clerkId}/bookings`,
+              label: `Bookings`,
+              icon: MdOutlineSchedule
+          },
+          {
+              route: `/user/${clerkId}/health-record`,
+              label: `Record`,
+              icon: BsDatabase
+          },
+      ],
+  }
+  
+  const pharmacySidebarElements = {
+      top: [
+          {
+              route: `/user/${clerkId}/dashboard`,
+              label: `Dashboard`,
+              icon: RxDashboard
+          },
+          {
+              route: `/user/${clerkId}/consultation`,
+              label: `Consultation`,
+              icon: MdMeetingRoom
+          },
+          {
+              route: `/user/${clerkId}/bookings`,
+              label: `Bookings`,
+              icon: MdOutlineSchedule
+          },
+          {
+              route: `/user/${clerkId}/health-record`,
+              label: `Record`,
+              icon: BsDatabase
+          },
+      ],
+  }
+  
+  const hospitalSidebarElements = {
+      top: [
+          {
+              route: `/user/${clerkId}/dashboard`,
+              label: `Dashboard`,
+              icon: RxDashboard
+          },
+          {
+              route: `/user/${clerkId}/consultation`,
+              label: `Consultation`,
+              icon: MdMeetingRoom
+          },
+          {
+              route: `/user/${clerkId}/bookings`,
+              label: `Bookings`,
+              icon: MdOutlineSchedule
+          },
+          {
+              route: `/user/${clerkId}/health-record`,
+              label: `Record`,
+              icon: BsDatabase
+          },
+      ],
+  }
+  const SidebarBbottomNavs = [
+    {
+        route: `/user/${clerkId}/history`,
+        label: 'History',
+        icon: AiOutlineHistory
+    },
+    {
+        route: `/user/${clerkId}/settings`,
+        label: 'Settings',
+        icon: MdOutlineSettings
+    },
+]
+  const doctorSidebarElements = {
+      top: [
+          {
+              route: `/user/${clerkId}/dashboard`,
+              label: `Dashboard`,
+              icon: RxDashboard
+          },
+          {
+              route: `/user/${clerkId}/consultation`,
+              label: `Consultation`,
+              icon: MdMeetingRoom
+          },
+          {
+              route: `/user/${clerkId}/clients`,
+              label: `Clients`,
+              icon: BsPeople
+          }
+      ],
+  }
     const renderNavigation = (nav: SideNavProps, index: number) => {
         const isActive = pathname === nav.route || pathname.startsWith(`${nav.route}/`);
         return (
