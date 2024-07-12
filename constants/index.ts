@@ -1,16 +1,12 @@
-import { LazyResult } from "postcss";
+import { useUser } from "@clerk/nextjs";
 import { 
-    AiOutlineLogout, 
-    AiOutlineSetting,
-    AiOutlineDashboard,
-    AiOutlineMail,
     AiOutlineMenu,
     AiOutlineArrowRight,
     AiOutlineCheck,
     AiOutlineHistory
   } from "react-icons/ai"
 import { BsDatabase, BsPeople } from "react-icons/bs";
-import { MdBlurOn, MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
+import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings, MdSchedule } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
   
 
@@ -657,27 +653,28 @@ export const landing = {
       copyright: `Copyright @ 2024 ! All rights reserved`
   }
 }
-
+const {user} = useUser()
+export const clerkId = user?.id
 export const patientSidebarElements = {
     top: [
         {
-            route: '/user/dashboard',
+            route: `/user/${clerkId}/dashboard`,
             label: 'Dashboard',
             icon: RxDashboard
         },
         {
-            route: '/user/consultation/home',
-            label: 'Consultation',
+            route: `/user/${clerkId}/consultation/home`,
+            label: `Consultation`,
             icon: MdMeetingRoom
         },
         {
-            route: '/user/appointments/',
-            label: 'Schedule',
+            route: `/user/${clerkId}/appointments`,
+            label: `Schedule`,
             icon: MdOutlineSchedule
         },
         {
-            route: '/user/record',
-            label: 'Record',
+            route: `/user/${clerkId}/record`,
+            label: `Record`,
             icon: BsDatabase
         },
     ],
@@ -686,23 +683,23 @@ export const patientSidebarElements = {
 export const pharmacySidebarElements = {
     top: [
         {
-            route: '/user/dashboard',
-            label: 'Dashboard',
+            route: `/user/${clerkId}/dashboard`,
+            label: `Dashboard`,
             icon: RxDashboard
         },
         {
-            route: '/user/consultation/home',
-            label: 'Consultation',
+            route: `/user/${clerkId}/consultation/home`,
+            label: `Consultation`,
             icon: MdMeetingRoom
         },
         {
-            route: '/user/appointments/',
-            label: 'Schedule',
+            route: `/user/${clerkId}/appointments/`,
+            label: `Schedule`,
             icon: MdOutlineSchedule
         },
         {
-            route: '/user/record',
-            label: 'Record',
+            route: `/user/${clerkId}/record`,
+            label: `Record`,
             icon: BsDatabase
         },
     ],
@@ -711,23 +708,23 @@ export const pharmacySidebarElements = {
 export const hospitalSidebarElements = {
     top: [
         {
-            route: '/patient/dashboard',
-            label: 'Dashboard',
+            route: `/user/${clerkId}/dashboard`,
+            label: `Dashboard`,
             icon: RxDashboard
         },
         {
-            route: '/user/consultation/home',
-            label: 'Consultation',
+            route: `/user/${clerkId}/consultation/home`,
+            label: `Consultation`,
             icon: MdMeetingRoom
         },
         {
-            route: '/appointments/',
-            label: 'Schedule',
+            route: `/user/${clerkId}/appointments/`,
+            label: `Schedule`,
             icon: MdOutlineSchedule
         },
         {
-            route: '/patient/record',
-            label: 'Record',
+            route: `/user/${clerkId}/record`,
+            label: `Record`,
             icon: BsDatabase
         },
     ],
@@ -736,18 +733,18 @@ export const hospitalSidebarElements = {
 export const doctorSidebarElements = {
     top: [
         {
-            route: '/user/dashboard',
-            label: 'Dashboard',
+            route: `/user/${clerkId}/dashboard`,
+            label: `Dashboard`,
             icon: RxDashboard
         },
         {
-            route: '/user/consultation/home',
-            label: 'Consultation',
+            route: `/user/${clerkId}/consultation/home`,
+            label: `Consultation`,
             icon: MdMeetingRoom
         },
         {
-            route: '/user/clients',
-            label: 'Clients',
+            route: `/user/${clerkId}/clients`,
+            label: `Clients`,
             icon: BsPeople
         }
     ],
