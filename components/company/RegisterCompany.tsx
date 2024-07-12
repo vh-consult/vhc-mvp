@@ -9,12 +9,19 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import Loader from '../general/Loader';
 import useUserRole from '@/hooks/useUserRole';
-import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
-import {CldUploadWidget} from "next-cloudinary"
-// Define Zod schema
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+
 const setupSchema = z.object({
   name: z.string().min(1, 'company\'s is required'),
   logo: z.any(),
@@ -23,21 +30,21 @@ const setupSchema = z.object({
   type: z.enum(["pharmacy", "hospital"])
 });
 
-// Define type for form values
 type FormValues = z.infer<typeof setupSchema>;
 
 
-const RegisterCompany =  () => {
+const RegisterCompany = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const {userRole} =useUserRole()
-  // const [file, setFile] = useState<File>()
+  const [file, setFile] = useState<File>()
   const {user} = useUser()
+
   const initialValues: FormValues = {
     name: '',
     location: '',
-    logo: '',
+    logo: file,
     description: '',
     type: userRole==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
   };
@@ -69,6 +76,7 @@ const RegisterCompany =  () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validateForm()) return;
+    alert('i dey work')
 
     setLoading(true);
     try {
@@ -82,41 +90,49 @@ const RegisterCompany =  () => {
   };
 
   return (
-      <form
-        className='p-3 w-[500px] flex flex-col gap-5 h-[450px] bg-dark-1 text-green-1'
-      >
-        <h1 className="text-2xl font-semibold">Company Registration Form</h1>
-        <Input
-          type='file'
-          placeholder='Upload company logo'
-          name='image'
-          // onChange={(e) => setFile(e.target.files?.[0])}
-          accept='image/*'
-          className='border-sky-1 bg-dark-3 '
-        />
-        <CldUploadWidget signatureEndpoint="/api/sign-image">
-        {
-          ({open}) => {
-            return(
-              <Button 
-                className=""
-                onClick={()=> open()}
-              >
-                Upload company logo
-              </Button>
-            )
-          }
-        }
-        </CldUploadWidget>
-        {errors.logo && <span className="text-red-500">{errors.logo}</span>}
-        <Input
-          type='text'
-          placeholder="Company's name"
-          name='name'
-          onChange={(e) => setValues({ ...values, name: e.target.value })}
-          className='border-none bg-dark-3 text-green-1'
-
-        />
+    <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
+    <Card className={`relative w-[400px] border-none bg-dark-1 text-green-1`}>
+      <CardHeader>
+        <CardTitle>Company Registration Form</CardTitle>
+        <CardDescription>Fill the forms to register your company</CardDescription>
+      </CardHeader>
+      <CardContent>
+      <div className="grid w-full items-center gap-4">
+        <div className="">
+          <Label>
+            Upload company logo
+          </Label>
+          <Input
+              type='file'
+              placeholder='Upload company logo'
+              name='logo'
+              onChange={(e) => setFile(e.target.files?.[0])}
+              accept='image/*'
+              className='border-sky-1 bg-dark-3 '
+            />
+            {errors.logo && 
+              <span className="text-red-500">
+                {errors.logo}
+              </span>
+            }
+        </div>
+        <div className="">
+        <Label className="text-sm font-normal leading-[22.4px] text-green-1">
+          Company's Name
+          </Label>
+          <Input
+            type='text'
+            placeholder="Company's name"
+            name='name'
+            onChange={(e) => setValues({ ...values, name: e.target.value })}
+            className='border-none bg-dark-3 text-green-1'
+          />
+            {errors.logo && 
+              <span className="text-red-500">
+                {errors.logo}
+              </span>
+            }
+        </div>
         <Input
           type='text'
           placeholder="Company's location"
@@ -148,11 +164,18 @@ const RegisterCompany =  () => {
             </RadioGroup>
           ): ''
         }
-        <Button onClick={handleSubmit} className='w-full bg-green-2 text-green-1'>
-          Register Company
-        </Button>
-        {loading && <Loader />}
-      </form>
+            </div>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button
+            onClick={handleSubmit}
+            className='w-full bg-green-2'
+          >
+          {loading? <Loader />: 'Register Company'}
+          </Button>
+        </CardFooter>
+      </Card>
+      </div>
   )
 }
 

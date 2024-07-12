@@ -7,19 +7,21 @@ import Drug from "../database/models/drug.model";
 
 export interface DrugParams {
     name: string;
-    // batchId: string;
     catalog: string;
     price: number;
     description: string;
-    quantity: number
+    quantity: number,
+    image: string
 }
 
 export async function addToInventory(
-    adminId: string, shopId: string, drugData: DrugParams
+    adminId: string, 
+    shopId: string, 
+    drugData: DrugParams
 ) {
     try {
         await connectToDatabase()
-        const admin = await PharmacyAdmin.findById({_id: adminId})
+        const admin = await PharmacyAdmin.findOne({clerkId: adminId})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Pharmacy.findById({_id: shopId})

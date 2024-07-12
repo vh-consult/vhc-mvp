@@ -9,7 +9,7 @@ import { writeFile } from 'fs/promises'
 export interface CompanyProps {
     name: string;
     location: string;
-    logo?: string;
+    logo?: File;
     description: string;
     type: string;
 }

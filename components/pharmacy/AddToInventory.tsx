@@ -15,7 +15,8 @@ const initialValues = {
   description: '',
   price: 0,
   quantity: 0,
-  catalog: ''
+  catalog: '',
+  image: ''
 };
 
 
@@ -35,7 +36,8 @@ const AddToInventory = () => {
         title="Medicine Inventory Form"
         handleClick={postDrug}
       >
-        <CldUploadWidget signatureEndpoint="/api/sign-image">
+
+        {/* <CldUploadWidget signatureEndpoint="/api/sign-image">
         {
           ({open}) => {
             return(
@@ -48,7 +50,15 @@ const AddToInventory = () => {
             )
           }
         }
-        </CldUploadWidget>
+        </CldUploadWidget> */}
+        <Input 
+          type='file' 
+          accept='image/*' 
+          name='image' 
+          onChange={(e) => setValues(
+            {...values, image: e.target.value}
+          )}
+        />
         <Input
           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) =>
