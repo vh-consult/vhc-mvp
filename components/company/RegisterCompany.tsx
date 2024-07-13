@@ -26,7 +26,7 @@ const setupSchema = z.object({
   name: z.string().min(1, 'company\'s is required'),
   logo: z.any(),
   location: z.string().min(1, 'Location is required'),
-  description: z.string().min(4, 'Please select gender').max(6),
+  description: z.string().min(4, 'Please select gender').max(200),
   type: z.enum(["pharmacy", "hospital"])
 });
 
@@ -73,12 +73,14 @@ const RegisterCompany = () => {
 
   const handleSubmit = async () => {
     console.log(values)
-    alert('i dey work')
     if (!validateForm()) return;
 
     setLoading(true);
     try {
-      const companyToCreate = await createCompany(clerkId, values)
+      console.log(clerkId)
+      console.log(clerkId)
+
+      const companyToCreate = await createCompany(clerkId as string, values)
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/home`)
     } finally {
@@ -107,11 +109,11 @@ const RegisterCompany = () => {
               accept='image/*'
               className='border-sky-1 bg-dark-3 '
             />
-            {/* {errors.logo && 
+            {errors.logo && 
               <span className="text-red-500">
                 {errors.logo}
               </span>
-            } */}
+            }
         </div>
         <div className="flex flex-col">
           <Label className='mb-2'>
@@ -119,7 +121,6 @@ const RegisterCompany = () => {
           </Label>
           <Input
             type='text'
-            placeholder="Company's name"
             name='name'
             onChange={(e) => setValues({ ...values, name: e.target.value })}
             className='border-none bg-dark-3 text-green-1'
@@ -136,7 +137,6 @@ const RegisterCompany = () => {
           </Label>
           <Input
             type='text'
-            placeholder=""
             name='location'
             onChange={(e) => setValues({ ...values, location: e.target.value })}
             className='border-none bg-dark-3 text-green-1'
@@ -163,23 +163,31 @@ const RegisterCompany = () => {
             </span>
           }
         </div>
-        {
-          userRole==="patient" || userRole==="doctor"? (
-            <RadioGroup defaultValue="pharmacy" 
-            onValueChange={(value) => setValues({
-              ...values, type: value as "pharmacy"| "hospital"
-            })}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="pharmacy" id="pharmacy" />
-                <Label htmlFor="pharmacy">Pharmacy</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="hospital" id="hospital" />
-                <Label htmlFor="hospital">Hospital</Label>
-              </div>
-            </RadioGroup>
-          ): ''
-        }
+          {
+            userRole==="patient" || userRole==="doctor"? (
+              <div className="flex">
+              <Label>Select Company Type</Label>
+              <RadioGroup defaultValue="pharmacy" 
+              onValueChange={(value) => setValues({
+                ...values, type: value as "pharmacy"| "hospital"
+              })}>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="pharmacy" id="pharmacy" />
+                  <Label htmlFor="pharmacy">Pharmacy</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="hospital" id="hospital" />
+                  <Label htmlFor="hospital">Hospital</Label>
+                </div>
+              </RadioGroup>
+          {errors.type && 
+            <span className="text-red-500">
+              {errors.type}
+            </span>
+          }
+        </div>
+            ): ''
+          }
             </div>
         </CardContent>
         <CardFooter className="flex justify-between">

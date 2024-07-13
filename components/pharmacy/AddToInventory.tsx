@@ -36,21 +36,6 @@ const AddToInventory = () => {
         title="Medicine Inventory Form"
         handleClick={postDrug}
       >
-
-        {/* <CldUploadWidget signatureEndpoint="/api/sign-image">
-        {
-          ({open}) => {
-            return(
-              <Button 
-                className="border-dark-4"
-                onClick={()=> open()}
-              >
-                Upload company logo
-              </Button>
-            )
-          }
-        }
-        </CldUploadWidget> */}
         <Input 
           type='file' 
           accept='image/*' 

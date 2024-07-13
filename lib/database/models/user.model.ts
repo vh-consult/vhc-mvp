@@ -273,12 +273,6 @@ const UserSchema = new Schema<UserParams>(
       type: Boolean,
       default: false,
     },
-    appointments: [
-      {
-        type: Schema.Types.ObjectId,
-        refPath: 'role',
-      },
-    ],
     orders: [
       {
         type: Schema.Types.ObjectId,
@@ -354,6 +348,12 @@ const PatientSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Doctor',
     },
+    appointments: [
+      {
+        type: Schema.Types.ObjectId,
+        refPath: 'Bookings',
+      },
+    ],
 });
 
 const PharmacyAdminSchema = new Schema({
@@ -371,10 +371,10 @@ const HospitalAdminSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
-const Patient = User.discriminator("Patient", PatientSchema);
-const Doctor = User.discriminator("Doctor", DoctorSchema);
-const HospitalAdmin = User.discriminator("HospitalAdmin", HospitalAdminSchema);
-const PharmacyAdmin = User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
+const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
+const Doctor =  models?.Doctor || User.discriminator("Doctor", DoctorSchema);
+const HospitalAdmin =  models?.HospitalAdmin || User.discriminator("HospitalAdmin", HospitalAdminSchema);
+const PharmacyAdmin =  models?.PharmacyAdmin || User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
 
 export {
   User,

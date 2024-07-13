@@ -112,9 +112,9 @@ export async function activateAccount(clerkId: string, userData:ActivateAccountP
         throw new Error("Invalid role");
     }
 
-    if (userData.role !== 'patient') {
-      await User.findOneAndDelete({ clerkId });
-    }
+    // if (userData.role !== 'patient') {
+    //   await User.findOneAndDelete({ clerkId });
+    // }
 
     return JSON.parse(JSON.stringify(userToActivateAccount));
   } catch (error) {

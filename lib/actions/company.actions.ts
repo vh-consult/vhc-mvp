@@ -13,11 +13,11 @@ export interface CompanyProps {
     description: string;
     type: string;
 }
-export async function createCompany(userId: string, companyData: CompanyProps){
+export async function createCompany(clerkId: string, companyData: CompanyProps){
     try {
         await connectToDatabase();
         
-        const userCreatingCompany = await User.findOne({ clerkId: userId });
+        const userCreatingCompany = await User.findOne({ clerkId });
         if (!userCreatingCompany) throw new Error("User not found");
         
         console.log('ereach here')
