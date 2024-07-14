@@ -84,43 +84,90 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
 }
 
 //Activate account
-export async function activateAccount(clerkId: string, userData:ActivateAccountParams) {
+// export async function activateAccount(clerkId: string, userData:ActivateAccountParams) {
+//   try {
+//     await connectToDatabase();
+
+//     const findUserInDB = await User.findOne({clerkId});
+//     console.log(findUserInDB)
+//     console.log(userData)
+//     if (!findUserInDB) {
+//       throw new Error("User not found")
+//     };
+//     let userToActivateAccount;
+//     console.log(userData.role)
+//     switch (userData.role) {
+//       case 'patient':
+//         userToActivateAccount = await Patient.create({ ...findUserInDB.toObject(), ...userData });
+//         break;
+//       case 'pharmacyAdmin':
+//         userToActivateAccount = await PharmacyAdmin.create({ ...findUserInDB.toObject(), ...userData });
+//         break;
+//       case 'hospitalAdmin':
+//         userToActivateAccount = await HospitalAdmin.create({ ...findUserInDB.toObject(), ...userData });
+//         break;
+//       case 'doctor':
+//         userToActivateAccount = await Doctor.create({ ...findUserInDB.toObject(), ...userData });
+//         break;
+//       default:
+//         throw new Error("Invalid role");
+//     }
+
+//     console.log("reached here")
+
+//     return JSON.parse(JSON.stringify(userToActivateAccount));
+//   } catch (error) {
+//     console.log(error)
+//     // handleError(error)
+//   }
+// }
+
+export async function activateAccount(clerkId: string, userData: ActivateAccountParams) {
   try {
     await connectToDatabase();
 
-    const findUserInDB = await User.findOne({clerkId});
-
+    const findUserInDB = await User.findOne({ clerkId });
     if (!findUserInDB) {
-      throw new Error("User not found")
+      throw new Error("User not found");
     };
+
     let userToActivateAccount;
+    const userObject = findUserInDB.toObject();
+    delete userObject._id;  
+    delete userObject.clerkId
 
     switch (userData.role) {
       case 'patient':
-        userToActivateAccount = await Patient.create({ ...findUserInDB.toObject(), ...userData });
+        userToActivateAccount = await Patient.create({ ...userObject, ...userData });
         break;
       case 'pharmacyAdmin':
-        userToActivateAccount = await PharmacyAdmin.create({ ...findUserInDB.toObject(), ...userData });
+        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
         break;
       case 'hospitalAdmin':
-        userToActivateAccount = await HospitalAdmin.create({ ...findUserInDB.toObject(), ...userData });
+        userToActivateAccount = await HospitalAdmin.create({ ...userObject, ...userData });
         break;
       case 'doctor':
-        userToActivateAccount = await Doctor.create({ ...findUserInDB.toObject(), ...userData });
+        userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
         break;
       default:
         throw new Error("Invalid role");
     }
+    userToActivateAccount.clerkId = findUserInDB.clerkId
+    await userToActivateAccount.save()
+    console.log(findUserInDB)
 
-    // if (userData.role !== 'patient') {
-    //   await User.findOneAndDelete({ clerkId });
-    // }
+    await User.findByIdAndDelete(findUserInDB._id)
+    console.log(userToActivateAccount)
+    console.log(findUserInDB)
 
     return JSON.parse(JSON.stringify(userToActivateAccount));
   } catch (error) {
-    handleError(error)
+    console.log(error);
+    // handleError(error)
   }
 }
+
+
 
 //get user by role
 export async function getUserRole(id: string) {

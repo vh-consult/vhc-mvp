@@ -3,7 +3,7 @@ import React from 'react'
 
 const SignUpPage = () => {
   return (
-    <SignUp fallbackRedirectUrl={'/user/activate-account'}/>
+    <SignUp fallbackRedirectUrl={'/account-activation'}/>
   )
 }
 

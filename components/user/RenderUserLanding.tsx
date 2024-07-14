@@ -63,7 +63,16 @@ const RenderUserLanding = () => {
 
         <>
             {
-                ClickableCardData.user.map((card, index) => (
+                userRole === undefined? (
+                    <ClickableCard 
+                    title="Activate Account"
+                    description="Activate your account"
+                    imgURL=""
+                    handleClick={() => { router.push("/account-activation")}}
+                    className='bg-dark-1 hover:bg-dark-3 text-green-1 h-[250px] w-[100%]'
+                />
+                ) : 
+               ( ClickableCardData.user.map((card, index) => (
                     <ClickableCard 
                         title={card.title}
                         description={card.description}
@@ -73,7 +82,7 @@ const RenderUserLanding = () => {
                         key={index}
                     />
 
-                ))
+                )))
             }
             {
                 userRole === "hospitalAdmin" || userRole === "pharmacyAdmin" ? (

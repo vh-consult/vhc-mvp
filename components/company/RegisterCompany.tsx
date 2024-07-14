@@ -72,14 +72,10 @@ const RegisterCompany = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(values)
     if (!validateForm()) return;
 
     setLoading(true);
     try {
-      console.log(clerkId)
-      console.log(clerkId)
-
       const companyToCreate = await createCompany(clerkId as string, values)
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/home`)

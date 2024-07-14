@@ -81,6 +81,7 @@ const ActivateAccount = () => {
     setLoading(true);
     try {
       const userToUpdate = await activateAccount(user?.id as string, values);
+      console.log(userToUpdate)
       switch (userToUpdate.role) {
         case 'patient':
         case 'doctor':
