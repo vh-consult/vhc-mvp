@@ -6,11 +6,11 @@ const UserSchema = new Schema(
   {
     clerkId: {
       type: String,
-      unique: true,
+      // unique: true,
     },
     email: {
       type: String,
-      unique: true,
+      // unique: true,
     },
     photo: {
       type: String,

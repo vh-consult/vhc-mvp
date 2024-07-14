@@ -134,7 +134,9 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     let userToActivateAccount;
     const userObject = findUserInDB.toObject();
     delete userObject._id;  
-    delete userObject.clerkId
+    // userObject.clerkId = ""
+    // userObject.email = ""
+    console.log(userObject)
 
     switch (userData.role) {
       case 'patient':
@@ -152,18 +154,17 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
       default:
         throw new Error("Invalid role");
     }
-    userToActivateAccount.clerkId = findUserInDB.clerkId
-    await userToActivateAccount.save()
-    console.log(findUserInDB)
-
-    await User.findByIdAndDelete(findUserInDB._id)
+    // userToActivateAccount.clerkId = findUserInDB.clerkId
     console.log(userToActivateAccount)
-    console.log(findUserInDB)
+    // userToActivateAccount.email = findUserInDB.email
+
+    // await userToActivateAccount.save()
+
 
     return JSON.parse(JSON.stringify(userToActivateAccount));
   } catch (error) {
-    console.log(error);
-    // handleError(error)
+    // console.log(error);
+    handleError(error)
   }
 }
 
