@@ -13,9 +13,9 @@ import { createBlog } from '@/lib/actions/blog.actions'
 // Define Zod schema
 const blogPostSchema = z.object({
   blogTitle: z.string().min(5, 'Please select your purpose on this app'),
-  introduction: z.string().min(1, 'intro is required'),
+  introduction: z.string().min(1, 'intro is required').optional(),
   content: z.string().min(1, 'content is required'),
-  conclusion: z.string().min(1, 'conclusion is required'),
+  conclusion: z.string().min(1, 'conclusion is required').optional(),
   coverImage: z.any()
 });
 

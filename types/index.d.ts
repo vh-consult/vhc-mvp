@@ -14,7 +14,7 @@ declare type UserParams = {
   lastName: string;
   photo: string;
   contact: string;
-  role: "patient" | "doctor" | "hospitalAdmin" | "pharmacyAdmin";
+  userRole: "patient" | "doctor" | "hospitalAdmin" | "pharmacyAdmin";
   country: string;
 };
 

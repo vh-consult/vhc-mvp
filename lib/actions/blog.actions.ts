@@ -7,15 +7,15 @@ import { User } from "../database/models/user.model";
 import { WriteStream } from "fs";
 import { File } from "buffer";
 
-interface BlogDataFromFrontend {
+interface BlogDataParams {
     blogTitle: string;
-    introduction: string;
+    introduction?: string;
     content: string;
-    conclusion: string;
+    conclusion?: string;
     coverImage?: File
 }
 
-export async function createBlog(clerkId:string, blogData:BlogDataFromFrontend) {
+export async function createBlog(clerkId:string, blogData:BlogDataParams) {
     try {
         await connectToDatabase();
         const author = await User.findOne({clerkId})

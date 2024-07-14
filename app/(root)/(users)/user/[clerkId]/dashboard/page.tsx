@@ -8,14 +8,14 @@ import HospitalAdminDashboard from '@/components/user/HospitalAdminDashboard'
 
 
 const DashboardPage = () => {
-  const {userRole} = useUserRole()
+  const {role} = useUserRole()
   return (
     <div>
       {
-        userRole === "pharmacyAdmin"? (<PharmacyAdminDashboard/>) :
-        userRole === "patient"? (<PatientDashboard/>) : 
-        userRole === "doctor"? (<DoctorDashboard/>) :
-        userRole === "hospitalAdmin"? (<HospitalAdminDashboard/>) : `Nothing to show you`
+        role === "pharmacyAdmin"? (<PharmacyAdminDashboard/>) :
+        role === "patient"? (<PatientDashboard/>) : 
+        role === "doctor"? (<DoctorDashboard/>) :
+        role === "hospitalAdmin"? (<HospitalAdminDashboard/>) : `Nothing to show you`
       }
     </div>
   )

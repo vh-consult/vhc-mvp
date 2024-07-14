@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 const useUserRole = () => {
     const {user} = useUser()
     const clerkId = user?.id as string
-    const [userRole, setUserRole] = useState<
+    const [role, setRole] = useState<
     "doctor"|"patient"|
     "hospitalAdmin"|"pharmacyAdmin">()
     useEffect(() => {        
@@ -13,11 +13,11 @@ const useUserRole = () => {
 
         async function getUserRole() {
             const userFromDB:UserParams = await getUserById(clerkId)
-            return setUserRole(userFromDB.role);
+            return setRole(userFromDB.userRole);
         }
         getUserRole()
     }, [user])
-  return {userRole, clerkId}
+  return {role, clerkId}
 }
 
 export default useUserRole

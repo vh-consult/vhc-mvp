@@ -37,14 +37,14 @@ const RegisterCompany = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const {userRole} =useUserRole()
+  const {role} =useUserRole()
   const {clerkId} = useUserRole()  
   const initialValues: FormValues = {
     name: '',
     location: '',
     logo: null,
     description: '',
-    type: userRole==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
+    type: role==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
   };
   
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -160,7 +160,7 @@ const RegisterCompany = () => {
           }
         </div>
           {
-            userRole==="patient" || userRole==="doctor"? (
+            role==="patient" || role==="doctor"? (
               <div className="flex">
               <Label>Select Company Type</Label>
               <RadioGroup defaultValue="pharmacy" 

@@ -21,7 +21,7 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {userRole, clerkId} = useUserRole()
+    const {role, clerkId} = useUserRole()
     
     const patientSidebarElements = {
       top: [
@@ -167,13 +167,13 @@ const Sidebar = () => {
 
         </div> */}
         {
-            userRole === "doctor"? 
+            role === "doctor"? 
             doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            userRole === "patient"? 
+            role === "patient"? 
             patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) :
-            userRole === "hospitalAdmin"?
+            role === "hospitalAdmin"?
             hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            userRole === "pharmacyAdmin"?
+            role === "pharmacyAdmin"?
             pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ``
         }
       </div>

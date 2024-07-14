@@ -4,6 +4,8 @@ import React from 'react'
 interface BlogContentProps {
     content: string;
     title: string;
+    introduction?: string;
+    conclusion?: string;
     datePublished: Date;
     authorImg: string;
     author: string;
@@ -11,8 +13,8 @@ interface BlogContentProps {
 }
 
 const BlogContent = ({
-    content, title, datePublished, 
-    author, authorImg, coverImg
+    content, title, datePublished, introduction,
+    author, authorImg, coverImg, conclusion
 }: BlogContentProps) => {
   return (
     <div className='w-[90%]'>
@@ -39,7 +41,13 @@ const BlogContent = ({
         />
       </div>
       <p>
+        {introduction && introduction}
+      </p>
+      <p>
         {content}
+      </p>
+      <p>
+        {conclusion && conclusion}
       </p>
     </div>
   )

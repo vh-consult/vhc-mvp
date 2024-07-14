@@ -39,7 +39,7 @@ const ConsultationRoom = () => {
   const { useCallCallingState } = useCallStateHooks();
   const [showConsultationForm, setShowConsultationForm] = useState<boolean>(false)
   const callingState = useCallCallingState();
-  const {userRole} = useUserRole()
+  const {role} = useUserRole()
   const [showComment, setShowComment] = useState<boolean>(false)
 
   
@@ -122,7 +122,7 @@ const ConsultationRoom = () => {
           </div>
         </button>
         {
-          userRole==="doctor"? (
+          role==="doctor"? (
             <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
                 <FaStethoscope/>
             </button>

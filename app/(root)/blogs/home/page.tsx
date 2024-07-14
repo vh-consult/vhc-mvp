@@ -1,5 +1,5 @@
-import CustomBlogCard from '@/components/blog/CustomBlogCard'
 import React from 'react'
+import AllBlogs from '@/components/blog/AllBlogs'
 
 const BlogsHomePage = () => {
   return (
@@ -12,41 +12,12 @@ const BlogsHomePage = () => {
           We have gathered the most helpful tips, expert knowledge and guidance you may need to live a healthy life. With over 1000+ contributors, we can boast of a robust network of people who really care about helping you live a healthy life.
         </p>
         <div className="w-full">
-          <span className="text-lg font-medium"></span>
+          <span className="text-lg font-medium">
           Recent Blogs
+          </span>
         </div>
       </div>
-      <div className="w-full grid grid-cols-4 ">
-        <CustomBlogCard
-          snippet='In recent times, the wide spread of the virus which had'
-          coverImage='/images/doc-1.jpg'
-          title='Combating HIV/AIDS With Advances In Technology'
-          author='NY Ayisi'
-          datePublished={new Date(2024, 5, 23)}
-        />
-        <CustomBlogCard
-          snippet='In recent times, the wide spread of the virus which had'
-          coverImage='/images/doc-1.jpg'
-          title='Combating HIV/AIDS With Advances In Technology'
-          author='NY Ayisi'
-          datePublished={new Date(2024, 5, 23)}
-        />
-        <CustomBlogCard
-          snippet='In recent times, the wide spread of the virus which had'
-          coverImage='/images/doc-1.jpg'
-          title='Combating HIV/AIDS With Advances In Technology'
-          author='NY Ayisi'
-          datePublished={new Date(2024, 5, 23)}
-        />
-        <CustomBlogCard
-          snippet='In recent times, the wide spread of the virus which had'
-          coverImage='/images/doc-1.jpg'
-          title='Combating HIV/AIDS With Advances In Technology'
-          author='NY Ayisi'
-          datePublished={new Date(2024, 5, 23)}
-        />
-      </div>
-      
+      <AllBlogs/>
     </section>
   )
 }

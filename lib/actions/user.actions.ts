@@ -172,9 +172,7 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
 //get user by role
 export async function getUserRole(id: string) {
  const user = await getUserById(id)
-
- return user.role;
-  
+ return user.userRole;
 }
 
 

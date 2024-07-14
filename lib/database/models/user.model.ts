@@ -1,6 +1,6 @@
 import { Schema, model, models, Document } from "mongoose";
 
-const options = { discriminatorKey: "role", timestamps: true };
+const options = { discriminatorKey: "userRole", timestamps: true };
 
 const UserSchema = new Schema(
   {

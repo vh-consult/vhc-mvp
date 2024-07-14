@@ -21,7 +21,7 @@ export interface ClickableCardDataStructure {
 
 const RenderUserLanding = () => {
     const router = useRouter()
-    const {userRole, clerkId} = useUserRole()
+    const {role, clerkId} = useUserRole()
     const ClickableCardData: ClickableCardDataStructure = {
         user: [
             {
@@ -63,7 +63,7 @@ const RenderUserLanding = () => {
 
         <>
             {
-                userRole === undefined? (
+                role === undefined? (
                     <ClickableCard 
                     title="Activate Account"
                     description="Activate your account"
@@ -85,7 +85,7 @@ const RenderUserLanding = () => {
                 )))
             }
             {
-                userRole === "hospitalAdmin" || userRole === "pharmacyAdmin" ? (
+                role === "hospitalAdmin" || role === "pharmacyAdmin" ? (
                     ClickableCardData.company.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
