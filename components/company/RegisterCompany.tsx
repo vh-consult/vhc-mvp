@@ -7,7 +7,6 @@ import { createCompany } from '@/lib/actions/company.actions';
 import { toast } from '../ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import Loader from '../general/Loader';
 import useUserRole from '@/hooks/useUserRole';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
@@ -20,6 +19,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import Loader from '../general/Loader';
+import { getSignature, uploader, verifySignature } from '@/lib/actions/general.actions';
+import { imageUploader } from '@/lib/utils';
 
 
 const setupSchema = z.object({
@@ -38,13 +40,14 @@ const RegisterCompany = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const {role} =useUserRole()
-  const {clerkId} = useUserRole()  
+  const {user} = useUser()
+  const [file, setFile] = useState<File>()
   const initialValues: FormValues = {
     name: '',
     location: '',
-    logo: null,
     description: '',
-    type: role==="hospitalAdmin"? 'hospital': 'pharmacy' || ''
+    type: role==="hospitalAdmin"? 'hospital': 'pharmacy' || '',
+    logo: ''
   };
   
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -76,7 +79,8 @@ const RegisterCompany = () => {
 
     setLoading(true);
     try {
-      const companyToCreate = await createCompany(clerkId as string, values)
+      values.logo = await imageUploader(file!, 'companyLogo')
+      const companyToCreate = await createCompany(user?.id as string, values)
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/home`)
     } finally {
@@ -98,10 +102,10 @@ const RegisterCompany = () => {
             Upload company logo
           </Label>
           <Input
-              type='file'
+              type='file' 
               placeholder='Upload company logo'
               name='logo'
-              onChange={(e) => setValues({...values, logo: e.target.files?.[0]})}
+              onChange={(e) => setFile(e.target.files?.[0])}
               accept='image/*'
               className='border-sky-1 bg-dark-3 '
             />

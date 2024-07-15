@@ -29,6 +29,7 @@
     "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",
     "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
     "fs": "^0.0.1-security",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",

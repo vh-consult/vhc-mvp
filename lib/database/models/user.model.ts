@@ -6,11 +6,9 @@ const UserSchema = new Schema(
   {
     clerkId: {
       type: String,
-      // unique: true,
     },
     email: {
       type: String,
-      // unique: true,
     },
     photo: {
       type: String,
@@ -79,7 +77,7 @@ const DoctorSchema = new Schema({
   clients: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Patient',
     },
   ],
   affiliateHospital: {
@@ -148,10 +146,10 @@ const HospitalAdminSchema = new Schema({
 });
 
 const User = models?.User || model("User", UserSchema);
-const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
 const Doctor =  models?.Doctor || User.discriminator("Doctor", DoctorSchema);
 const HospitalAdmin =  models?.HospitalAdmin || User.discriminator("HospitalAdmin", HospitalAdminSchema);
 const PharmacyAdmin =  models?.PharmacyAdmin || User.discriminator("PharmacyAdmin", PharmacyAdminSchema);
+const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
 
 export {
   User,

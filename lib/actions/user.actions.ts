@@ -134,10 +134,10 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     let userToActivateAccount;
     const userObject = findUserInDB.toObject();
     delete userObject._id;  
-    // userObject.clerkId = ""
-    // userObject.email = ""
+    
+    await User.findOneAndDelete({ clerkId })
+    console.log('deleted user')
     console.log(userObject)
-
     switch (userData.role) {
       case 'patient':
         userToActivateAccount = await Patient.create({ ...userObject, ...userData });
@@ -154,11 +154,6 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
       default:
         throw new Error("Invalid role");
     }
-    // userToActivateAccount.clerkId = findUserInDB.clerkId
-    console.log(userToActivateAccount)
-    // userToActivateAccount.email = findUserInDB.email
-
-    // await userToActivateAccount.save()
 
 
     return JSON.parse(JSON.stringify(userToActivateAccount));

@@ -83,13 +83,13 @@ const ActivateAccount = () => {
       const userToUpdate = await activateAccount(user?.id as string, values);
       console.log(userToUpdate)
       switch (userToUpdate.userRole) {
-        case 'patient':
-        case 'doctor':
+        case 'Patient':
+        case 'Doctor':
           toast({title: 'Account activated successfully, you are being redirected'})
           router.push('/user/landing');
           break;
-        case 'hospitalAdmin':
-        case 'pharmacyAdmin':
+        case 'HospitalAdmin':
+        case 'PharmacyAdmin':
           toast({title: 'Account activated successfully, you have to set your company up next'})
           router.push('/company/set-up');
           break;
