@@ -39,33 +39,7 @@ export async function verifySignature(
 
 
 //IMAGE UPLOAD WITH CLOUDINARY
-export const imageUploader = async (image: File, folderName: string) => {
-  const { timestamps, signature } = await getSignature(folderName)
-  const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
-
-  const formData = new FormData()
-  formData.append('file', image)
-  formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!)
-  formData.append('signature', signature)
-  //@ts-ignore
-  formData.append('timestamps', timestamps)
-  formData.append('folder', folderName)
-
-  const data = await fetch(endpoint as string, {
-    method: 'POST',
-    body: formData
-  }).then(res => res.json())
-
-  if (!data.secure_url) {
-    throw new Error('Failed to upload image')
-  }
-
-  return data.secure_url
-}
-
-
-//IMAGE UPLOAD WITH CLOUDINARY
-export const imageUploader2 = async(image: File, folderName: string) => {
+export const imageUploader = async(image: File, folderName: string) => {
   const { timestamps, signature} = await getSignature(folderName)
   const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
   
@@ -109,26 +83,3 @@ export const uploader = async (base64Image: string) => {
     uploadStream.end(buffer);
   });
 };
-
-// import {v2 as cloudinary} from "cloudinary"
-
-// cloudinary.config({
-//     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_NAME,
-//     api_key: process.env.CLOUDINARY_API_KEY,
-//     api_secret: process.env.CLOUDINARY_API_SECRET
-// })  
-
-// export const uploader = async (image: File) => {
-//     const arrayBuffer = await image.arrayBuffer()
-//     const buffer = new Uint8Array(arrayBuffer)
-//     await new Promise((resolve, reject) => {
-//       cloudinary.uploader.upload_stream({}, function (error, result) {
-//         if (error) {
-//           reject(error)
-//           return
-//         }
-//         resolve(result) 
-//       }).emit(buffer)
-//     })
-// }
-
