@@ -38,6 +38,59 @@ export async function verifySignature(
 }
 
 
+//IMAGE UPLOAD WITH CLOUDINARY
+export const imageUploader = async (image: File, folderName: string) => {
+  const { timestamps, signature } = await getSignature(folderName)
+  const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
+
+  const formData = new FormData()
+  formData.append('file', image)
+  formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!)
+  formData.append('signature', signature)
+  //@ts-ignore
+  formData.append('timestamps', timestamps)
+  formData.append('folder', folderName)
+
+  const data = await fetch(endpoint as string, {
+    method: 'POST',
+    body: formData
+  }).then(res => res.json())
+
+  if (!data.secure_url) {
+    throw new Error('Failed to upload image')
+  }
+
+  return data.secure_url
+}
+
+
+//IMAGE UPLOAD WITH CLOUDINARY
+export const imageUploader2 = async(image: File, folderName: string) => {
+  const { timestamps, signature} = await getSignature(folderName)
+  const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
+  
+  const formData = new FormData()
+  formData.append('file', image!)
+  formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!)
+  formData.append('signature', signature!)
+  //@ts-ignore
+  formData.append('timestamps', timestamps)
+  formData.append('folder', folderName)
+  console.log(formData)
+  const data = await fetch(endpoint as string, {
+    method: 'POST',
+    body: JSON.stringify(formData)
+  }).then(res => res.json())
+  console.log(data)
+
+  const verifiedPublicId = await verifySignature({
+    version: data?.version,
+    signature: data?.signature,
+    public_id: data?.public_id
+  })
+
+  return verifiedPublicId
+}
 
 
 

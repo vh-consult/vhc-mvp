@@ -20,17 +20,16 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Loader from '../general/Loader';
-import { getSignature, uploader, verifySignature } from '@/lib/actions/general.actions';
-import { imageUploader } from '@/lib/utils';
+import { imageUploader } from '@/lib/actions/general.actions';
 
 
-const setupSchema = z.object({
-  name: z.string().min(1, 'company\'s is required'),
-  logo: z.any(),
-  location: z.string().min(1, 'Location is required'),
-  description: z.string().min(4, 'Please select gender').max(200),
-  type: z.enum(["pharmacy", "hospital"])
-});
+  const setupSchema = z.object({
+    name: z.string().min(1, 'company\'s is required'),
+    logo: z.string().url('Invalid logo URL').optional(),
+    location: z.string().min(1, 'Location is required'),
+    description: z.string().min(4, 'Please select gender').max(200),
+    type: z.enum(["pharmacy", "hospital"])
+  });
 
 type FormValues = z.infer<typeof setupSchema>;
 
@@ -79,9 +78,9 @@ const RegisterCompany = () => {
 
     setLoading(true);
     try {
-      
-      values.logo = await imageUploader(file!, 'companyLogos')
-      const companyToCreate = await createCompany(user?.id as string, values)
+      const logoUrl = await imageUploader(file!, 'companyLogos')
+      const companyToCreate = await createCompany(user?.id as string, { ...values, logo: logoUrl })
+
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/home`)
     } finally {
@@ -105,16 +104,11 @@ const RegisterCompany = () => {
           <Input
               type='file' 
               placeholder='Upload company logo'
-              name='logo'
+              name='file'
               onChange={(e) => setFile(e.target.files?.[0])}
               accept='image/*'
               className='border-sky-1 bg-dark-3 '
             />
-            {errors.logo && 
-              <span className="text-red-500">
-                {errors.logo}
-              </span>
-            }
         </div>
         <div className="flex flex-col">
           <Label className='mb-2'>
