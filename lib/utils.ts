@@ -27,7 +27,7 @@ export const handleError = (error: unknown) => {
 //IMAGE UPLOAD WITH CLOUDINARY
 export const imageUploader = async(image: File, folderName: string) => {
   const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL
-  const { timestamps, signature} = await getSignature()
+  const { timestamps, signature} = await getSignature(folderName)
   
   const formData = new FormData()
   formData.append('file', image!)
@@ -37,10 +37,14 @@ export const imageUploader = async(image: File, folderName: string) => {
   formData.append('timestamps', timestamps)
   formData.append('folder', folderName)
 
-  const data = await fetch(endpoint as string, {
+  const data = await fetch('/api/sign-image', {
     method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: formData
   }).then(res => res.json())
+  console.log(data)
 
   const verifiedPublicId = await verifySignature({
     version: data?.version,

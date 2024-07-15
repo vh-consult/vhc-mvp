@@ -22,22 +22,14 @@ export async function createCompany(clerkId: string, companyData: any){
         if (!userCreatingCompany) throw new Error("User not found");
 
         let company;
+        const {type:_, ...registrationData} = companyData 
+        console.log(registrationData)
         switch (companyData.type) {
             case "pharmacy":
-                company = await Pharmacy.create({
-                    name: companyData.name,
-                    location: companyData.location,
-                    image: companyData.logo,
-                    type: "pharmacy",
-                })
+                company = await Pharmacy.create({registrationData})
                 break;
             case "hospital":
-                company = await Hospital.create({
-                    name: companyData.name,
-                    location: companyData.location,
-                    image: companyData.logo,
-                    type: "hospital",
-                })
+                company = await Hospital.create({registrationData})
                 break;  
             default:
                 break;

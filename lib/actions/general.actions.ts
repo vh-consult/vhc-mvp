@@ -8,13 +8,14 @@ const cloudinaryConfig = cloudinary.config({
     secure: true
 });
 
-export async function getSignature() {
+export async function getSignature(folderName: string) {
   const timestamps = Math.floor(new Date().getTime()/1000)
 
   const signature = cloudinary.utils.api_sign_request(
-    {timestamps, folder: 'vhealthcare'},
+    {timestamps, folder: folderName},
     cloudinaryConfig.api_secret!
   )
+  console.log(timestamps, ' and ', signature)
 
   return {timestamps, signature}
 }
@@ -25,13 +26,20 @@ export async function verifySignature(
 ) {
   const expectedSignature = cloudinary.utils.api_sign_request(
     {public_id, version},
-    cloudinaryConfig.api_secret!
+    cloudinaryConfig.api_secret as string
   )
+  console.log(expectedSignature)
+  console.log(signature)
+
 
   if (expectedSignature !== signature) throw new Error("signatures don't match")
   
   return public_id
 }
+
+
+
+
 
 export const uploader = async (base64Image: string) => {
   const buffer = Buffer.from(base64Image, 'base64');

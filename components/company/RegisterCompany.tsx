@@ -79,7 +79,8 @@ const RegisterCompany = () => {
 
     setLoading(true);
     try {
-      values.logo = await imageUploader(file!, 'companyLogo')
+      
+      values.logo = await imageUploader(file!, 'companyLogos')
       const companyToCreate = await createCompany(user?.id as string, values)
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/home`)

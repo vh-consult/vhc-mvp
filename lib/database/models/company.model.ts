@@ -7,21 +7,8 @@ export interface CompanyParams extends Document {
     admins: Schema.Types.ObjectId[];
     logo: string;
     description: string;
-    type: "hospital" | "pharmacy"
-  }
-
-  export interface PharmacyParams extends CompanyParams {
-    inventory: Schema.Types.ObjectId[];
-    orders: Schema.Types.ObjectId[];
-    opens_at: string;
-    closes_at: string
-  }
-
-  export interface HospitalParams extends CompanyParams {
-    doctors: Schema.Types.ObjectId[];
-    clients: Schema.Types.ObjectId[];
-    specialties: Array<string>;
-    booked_appointments: Schema.Types.ObjectId[];
+    posts?: Schema.Types.ObjectId[];
+    companyType: "Hospital" | "Pharmacy"
   }
 
 const CompanySchema = new Schema<CompanyParams>({
@@ -43,19 +30,18 @@ const CompanySchema = new Schema<CompanyParams>({
     description: {
         type: String,
     },
+    posts: {
+        type: Schema.Types.ObjectId,
+        ref: 'Blog'
+    },
     isVerified: {
         type: Boolean,
         default: false
     },
-    type: {
-        type: String,
-        required: [true, "Please the type of company is required"],
-        enum: ["hospital", "pharmacy"],
-    }
 }, { discriminatorKey: 'companyType' });
 
 
-const PharmacySchema = new Schema<PharmacyParams>({
+const PharmacySchema = new Schema({
     inventory: [{
         type: Schema.Types.ObjectId,
         ref: 'Drug'
@@ -75,7 +61,7 @@ const PharmacySchema = new Schema<PharmacyParams>({
     
 });
 
-const HospitalSchema = new Schema<HospitalParams>({
+const HospitalSchema = new Schema({
     doctors: [{
         type: Schema.Types.ObjectId,
         ref: 'Doctor'
@@ -100,7 +86,7 @@ const HospitalSchema = new Schema<HospitalParams>({
 
 
 const Company = models?.Company || model("Company", CompanySchema);
-const Hospital = models?.Hospital || model("Hospital", HospitalSchema);
-const Pharmacy = models?.Pharmacy || model("Pharmacy", PharmacySchema);
+const Hospital = models?.Hospital || Company.discriminator("Hospital", HospitalSchema);
+const Pharmacy = models?.Pharmacy || Company.discriminator("Pharmacy", PharmacySchema);
 
 export {Company, Hospital, Pharmacy}
