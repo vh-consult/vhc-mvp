@@ -12,10 +12,10 @@ const DashboardPage = () => {
   return (
     <div>
       {
-        role === "pharmacyAdmin"? (<PharmacyAdminDashboard/>) :
-        role === "patient"? (<PatientDashboard/>) : 
-        role === "doctor"? (<DoctorDashboard/>) :
-        role === "hospitalAdmin"? (<HospitalAdminDashboard/>) : `Nothing to show you`
+        role === "PharmacyAdmin"? (<PharmacyAdminDashboard/>) :
+        role === "Patient"? (<PatientDashboard/>) : 
+        role === "Doctor"? (<DoctorDashboard/>) :
+        role === "HospitalAdmin"? (<HospitalAdminDashboard/>) : `Nothing to show you`
       }
     </div>
   )

@@ -21,11 +21,13 @@ import {
 } from "@/components/ui/card"
 import Loader from '../general/Loader';
 import { imageUploader } from '@/lib/actions/general.actions';
+import { useEdgeStore } from '@/lib/edgestore';
+import { Toast } from '../ui/toast';
 
 
   const setupSchema = z.object({
     name: z.string().min(1, 'company\'s is required'),
-    logo: z.string().url('Invalid logo URL').optional(),
+    logo: z.string(),
     location: z.string().min(1, 'Location is required'),
     description: z.string().min(4, 'Please select gender').max(200),
     type: z.enum(["pharmacy", "hospital"])
@@ -45,10 +47,10 @@ const RegisterCompany = () => {
     name: '',
     location: '',
     description: '',
-    type: role==="hospitalAdmin"? 'hospital': 'pharmacy' || '',
+    type: role==="HospitalAdmin"? 'hospital': 'pharmacy' || '',
     logo: ''
   };
-  
+  const {edgestore} = useEdgeStore()
   const [values, setValues] = useState<FormValues>(initialValues);
   
   const validateForm = (): boolean => {
@@ -72,13 +74,17 @@ const RegisterCompany = () => {
       return false;
     }
   };
-
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setLoading(true);
     try {
-      const logoUrl = await imageUploader(file!, 'companyLogos')
+      let logoUrl
+      if (file) {
+        const res = await edgestore.myPublicImages.upload({file})
+        console.log(res)
+        logoUrl = res.url
+      }
       const companyToCreate = await createCompany(user?.id as string, { ...values, logo: logoUrl })
 
       toast({title: 'Company registered successfully'})
@@ -159,10 +165,11 @@ const RegisterCompany = () => {
           }
         </div>
           {
-            role==="patient" || role==="doctor"? (
-              <div className="flex">
+            role==="Patient" || role==="Doctor"? (
+              <div className="w-[80%] flex flex-row flex-between">
               <Label>Select Company Type</Label>
               <RadioGroup defaultValue="pharmacy" 
+              className='flex w-[50%] flex-between'
               onValueChange={(value) => setValues({
                 ...values, type: value as "pharmacy"| "hospital"
               })}>

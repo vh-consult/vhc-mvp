@@ -7,6 +7,7 @@ import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,7 +49,9 @@ export default function RootLayout({
       >
           <body className={`${inter.className} `}>
             <Toaster />
-            {children}
+            <EdgeStoreProvider>
+              {children}
+            </EdgeStoreProvider>
           </body>
       </ClerkProvider>
     </html>

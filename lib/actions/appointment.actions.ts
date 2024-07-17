@@ -1,26 +1,66 @@
 "use server"
 
 import { Booking, Consultation } from "../database/models/appointment.model";
-import { Doctor, User } from "../database/models/user.model";
+import { Doctor, Patient, User } from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
-export async function postConsultationForm(doctorId:string, formData: any, userId: string) {
+interface MedicationParams {
+    drug: string;
+    dose: number;
+    condition: string;
+    duration?: string;
+}
+
+interface BookingParams {
+    date: Date;
+    problem_statement: string;
+    channel: 'virtual'| 'inPerson'| 'lab';
+    doctor?: string;
+}
+
+interface ConsultationParams {
+    medication: Array<MedicationParams>;
+    summary?: string;
+    diagnosis: string;
+}
+
+
+export async function postConsultationForm(
+    doctorId:string, 
+    formData: ConsultationParams, 
+    patientId: string,
+    bookingId: string
+) {
     try {
         await connectToDatabase()
-        const userActingAsDoctor = await Doctor.findOne({clerkId: doctorId})
-        if (!userActingAsDoctor) throw new Error("Doctor not found")
+        const booking = await Booking.findOne({
+            _id: bookingId, 
+            patient: patientId, 
+            doctor: doctorId
+        })
+        const doctor = await Doctor.findOne({clerkId: doctorId})
+        if (!doctor) throw new Error("Doctor not found")
         
-        const patient = await User.findById({_id: userId})
-        if (!patient) throw new Error("User not found")
+        const patient = await Patient.findById(patientId)
+        if (!patient) throw new Error("Patient not found")
 
-        const newConsultationSession = await Consultation.create(formData)
-        patient.healthRecord.append(newConsultationSession._id)
+        const bookingObject = booking.toObject();
+        delete bookingObject._id
+
+        const newConsultationSession = await Consultation.create({...bookingObject, ...formData})
+        patient.healthRecord.push(newConsultationSession._id)
         await patient.save()
 
-        userActingAsDoctor.consultationHistory.append(newConsultationSession._id)
-        await userActingAsDoctor.save()
-
+        doctor.consultationHistory.push(newConsultationSession._id)
+        await doctor.save()
+        
+        await Booking.findOneAndDelete({
+            _id: bookingId, 
+            patient: patientId, 
+            doctor: doctorId
+        })
+ 
         return JSON.parse(JSON.stringify(newConsultationSession))
 
     } catch (error) {
@@ -67,7 +107,7 @@ export async function createAppointment(clerkId: string, formData: any) {
         } else {
             appointment = await Booking.create(formData)
         }
-        creator.appointments.append(appointment._id)
+        creator.appointments.push(appointment._id)
         await creator.save()  
         return JSON.parse(JSON.stringify(appointment))
     } catch (error) {

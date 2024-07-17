@@ -136,8 +136,7 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     delete userObject._id;  
     
     await User.findOneAndDelete({ clerkId })
-    console.log('deleted user')
-    console.log(userObject)
+
     switch (userData.role) {
       case 'patient':
         userToActivateAccount = await Patient.create({ ...userObject, ...userData });
@@ -158,7 +157,6 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
 
     return JSON.parse(JSON.stringify(userToActivateAccount));
   } catch (error) {
-    // console.log(error);
     handleError(error)
   }
 }

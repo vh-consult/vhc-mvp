@@ -6,8 +6,8 @@ const useUserRole = () => {
     const {user} = useUser()
     const clerkId = user?.id as string
     const [role, setRole] = useState<
-    "doctor"|"patient"|
-    "hospitalAdmin"|"pharmacyAdmin">()
+    "Doctor"|"Patient"|
+    "HospitalAdmin"|"PharmacyAdmin">()
     useEffect(() => {        
         if(!user) return;
 

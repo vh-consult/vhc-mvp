@@ -315,14 +315,14 @@ const ConsultationTypeList = () => {
           title={card.title}
           description={card.description}
           handleClick={() => setConsultationState(card.action as ConsultationStateProps)}
-          className='bg-dark-3 hover:bg-dark-4'
+          className='bg-dark-3 hover:bg-dark-3'
         />
       ))}
       <ClickableCard
         imgURL="/icons/recordings.svg"
         title="View Recordings"
         description="Consultation Recordings"
-        className="bg-dark-3 hover:bg-dark-4"
+        className="bg-dark-3 hover:bg-dark-3"
         handleClick={() => router.push('/recordings')}
       />
 

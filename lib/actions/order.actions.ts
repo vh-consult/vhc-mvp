@@ -17,7 +17,7 @@ export async function addToCart(clerkId: string, drugId: string) {
         const itemToAdd = await Drug.findById({_id: drugId})
         if (!itemToAdd) throw new Error("Drug not found")
         
-        userAddingItem.cart.append(drugId)
+        userAddingItem.cart.push(drugId)
         await userAddingItem.save()
 
         return {message: 'Item added to cart'}
@@ -64,7 +64,7 @@ export async function placeOrder(
             const drug = await Drug.findById({_id: drugID})
             if(!drug) throw new Error("Drug not found")
             
-            userOrderingItem.orders.append(drug)
+            userOrderingItem.orders.push(drug)
             await userOrderingItem.save()
         });
         

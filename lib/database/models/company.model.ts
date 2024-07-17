@@ -14,7 +14,6 @@ export interface CompanyParams extends Document {
 const CompanySchema = new Schema<CompanyParams>({
     name: {
         type: String,
-        required: [true, "Please provide the company's name."],
         minlength: [2, "Name cannot be less than 2 characters"]
     },
     location: {
@@ -50,14 +49,14 @@ const PharmacySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-    opens_at: {
-        type: String,
-        required: [true, "Please state opening time."],
-    },
-    closes_at: {
-        type: String,
-        required: [true, "Please state closing time."],
-    },
+    // opens_at: {
+    //     type: String,
+    //     required: [true, "Please state opening time."],
+    // },
+    // closes_at: {
+    //     type: String,
+    //     required: [true, "Please state closing time."],
+    // },
     
 });
 

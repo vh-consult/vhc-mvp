@@ -35,7 +35,7 @@ export async function createCompany(clerkId: string, companyData: any){
                 break;
         }
         userCreatingCompany.company = company._id
-        company.admins.append(userCreatingCompany._id)
+        company.admins.push(userCreatingCompany._id)
         await userCreatingCompany.save()
         await company.save()
         return JSON.parse(JSON.stringify(company));

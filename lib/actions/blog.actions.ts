@@ -22,7 +22,7 @@ export async function createBlog(clerkId:string, blogData:BlogDataParams) {
         if (!author) throw new Error("user not found")
         
         const newBlog = await Blog.create(blogData)
-        author.blogsAuthored.append(newBlog._id)
+        author.blogsAuthored.push(newBlog._id)
         await author.save()
 
         return JSON.parse(JSON.stringify(newBlog))
@@ -105,7 +105,7 @@ export async function shareBlog(senderId:string, blogId:string, receiverId: stri
         const blog = await Blog.findOne({blogId})
         if(!blog) throw new Error("blog not found!")
                 
-        receiver.savedBlogs.append(blog._id)
+        receiver.savedBlogs.push(blog._id)
         await receiver.save()
 
         blog.shares += 1
@@ -144,7 +144,7 @@ export async function commentOnBlog(clerkId:string, blogId:string, comment: stri
         const blog = await Blog.findOne({blogId})
         if(!blog) throw new Error("blog not found!")
         
-        blog.comments.append({userId: user._id, comment})
+        blog.comments.push({userId: user._id, comment})
         await blog.save()
     } catch (error) {
         handleError(error)
@@ -160,7 +160,7 @@ export async function saveBlog(clerkId:string, blogId:string) {
         const blog = await Blog.findOne({blogId})
         if(!blog) throw new Error("blog not found!")
         
-        user.savedBlogs.append(blog._id)
+        user.savedBlogs.push(blog._id)
         await user.save()
 
         return "Blog saved"

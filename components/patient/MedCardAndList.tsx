@@ -13,7 +13,58 @@ export interface MedCardProps {
     condition: string;
     quantity: number
   }
-  
+
+const data =[
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+  {
+    imageSrc: '/images/drug 5.jpg',
+    drug: 'Zimadal 50mg',
+    time: new Date(0, 0, 0, 11, 30),
+    condition: 'Before Meal',
+    quantity: 4
+  },
+]
 
 const MedCard = ({
     imageSrc, drug, time,
@@ -52,7 +103,18 @@ const MedCard = ({
   }
     return (
         <div>
-          hd
+          {
+            data.map((card, index) => (
+              <MedCard 
+                condition={card.condition}
+                drug={card.drug}
+                imageSrc={card.imageSrc}
+                quantity={card.quantity}
+                time={card.time}
+                key={index}
+              />
+            )).slice(0, 3)
+          }
         </div>
     )
   }

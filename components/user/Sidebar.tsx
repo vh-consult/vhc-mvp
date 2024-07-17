@@ -167,13 +167,13 @@ const Sidebar = () => {
 
         </div> */}
         {
-            role === "doctor"? 
+            role === "Doctor"? 
             doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            role === "patient"? 
+            role === "Patient"? 
             patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) :
-            role === "hospitalAdmin"?
+            role === "HospitalAdmin"?
             hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            role === "pharmacyAdmin"?
+            role === "PharmacyAdmin"?
             pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ``
         }
       </div>

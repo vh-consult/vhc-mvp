@@ -29,7 +29,7 @@ export const postMeds = async (clerkId: string, medData: MedicationParams) => {
         if(!user) throw new Error("User not found")
 
         const med = await Medication.create(medData)
-        user.currentMeds.append(med._id)
+        user.currentMeds.push(med._id)
         await user.save()
     } catch (error) {
         handleError(error)

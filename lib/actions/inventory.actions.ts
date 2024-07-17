@@ -49,7 +49,7 @@ export async function addToInventory(
         newDrug.shop = shop._id
         await newDrug.save()
 
-        shop.inventory.append(newDrug._id)
+        shop.inventory.push(newDrug._id)
         await shop.save()
 
         // return JSON.parse(JSON.stringify())
