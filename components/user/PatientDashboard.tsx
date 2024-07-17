@@ -3,7 +3,7 @@ import { FaLevelUpAlt, FaWeight } from 'react-icons/fa'
 import { MdHeight, MdScale } from 'react-icons/md'
 import HighlightCard from '@/components/general/HighlightCard'
 import Medication from '../patient/Medication'
-import Reminder from '../booking/Reminder'
+import Reminder from '../request/Request'
 
 const PatientDashboard = () => {
     const vitals = [

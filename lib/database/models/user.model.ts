@@ -54,10 +54,10 @@ const UserSchema = new Schema(
         ref: 'Order',
       },
     ],
-    reminders: [
+    reauests: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Reminder',
+        ref: 'Request',
       },
     ],
     cart: [

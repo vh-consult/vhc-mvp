@@ -1,5 +1,8 @@
 "use server"
 import { v2 as cloudinary } from "cloudinary";
+import { handleError } from "../utils";
+import { connectToDatabase } from "../database/mongoose";
+import Request from "../database/models/request.model";
 
 const cloudinaryConfig = cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_NAME,
@@ -52,7 +55,7 @@ export const imageUploader = async(image: File, folderName: string) => {
   formData.append('folder', folderName)
   console.log(formData)
   const data = await fetch(endpoint as string, {
-    method: 'POST',
+    method: 'Request',
     body: JSON.stringify(formData)
   }).then(res => res.json())
   console.log(data)
@@ -83,3 +86,25 @@ export const uploader = async (base64Image: string) => {
     uploadStream.end(buffer);
   });
 };
+
+export async function makeRequest(userId:string, request:string) {
+  try {
+    await connectToDatabase()
+
+
+    const message = await Request.create(request)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+export async function sendResponse(requestId:string, response:string) {
+  try {
+    await connectToDatabase()
+
+    const message = await Request.findById(requestId)
+
+  } catch (error) {
+    handleError(error)
+  }
+}
