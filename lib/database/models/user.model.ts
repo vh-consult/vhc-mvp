@@ -1,4 +1,4 @@
-import { Schema, model, models, Document } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const options = { discriminatorKey: "userRole", timestamps: true };
 

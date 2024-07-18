@@ -1,8 +1,8 @@
 import React from 'react'
 
-const AboutComponent = () => {
+const AboutComponent = ({companyDescription}: {companyDescription: string}) => {
   return (
-    <div>AboutComponent</div>
+    <div>{companyDescription}</div>
   )
 }
 

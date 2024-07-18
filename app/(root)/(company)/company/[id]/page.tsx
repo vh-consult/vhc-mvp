@@ -5,9 +5,10 @@ import PostsComponent from '@/components/company/PostsComponent'
 import ServicesComponent from '@/components/company/ServicesComponent'
 import AddToInventory from '@/components/pharmacy/AddToInventory'
 import { CompanyProps, fetchCompanyData } from '@/lib/actions/company.actions'
+import { CompanyParams } from '@/lib/database/models/company.model'
 import { linkSync } from 'fs'
 import Image from 'next/image'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useState, useEffect } from 'react'
 import { BsDot } from 'react-icons/bs'
 
 interface NavComponent {
@@ -15,30 +16,38 @@ interface NavComponent {
   componentToRender: ReactNode
 }
 
-const navsForRendering = [
-  {
-    label: 'About',
-    componentToRender: <AboutComponent/>
-  },
-  {
-    label: 'Services',
-    componentToRender: <ServicesComponent/>
-  },
-  {
-    label: 'Posts',
-    componentToRender: <PostsComponent/>
-  },
-  {
-    label: 'Administrators',
-    componentToRender: <AdminsComponent/>
-  },
-]
 
 
 
-const CompanyProfile = () => {
+
+const CompanyProfile = ({companyId}:{companyId: string}) => {
+  const [companyData, setCompanyData] = useState<CompanyParams>()
+  const navsForRendering = [
+    {
+      label: 'About',
+      componentToRender: <AboutComponent companyDescription={companyData?.description!}/>
+    },
+    {
+      label: 'Services',
+      componentToRender: <ServicesComponent/>
+    },
+    {
+      label: 'Posts',
+      componentToRender: <PostsComponent/>
+    },
+    {
+      label: 'Administrators',
+      componentToRender: <AdminsComponent/>
+    },
+  ]
   const [active, setActive] = useState(navsForRendering[0].label)
-  
+  useEffect(()=>{
+    const request = async () => {
+      const company = await fetchCompanyData(companyId)
+      setCompanyData(company)
+    }
+    request()
+  }, [companyId])
   return(
     <section>
       <div className="w-full">
@@ -46,19 +55,19 @@ const CompanyProfile = () => {
         <div className="w-full flex">
           <Image 
             alt=''
-            src={'/favicon.svg'}
+            src={companyData?.logo!}
             width={100}
             height={100}
           />
           <div className="">
             <h2 className="text-2xl font-medium">
-              Virtual Healthcare Co.
+            {companyData?.name!}
             </h2>
             <p className="text-base">
               Your healthcare in one place
             </p>
             <p className="text-sm opacity-75 flex">
-              Pharmacy <BsDot/> Accra 
+            {companyData?.companyType!} <BsDot/> {companyData?.location!} 
             </p>
           </div>
         </div>
@@ -91,18 +100,11 @@ const CompanyProfile = () => {
   )
 }
 
-const CompanyPage =  ({params}: {params: {id: string}}) => {
-    const [companyData, setCompanyData] = useState()
-
-    const request = async () => {
-      const company = await fetchCompanyData(params.id)
-      setCompanyData(company)
-    }
-    
+const CompanyPage =  ({params}: {params: {id: string}}) => {    
   return (
     
     <main className='w-full min-h-screen'>
-      <CompanyProfile/>
+      <CompanyProfile companyId={params.id}/>
     </main>
   )
 }

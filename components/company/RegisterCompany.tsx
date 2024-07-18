@@ -26,10 +26,10 @@ import { Toast } from '../ui/toast';
 
 
   const setupSchema = z.object({
-    name: z.string().min(1, 'company\'s is required'),
+    name: z.string().min(1, 'company\'s name is required'),
     logo: z.string(),
     location: z.string().min(1, 'Location is required'),
-    description: z.string().min(4, 'Please select gender').max(200),
+    description: z.string().min(4, 'Please type something about your company'),
     type: z.enum(["pharmacy", "hospital"])
   });
 
@@ -88,7 +88,7 @@ const RegisterCompany = () => {
       const companyToCreate = await createCompany(user?.id as string, { ...values, logo: logoUrl })
 
       toast({title: 'Company registered successfully'})
-      router.push(`/company/${companyToCreate._id}/home`)
+      router.push(`/company/${companyToCreate._id}/`)
     } finally {
       setLoading(false);
     }

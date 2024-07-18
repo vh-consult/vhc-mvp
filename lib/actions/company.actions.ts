@@ -21,15 +21,15 @@ export async function createCompany(clerkId: string, companyData: any){
         const userCreatingCompany = await User.findOne({ clerkId });
         if (!userCreatingCompany) throw new Error("User not found");
 
-        let company;
+        let company:any;
         const {type:_, ...registrationData} = companyData 
         console.log(registrationData)
         switch (companyData.type) {
             case "pharmacy":
-                company = await Pharmacy.create({registrationData})
+                company = await Pharmacy.create(registrationData)
                 break;
             case "hospital":
-                company = await Hospital.create({registrationData})
+                company = await Hospital.create(registrationData)
                 break;  
             default:
                 break;
@@ -124,7 +124,7 @@ export async function getAllCompanies() {
 export async function fetchCompanyData (companyId: string) {
     try {
         await connectToDatabase()
-        const company = await Company.findById({_id: companyId})
+        const company = await Company.findById(companyId)
         if (!company) throw new Error("Company not found")
 
         return JSON.parse(JSON.stringify(company))
