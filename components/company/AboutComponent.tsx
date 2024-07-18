@@ -2,7 +2,9 @@ import React from 'react'
 
 const AboutComponent = ({companyDescription}: {companyDescription: string}) => {
   return (
-    <div>{companyDescription}</div>
+    <div>
+      {companyDescription}
+    </div>
   )
 }
 

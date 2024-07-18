@@ -45,6 +45,7 @@ const FormModal = ({
                             {title}
                         </h1>
                         { children }
+
                         <Button className='bg-green-2 focus-visible:ring-0 focus-visible:ring-offset-0'
                             onClick={handleClick}
                         >

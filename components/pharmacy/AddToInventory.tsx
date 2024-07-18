@@ -9,6 +9,7 @@ import { Button } from '../ui/button';
 import { addToInventory } from '@/lib/actions/inventory.actions';
 import { useUser } from '@clerk/nextjs';
 import { toast } from '../ui/use-toast'; 
+import { useEdgeStore } from '@/lib/edgestore';
 
 const initialValues = {
   name: '',
@@ -24,8 +25,14 @@ const AddToInventory = () => {
   const [values, setValues] = useState(initialValues);
   const [show, setShow] = useState(true);
   const {user} = useUser()
-
+  const {edgestore} = useEdgeStore()
+  const [file, setFile] = useState<File>()
+  
   const postDrug = async () => {
+    if (file) {
+      const res = await edgestore.myPublicImages.upload({file})
+      values.image = res.url
+    }
     await addToInventory(user?.id as string, '', values )
     toast({title: 'Drug uploaded successfully'})
   }
@@ -39,10 +46,9 @@ const AddToInventory = () => {
         <Input 
           type='file' 
           accept='image/*' 
+          placeholder='Upload image of drug'
           name='image' 
-          onChange={(e) => setValues(
-            {...values, image: e.target.value}
-          )}
+          onChange={(e) => setFile(e.target.files?.[0])}
         />
         <Input
           className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
