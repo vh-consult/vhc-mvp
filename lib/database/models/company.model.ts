@@ -49,15 +49,6 @@ const PharmacySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-    // opens_at: {
-    //     type: String,
-    //     required: [true, "Please state opening time."],
-    // },
-    // closes_at: {
-    //     type: String,
-    //     required: [true, "Please state closing time."],
-    // },
-    
 });
 
 const HospitalSchema = new Schema({

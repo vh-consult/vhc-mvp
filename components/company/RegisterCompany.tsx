@@ -30,7 +30,7 @@ import { Toast } from '../ui/toast';
     logo: z.string(),
     location: z.string().min(1, 'Location is required'),
     description: z.string().min(4, 'Please type something about your company'),
-    type: z.enum(["pharmacy", "hospital"])
+    type: z.enum(["pharmacy", "hospital", ""])
   });
 
 type FormValues = z.infer<typeof setupSchema>;
@@ -47,7 +47,7 @@ const RegisterCompany = () => {
     name: '',
     location: '',
     description: '',
-    type: role==="HospitalAdmin"? 'hospital': 'pharmacy' || '',
+    type: '',
     logo: ''
   };
   const {edgestore} = useEdgeStore()
@@ -85,6 +85,18 @@ const RegisterCompany = () => {
         console.log(res)
         logoUrl = res.url
       }
+      
+      switch (role) {
+        case "PharmacyAdmin":
+          values.type = "pharmacy"
+          break;
+        case "HospitalAdmin":
+          values.type = "hospital"
+          break;
+        default:
+          break;
+      }
+      console.log(values.type)
       const companyToCreate = await createCompany(user?.id as string, { ...values, logo: logoUrl })
 
       toast({title: 'Company registered successfully'})

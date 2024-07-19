@@ -16,8 +16,6 @@ const DrugSchema = new Schema({
     },
     batchId: {
         type: String,
-        required: [true, "Please  is required"],
-        unique: [true, "Please batch id  is required"]
     },
     catalog: {
         type: String,

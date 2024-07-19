@@ -42,22 +42,22 @@ const FormModal = ({
                     </div>
                 )
             }
-                        <h1 
-                            className={
-                                cn("text-3xl font-bold leading-[42px]", 
-                                className)
-                            }
-                        >
-                            {title}
-                        </h1>
+            <h1 
+                className={
+                    cn("text-3xl font-bold leading-[42px]", 
+                    className)
+                }
+            >
+                {title}
+            </h1>
 
-                        { children }
-                        <SubmitButton 
-                            className='bg-green-2 focus-visible:ring-0 focus-visible:ring-offset-0'
-                            buttonText={buttonText!}
-                            buttonIcon={buttonIcon}
-                            handleClick={handleClick}
-                        />
+            { children }
+            <SubmitButton 
+                className='bg-green-2 focus-visible:ring-0 focus-visible:ring-offset-0'
+                buttonText={buttonText!}
+                buttonIcon={buttonIcon}
+                handleClick={handleClick}
+            />
         </div>
       </DialogContent>
     </Dialog>

@@ -35,6 +35,7 @@ const AddToInventory = () => {
     }
     await addToInventory(user?.id as string, values )
     toast({title: 'Drug uploaded successfully'})
+    
   }
   return (
       <FormModal
@@ -42,6 +43,7 @@ const AddToInventory = () => {
         onClose={() => setShow(false)}
         title="Medicine Inventory Form"
         handleClick={postDrug}
+        buttonText='Upload To Inventory'
       >
         <Input 
           type='file' 

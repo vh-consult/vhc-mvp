@@ -4,8 +4,6 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { Company, Hospital, Pharmacy } from "../database/models/company.model";
 import { User } from "../database/models/user.model";
-import { writeFile } from 'fs/promises'
-import { uploader } from "./general.actions";
 
 export interface CompanyProps {
     name: string;
@@ -23,7 +21,6 @@ export async function createCompany(clerkId: string, companyData: any){
 
         let company:any;
         const {type:_, ...registrationData} = companyData 
-        console.log(registrationData)
         switch (companyData.type) {
             case "pharmacy":
                 company = await Pharmacy.create(registrationData)
@@ -40,6 +37,7 @@ export async function createCompany(clerkId: string, companyData: any){
         await company.save()
         return JSON.parse(JSON.stringify(company));
     } catch (error) {
+        console.log(error)
         handleError(error);
     }
 }
@@ -47,7 +45,7 @@ export async function createCompany(clerkId: string, companyData: any){
 export async function getAllPharmacyShops() {
     try {
         await connectToDatabase();
-        const allPharmacies = await Pharmacy.find();
+        const allPharmacies = await Company.find({companyType: "Pharmacy"});
         return JSON.parse(JSON.stringify(allPharmacies))
     } catch (error) {
         handleError(error)
@@ -57,22 +55,27 @@ export async function getAllPharmacyShops() {
 export async function getPharmacyInventory(pharmacyId: string) {
     try {
         await connectToDatabase()
-        const inventory = await Pharmacy.findById(pharmacyId).populate('inventory')
-        if (!inventory) throw new Error('No pharmacy drugs found')
-        
-        return JSON.parse(JSON.stringify(inventory))
+        const pharmacy = await Company.findById(pharmacyId).populate('inventory');
+
+        if (!pharmacy) throw new Error('No pharmacy found');
+        if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
+
+        return JSON.parse(JSON.stringify(pharmacy.inventory));
     } catch (error) {
-        handleError(error)
+        handleError(error);
     }
 }
 
 export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
     try {
         await connectToDatabase()
-        const filteredInventory = await Pharmacy.findById(pharmacyId).populate('inventory')
-        if (!filteredInventory) throw new Error('No pharmacy drugs found')
+        const pharmacy = await Company.findById(pharmacyId)
+        if (!pharmacy) throw new Error('No pharmacy found')
+
+        const inventory = await pharmacy.inventory.populate('drug')
+        if (!inventory) throw new Error('No pharmacy drugs found')
         
-        
+        const filteredInventory = await inventory.find({name: query})
         return JSON.parse(JSON.stringify(filteredInventory))
     } catch (error) {
         handleError(error)
@@ -82,7 +85,7 @@ export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
 export async function getPharmacyById(pharmacyId: string) {
     try {
         await connectToDatabase();
-        const pharmacyFromDB = await Pharmacy.findById({_id: pharmacyId});
+        const pharmacyFromDB = await Company.findById({_id: pharmacyId});
         if (!pharmacyFromDB) throw new Error("pharmacy shop not found!");
         return JSON.parse(JSON.stringify(pharmacyFromDB))
     } catch (error) {

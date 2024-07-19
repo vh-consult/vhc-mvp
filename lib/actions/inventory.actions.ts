@@ -19,50 +19,45 @@ export async function addToInventory(
     drugData: DrugParams
 ) {
     try {
-        await connectToDatabase()
-        const admin = await User.findOne({clerkId: adminId})
-        if (!admin) throw new Error("User not found")
+        await connectToDatabase();
+        const admin = await User.findOne({ clerkId: adminId }).populate('company');
+        if (!admin) throw new Error("User not found");
 
-        if(admin.userRole === "PharmacyAdmin"){
-            const company = await admin.populate("company")
-            console.log(company)
-            if(company.legth === 0) throw new Error("no company found")
-            if(company.companyType !== "Pharmacy" ) throw new Error("Company is not a pharmacy")
-            
-    
-            let drugToAdd
-            const existingDrugs = await company.populate("inventory")
-            existingDrugs.forEach(async (drug:any) => {
-                if(
-                    drug.shop === company._id && 
-                    drug.name === drugData.name && 
-                    drug.catalog === drugData.catalog
-                ) {
-                    drugToAdd = await Drug.findById({_id: drug._id})
-                    drugToAdd.quantity += drugData.quantity
-                    drugToAdd.amount = drugData.price
-                    drugToAdd.description = drugData.description
-                    drugToAdd.catalog = drugData.catalog
-                    await drugToAdd.save()
-                } 
-                return {message: "Drug in inventory updated"}
-            });
-            const newDrug = await Drug.create(drugData)
-            newDrug.shop = company._id
-            await newDrug.save()
-    
-            company.inventory.push(newDrug._id)
-            await company.save()
-    
-            // return JSON.parse(JSON.stringify())
-            
+        if (admin.userRole === "PharmacyAdmin") {
+            const company = admin.company;
+            if (!company) throw new Error("No company found");
+            if (company.companyType !== "Pharmacy") throw new Error("Company is not a pharmacy");
+
+            let drugToAdd = null;
+            for (let i = 0; i < company.inventory.length; i++) {
+                const drug = await Drug.findById(company.inventory[i]);
+                if (drug && drug.name === drugData.name && drug.catalog === drugData.catalog) {
+                    drugToAdd = drug;
+                    break;
+                }
+            }
+
+            if (drugToAdd) {
+                drugToAdd.quantity += drugData.quantity;
+                drugToAdd.price = drugData.price;
+                drugToAdd.description = drugData.description;
+                await drugToAdd.save();
+                return { message: "Drug in inventory updated" };
+            } else {
+                const newDrug = await Drug.create(drugData);
+                newDrug.shop = company._id;
+                await newDrug.save();
+
+                company.inventory.push(newDrug._id);
+                await company.save();
+
+                return { message: 'Drug added to inventory' };
+            }
         } else {
-            throw new Error("User not a pharmacy admin")
+            throw new Error("User not a pharmacy admin");
         }
-        return {message: 'drug added to inventory'}
-
     } catch (error) {
-        handleError(error)
+        handleError(error);
     }
 }
 

@@ -1,5 +1,5 @@
-import { Pharmacy } from '@/lib/database/models/company.model'
-import React from 'react'
+"use client"
+import React, {useState, useEffect} from 'react'
 import DrugCard from './DrugCard'
 import { fetchFilteredDrugs, getPharmacyInventory } from '@/lib/actions/company.actions'
 
