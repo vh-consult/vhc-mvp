@@ -77,12 +77,12 @@ const DoctorSchema = new Schema({
   clients: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Patient',
+      ref: 'User',
     },
   ],
   affiliateHospital: {
     type: Schema.Types.ObjectId,
-    ref: 'Hospital',
+    ref: 'Company',
   },
   bookings: [
     {
@@ -117,11 +117,11 @@ const PatientSchema = new Schema({
     },
     affiliateHospital: {
       type: Schema.Types.ObjectId,
-      ref: 'Hospital',
+      ref: 'Company',
     },
     personalPhysician: {
       type: Schema.Types.ObjectId,
-      ref: 'Doctor',
+      ref: 'User',
     },
     appointments: [
       {
@@ -134,14 +134,14 @@ const PatientSchema = new Schema({
 const PharmacyAdminSchema = new Schema({
   company: {
     type: Schema.Types.ObjectId,
-    ref: 'Pharmacy',
+    ref: 'Company',
   },
 });
 
 const HospitalAdminSchema = new Schema({
   company: {
     type: Schema.Types.ObjectId,
-    ref: 'Hospital',
+    ref: 'Company',
   },
 });
 

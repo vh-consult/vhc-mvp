@@ -3,11 +3,11 @@ import { Schema, model, models } from "mongoose";
 const BookingSchema = new Schema({
     patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Patient'
+        ref: 'User'
     },
     doctor: {
         type: Schema.Types.ObjectId,
-        ref: 'Doctor'
+        ref: 'User'
     },
     date: {
         type: Date,

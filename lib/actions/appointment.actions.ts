@@ -66,7 +66,7 @@ export async function postConsultationForm(
     } catch (error) {
         handleError(error)
     }
-}
+} 
 
 export async function editConsultationSummary(doctorId:string, formData: any, sessionId: string) {
     try {

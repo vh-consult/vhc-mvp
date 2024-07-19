@@ -33,7 +33,7 @@ const AddToInventory = () => {
       const res = await edgestore.myPublicImages.upload({file})
       values.image = res.url
     }
-    await addToInventory(user?.id as string, '', values )
+    await addToInventory(user?.id as string, values )
     toast({title: 'Drug uploaded successfully'})
   }
   return (

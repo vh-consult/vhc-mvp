@@ -16,7 +16,7 @@ const OrderSchema = new Schema({
     },
     shop: {
         type: Schema.Types.ObjectId,
-        ref: 'Pharmacy'
+        ref: 'Company'
     },
     drugs: [{
         type: Schema.Types.ObjectId,

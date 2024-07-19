@@ -7,6 +7,7 @@ import {
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
+import SubmitButton from '../general/SubmitButton';
 
 interface FormModalProps {
     isOpen: boolean;
@@ -41,19 +42,22 @@ const FormModal = ({
                     </div>
                 )
             }
-                        <h1 className={cn("text-3xl font-bold leading-[42px]", className)}>
+                        <h1 
+                            className={
+                                cn("text-3xl font-bold leading-[42px]", 
+                                className)
+                            }
+                        >
                             {title}
                         </h1>
-                        { children }
 
-                        <Button className='bg-green-2 focus-visible:ring-0 focus-visible:ring-offset-0'
-                            onClick={handleClick}
-                        >
-                            {buttonIcon && (
-                                <Image src={buttonIcon} alt='icon' width={13} height={13} />
-                            )} &nbsp;
-                            {buttonText || 'Done'}
-                        </Button>
+                        { children }
+                        <SubmitButton 
+                            className='bg-green-2 focus-visible:ring-0 focus-visible:ring-offset-0'
+                            buttonText={buttonText!}
+                            buttonIcon={buttonIcon}
+                            handleClick={handleClick}
+                        />
         </div>
       </DialogContent>
     </Dialog>
