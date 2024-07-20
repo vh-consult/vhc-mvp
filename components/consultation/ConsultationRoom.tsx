@@ -24,7 +24,7 @@ import { cn } from '@/lib/utils';
 import EndCallButton from './EndCallButton';
 import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
-import useUserRole from '@/hooks/useUserRole';
+import useDBUser from '@/hooks/useDBUser';
 import { BiComment } from 'react-icons/bi';
 import ConsultationComment from './ConsultationComment';
 
@@ -39,7 +39,7 @@ const ConsultationRoom = () => {
   const { useCallCallingState } = useCallStateHooks();
   const [showConsultationForm, setShowConsultationForm] = useState<boolean>(false)
   const callingState = useCallCallingState();
-  const {role} = useUserRole()
+  const {role} = useDBUser()
   const [showComment, setShowComment] = useState<boolean>(false)
 
   
@@ -122,7 +122,7 @@ const ConsultationRoom = () => {
           </div>
         </button>
         {
-          role==="doctor"? (
+          role==="Doctor"? (
             <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
                 <FaStethoscope/>
             </button>

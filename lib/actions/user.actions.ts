@@ -53,13 +53,16 @@ export async function buyInsurance(clerkId: string, insurancePlanChosen: string)
 }
 
 // READ
-export async function getUserById(clerkId: string) {
+export async function getUser(clerkId: string) {
   try {
     await connectToDatabase();
 
     const user = await User.findOne({ clerkId });
-
     if (!user) throw new Error("User not found");
+    let admin
+    if (user.userRole === "HospitalAdmin" || user.userRole === "PharmacyAdmin") {
+      admin = await user.populate({path: "company", select: "_id name"})
+    }
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
@@ -121,15 +124,6 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     handleError(error)
   }
 }
-
-
-
-//get user by role
-export async function getUserRole(id: string) {
- const user = await getUserById(id)
- return user.userRole;
-}
-
 
 // DELETE
 export async function deleteUser(clerkId: string) {

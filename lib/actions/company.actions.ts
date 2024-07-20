@@ -42,6 +42,25 @@ export async function createCompany(clerkId: string, companyData: any){
     }
 }
 
+export async function getAdminCompany(adminId: string) {
+    try {
+        await connectToDatabase()
+        const userClaimingToBeAdmin = await User.findOne({clerkId: adminId})
+        if (!userClaimingToBeAdmin) throw new Error("User not found")
+        console.log(userClaimingToBeAdmin.userRole)
+        if (
+            userClaimingToBeAdmin.userRole !== "HospitalAdmin" || 
+            userClaimingToBeAdmin.userRole !== "PharmacyAdmin"
+        ) throw new Error("User not an admin of a company")
+
+        const admin = await userClaimingToBeAdmin.populate('company')
+        console.log(admin.company)
+        return {companyId: admin.company._id}
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function getAllPharmacyShops() {
     try {
         await connectToDatabase();

@@ -1,9 +1,10 @@
 "use client"
 
-import useUserRole from '@/hooks/useUserRole'
+import useDBUser from '@/hooks/useDBUser'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ClickableCard from '../general/ClickableCard'
+import { getAdminCompany } from '@/lib/actions/company.actions'
 
 export interface ClickableCardProps {
     title: string;
@@ -21,7 +22,9 @@ export interface ClickableCardDataStructure {
 
 const RenderUserLanding = () => {
     const router = useRouter()
-    const {role, clerkId} = useUserRole()
+    const {role, clerkId, companyId} = useDBUser()
+
+    
     const ClickableCardData: ClickableCardDataStructure = {
         user: [
             {
@@ -54,7 +57,7 @@ const RenderUserLanding = () => {
                 title: 'Company',
                 description: 'Manage your company',
                 imageSrc: '/icons/Company.svg',
-                action: `/company/home`
+                action: `/company/${companyId}`
             },
         ]
     };
@@ -85,7 +88,7 @@ const RenderUserLanding = () => {
                 )))
             }
             {
-                role === "hospitalAdmin" || role === "pharmacyAdmin" ? (
+                role === "HospitalAdmin" || role === "PharmacyAdmin" ? (
                     ClickableCardData.company.map((card, index) => (
                         <ClickableCard 
                             title={card.title}

@@ -3,15 +3,23 @@ import React, {useState, useEffect} from 'react'
 import DrugCard from './DrugCard'
 import { fetchFilteredDrugs, getPharmacyInventory } from '@/lib/actions/company.actions'
 
-const DrugListings = async ({pharmacyId, query}: {pharmacyId: string, query?: string}) => {
-  const drugs = await getPharmacyInventory(pharmacyId)
-  
-  const filteredDrugs = await fetchFilteredDrugs(pharmacyId, query!)
+const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string}) => {
+  const [drugs, setDrugs] = useState<any[]>()
+  const [filteredDrugs, setFilteredDrugs] = useState<any[]>()
+  useEffect(() => {
+    const fetchDrugs = async () => {
+      const allDrugs = await getPharmacyInventory(pharmacyId)
+      setDrugs(allDrugs)
+      const filteredDrugs = await fetchFilteredDrugs(pharmacyId, query!)
+      setFilteredDrugs(filteredDrugs)
+    }
+    fetchDrugs()
+  }, [pharmacyId])
   return (
     <div className='w-[80%] flex flex-wrap'>
 
       {
-        query? (filteredDrugs.map((drug: {
+        query? (filteredDrugs && filteredDrugs.map((drug: {
           image: string, name: string , numberInStock: number, price: number
           }, index: React.Key | null | undefined) => {
           return(
@@ -26,7 +34,7 @@ const DrugListings = async ({pharmacyId, query}: {pharmacyId: string, query?: st
       } 
 
         )) :
-        (drugs.map((drug: {
+        (drugs && drugs.map((drug: {
             image: string, name: string , numberInStock: number, price: number
             }, index: React.Key | null | undefined) => {
             return(

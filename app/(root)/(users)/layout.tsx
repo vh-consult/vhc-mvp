@@ -1,12 +1,12 @@
 "use client"
 import Header, { NavLinkProps } from '@/components/user/Header'
-import useUserRole from '@/hooks/useUserRole'
+import useDBUser from '@/hooks/useDBUser'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const UserLayout = ({children}: {children: React.ReactNode}) => {
   const pathname = usePathname()
-  const {clerkId} = useUserRole()
+  const {clerkId} = useDBUser()
   const consultationSidebarLinks = [
     {
       imgURL: '/icons/Home.svg',

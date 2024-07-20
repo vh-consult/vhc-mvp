@@ -1,5 +1,5 @@
 "use client"
-import useUserRole from '@/hooks/useUserRole'
+import useDBUser from '@/hooks/useDBUser'
 import { getUserById } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {role, clerkId} = useUserRole()
+    const {role, clerkId} = useDBUser()
     
     const patientSidebarElements = {
       top: [
