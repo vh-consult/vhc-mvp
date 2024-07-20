@@ -54,7 +54,7 @@ const UserSchema = new Schema(
         ref: 'Order',
       },
     ],
-    reauests: [
+    requests: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Request',

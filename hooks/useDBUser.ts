@@ -12,13 +12,13 @@ const useDBUser = () => {
     "HospitalAdmin"|"PharmacyAdmin">()
     useEffect(() => {        
         if(!user) return;
-
         async function getUserFromDB() {
-            const userFromDB:UserParams = await getUser(clerkId)
-            return setRole(userFromDB.userRole);
+            const userData:UserParams = await getUser(clerkId)
+            setRole(userData.userRole)
         }
         getUserFromDB()
     }, [user])
+
   return {role, clerkId, companyId}
 }
 

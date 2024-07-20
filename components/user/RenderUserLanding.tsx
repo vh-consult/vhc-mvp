@@ -23,8 +23,6 @@ export interface ClickableCardDataStructure {
 const RenderUserLanding = () => {
     const router = useRouter()
     const {role, clerkId, companyId} = useDBUser()
-
-    
     const ClickableCardData: ClickableCardDataStructure = {
         user: [
             {

@@ -88,12 +88,12 @@ export async function getPharmacyInventory(pharmacyId: string) {
 export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
     try {
         await connectToDatabase()
-        const pharmacy = await Company.findById(pharmacyId)
-        if (!pharmacy) throw new Error('No pharmacy found')
 
-        const inventory = await pharmacy.inventory.populate('drug')
-        if (!inventory) throw new Error('No pharmacy drugs found')
-        
+        const pharmacy = await Company.findById(pharmacyId).populate('inventory');
+        if (!pharmacy) throw new Error('No pharmacy found');
+        if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
+
+        const inventory = pharmacy.inventory
         const filteredInventory = await inventory.find({name: query})
         return JSON.parse(JSON.stringify(filteredInventory))
     } catch (error) {
@@ -104,7 +104,7 @@ export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
 export async function getPharmacyById(pharmacyId: string) {
     try {
         await connectToDatabase();
-        const pharmacyFromDB = await Company.findById({_id: pharmacyId});
+        const pharmacyFromDB = await Company.findById(pharmacyId);
         if (!pharmacyFromDB) throw new Error("pharmacy shop not found!");
         return JSON.parse(JSON.stringify(pharmacyFromDB))
     } catch (error) {
@@ -115,7 +115,7 @@ export async function getPharmacyById(pharmacyId: string) {
 export async function getHospitalById(hospitalId: string) {
     try {
         await connectToDatabase();
-        const hospitalFromDB = await Hospital.findById({_id: hospitalId});
+        const hospitalFromDB = await Hospital.findById(hospitalId);
         if (!hospitalFromDB) throw new Error("hospital shop not found!");
         return JSON.parse(JSON.stringify(hospitalFromDB))
     } catch (error) {

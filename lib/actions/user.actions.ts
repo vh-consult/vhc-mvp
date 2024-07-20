@@ -5,6 +5,9 @@ import { revalidatePath } from "next/cache";
 import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import { cookies } from "next/headers";
+
+const cookieStore = cookies()
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -59,11 +62,20 @@ export async function getUser(clerkId: string) {
 
     const user = await User.findOne({ clerkId });
     if (!user) throw new Error("User not found");
-    let admin
+    let company
     if (user.userRole === "HospitalAdmin" || user.userRole === "PharmacyAdmin") {
-      admin = await user.populate({path: "company", select: "_id name"})
+      const admin = await user.populate({path: "company"})
+      company = admin.company
     }
-    return JSON.parse(JSON.stringify(user));
+    const userToObject = user.toObject()
+    delete userToObject.password
+
+    console.log(company)
+
+    const userData = {...userToObject, ...company}
+    console.log(userData)
+    cookieStore.set("userData", userData, {maxAge: 5*24*60*60*1000})
+    return JSON.parse(JSON.stringify(userData));
   } catch (error) {
     handleError(error);
   }
@@ -79,7 +91,10 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
     });
 
     if (!updatedUser) throw new Error("User update failed");
-    
+    const userData = updatedUser.toObject()
+    delete userData.password
+
+    cookieStore.set('userData', userData, { maxAge: 5 * 24 * 60 * 60 * 1000 })
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
@@ -118,8 +133,8 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
         throw new Error("Invalid role");
     }
 
-
-    return JSON.parse(JSON.stringify(userToActivateAccount));
+    cookieStore.set('userData', userToActivateAccount, { maxAge: 5 * 24 * 60 * 60 * 1000 })
+    return {userRole: userToActivateAccount.userRole};
   } catch (error) {
     handleError(error)
   }

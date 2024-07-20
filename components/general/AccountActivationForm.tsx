@@ -81,7 +81,7 @@ const ActivateAccount = () => {
     setLoading(true);
     try {
       const userToUpdate = await activateAccount(user?.id as string, values);
-      switch (userToUpdate.userRole) {
+      switch (userToUpdate?.userRole) {
         case 'Patient':
         case 'Doctor':
           toast({title: 'Account activated successfully, you are being redirected'})
