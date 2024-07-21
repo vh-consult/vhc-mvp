@@ -60,20 +60,13 @@ export async function getUser(clerkId: string) {
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerkId });
+    const user = await User.findOne({ clerkId })
     if (!user) throw new Error("User not found");
-    let company
-    if (user.userRole === "HospitalAdmin" || user.userRole === "PharmacyAdmin") {
-      const admin = await user.populate({path: "company"})
-      company = admin.company
-    }
+
     const userToObject = user.toObject()
     delete userToObject.password
 
-    console.log(company)
-
-    const userData = {...userToObject, ...company}
-    console.log(userData)
+    const userData = {...userToObject}
     cookieStore.set("userData", userData, {maxAge: 5*24*60*60*1000})
     return JSON.parse(JSON.stringify(userData));
   } catch (error) {

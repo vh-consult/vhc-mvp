@@ -2,24 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { BookingParams } from '@/lib/actions/appointment.actions';
 
-const AppointmentCalendar = ({ color }: {color: string}) => {
+const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [appointments, setAppointments] = useState([
-    {
-      date: new Date(2024, 6, 23),
-      title: 'Check-up',
-      doctor: 'Dr Rins Monroe',
-      time: '12:30pm',
-    },
-    {
-      date: new Date(2024, 5, 24),
-      title: 'Dental Cleaning',
-      doctor: 'Dr Jane Doe',
-      time: '10:00am',
-    },
+  const [appointments, setAppointments] = useState<BookingParams[]>([
+
   ]);
 
+  useEffect(()=> {
+
+  })
+  
   const daysInMonth = (month: number, year: number) => 
     {
     return new Date(year, month + 1, 0).getDate();
@@ -59,7 +53,7 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
           key={day}
           className={`w-full relative h-full p-1 border 
             border-l-0 border-gray-700 ${
-            isToday ? `bg-${color} text-white` : 
+            isToday ? `bg-green-2 text-green-1` : 
             ``
           }`}
         >
@@ -69,13 +63,13 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
             <div className="absolute bottom-2 flex
             flex-col">
               <span className={`text-sm font-medium 
-                ${isToday ? 'text-white' : `text-${color}`}`}>
-                {appointment.title}
+                ${isToday ? 'text-green-1' : `text-green-2`}`}>
+                {appointment.channel}
               </span>
               <span className="text-lg ">{
               appointment.doctor}</span>
               <span className="text-[12px] font-semibold">
-                {appointment.time}</span>
+                {appointment.date.toLocaleTimeString()}</span>
             </div>
           )}
         </td>
@@ -111,19 +105,19 @@ const AppointmentCalendar = ({ color }: {color: string}) => {
   };
 
   return (
-    <div className="w-full h-screen rounded-t-xl p-4 text-white">
+    <div className="w-full min=h-screen rounded-t-xl p-4 text-green-1">
       <div className="w-full mt-[1%] mb-[2%] flex items-center justify-between">
         <span className="text-lg font-medium">Calendar</span>
         <span className="">
           {currentDate.toLocaleString('default', { month: 'long' })}, {currentDate.getFullYear()}
         </span>
         <div className='flex '>
-          <span className="flex-center mr-2 flex border rounded-md border-gray-600  h-[30px] w-[30px]">
+          <span className="flex-center mr-2 flex border rounded-md border-gray-600 cursor-pointer  h-[30px] w-[30px]">
             <AiOutlineLeft
               onClick={handlePreviousMonth}
             />
           </span>
-          <span className="flex-center flex border rounded-md border-gray-600  h-[30px] w-[30px]">
+          <span className="flex-center flex border rounded-md border-gray-600 cursor-pointer  h-[30px] w-[30px]">
             <AiOutlineRight
               onClick={handleNextMonth}
             />

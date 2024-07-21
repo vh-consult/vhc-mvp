@@ -4,6 +4,7 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { toast } from '../ui/use-toast'
+import Loader from '../general/Loader'
 
 interface DrugPrescriptionParams {
   medicine: string;
@@ -19,18 +20,28 @@ const initialValues = {
 }
 const PrescriptionForm = () => {
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
+  const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
-  const handleNew = async () => {
-    
+  const handleDone = async () => {
+    setLoading(true)
   }
   const handlePush = async (e: FormEvent, values: DrugPrescriptionParams) => {
     e.preventDefault()
+    const {caution, dose, duration, medicine} = values
+    if(caution === '' || dose === null || duration === null || medicine === '') {
+      throw new Error(
+        `${
+          toast({title: "Fill all form fields with valid data"}) 
+        }`
+      )
+    }
+
     drugsAdded.push(values)
     toast({title: "Drug appended"})
     setValues(initialValues)
   }
   return (
-    <div className="w-[350px] h-[300px] bg-dark-1 p-3">
+    <div className="w-[350px] min-h-[350px] bg-dark-1 p-3">
       <h2 className="text-lg">
         Add Presciption
       </h2>
@@ -54,8 +65,8 @@ const PrescriptionForm = () => {
               <div key={index} className=' flex flex-between bg-dark-3 text-sm'>
                 <span className="max-w-[40%]">{drug.medicine}</span>
                 <span className="max-w-[30%]">{drug.caution}</span>
-                <span className="w-[15%]">{drug.duration}</span>
-                <span className="w-[15%]">{drug.dose}</span>
+                <span className="max-w-[15%]">{drug.duration}</span>
+                <span className="max-w-[15%]">{drug.dose}</span>
               </div>
             ))
           }
@@ -108,14 +119,14 @@ const PrescriptionForm = () => {
           className='w-full border-2 border-dashed border-green-1 hover:bg-green-1 hover:text-green-4'
           onClick={(e) => handlePush(e, values)}
         >
-          Push drug
+          Add To Prescription
         </Button>
-        <Button
-          className='w-full bg-blue-1'
-          onClick={handleNew}
-        >
-          Done
-        </Button>
+          <Button
+            className='w-full bg-blue-1'
+            onClick={handleDone}
+          >
+            Done
+          </Button>
       </form>
 
     </div>

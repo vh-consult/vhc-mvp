@@ -13,9 +13,9 @@ interface MedicationParams {
     duration?: string;
 }
 
-interface BookingParams {
+export interface BookingParams {
     date: Date;
-    problem_statement: string;
+    problem_statement?: string;
     channel: 'virtual'| 'inPerson'| 'lab';
     doctor?: string;
 }
@@ -132,20 +132,51 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
         })
         if (!userCancelingBooking) throw new Error("User not found")
         if (!userCancelingBooking.booking.includes(sessionId)) throw new Error("Booking session not found in user's bookings")
+
+        const booking = await Booking.findById(sessionId)
+        if (!booking) throw new Error("Booking not found")
+        
+        booking.status = "canceled"
+        await booking.save()
+
+        return {message: "Booking canceled"}
     } catch (error) {
         handleError(error)
     }
 }
 
 export async function searchDoctor() {
-    
+    try {
+        await connectToDatabase()
+    } catch (error) {
+      handleError(error)  
+    }
+}
+
+export async function fetchBookings(clerkId:string) {
+    try {
+        await connectToDatabase()
+        const user = await User.findOne({clerkId }).populate("bookings")
+        if (!user) throw new Error("User not found")
+        
+        const bookings = user.bookings
+        return JSON.parse(JSON.stringify(bookings))
+    } catch (error) {
+      handleError(error)  
+    }
 }
 
 export async function getMessages(clerkId: string) {
-    const user = await User.findOne({clerkId})
-    if (!user) throw new Error("User not found")
-    const messages = user.populate('messages')
+    try {
+        await connectToDatabase()
+        const user = await User.findOne({clerkId}).populate('messages')
+        if (!user) throw new Error("User not found")
+        const messages = user.messages
+    
+        return JSON.parse(JSON.stringify(messages))
+    } catch (error) {
+      handleError(error)  
+    }
 
-    return JSON.parse(JSON.stringify(messages))
 }
 

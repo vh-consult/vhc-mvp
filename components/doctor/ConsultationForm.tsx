@@ -5,6 +5,8 @@ import { Textarea } from '../ui/textarea'
 import Loader from '../general/Loader'
 import { postConsultationForm } from '@/lib/actions/appointment.actions'
 import { useUser } from '@clerk/nextjs'
+import PrescriptionForm from '../pharmacy/PrescriptionForm'
+import { BiPlus } from 'react-icons/bi'
 
 const ConsultationForm = () => {
   const initialValues = {
@@ -44,11 +46,7 @@ const ConsultationForm = () => {
         className="my-2 w-full bg-dark-3 h-[80px] border-none"
         onChange={(e) => setValues({ ...values, diagnosis: e.target.value })}
     />
-    <Textarea 
-        placeholder={`Enter prescription here`}
-        className="my-2 w-full bg-dark-3 h-[80px] border-none"
-        // onChange={(e) => setValues({ ...values, prescription: e.target.value })}
-    />
+    <Button>Add Prescription <BiPlus/> </Button>
     <Button className='w-full mt-3 rounded-md 
     capitalize hover:shadow-md bg-green-2 text-whitish-violet 
     font-medium text-sm ' onClick={addConsultationPost}>

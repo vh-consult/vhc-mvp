@@ -16,6 +16,9 @@ declare type UserParams = {
   contact: string;
   userRole: "Patient" | "Doctor" | "HospitalAdmin" | "PharmacyAdmin";
   country: string;
+  company?: string;
+  bookings?: any[];
+  requests?: any[]
 };
 
 declare type CreateDoctorParams = {
