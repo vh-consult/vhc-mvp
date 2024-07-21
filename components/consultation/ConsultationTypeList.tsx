@@ -27,9 +27,9 @@
 // const ClickableCards: Array<ClickableCardProps> = [
 //   {
 //     title: 'New Consultation',
-//     description: 'Start an instant Consultation',
+//     description: 'Start an Emergency Consultation',
 //     imageSrc: '/icons/add-Consultation.svg',
-//     action: 'isInstantConsultation'
+//     action: 'isEmergencyConsultation'
 //   },
 //   {
 //     title: 'Join Consultation',
@@ -45,7 +45,7 @@
 //   }
 // ]
 
-// type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isInstantConsultation' | undefined
+// type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isEmergencyConsultation' | undefined
 
 // const ConsultationTypeList = () => {
 //   const router = useRouter();
@@ -68,7 +68,7 @@
 //       if (!call) throw new Error('Failed to create Consultation');
 //       const startsAt =
 //         values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-//       const description = values.description || 'Instant Consultation';
+//       const description = values.description || 'Emergency Consultation';
 //       await call.getOrCreate({
 //         data: {
 //           starts_at: startsAt,
@@ -212,9 +212,9 @@
 //       </FormModal>
 
 //       <FormModal
-//         isOpen={ConsultationState === 'isInstantConsultation'}
+//         isOpen={ConsultationState === 'isEmergencyConsultation'}
 //         onClose={() => setConsultationState(undefined)}
-//         title="Start an Instant Consultation"
+//         title="Start an Emergency Consultation"
 //         className="text-center"
 //         buttonText="Start Consultation"
 //         handleClick={createConsultation}
@@ -239,6 +239,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
+import { newBooking } from '@/lib/actions/appointment.actions';
 
 const initialValues = {
   dateTime: new Date(),
@@ -249,12 +250,12 @@ const initialValues = {
 };
 
 const ClickableCards = [
-  { title: 'New Consultation', description: 'Start an instant Consultation', imageSrc: '/icons/add-meeting.svg', action: 'isInstantConsultation' },
+  { title: 'New Consultation', description: 'Start an emergency Consultation', imageSrc: '/icons/add-meeting.svg', action: 'isEmergencyConsultation' },
   { title: 'Join Consultation', description: 'via invitation link', imageSrc: '/icons/join-meeting.svg', action: 'isJoiningConsultation' },
   { title: 'Schedule Consultation', description: 'Plan your Consultation', imageSrc: '/icons/schedule.svg', action: 'isSchedulingConsultation' }
 ];
 
-type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isInstantConsultation' | undefined;
+type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isEmergencyConsultation' | undefined;
 
 const ConsultationTypeList = () => {
   const router = useRouter();
@@ -281,7 +282,7 @@ const ConsultationTypeList = () => {
       const call = client.call('default', id);
       if (!call) throw new Error('Failed to create Consultation');
       const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-      const description = values.description || 'Instant Consultation';
+      const description = values.description || 'Emergency Consultation';
       await call.getOrCreate({
         data: {
           starts_at: startsAt,
@@ -290,6 +291,7 @@ const ConsultationTypeList = () => {
       });
       
       setCallDetail(call);
+      await newBooking(user?.id, values)
       if (!values.description) {
         router.push(`/user/consultation/room/${call.id}`);
       }
@@ -411,9 +413,9 @@ const ConsultationTypeList = () => {
       </FormModal>
 
       <FormModal
-        isOpen={ConsultationState === 'isInstantConsultation'}
+        isOpen={ConsultationState === 'isEmergencyConsultation'}
         onClose={() => setConsultationState(undefined)}
-        title="Start an Instant Consultation"
+        title="Start an Emergency Consultation"
         className="text-center"
         buttonText="Start Consultation"
         handleClick={createConsultation}

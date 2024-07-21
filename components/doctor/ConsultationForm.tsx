@@ -11,7 +11,7 @@ const ConsultationForm = () => {
     complaint: '',
     diagnosis: '',
     examination: '',
-    prescription: '',
+    prescription: [],
   };
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState<boolean>(false)
@@ -47,7 +47,7 @@ const ConsultationForm = () => {
     <Textarea 
         placeholder={`Enter prescription here`}
         className="my-2 w-full bg-dark-3 h-[80px] border-none"
-        onChange={(e) => setValues({ ...values, prescription: e.target.value })}
+        // onChange={(e) => setValues({ ...values, prescription: e.target.value })}
     />
     <Button className='w-full mt-3 rounded-md 
     capitalize hover:shadow-md bg-green-2 text-whitish-violet 

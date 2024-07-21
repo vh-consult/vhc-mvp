@@ -3,7 +3,7 @@ import { Schema, model, models, Document } from "mongoose";
 export interface MedicationParams extends Document {
     drug: string;
     dose: number;
-    condition?: string;
+    caution?: string;
     status:string;
     duration?: string;
     prescribed_by?: Schema.Types.ObjectId
@@ -18,9 +18,9 @@ const MedicationSchema = new Schema<MedicationParams>({
         type: Number,
         required: [true, "Input drug dosage"],
     },
-    condition: {
+    caution: {
         type: String,
-        required: [true, "condition for taking drugs is required"],
+        required: [true, "caution for taking drugs is required"],
     },
     status: {
         type: String,

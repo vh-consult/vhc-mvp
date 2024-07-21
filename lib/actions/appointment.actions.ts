@@ -2,14 +2,14 @@
 
 import Booking from "../database/models/booking.model";
 import Consultation from "../database/models/consultation.model";
-import { Doctor, Patient, User } from "../database/models/user.model";
+import { User } from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
 interface MedicationParams {
     drug: string;
     dose: number;
-    condition: string;
+    caution: string;
     duration?: string;
 }
 
@@ -21,9 +21,10 @@ interface BookingParams {
 }
 
 interface ConsultationParams {
-    medication: Array<MedicationParams>;
+    prescription: Array<MedicationParams>;
     summary?: string;
     diagnosis: string;
+    examination?: string
 }
 
 
@@ -31,7 +32,7 @@ export async function postConsultationForm(
     doctorId:string, 
     formData: ConsultationParams, 
     patientId: string,
-    bookingId: string
+    bookingId?: string
 ) {
     try {
         await connectToDatabase()
