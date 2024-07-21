@@ -6,7 +6,7 @@ import { getAllPharmacyShops } from '@/lib/actions/company.actions'
 
 
 interface ShopProps {
-  image: string;
+  logo: string;
   name: string;
   distance: string;
   isOpen: boolean;
@@ -25,7 +25,7 @@ const PharmacyHomePage = async () => {
               name={shop.name}
               distance_by_car={6}
               distance_by_walk={10}
-              imageSrc={shop.image}
+              imageSrc={shop.logo}
               location={shop.location}
               number_of_stars={3.8}
             />

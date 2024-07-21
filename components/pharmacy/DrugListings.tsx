@@ -35,15 +35,16 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
 
         )) :
         (drugs && drugs.map((drug: {
-            image: string, name: string , numberInStock: number, price: number
+            imageUrl: string, name: string , numberInStock: number, price: number
             }, index: React.Key | null | undefined) => {
             return(
                 <DrugCard
                     name={drug.name}
+
                     key={index}
-                    numberInStock={3}
-                    imageSRC={drug.image}
-                    price={3}
+                    numberInStock={drug.numberInStock}
+                    imageSRC={drug.imageUrl}
+                    price={drug.price}
               />
             )
         }))

@@ -3,7 +3,7 @@ import { BiCar } from 'react-icons/bi'
 import { BsStarFill } from 'react-icons/bs';
 import { GoLocation } from 'react-icons/go'
 import { PiPerson } from 'react-icons/pi'
-import CldImage from '../general/CldImage';
+import Image from 'next/image';
 
 interface PharmacyShopCardProps {
   imageSrc: string;
@@ -26,7 +26,7 @@ const ShopCard = ({
     <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
     -200 rounded-xl hover:shadow-lg">
     <div className="h-[55%] w-full ">
-        <CldImage
+        <Image
           alt='' 
           width={100}
           height={100}

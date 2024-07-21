@@ -1,5 +1,6 @@
 import React from 'react'
 import DrugListings from '../pharmacy/DrugListings'
+import InventoryHeader from './InventoryHeader'
 
 const InventoryComponent = ({companyId}: {companyId: string}) => {
   const headers = [
@@ -9,15 +10,9 @@ const InventoryComponent = ({companyId}: {companyId: string}) => {
   ]
   return (
     <div>
-      <div className="">
-        <span className=""></span>
-        <div className="">
-          <span className=""></span>
-        </div>
-      </div>
-
-     <DrugListings pharmacyId={companyId}  />
-     <div className=""></div>
+      <InventoryHeader/>
+      <DrugListings pharmacyId={companyId}  />
+      <div className=""></div>
     </div>
   )
 }

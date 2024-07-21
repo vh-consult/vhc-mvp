@@ -93,7 +93,7 @@ const RenderUserLanding = () => {
                             description={card.description}
                             imgURL={card.imageSrc}
                             handleClick={() => { router.push(card.action)}}
-                            className='bg-dark-1 hover:bg-dark-4 text-green-1 w-[100%]'
+                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
                             key={index}
                         />
         

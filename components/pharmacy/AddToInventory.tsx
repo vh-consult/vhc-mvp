@@ -21,9 +21,9 @@ const initialValues = {
 };
 
 
-const AddToInventory = () => {
+const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   const [values, setValues] = useState(initialValues);
-  const [show, setShow] = useState(true);
+  const [open, setOpen] = useState(show);
   const {user} = useUser()
   const {edgestore} = useEdgeStore()
   const [file, setFile] = useState<File>()
@@ -39,8 +39,8 @@ const AddToInventory = () => {
   }
   return (
       <FormModal
-        isOpen={show}
-        onClose={() => setShow(false)}
+        isOpen={open}
+        onClose={onClose}
         title="Medicine Inventory Form"
         handleClick={postDrug}
         buttonText='Upload To Inventory'
