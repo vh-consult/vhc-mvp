@@ -1,9 +1,11 @@
+"use client"
 import React from 'react'
 import { BiCar } from 'react-icons/bi'
 import { BsStarFill } from 'react-icons/bs';
 import { GoLocation } from 'react-icons/go'
 import { PiPerson } from 'react-icons/pi'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface PharmacyShopCardProps {
   imageSrc: string;
@@ -12,6 +14,7 @@ interface PharmacyShopCardProps {
   distance_by_car: number;
   distance_by_walk: number;
   number_of_stars: number;
+  _id: string
 }
 
 const ShopCard = ({
@@ -20,10 +23,12 @@ const ShopCard = ({
   location,
   distance_by_walk,
   distance_by_car,
-  number_of_stars
+  number_of_stars,
+  _id
 }: PharmacyShopCardProps) => {
+  const router = useRouter()
   return (
-    <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
+    <div onClick={()=> router.push(`/pharmacy/shop/${_id}`)} className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
     -200 rounded-xl hover:shadow-lg">
     <div className="h-[55%] w-full ">
         <Image

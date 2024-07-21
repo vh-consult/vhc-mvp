@@ -23,7 +23,6 @@ const initialValues = {
 
 const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   const [values, setValues] = useState(initialValues);
-  const [open, setOpen] = useState(show);
   const {user} = useUser()
   const {edgestore} = useEdgeStore()
   const [file, setFile] = useState<File>()
@@ -39,7 +38,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   }
   return (
       <FormModal
-        isOpen={open}
+        isOpen={show}
         onClose={onClose}
         title="Medicine Inventory Form"
         handleClick={postDrug}
@@ -65,10 +64,10 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
             <SelectValue placeholder="Select catalog" />
           </SelectTrigger>
           <SelectContent position="popper" className='bg-dark-3 text-green-1'>
-            <SelectItem value="inPersonGeneral">Painkiller</SelectItem>
-            <SelectItem value="virtual">Appetizer</SelectItem>
-            <SelectItem value="lab">Anti-malaria</SelectItem>
-            <SelectItem value="specialBooking">Energizer</SelectItem>
+            <SelectItem value="painkiller">Painkiller</SelectItem>
+            <SelectItem value="appetizer">Appetizer</SelectItem>
+            <SelectItem value="antiMalaria">Anti-malaria</SelectItem>
+            <SelectItem value="energizer">Energizer</SelectItem>
           </SelectContent>
         </Select>
         <Textarea

@@ -11,8 +11,6 @@ const InventoryComponent = ({companyId}: {companyId: string}) => {
   return (
     <div>
       <InventoryHeader/>
-      <DrugListings pharmacyId={companyId}  />
-      <div className=""></div>
     </div>
   )
 }

@@ -26,9 +26,9 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
               <DrugCard
                   name={drug.name}
                   key={index}
-                  numberInStock={3}
+                  numberInStock={drug.numberInStock}
                   imageSRC={drug.image}
-                  price={3}
+                  price={drug.price}
             />
           )
       } 
@@ -40,7 +40,6 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
             return(
                 <DrugCard
                     name={drug.name}
-
                     key={index}
                     numberInStock={drug.numberInStock}
                     imageSRC={drug.imageUrl}
