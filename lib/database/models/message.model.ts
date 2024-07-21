@@ -1,21 +1,21 @@
 import { Schema, model, models } from "mongoose";
 
-const RequestSchema = new Schema({
+const MessageSchema = new Schema({
     sender: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    message: {
+    message: [{
         type: String,
         required: true
-    },
+    }],
     receiver: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    response: {
+    response: [{
         type: String,
-    },
+    }],
     isRead: {
         type: Boolean,
         default: false
@@ -24,5 +24,5 @@ const RequestSchema = new Schema({
     timestamps: true
 })
 
-const Request = models?.Request ||  model("Request", RequestSchema);
-export default Request
+const Message = models?.Message ||  model("Message", MessageSchema);
+export default Message

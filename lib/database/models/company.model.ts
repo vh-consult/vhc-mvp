@@ -5,8 +5,10 @@ export interface CompanyParams extends Document {
     location: string;
     isVerified: boolean;
     admins: Schema.Types.ObjectId[];
-    logo: string;
+    logo?: string;
+    tagline?: string;
     description: string;
+    services?: string[];
     posts?: Schema.Types.ObjectId[];
     companyType: "Hospital" | "Pharmacy"
   }
@@ -20,6 +22,9 @@ const CompanySchema = new Schema<CompanyParams>({
         type: String,
     },
     logo: {
+        type: String,
+    },
+    tagline: {
         type: String,
     },
     admins: [{
@@ -63,7 +68,7 @@ const HospitalSchema = new Schema({
     description: {
         type: String,
     },
-    specialties: [{
+    services: [{
         type: String,
     }],
     booked_appointments: [

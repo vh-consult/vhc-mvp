@@ -54,16 +54,22 @@ const UserSchema = new Schema(
         ref: 'Order',
       },
     ],
-    requests: [
+    messages: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Request',
+        ref: 'Message',
       },
     ],
     cart: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Drug',
+      },
+    ],
+    bookings: [
+      {
+        type: Schema.Types.ObjectId,
+        refPath: 'Bookings',
       },
     ],
   },
@@ -84,12 +90,6 @@ const DoctorSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Company',
   },
-  bookings: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Booking',
-    },
-  ],
   consultationHistory: [
     {
       type: Schema.Types.ObjectId,
@@ -122,13 +122,7 @@ const PatientSchema = new Schema({
     personalPhysician: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-    },
-    appointments: [
-      {
-        type: Schema.Types.ObjectId,
-        refPath: 'Bookings',
-      },
-    ],
+    }
 });
 
 const PharmacyAdminSchema = new Schema({

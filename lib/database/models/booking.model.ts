@@ -26,26 +26,11 @@ const BookingSchema = new Schema({
         default: 'pending'
     },
 },{
-    discriminatorKey: "BooingStatus",
     timestamps: true
 })
 
-const ConsultationSchema = new Schema({
-    medication: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Medication'
-    }],
-    summary: {
-        type: String,
-    },
-    diagnosis: [{
-        type: String,
-        required: true
-    }]
-})
 
 const Booking = models?.Booking ||  model("Booking", BookingSchema);
-const Consultation = models?.Consultation || Booking.discriminator("Consultation", ConsultationSchema);
 
 
-export {Consultation, Booking}
+export default Booking

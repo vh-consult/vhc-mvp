@@ -90,7 +90,7 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
                             {companyData?.name!}
                         </h2>
                         <p className="text-base">
-                            Your healthcare in one place
+                            {companyData?.tagline}
                         </p>
                         <p className="text-sm opacity-75 flex">
                             {companyData?.companyType!} <BsDot/> {companyData?.location!} 

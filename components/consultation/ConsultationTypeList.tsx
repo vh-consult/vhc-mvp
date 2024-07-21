@@ -288,6 +288,7 @@ const ConsultationTypeList = () => {
           custom: { description },
         },
       });
+      
       setCallDetail(call);
       if (!values.description) {
         router.push(`/user/consultation/room/${call.id}`);

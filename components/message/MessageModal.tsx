@@ -1,6 +1,5 @@
 "use client"
 import React, {useState} from 'react'
-import { RequestCardProps } from './RequestCardAndList'
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import { MdReply } from 'react-icons/md'
@@ -14,7 +13,7 @@ import { Input } from '../ui/input'
 import { sendResponse } from '@/lib/actions/general.actions'
 import { toast } from '../ui/use-toast'
 
-interface RequestModalProps {
+interface MessageModalProps {
   isOpen: boolean;
   onClose: () => void;
   imageUrl: string;
@@ -24,9 +23,9 @@ interface RequestModalProps {
   // handleClick?: () => void;
 }
 
-const RequestModal = ({
+const MessageModal = ({
   imageUrl, sender, message, time, isOpen, onClose
-}: RequestModalProps) => {
+}: MessageModalProps) => {
   const [showInputField ,setShowInputField] = useState<boolean>(false)
   const [response, setResponse] = useState<string>('')
 
@@ -91,4 +90,4 @@ const RequestModal = ({
   )
 }
 
-export default RequestModal
+export default MessageModal
