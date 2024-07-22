@@ -7,18 +7,22 @@ const BookingSchema = new Schema({
     },
     doctor: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: false
     },
     date: {
         type: Date,
-        required: true
+        required: true,
+        default: new Date()
     },
     problem_statement: {
         type: String,
+        default: 'Emergency'
     },
     channel: {
         type: String,
-        enum: ['virtual', 'inPerson', 'lab']
+        enum: ['virtual', 'inPerson', 'lab'],
+        default: 'virtual'
     },
     status: {
         type: String,

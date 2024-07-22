@@ -5,7 +5,7 @@ const Home = () => {
 
 
   return (
-    <section className='flex flex-center size-full flex-col gap-10 text-green-1'>
+    <section className='flex justify-center size-full flex-col gap-10 text-green-1'>
       <ConsultationTypeList/>
     </section>
   )
