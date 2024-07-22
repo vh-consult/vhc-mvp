@@ -61,33 +61,54 @@ export async function addToInventory(
     }
 }
 
-export async function removeFromInventory(adminId: string, drugId: string, shopId: string) {
+export async function removeFromInventory(clerkId: string, drugId: string, shopId: string) {
     try {
         await connectToDatabase()
-        const admin = await PharmacyAdmin.findById({_id: adminId})
+        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
         if (!admin) throw new Error("Admin not found")
 
-        const shop = await Pharmacy.findById({_id: shopId})
+        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
         if (!shop) throw new Error("Shop not found")
 
-        if (!shop.admins.includes(adminId)) throw new Error("Not an admin of pharmacy")
+        if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
         
         } catch (error) {
         handleError(error)
     }
 }
 
-export async function updateInventory(adminId: string, shopId: string) {
+export async function updateInventory(clerkId: string, shopId: string) {
     try {
         await connectToDatabase()
-        const admin = await PharmacyAdmin.findById({_id: adminId})
+        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
         if (!admin) throw new Error("Admin not found")
 
-        const shop = await Pharmacy.findById({_id: shopId})
+        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
         if (!shop) throw new Error("Shop not found")
 
-        if (!shop.admins.includes(adminId)) throw new Error("Not an admin of pharmacy")
+        if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
         
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function getDrug(drugId: string , shopId: string) {
+    try {
+        await connectToDatabase()
+
+        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"}).populate("inventory")
+        if (!shop) throw new Error("Shop not found")
+
+        const inventory = shop.inventory
+        let drug
+        if (inventory.includes(drugId)) {
+            drug = await Drug.findById(drugId)
+
+        }else {
+            throw new Error("Drug not in shop inventory")
+        }
+        return JSON.parse(JSON.stringify(drug))
     } catch (error) {
         handleError(error)
     }
