@@ -81,7 +81,7 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/user/${clerkId}/consultation`,
+              route: `/consultation/home`,
               label: `Consultation`,
               icon: MdMeetingRoom
           },
@@ -117,7 +117,7 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/user/${clerkId}/consultation`,
+              route: `/consultation/home`,
               label: `Consultation`,
               icon: MdMeetingRoom
           },

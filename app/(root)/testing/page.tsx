@@ -9,7 +9,6 @@ import React, { useState } from 'react'
 const page = () => {
   return (
     <section className='w-full min-h-screen flex flex-center bg-dark-2 text-green-1'>
-      <AppointmentCalendar/>
       <ItemPreview companyId='' itemId=''/>
     </section>
   )

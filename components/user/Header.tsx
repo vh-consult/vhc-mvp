@@ -48,7 +48,7 @@ const Header = ({navigations}: HeaderProps) => {
                   <li key={index}>
                     <Link
                       href={nav.route}
-                      className={` font-normal text-sm hover:text-blue-1 ${activeLink ? `text-blue-1 font-semibold`: ``}`}
+                      className={` font-normal text-sm hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
                     >
                       {nav.label}
                     </Link>
