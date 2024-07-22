@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { AiOutlineHistory } from 'react-icons/ai'
 import { BiMenu } from 'react-icons/bi'
-import { BsDatabase, BsPeople } from 'react-icons/bs'
+import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
 import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
@@ -21,7 +21,7 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {role, clerkId} = useDBUser()
+    const {role, clerkId, companyId} = useDBUser()
     
     const patientSidebarElements = {
       top: [
@@ -31,9 +31,9 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/user/${clerkId}/consultation`,
-            label: `Consultation`,
-              icon: MdMeetingRoom
+              route: `/user/${clerkId}/affiliation`,
+              label: `Affiliation`,
+              icon: BsHospital
           },
           {
               route: `/user/${clerkId}/bookings`,
@@ -56,8 +56,8 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/user/${clerkId}/consultation`,
-              label: `Consultation`,
+              route: `/company/${companyId}/`,
+              label: `Company`,
               icon: MdMeetingRoom
           },
           {

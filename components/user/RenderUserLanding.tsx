@@ -47,7 +47,7 @@ const RenderUserLanding = () => {
                 title: 'Consultation',
                 description: 'Visit consultation room',
                 imageSrc: '/icons/consultation.svg',
-                action: `/user/${clerkId}/consultation/home`
+                action: `/consultation/home`
             },
         ],
         company: [

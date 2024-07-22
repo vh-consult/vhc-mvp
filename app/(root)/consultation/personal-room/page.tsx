@@ -50,7 +50,7 @@ const PersonalRoom = () => {
       });
     }
 
-    router.push(`/user/consultation/room/${consultationId}?personal=true`);
+    router.push(`/consultation/room/${consultationId}?personal=true`);
   };
 
   const consultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/consultation/room/${consultationId}?personal=true`;
