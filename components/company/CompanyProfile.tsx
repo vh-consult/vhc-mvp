@@ -71,7 +71,7 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
             }
         }
         request()
-    }, [companyId])
+    }, [companyId, navsForRendering])
 
     return (
         <section className='w-full h-full flex flex-col flex-between p-4'>

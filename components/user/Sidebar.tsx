@@ -1,6 +1,6 @@
 "use client"
 import useDBUser from '@/hooks/useDBUser'
-import { getUserById } from '@/lib/actions/user.actions'
+import { getUser } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

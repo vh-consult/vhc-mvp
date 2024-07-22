@@ -14,7 +14,7 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
       setFilteredDrugs(filteredDrugs)
     }
     fetchDrugs()
-  }, [pharmacyId])
+  }, [pharmacyId, query])
   return (
     <div className='w-[80%] flex flex-wrap'>
 

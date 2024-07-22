@@ -52,7 +52,7 @@ const MapComponent: FC = () => {
 
  useEffect(() => {
         console.log(markerRef.current)
-    }, [markerRef.current])
+    })
     const flyToMarker = (coordinates: [number, number], zoom: number) => {
         if (coordinates && typeof coordinates[0] !== "undefined") {
             map.flyTo(coordinates, zoom, {
@@ -74,7 +74,7 @@ const MapComponent: FC = () => {
                 flyToMarker(markerData.coordinates, 11)
             }
         }
-    }, [markerData])
+    }, [markerData, flyToMarker])
     return null;
   }
   const handleSubmit = async () => {

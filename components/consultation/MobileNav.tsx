@@ -3,9 +3,16 @@
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
-import { consultationSidebarLinks } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+
+const consultationSidebarLinks = [
+  {
+    route: '',
+    label: '',
+    imgURL: ''
+  }
+]
 
 const MobileNav = () => {
   const pathname = usePathname()

@@ -129,7 +129,7 @@ const RegisterCompany = () => {
         </div>
         <div className="flex flex-col">
           <Label className='mb-2'>
-            Company's Name
+            Company&apos;s Name
           </Label>
           <Input
             type='text'
@@ -145,7 +145,7 @@ const RegisterCompany = () => {
         </div>
         <div className="flex flex-col">
           <Label className='mb-2'>
-          Company's location
+          Company&apos;s location
           </Label>
           <Input
             type='text'
