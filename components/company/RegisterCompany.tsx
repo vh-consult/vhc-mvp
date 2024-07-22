@@ -20,7 +20,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Loader from '../general/Loader';
-import { imageUploader } from '@/lib/actions/general.actions';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
 

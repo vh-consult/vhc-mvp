@@ -20,6 +20,7 @@ const AllBlogs = () => {
         {
             blogs.map((blog, index) => (
                 <CustomBlogCard
+                  key={index}
                   snippet={blog.content.slice(0, 60)}
                   coverImage={blog.coverImage}
                   title= {blog.title}
