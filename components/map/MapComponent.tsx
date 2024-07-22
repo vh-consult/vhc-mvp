@@ -74,7 +74,7 @@ const MapComponent: FC = () => {
                 flyToMarker(markerData.coordinates, 11)
             }
         }
-    }, [markerData, flyToMarker])
+    }, [flyToMarker])
     return null;
   }
   const handleSubmit = async () => {
