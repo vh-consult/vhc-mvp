@@ -1,15 +1,13 @@
 "use client"
-import ConsultationForm from '@/components/doctor/ConsultationForm'
-import AppointmentCalendar from '@/components/general/AppointmentCalendar'
-import AddToInventory from '@/components/pharmacy/AddToInventory'
-import ItemPreview from '@/components/pharmacy/ItemPreview'
-import PrescriptionForm from '@/components/pharmacy/PrescriptionForm'
+import InventoryList from '@/components/pharmacy/InventoryList'
+import useDBUser from '@/hooks/useDBUser'
 import React, { useState } from 'react'
-
 const page = () => {
+  const {companyId} = useDBUser()
   return (
     <section className='w-full min-h-screen flex flex-center bg-dark-2 text-green-1'>
-      <ItemPreview companyId='' itemId=''/>
+      
+      <InventoryList pharmacyId={companyId}/>
     </section>
   )
 }

@@ -72,6 +72,10 @@ export async function removeFromInventory(clerkId: string, drugId: string, shopI
 
         if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
         
+        if (!shop.inventory.includes(drugId)) throw new Error("Drug not in shop inventory")
+        
+        
+
         } catch (error) {
         handleError(error)
     }

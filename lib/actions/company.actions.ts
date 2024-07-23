@@ -74,36 +74,38 @@ export async function getAllPharmacyShops() {
 export async function getPharmacyInventory(pharmacyId: string) {
     try {
         await connectToDatabase()
-        const pharmacy = await Company.findOne({
-            _id: pharmacyId,
-            companyType: "Pharmacy"
-        }).populate('inventory');
+        if (!pharmacyId || pharmacyId.trim() === '') {
+            throw new Error('Invalid company ID');
+          }
+        console.log(pharmacyId)
+        const pharmacy = await Company.findById(pharmacyId).populate('inventory');
         
         if (!pharmacy) throw new Error('No pharmacy found');
         if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
-
+        console.log(pharmacy.inventory)
         return JSON.parse(JSON.stringify(pharmacy.inventory));
     } catch (error) {
         console.log(error)
-        handleError(error);
+        // handleError(error);
     }
 }
 
-export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
-    try {
-        await connectToDatabase()
+// export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
+//     try {
+//         await connectToDatabase()
 
-        const pharmacy = await Company.findById(pharmacyId).populate('inventory');
-        if (!pharmacy) throw new Error('No pharmacy found');
-        if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
+//         const pharmacy = await Company.findById(pharmacyId).populate('inventory');
+//         if (!pharmacy) throw new Error('No pharmacy found');
+//         if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
 
-        const inventory = pharmacy.inventory
-        const filteredInventory = await inventory.find({name: query})
-        return JSON.parse(JSON.stringify(filteredInventory))
-    } catch (error) {
-        handleError(error)
-    }
-}
+//         const inventory = pharmacy.inventory
+//         const filteredInventory = await inventory.find({name: query})
+//         return JSON.parse(JSON.stringify(filteredInventory))
+//     } catch (error) {
+//         console.log(error)
+//         handleError(error)
+//     }
+// }
 
 export async function getPharmacyById(pharmacyId: string) {
     try {

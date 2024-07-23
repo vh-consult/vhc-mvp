@@ -19,8 +19,8 @@ const itemData = {
 const ItemPreview = async ({itemId, companyId}: {itemId: string, companyId: string}) => {
     // const itemData = await getDrug(itemId, companyId)
     return (
-    <section className='w-[650px] p-4 rounded-lg bg-dark-1'>
-      <div className="flex flex-between">
+    <section className='w-[650px] p-4 rounded-lg  bg-dark-1'>
+      <div className="flex flex-between ">
         <div className="flex flex-center">
           <Image
             src={itemData.image}
@@ -43,24 +43,54 @@ const ItemPreview = async ({itemId, companyId}: {itemId: string, companyId: stri
           <MdEdit/>
         </Button>
       </div>
-      <div className="flex flex-col gap-3 even:bg-dark-4 pt-4">
-        <span className="">
-          Quantity: {itemData.quantity}
+      <div className="flex flex-col flex-between gap-3 pt-4 ">
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Quantity: 
+          </span>
+          <span className="">
+            {itemData.quantity}
+          </span>
         </span>
-        <span className="">
-          Price ($): {itemData.price}
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Price ($): 
+          </span>
+          <span className="">
+           {itemData.price}
+          </span>
         </span>
-        <span className="">
-          Caution: {itemData.caution}
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Caution: 
+          </span>
+          <span className="">
+           {itemData.caution}
+          </span>
         </span>
-        <span className="">
-          Expiry Date: {itemData.expiryDate}
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Expiry Date: 
+          </span>
+          <span className="">
+            {itemData.expiryDate}
+          </span>
         </span>
-        <span className="">
-          Uploaded On: {itemData.createdAt}
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Uploaded On: 
+          </span>
+          <span className="">
+            {itemData.createdAt}
+          </span>
         </span>
-        <span className="">
-          Last Updated: {itemData.updatedAt}
+        <span className="w-full grid grid-cols-2">
+          <span className="font-medium">
+            Last Updated: 
+          </span>
+          <span className="">
+            {itemData.updatedAt}
+          </span>
         </span>
       </div>
     </section>

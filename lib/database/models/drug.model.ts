@@ -1,8 +1,8 @@
 import { Schema, model, models, Document } from "mongoose";
 
-export interface DrugParams extends Document {
+export interface DrugParams {
     name: string;
-    batch_ID: string;
+    image?: string;
     catalog: string;
     price:number;
     description: string;
@@ -14,7 +14,7 @@ const DrugSchema = new Schema({
         type: String,
         required: [true, "Please drug's name is required"],
     },
-    batchId: {
+    image: {
         type: String,
     },
     catalog: {

@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import DrugCard from './DrugCard'
-import { fetchFilteredDrugs, getPharmacyInventory } from '@/lib/actions/company.actions'
+import { getPharmacyInventory } from '@/lib/actions/company.actions'
 
 const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string}) => {
   const [drugs, setDrugs] = useState<any[]>()
@@ -10,8 +10,8 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
     const fetchDrugs = async () => {
       const allDrugs = await getPharmacyInventory(pharmacyId)
       setDrugs(allDrugs)
-      const filteredDrugs = await fetchFilteredDrugs(pharmacyId, query!)
-      setFilteredDrugs(filteredDrugs)
+      // const filteredDrugs = await fetchFilteredDrugs(pharmacyId, query!)
+      // setFilteredDrugs(filteredDrugs)
     }
     fetchDrugs()
   }, [pharmacyId, query])
@@ -19,21 +19,21 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
     <div className='w-[80%] flex flex-wrap'>
 
       {
-        query? (filteredDrugs && filteredDrugs.map((drug: {
-          image: string, name: string , numberInStock: number, price: number
-          }, index: React.Key | null | undefined) => {
-          return(
-              <DrugCard
-                  name={drug.name}
-                  key={index}
-                  numberInStock={drug.numberInStock}
-                  imageSRC={drug.image}
-                  price={drug.price}
-            />
-          )
-      } 
+      //   query? (filteredDrugs && filteredDrugs.map((drug: {
+      //     image: string, name: string , numberInStock: number, price: number
+      //     }, index: React.Key | null | undefined) => {
+      //     return(
+      //         <DrugCard
+      //             name={drug.name}
+      //             key={index}
+      //             numberInStock={drug.numberInStock}
+      //             imageSRC={drug.image}
+      //             price={drug.price}
+      //       />
+      //     )
+      // } 
 
-        )) :
+      //   )) :
         (drugs && drugs.map((drug: {
             imageUrl: string, name: string , numberInStock: number, price: number
             }, index: React.Key | null | undefined) => {
