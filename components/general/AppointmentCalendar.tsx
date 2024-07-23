@@ -67,7 +67,7 @@ const AppointmentCalendar = () => {
                 {appointment.channel}
               </span>
               <span className="text-lg ">{
-              appointment.doctor}</span>
+              appointment.host}</span>
               <span className="text-[12px] font-semibold">
                 {appointment.date.toLocaleTimeString()}</span>
             </div>

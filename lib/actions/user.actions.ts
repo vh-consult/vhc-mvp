@@ -5,9 +5,6 @@ import { revalidatePath } from "next/cache";
 import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
-import { cookies } from "next/headers";
-
-const cookieStore = cookies()
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -67,7 +64,6 @@ export async function getUser(clerkId: string) {
     delete userToObject.password
 
     const userData = {...userToObject}
-    cookieStore.set("userData", userData, {maxAge: 5*24*60*60*1000})
     return JSON.parse(JSON.stringify(userData));
   } catch (error) {
     handleError(error);
@@ -87,7 +83,6 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
     const userData = updatedUser.toObject()
     delete userData.password
 
-    cookieStore.set('userData', userData, { maxAge: 5 * 24 * 60 * 60 * 1000 })
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
@@ -126,7 +121,6 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
         throw new Error("Invalid role");
     }
 
-    cookieStore.set('userData', userToActivateAccount, { maxAge: 5 * 24 * 60 * 60 * 1000 })
     return {userRole: userToActivateAccount.userRole};
   } catch (error) {
     handleError(error)
