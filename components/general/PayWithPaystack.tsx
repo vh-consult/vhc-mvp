@@ -47,8 +47,11 @@ const PayWithPaystack = ({amount}: {amount: number}) => {
   };
 
   return (
-    <div className="w-[350px] py-4 rounded-lg mb-4 bg-dark-1 flex flex-col flex-between">
-    <div className="w-[90%]">
+    <div className="w-full h-[300px] py-4 rounded-lg mb-4 bg-dark-1 flex flex-col ">
+      <h1 className="text-2xl pl-2 font-semibold">
+        Payment Form
+      </h1>
+    <div className="w-[96%] mx-auto">
         <Input
             className="border-none bg-dark-3 my-2"
             placeholder="Name"
@@ -58,7 +61,7 @@ const PayWithPaystack = ({amount}: {amount: number}) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         />
     </div>
-    <div className="w-[90%]">
+    <div className="w-[96%] mx-auto">
         <Input
             className="border-none bg-dark-3 my-2"
             placeholder="Email"
@@ -68,7 +71,7 @@ const PayWithPaystack = ({amount}: {amount: number}) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
         />
     </div>
-    <div className="w-[90%]">
+    <div className="w-[96%] mx-auto">
         <Input
             className="border-none bg-dark-3 my-2"
             placeholder="Phone"
@@ -79,7 +82,7 @@ const PayWithPaystack = ({amount}: {amount: number}) => {
         />
     </div>
     <PaystackButton 
-        className="w-[90%] rounded-lg h-[40px] text-sm font-medium mt-3 bg-blue-1" 
+        className="w-[96%] mx-auto rounded-lg h-[40px] text-sm font-medium mt-3 bg-blue-1" 
         {...componentProps} 
     />
     </div>

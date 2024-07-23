@@ -17,7 +17,7 @@ const PharmacyHomePage = async () => {
   const shops = await getAllPharmacyShops()
   return (
     <div className='px-10 grid grid-cols-5
-      gap-10 pt-20'>
+      gap-10 pt-6'>
         {
           shops.map((shop: ShopProps) => (
             <ShopCard

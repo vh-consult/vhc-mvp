@@ -5,7 +5,7 @@ import { getPharmacyInventory } from '@/lib/actions/company.actions'
 
 const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string}) => {
   const [drugs, setDrugs] = useState<any[]>()
-  const [filteredDrugs, setFilteredDrugs] = useState<any[]>()
+  // const [filteredDrugs, setFilteredDrugs] = useState<any[]>()
   useEffect(() => {
     const fetchDrugs = async () => {
       const allDrugs = await getPharmacyInventory(pharmacyId)

@@ -25,7 +25,7 @@ const PharmacyAdminDashboard = () => {
                 Out of Stock
             </h3>
             <div className="w-full">
-                <ClientList/>
+              No drugs yet.
             </div>
         </div>
       </div>

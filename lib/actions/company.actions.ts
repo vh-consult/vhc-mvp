@@ -77,7 +77,6 @@ export async function getPharmacyInventory(pharmacyId: string) {
         if (!pharmacyId || pharmacyId.trim() === '') {
             throw new Error('Invalid company ID');
           }
-        console.log(pharmacyId)
         const pharmacy = await Company.findById(pharmacyId).populate('inventory');
         
         if (!pharmacy) throw new Error('No pharmacy found');

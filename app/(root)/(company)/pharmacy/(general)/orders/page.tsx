@@ -34,8 +34,8 @@ const OrdersPage = () => {
 
   }, [])
   return (
-    <main className='w-[80%] mx-auto min-h-screen pt-20 bg-dark-1'>
-      <div className="flex px-11 flex-between">
+    <main className='w-[90%] mx-auto min-h-screen py-4 bg-dark-1'>
+      <div className="flex px-11 flex-between sticky top-[60px]">
         <h2 className="text-2xl font-semibold text-green-1">
           All Orders
         </h2>

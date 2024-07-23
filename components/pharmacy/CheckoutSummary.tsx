@@ -9,7 +9,7 @@ interface CheckoutSummaryParams {
 
 const CheckoutSummary = ({subtotalPrice, shippingFee, tax, totalCost}: CheckoutSummaryParams) => {
   return (
-    <div className='bg-dark-1 w-[365px] h-[200px] rounded-lg p-2'>
+    <div className='bg-dark-1 w-[50%] h-[200px] rounded-lg p-2'>
       <h2 className='text-xl font-semibold'>
         Checkout Summary
       </h2>
