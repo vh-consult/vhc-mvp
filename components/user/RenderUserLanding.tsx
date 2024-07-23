@@ -2,7 +2,7 @@
 
 import useDBUser from '@/hooks/useDBUser'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ClickableCard from '../general/ClickableCard'
 import { getAdminCompany } from '@/lib/actions/company.actions'
 
@@ -14,8 +14,11 @@ export interface ClickableCardProps {
 }
 
 export interface ClickableCardDataStructure {
-    user: ClickableCardProps[];
+    patientAndDoctor: ClickableCardProps[];
+    pharmacy: ClickableCardProps[];
+    hospital: ClickableCardProps[];
     company: ClickableCardProps[];
+    user: ClickableCardProps[];
 }
 
 
@@ -23,6 +26,7 @@ export interface ClickableCardDataStructure {
 const RenderUserLanding = () => {
     const router = useRouter()
     const {role, clerkId, companyId} = useDBUser()
+
     const ClickableCardData: ClickableCardDataStructure = {
         user: [
             {
@@ -32,8 +36,16 @@ const RenderUserLanding = () => {
                 action: `/user/${clerkId}/dashboard`
             },
             {
+                title: 'Consultation',
+                description: 'Visit consultation room',
+                imageSrc: '/icons/consultation.svg',
+                action: `/consultation/home`
+            },
+        ],
+        patientAndDoctor: [
+            {
                 title: 'Affiliation',
-                description: 'Manage your contacts',
+                description: 'Visit affiliate page',
                 imageSrc: '/icons/userlist.svg',
                 action: `/user/${clerkId}/affiliation`
             },
@@ -43,19 +55,41 @@ const RenderUserLanding = () => {
                 imageSrc: '/icons/Pill.svg',
                 action: `/pharmacy/home`
             },
-            {
-                title: 'Consultation',
-                description: 'Visit consultation room',
-                imageSrc: '/icons/consultation.svg',
-                action: `/consultation/home`
-            },
         ],
         company: [
             {
-                title: 'Company',
+                title: 'Company Profile',
                 description: 'Manage your company',
                 imageSrc: '/icons/Company.svg',
                 action: `/company/${companyId}`
+            },
+        ],
+        hospital: [
+            {
+                title: 'Affiliation',
+                description: 'Manage your affiliates',
+                imageSrc: '/icons/Medical Doctor.svg',
+                action: `/company/${companyId}/affiliates`
+            },
+            {
+                title: 'Manage Clients',
+                description: 'Manage your patients',
+                imageSrc: '/icons/User Account.svg',
+                action: `/company/${companyId}/clients`
+            },
+        ],
+        pharmacy: [
+            {
+                title: 'Inventory',
+                description: 'Manage your inventory',
+                imageSrc: '/icons/Warehouse.svg',
+                action: `/company/${companyId}/inventory`
+            },
+            {
+                title: 'Orders',
+                description: 'Process customer\' orders',
+                imageSrc: '/icons/Cart.svg',
+                action: `/company/${companyId}/orders`
             },
         ]
     };
@@ -68,7 +102,7 @@ const RenderUserLanding = () => {
                     <ClickableCard 
                     title="Activate Account"
                     description="Activate your account"
-                    imgURL=""
+                    imgURL="/icons/Profile.svg"
                     handleClick={() => { router.push("/account-activation")}}
                     className='bg-dark-1 hover:bg-dark-3 text-green-1 h-[250px] w-[100%]'
                 />
@@ -84,6 +118,33 @@ const RenderUserLanding = () => {
                     />
 
                 )))
+            }
+            {
+                role === "Patient" || role === "Doctor" ? (
+                    ClickableCardData.patientAndDoctor.map((card, index) => (
+                        <ClickableCard 
+                            title={card.title}
+                            description={card.description}
+                            imgURL={card.imageSrc}
+                            handleClick={() => { router.push(card.action)}}
+                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                            key={index}
+                        />
+        
+                    ))
+                ) : role === "PharmacyAdmin" ? (
+                    ClickableCardData.pharmacy.map((card, index) => (
+                        <ClickableCard 
+                            title={card.title}
+                            description={card.description}
+                            imgURL={card.imageSrc}
+                            handleClick={() => { router.push(card.action)}}
+                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                            key={index}
+                        />
+        
+                    ))
+                ): ''
             }
             {
                 role === "HospitalAdmin" || role === "PharmacyAdmin" ? (
