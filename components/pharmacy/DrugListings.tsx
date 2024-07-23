@@ -16,17 +16,17 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
     fetchDrugs()
   }, [pharmacyId, query])
   return (
-    <div className='w-[80%] flex flex-wrap'>
+    <div className='w-[90%] mx-auto py-8 grid grid-cols-6 '>
 
       {
       //   query? (filteredDrugs && filteredDrugs.map((drug: {
-      //     image: string, name: string , numberInStock: number, price: number
+      //     image: string, name: string , quantity: number, price: number
       //     }, index: React.Key | null | undefined) => {
       //     return(
       //         <DrugCard
       //             name={drug.name}
       //             key={index}
-      //             numberInStock={drug.numberInStock}
+      //             quantity={drug.quantity}
       //             imageSRC={drug.image}
       //             price={drug.price}
       //       />
@@ -35,17 +35,17 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
 
       //   )) :
         (drugs && drugs.map((drug: {
-            imageUrl: string, name: string , numberInStock: number, price: number
+            image: string, name: string , quantity: number, price: number
             }, index: React.Key | null | undefined) => {
             return(
                 <DrugCard
                     name={drug.name}
                     key={index}
-                    numberInStock={drug.numberInStock}
-                    imageSRC={drug.imageUrl}
+                    quantity={drug.quantity}
+                    imageSRC={drug.image}
                     price={drug.price}
               />
-            )
+            ) 
         }))
       }
     </div>

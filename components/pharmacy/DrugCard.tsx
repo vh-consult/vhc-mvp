@@ -5,14 +5,14 @@ interface DrugCardProps {
   name: string;
   imageSRC: string;
   price: number;
-  numberInStock: number;
+  quantity: number;
 }
 
 const DrugCard = ({
   name, 
   imageSRC, 
   price,
-  numberInStock
+  quantity
 }: DrugCardProps) => {
   return (
     <div className='w-[165px] h-[185px] rounded-lg border 
@@ -29,7 +29,7 @@ const DrugCard = ({
         <span className="font-medium">{name}</span>
         <div className="flex text-sm items-center 
         justify-between">
-          <span> <b>{numberInStock}</b> in stock</span>
+          <span> <b>{quantity}</b> in stock</span>
           <span>$<b>{price}</b>.00</span>
         </div>
       </div>
