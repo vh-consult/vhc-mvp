@@ -16,8 +16,9 @@ interface MedicationParams {
 export interface BookingParams {
     date: Date;
     problem_statement?: string;
+    link?: string;
     channel?: 'virtual'| 'inPerson'| 'lab';
-    doctor?: string;
+    host?: string;
 }
 
 interface ConsultationParams {
@@ -107,7 +108,7 @@ export async function fetchAllConsultationSummary() {
 export async function newBooking(clerkId: string, formData?: BookingParams) {
     try {
         await connectToDatabase()
-        const creator = await User.findOne({clerkId, userRole: "Patient"})
+        const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
         
         const appointment = await Booking.create(formData)

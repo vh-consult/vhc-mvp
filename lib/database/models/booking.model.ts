@@ -5,10 +5,12 @@ const BookingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    doctor: {
+    host: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+    },
+    link: {
+        type: String,
     },
     date: {
         type: Date,

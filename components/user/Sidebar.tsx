@@ -2,14 +2,16 @@
 import useDBUser from '@/hooks/useDBUser'
 import { getUser } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
+import { ListOrderedIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
-import { AiOutlineHistory } from 'react-icons/ai'
+import { AiOutlineHistory, AiOutlineOrderedList } from 'react-icons/ai'
 import { BiMenu } from 'react-icons/bi'
 import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
-import { MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
+import { FaAffiliatetheme, FaFirstOrder } from 'react-icons/fa'
+import { MdInventory, MdLocalPharmacy, MdMeetingRoom, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSchedule, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
 interface SideNavProps {
@@ -56,19 +58,19 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/company/${companyId}/`,
+              route: `/company/${companyId}`,
               label: `Company`,
-              icon: MdMeetingRoom
+              icon: MdOutlineLocalPharmacy
           },
           {
-              route: `/user/${clerkId}/bookings`,
-              label: `Bookings`,
-              icon: MdOutlineSchedule
+              route: `/company/${companyId}/orders`,
+              label: `Orders`,
+              icon: AiOutlineOrderedList
           },
           {
-              route: `/user/${clerkId}/health-record`,
-              label: `Record`,
-              icon: BsDatabase
+              route: `/company/${companyId}/inventory`,
+              label: `Inventory`,
+              icon: MdOutlineInventory
           },
       ],
   }
@@ -81,19 +83,19 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/consultation/home`,
+              route: `/company/${companyId}/consultation`,
               label: `Consultation`,
               icon: MdMeetingRoom
           },
           {
-              route: `/user/${clerkId}/bookings`,
-              label: `Bookings`,
-              icon: MdOutlineSchedule
+              route: `/company/${companyId}/clients`,
+              label: `Clients`,
+              icon: MdPeopleOutline
           },
           {
-              route: `/user/${clerkId}/health-record`,
-              label: `Record`,
-              icon: BsDatabase
+              route: `/company/${companyId}/affiliates`,
+              label: `Affilates`,
+              icon: FaAffiliatetheme
           },
       ],
   }
