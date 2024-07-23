@@ -9,6 +9,7 @@ import { useUser } from '@clerk/nextjs';
 import { toast } from '../ui/use-toast'; 
 import { useEdgeStore } from '@/lib/edgestore';
 import Loader from '../general/Loader';
+import { SingleImageDropzone } from '../general/SingleImageDropzone';
 
 const initialValues = {
   name: '',
@@ -50,13 +51,15 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
             handleClick={postDrug}
             buttonText='Upload To Inventory'
           >
-            <Input 
-              type='file' 
-              accept='image/*' 
-              placeholder='Upload image of drug'
-              name='image' 
-              onChange={(e) => setFile(e.target.files?.[0])}
-            />
+          <SingleImageDropzone
+            width={125}
+            height={150}
+            value={file}
+            onChange={(file) => {
+              setFile(file);
+            }}
+            className='mx-auto'
+          />
             <Input
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) =>

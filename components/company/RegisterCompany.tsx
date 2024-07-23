@@ -22,6 +22,7 @@ import {
 import Loader from '../general/Loader';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
+import { SingleImageDropzone } from '../general/SingleImageDropzone';
 
 
   const setupSchema = z.object({
@@ -118,14 +119,15 @@ const RegisterCompany = () => {
           <Label className='mb-2'>
             Upload company logo
           </Label>
-          <Input
-              type='file' 
-              placeholder='Upload company logo'
-              name='file'
-              onChange={(e) => setFile(e.target.files?.[0])}
-              accept='image/*'
-              className='border-sky-1 bg-dark-3 '
-            />
+          <SingleImageDropzone
+          width={150}
+          height={150}
+          value={file}
+          onChange={(file) => {
+            setFile(file);
+          }}
+          className='mx-auto'
+        />
         </div>
         <div className="flex flex-col">
           <Label className='mb-2'>
