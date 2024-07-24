@@ -9,6 +9,8 @@ import { z } from 'zod'
 import { useRouter } from 'next/navigation';
 import { Textarea } from '@/components/ui/textarea'
 import { createBlog } from '@/lib/actions/blog.actions'
+import { SingleImageDropzone } from '@/components/general/SingleImageDropzone'
+import { useEdgeStore } from '@/lib/edgestore';
 
 // Define Zod schema
 const blogPostSchema = z.object({
@@ -16,7 +18,7 @@ const blogPostSchema = z.object({
   introduction: z.string().min(1, 'intro is required').optional(),
   content: z.string().min(1, 'content is required'),
   conclusion: z.string().min(1, 'conclusion is required').optional(),
-  coverImage: z.any()
+  coverImage: z.string()
 });
 
 // Define type for form values
@@ -29,13 +31,15 @@ const CreateBlogPostPage = () => {
   const { user } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
+  const [file, setFile] = useState<File>()
+  const {edgestore} = useEdgeStore()
 
   const initialValues: FormValues = {
     blogTitle: '',
     introduction: '',
     content: '',
     conclusion: '',
-    coverImage: File
+    coverImage: ''
   };
 
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -67,7 +71,15 @@ const CreateBlogPostPage = () => {
 
     setLoading(true);
     try {
-      const newBlog = await createBlog(user?.id as string, values)
+      let imageUrl
+      if (file) {
+        const res = await edgestore.myPublicImages.upload({file})
+        console.log(res)
+       imageUrl = res.url
+      }
+      const newBlog = await createBlog(
+        user?.id as string, {...values, coverImage: imageUrl}
+      )
       router.push(`/blogs/${newBlog._id}`)
     } finally {
       setLoading(false);
@@ -79,6 +91,15 @@ const CreateBlogPostPage = () => {
   <form className='bg-dark-2 min-h-screen w-full py-5 flex flex-col flex-center'>
     <h1 className="text-xl font-medium">Create Post</h1>
     <div className="grid w-full items-center gap-4">
+      <SingleImageDropzone
+        width={125}
+        height={150}
+        value={file}
+        onChange={(file) => {
+          setFile(file);
+        }}
+        className='mx-auto'
+      />
       <div className="flex w-full flex-col gap-2.5">
         <Label className="text-base font-normal leading-[22.4px] text-green-1">
           Title
@@ -120,7 +141,7 @@ const CreateBlogPostPage = () => {
     onClick={handleSubmit}
     className='w-full bg-green-2'
   >
-      {loading? <Loader />: `Upload Content`}
+      {loading? <Loader />: `Post Blog`}
   </Button>
   </form>
   )

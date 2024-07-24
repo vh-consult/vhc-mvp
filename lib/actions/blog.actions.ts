@@ -12,7 +12,7 @@ interface BlogDataParams {
     introduction?: string;
     content: string;
     conclusion?: string;
-    coverImage?: File
+    coverImage?: string
 }
 
 export async function createBlog(clerkId:string, blogData:BlogDataParams) {

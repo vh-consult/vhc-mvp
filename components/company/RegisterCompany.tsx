@@ -82,7 +82,6 @@ const RegisterCompany = () => {
       let logoUrl
       if (file) {
         const res = await edgestore.myPublicImages.upload({file})
-        console.log(res)
         logoUrl = res.url
       }
       
@@ -97,7 +96,9 @@ const RegisterCompany = () => {
           break;
       }
       console.log(values.type)
-      const companyToCreate = await createCompany(user?.id as string, { ...values, logo: logoUrl })
+      const companyToCreate = await createCompany(
+        user?.id as string, { ...values, logo: logoUrl }
+      )
 
       toast({title: 'Company registered successfully'})
       router.push(`/company/${companyToCreate._id}/`)

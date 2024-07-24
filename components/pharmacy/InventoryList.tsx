@@ -1,8 +1,8 @@
-// "use client"
+"use client"
 import { getPharmacyInventory } from '@/lib/actions/company.actions';
 import { DrugParams } from '@/lib/database/models/drug.model';
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Header = () => {
     return(
@@ -76,34 +76,37 @@ const InventoryCard = (
     )
 }
 
-const InventoryList = async({pharmacyId}: {pharmacyId: string}) => {
-    // const [inventory, setInventory] = useState()
-    // useEffect( () => {
-    //     const fetch = async () => {
-    //         const drugs = await getPharmacyInventory(pharmacyId)
-    //         console.log(drugs)
-    //         setInventory(drugs)
-    //     }
-    //     fetch()
-    // }, [inventory])
-    const drugs = await getPharmacyInventory(pharmacyId)
+const InventoryList = ({pharmacyId}: {pharmacyId: string}) => {
+    const [inventory, setInventory] = useState<DrugParams[]>([])
+    useEffect( () => {
+        const fetch = async () => {
+            const drugs = await getPharmacyInventory(pharmacyId)
+            console.log(drugs)
+            setInventory(drugs)
+        }
+        fetch()
+    }, [inventory, pharmacyId])
+    // const drugs = await getPharmacyInventory(pharmacyId)
   return (
     <div className='w-full'>
       <Header/>
-      {
-        drugs.map((drug:DrugParams, index:number) => {
-            <InventoryCard
-                key={index}
-                catalog={drug.catalog}
-                count={1}
-                expiryDate={new Date(2025, 5, 12)}
-                imageUrl={drug.image as string}
-                name={drug.name}
-                price={drug.price}
-                quantity={drug.quantity}
-            />
-        })
-      }
+      <>
+        {
+            inventory?.length >= 1 ? (inventory?.map((drug:DrugParams, index:number) => {
+                <InventoryCard
+                    key={index}
+                    catalog={drug.catalog}
+                    count={1}
+                    expiryDate={new Date(2025, 5, 12)}
+                    imageUrl={drug.image as string}
+                    name={drug.name}
+                    price={drug.price}
+                    quantity={drug.quantity}
+                />
+            })): 'No item in inventory'
+        }
+      </>
+      
     </div>
   )
 }
