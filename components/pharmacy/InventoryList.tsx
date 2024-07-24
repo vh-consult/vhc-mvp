@@ -85,7 +85,7 @@ const InventoryList = ({pharmacyId}: {pharmacyId: string}) => {
             setInventory(drugs)
         }
         fetch()
-    }, [inventory, pharmacyId])
+    }, [inventory, pharmacyId]) 
     // const drugs = await getPharmacyInventory(pharmacyId)
   return (
     <div className='w-full'>

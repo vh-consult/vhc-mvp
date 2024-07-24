@@ -14,7 +14,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 
 // Define Zod schema
 const blogPostSchema = z.object({
-  blogTitle: z.string().min(5, 'Add blog title'),
+  title: z.string().min(1, 'Add blog title'),
   introduction: z.string().min(1, 'intro is required').optional(),
   content: z.string().min(1, 'content is required'),
   conclusion: z.string().min(1, 'conclusion is required').optional(),
@@ -35,7 +35,7 @@ const CreateBlogPostPage = () => {
   const {edgestore} = useEdgeStore()
 
   const initialValues: FormValues = {
-    blogTitle: '',
+    title: '',
     introduction: '',
     content: '',
     conclusion: '',
@@ -107,8 +107,9 @@ const CreateBlogPostPage = () => {
         </Label>
         <Input
           className="w-full rounded bg-dark-3 p-2 focus:outline-none"
+          onChange={(e) => setValues({...values, title: e.target.value})}
         />
-        {errors.blogTitle && <span className="text-red-500">{errors.blogTitle}</span>}
+        {errors.title && <span className="text-red-500">{errors.title}</span>}
       </div>
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor='introduction'>Introduction</Label>

@@ -14,18 +14,17 @@ export interface BlogParams extends Document {
     shares: number;
     author: Schema.Types.ObjectId | string;
     coverImage: string;
-    comments: Array<CommentProps>
+    comments: Array<CommentProps>;
+    createdAt: Date;
   }
 
 const BlogSchema = new Schema<BlogParams>({
     title: {
         type: String,
         required: [true, "Please provide the title."],
-        minlength: [5, "title cannot be less than 2 characters"]
     },
     introduction: {
         type: String,
-        mmaxlength: [300, "introduction cannot be more than 300 characters"]
     },    
     content: {
         type: String,
@@ -34,7 +33,6 @@ const BlogSchema = new Schema<BlogParams>({
     },
     conclusion: {
         type: String,
-        maxlength: [250, "conclusion cannot be more than 250 characters"]
     },
     coverImage: {
         type: String,
@@ -53,7 +51,11 @@ const BlogSchema = new Schema<BlogParams>({
     },
     comments: [{
         type: Array<CommentProps>
-    }]
+    }],
+    createdAt: {
+        type: Date,
+        default: new Date()
+    }
 }, { timestamps: true });
 
 const Blog = models?.Blog || model("Blog", BlogSchema);

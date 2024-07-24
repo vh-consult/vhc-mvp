@@ -1,6 +1,6 @@
 "use client"
 import Header, { NavLinkProps } from '@/components/user/Header'
-import useDBUser from '@/constants/hooks/useDBUser'
+import useDBUser from '@/hooks/useDBUser'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 

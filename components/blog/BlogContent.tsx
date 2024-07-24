@@ -18,7 +18,7 @@ const BlogContent = ({
 }: BlogContentProps) => {
   return (
     <div className='w-[90%]'>
-      <span className="opacity-75">Date Published: {datePublished.toDateString()}</span>
+      <span className="opacity-75">Date Published: {datePublished.toLocaleDateString()}</span>
       <h1 className="text-4xl font font-semibold my-2">{title}</h1>
       <span className="flex text-sm font-medium opacity-75">
       Posted by: 
@@ -41,13 +41,25 @@ const BlogContent = ({
         />
       </div>
       <p>
-        {introduction && introduction}
+        {
+          introduction 
+          && 
+          <>
+          <h2 className="text-3xl font-semibold">Introduction</h2>
+          {introduction}
+          </>
+        }
       </p>
       <p>
         {content}
       </p>
       <p>
-        {conclusion && conclusion}
+        {
+          conclusion && 
+          <>
+          <h2 className="text-3xl font-semibold">Conclusion</h2>
+          {conclusion}
+          </>        }
       </p>
     </div>
   )

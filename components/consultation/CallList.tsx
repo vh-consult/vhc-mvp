@@ -3,7 +3,7 @@
 import { Call, CallRecording } from '@stream-io/video-react-sdk';
 
 import Loader from '../general/Loader';
-import { useGetCalls } from '@/constants/hooks/useGetCalls';
+import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';

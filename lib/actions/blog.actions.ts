@@ -8,7 +8,7 @@ import { WriteStream } from "fs";
 import { File } from "buffer";
 
 interface BlogDataParams {
-    blogTitle: string;
+    title: string;
     introduction?: string;
     content: string;
     conclusion?: string;
@@ -24,6 +24,8 @@ export async function createBlog(clerkId:string, blogData:BlogDataParams) {
         const newBlog = await Blog.create(blogData)
         author.blogsAuthored.push(newBlog._id)
         await author.save()
+        newBlog.author = author._id
+        await newBlog.save()
 
         return JSON.parse(JSON.stringify(newBlog))
 
@@ -45,9 +47,23 @@ export async function getAllBlogs() {
 export async function getBlogById(blogId:string) {
     try {
         await connectToDatabase();
-        const blog = await Blog.findById({_id: blogId})
+        const blog:BlogParams|any = await Blog.findById(blogId).populate("author")
         if(!blog) throw new Error("Blog not found!")
-        return JSON.parse(JSON.stringify(blog))
+        const authorName = blog.author.firstName + ' ' + blog.author.lastName
+        const authorImage = blog.author.photo
+
+        const blogData = {
+            authorImage: authorImage,
+            authorName: authorName,
+            title: blog.title,
+            introduction: blog.introduction,
+            content: blog.content,
+            conclusion: blog.conclusion,
+            coverImg: blog.coverImage,
+            datePublished: blog.createdAt
+        }
+
+        return JSON.parse(JSON.stringify(blogData))
     } catch (error) {
         handleError(error)
     }
@@ -60,8 +76,8 @@ export async function editBlog(clerkId:string, blogId:string, blogData:BlogParam
         if(!blogAuthor) throw new Error("Author not found!")
         let blogToEdit
         if (blogAuthor.blogsAuthored.includes(blogId)) {
-            blogToEdit = await Blog.findByIdAndUpdate({
-                _id: blogId}, {blogData}, {new: true}
+            blogToEdit = await Blog.findByIdAndUpdate(
+                blogId, {blogData}, {new: true}
             )
             if(!blogToEdit) throw new Error("Blog not found!")
         } else {

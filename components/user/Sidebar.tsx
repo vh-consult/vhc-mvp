@@ -1,17 +1,12 @@
 "use client"
-import useDBUser from '@/constants/hooks/useDBUser'
-import { getUser } from '@/lib/actions/user.actions'
-import { useUser } from '@clerk/nextjs'
-import { ListOrderedIcon } from 'lucide-react'
+import useDBUser from '@/hooks/useDBUser'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IconType } from 'react-icons'
-import { AiOutlineHistory, AiOutlineOrderedList } from 'react-icons/ai'
-import { BiMenu } from 'react-icons/bi'
+import { AiOutlineHistory } from 'react-icons/ai'
 import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
-import { FaAffiliatetheme, FaFirstOrder } from 'react-icons/fa'
-import { MdInventory, MdLocalPharmacy, MdMeetingRoom, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSchedule, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
+import {  MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
 interface SideNavProps {
@@ -50,55 +45,7 @@ const Sidebar = () => {
       ],
   }
   
-  const pharmacySidebarElements = {
-      top: [
-          {
-              route: `/user/${clerkId}/dashboard`,
-              label: `Dashboard`,
-              icon: RxDashboard
-          },
-          {
-              route: `/company/${companyId}`,
-              label: `Company`,
-              icon: MdOutlineLocalPharmacy
-          },
-          {
-              route: `/company/${companyId}/orders`,
-              label: `Orders`,
-              icon: AiOutlineOrderedList
-          },
-          {
-              route: `/company/${companyId}/inventory`,
-              label: `Inventory`,
-              icon: MdOutlineInventory
-          },
-      ],
-  }
-  
-  const hospitalSidebarElements = {
-      top: [
-          {
-              route: `/user/${clerkId}/dashboard`,
-              label: `Dashboard`,
-              icon: RxDashboard
-          },
-          {
-              route: `/company/${companyId}/consultation`,
-              label: `Consultation`,
-              icon: MdMeetingRoom
-          },
-          {
-              route: `/company/${companyId}/clients`,
-              label: `Clients`,
-              icon: MdPeopleOutline
-          },
-          {
-              route: `/company/${companyId}/affiliates`,
-              label: `Affilates`,
-              icon: FaAffiliatetheme
-          },
-      ],
-  }
+
   const SidebarBbottomNavs = [
     {
         route: `/user/${clerkId}/history`,
@@ -172,11 +119,7 @@ const Sidebar = () => {
             role === "Doctor"? 
             doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
             role === "Patient"? 
-            patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) :
-            role === "HospitalAdmin"?
-            hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            role === "PharmacyAdmin"?
-            pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ``
+            patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ''
         }
       </div>
       <div className='w-full'>
