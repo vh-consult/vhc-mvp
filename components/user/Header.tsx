@@ -16,11 +16,12 @@ export interface NavLinkProps {
 }
 
 export interface HeaderProps {
+  logo?: string;
   navigations?: Array<NavLinkProps>
 }
 
 
-const Header = ({navigations}: HeaderProps) => {
+const Header = ({navigations, logo}: HeaderProps) => {
   const pathname = usePathname()
   const {isLoaded} = useUser()
   return (
@@ -29,7 +30,7 @@ const Header = ({navigations}: HeaderProps) => {
         <Link href={"/"} className='flex items-center gap-1'>
           <div className="w-5/6">
             <Image
-              src='/logo.svg'
+              src={logo !== undefined ? logo :'/logo.svg'}
               alt='logo'
               width={32}
               height={32}

@@ -15,9 +15,7 @@ export interface ClickableCardProps {
 
 export interface ClickableCardDataStructure {
     patientAndDoctor: ClickableCardProps[];
-    pharmacy: ClickableCardProps[];
-    hospital: ClickableCardProps[];
-    company: ClickableCardProps[];
+    admin: ClickableCardProps[];
     user: ClickableCardProps[];
 }
 
@@ -56,40 +54,12 @@ const RenderUserLanding = () => {
                 action: `/pharmacy/home`
             },
         ],
-        company: [
+        admin: [
             {
                 title: 'Company Profile',
                 description: 'Manage your company',
                 imageSrc: '/icons/Company.svg',
-                action: `/company/${companyId}`
-            },
-        ],
-        hospital: [
-            {
-                title: 'Affiliation',
-                description: 'Manage your affiliates',
-                imageSrc: '/icons/Medical Doctor.svg',
-                action: `/company/${companyId}/affiliates`
-            },
-            {
-                title: 'Manage Clients',
-                description: 'Manage your patients',
-                imageSrc: '/icons/User Account.svg',
-                action: `/company/${companyId}/clients`
-            },
-        ],
-        pharmacy: [
-            {
-                title: 'Inventory',
-                description: 'Manage your inventory',
-                imageSrc: '/icons/Warehouse.svg',
-                action: `/company/${companyId}/inventory`
-            },
-            {
-                title: 'Orders',
-                description: 'Process customer\' orders',
-                imageSrc: '/icons/Cart.svg',
-                action: `/company/${companyId}/orders`
+                action: `/company/${companyId}/overview`
             },
         ]
     };
@@ -132,23 +102,11 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : role === "PharmacyAdmin" ? (
-                    ClickableCardData.pharmacy.map((card, index) => (
-                        <ClickableCard 
-                            title={card.title}
-                            description={card.description}
-                            imgURL={card.imageSrc}
-                            handleClick={() => { router.push(card.action)}}
-                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
-                            key={index}
-                        />
-        
-                    ))
-                ): ''
+                ) : ''
             }
             {
                 role === "HospitalAdmin" || role === "PharmacyAdmin" ? (
-                    ClickableCardData.company.map((card, index) => (
+                    ClickableCardData.admin.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
                             description={card.description}
