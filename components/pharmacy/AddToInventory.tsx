@@ -40,18 +40,17 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
     
   }
   return (
-    <>
-      {
-        loading? (<Loader/>) : (
-          
-          <FormModal
-            isOpen={show}
-            onClose={onClose}
-            title="Medicine Inventory Form"
-            handleClick={postDrug}
-            buttonText='Upload To Inventory'
-          >
-          <SingleImageDropzone
+    <FormModal
+    isOpen={show}
+    onClose={onClose}
+    title="Medicine Inventory Form"
+    handleClick={postDrug}
+    buttonText='Upload To Inventory'
+    >
+            {
+              loading? (<Loader/>) : (
+                <>
+                <SingleImageDropzone
             width={125}
             height={150}
             value={file}
@@ -101,13 +100,13 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
                 placeholder='Quantity' 
                 onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
                 className="border-none w-1/2 bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
+                />
           </div>
+            </>
+              )
+            }
           
         </FormModal>
-        )
-      }
-    </>
   )
 }
 

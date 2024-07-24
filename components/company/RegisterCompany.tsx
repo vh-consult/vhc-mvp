@@ -101,7 +101,7 @@ const RegisterCompany = () => {
       )
 
       toast({title: 'Company registered successfully'})
-      router.push(`/company/${companyToCreate._id}/`)
+      router.push(`/company/${companyToCreate._id}/about`)
     } finally {
       setLoading(false);
     }

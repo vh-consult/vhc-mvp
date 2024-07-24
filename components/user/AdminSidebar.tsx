@@ -5,6 +5,7 @@ import { useParams, usePathname } from 'next/navigation'
 import React from 'react'
 import { IconType } from 'react-icons'
 import { AiOutlineHistory, AiOutlineOrderedList } from 'react-icons/ai'
+import { BiSolidInstitution } from 'react-icons/bi'
 import { FaAffiliatetheme } from 'react-icons/fa'
 import { MdMeetingRoom, MdMessage, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
@@ -93,9 +94,9 @@ const AdminSidebar = () => {
   }
   const bottomNav = [
     {
-        route: `/company/${companyId}/history`,
-        label: 'History',
-        icon: AiOutlineHistory
+        route: `/company/${companyId}/about`,
+        label: 'About Us',
+        icon: BiSolidInstitution
     },
     {
         route: `/company/${companyId}/settings`,
@@ -104,7 +105,7 @@ const AdminSidebar = () => {
     },
 ]
   return (
-    <aside className={`w-[170px] h-[calc(100vh-64px)] bg-white  flex flex-col flex-between py-4`}
+    <aside className={`w-[170px] h-[calc(100vh-64px)] sticky left-0 top-[64px] bg-white  flex flex-col flex-between py-4`}
     >
       <div className='w-full'>
         {

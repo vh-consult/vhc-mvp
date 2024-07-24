@@ -105,7 +105,7 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
-                role === "HospitalAdmin" || role === "PharmacyAdmin" ? (
+                role === "HospitalAdmin" || role === "PharmacyAdmin" && companyId !== undefined ? (
                     ClickableCardData.admin.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -117,7 +117,15 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : ``
+                ) : (
+                    <ClickableCard 
+                    title="Register Company"
+                    description="Create company profile"
+                    imgURL="/icons/Company.svg"
+                    handleClick={() => { router.push("/company/set-up")}}
+                    className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                />
+                )
             }
         </>
   )

@@ -83,7 +83,7 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
                         src={companyData?.logo!}
                         width={100}
                         height={100}
-                        className='w-[100px] h-[100px] z-[100000]'
+                        className='w-[100px] h-[100px] z-[1000]'
                     />
                     <div className="z-[1000000] ml-4 mt-4">
                         <h2 className="text-2xl font-medium">
