@@ -8,11 +8,22 @@ import { cn } from '@/lib/utils'
 
 const consultationSidebarLinks = [
   {
-    route: '',
-    label: '',
-    imgURL: ''
-  }
-]
+    imgURL: '/icons/Home.svg',
+    route: `/consultation/home`,
+    label: 'Home',
+  },
+
+  {
+    imgURL: '/icons/upcoming.svg',
+    route: `/consultation/upcoming`,
+    label: 'Upcoming',
+  },
+  {
+    imgURL: '/icons/Video.svg',
+    route: `/consultation/recordings`,
+    label: 'Recordings',
+  },
+];
 
 const MobileNav = () => {
   const pathname = usePathname()
