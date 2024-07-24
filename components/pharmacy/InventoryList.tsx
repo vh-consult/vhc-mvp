@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 const Header = () => {
     return(
-        <div className="w-full h-10 grid grid-cols-6 px-6 items-center text-sm font-semibold bg-dark-4">
+        <div className="w-full h-10 grid grid-cols-6 px-6 items-center text-sm font-semibold bg-blue-2">
             <span>
                 No.
             </span>
@@ -44,7 +44,7 @@ const InventoryCard = (
     : InventoryItemProps
 ) => {
     return(
-        <div className="w-full h-10 grid grid-cols-6 px-6 items-center bg-dark-1">
+        <div className="w-full h-10 grid grid-cols-6 px-6 items-center bg-white">
             <div className="flex items-center">
                 <span>
                     {count}

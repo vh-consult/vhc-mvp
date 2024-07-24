@@ -6,7 +6,7 @@ import React from 'react'
 import { IconType } from 'react-icons'
 import { AiOutlineHistory, AiOutlineOrderedList } from 'react-icons/ai'
 import { FaAffiliatetheme } from 'react-icons/fa'
-import { MdMeetingRoom, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
+import { MdMeetingRoom, MdMessage, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
 export interface SideNavProps {
@@ -28,9 +28,9 @@ const AdminSidebar = () => {
         href={nav.route} 
         key={index} 
         className={`flex flex-row items-center p-3          
-            hover:bg-dark-3 ${isActive? `bg-blue-1 
+            hover:bg-blue-1 ${isActive? `bg-blue-1 
            hover:bg-blue-1 hover:opacity-90 text-blue-2 `:
-         'text-blue-3 hover:bg-blue-1 hover:text-blue-2 '}
+         'text-blue-4 hover:bg-blue-2 '}
         `}
         
       >
@@ -45,24 +45,24 @@ const AdminSidebar = () => {
   const pharmacySidebarElements = {
     top: [
         {
-            route: `/company/${companyId}/dashboard`,
-            label: `Dashboard`,
+            route: `/company/${companyId}/overview`,
+            label: `Overview`,
             icon: RxDashboard
         },
         {
-            route: `/company/${companyId}`,
-            label: `Company`,
-            icon: MdOutlineLocalPharmacy
+          route: `/company/${companyId}/orders`,
+          label: `Orders`,
+          icon: AiOutlineOrderedList
         },
         {
-            route: `/company/${companyId}/orders`,
-            label: `Orders`,
-            icon: AiOutlineOrderedList
+          route: `/company/${companyId}/inventory`,
+          label: `Inventory`,
+          icon: MdOutlineInventory
         },
         {
-            route: `/company/${companyId}/inventory`,
-            label: `Inventory`,
-            icon: MdOutlineInventory
+            route: `/company/${companyId}/messages`,
+            label: `Messages`,
+            icon: MdMessage
         },
     ],
   }
@@ -70,8 +70,8 @@ const AdminSidebar = () => {
   const hospitalSidebarElements = {
     top: [
         {
-            route: `/user/${clerkId}/dashboard`,
-            label: `Dashboard`,
+            route: `/company/${companyId}/overview`,
+            label: `Overview`,
             icon: RxDashboard
         },
         {
@@ -104,7 +104,7 @@ const AdminSidebar = () => {
     },
 ]
   return (
-    <aside className={`w-[170px] h-[calc(100vh-55px)] bg-blue-2 flex flex-col flex-between py-4`}
+    <aside className={`w-[170px] h-[calc(100vh-64px)] bg-white  flex flex-col flex-between py-4`}
     >
       <div className='w-full'>
         {

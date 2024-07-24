@@ -1,6 +1,6 @@
 import React from 'react'
 import DrugListings from '../pharmacy/DrugListings'
-import InventoryHeader from './InventoryHeader'
+import InventoryHeader from '../pharmacy/InventoryHeader'
 
 const InventoryComponent = ({companyId}: {companyId: string}) => {
   const headers = [
