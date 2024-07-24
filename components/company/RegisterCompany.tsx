@@ -7,7 +7,7 @@ import { createCompany } from '@/lib/actions/company.actions';
 import { toast } from '../ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/constants/hooks/useDBUser';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';

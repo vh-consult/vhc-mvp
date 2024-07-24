@@ -1,9 +1,13 @@
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
 const CreatedBlogsPage = () => {
   return (
     <div>
-      created blogs
+      <Link href={'/blogs/create-post'}>
+        <Button className='bg-green-2'>Create Blog</Button>
+      </Link>
     </div>
   )
 }

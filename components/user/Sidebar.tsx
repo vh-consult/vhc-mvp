@@ -1,5 +1,5 @@
 "use client"
-import useDBUser from '@/hooks/useDBUser'
+import useDBUser from '@/constants/hooks/useDBUser'
 import { getUser } from '@/lib/actions/user.actions'
 import { useUser } from '@clerk/nextjs'
 import { ListOrderedIcon } from 'lucide-react'

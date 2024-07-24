@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useUser } from '@clerk/nextjs'
-import React, { useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation';
 import { Textarea } from '@/components/ui/textarea'
@@ -14,7 +14,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 
 // Define Zod schema
 const blogPostSchema = z.object({
-  blogTitle: z.string().min(5, 'Please select your purpose on this app'),
+  blogTitle: z.string().min(5, 'Add blog title'),
   introduction: z.string().min(1, 'intro is required').optional(),
   content: z.string().min(1, 'content is required'),
   conclusion: z.string().min(1, 'conclusion is required').optional(),
@@ -66,7 +66,8 @@ const CreateBlogPostPage = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
     if (!validateForm()) return;
 
     setLoading(true);
@@ -88,11 +89,11 @@ const CreateBlogPostPage = () => {
 
 
   return (
-  <form className='bg-dark-2 min-h-screen w-full py-5 flex flex-col flex-center'>
+  <form className='bg-dark-1 p-4 rounded-lg min-h-screen w-[600px] mx-auto py-5 flex flex-col'>
     <h1 className="text-xl font-medium">Create Post</h1>
     <div className="grid w-full items-center gap-4">
       <SingleImageDropzone
-        width={125}
+        width={300}
         height={150}
         value={file}
         onChange={(file) => {
@@ -139,7 +140,7 @@ const CreateBlogPostPage = () => {
     </div>
   <Button
     onClick={handleSubmit}
-    className='w-full bg-green-2'
+    className='w-full bg-green-2 mt-4'
   >
       {loading? <Loader />: `Post Blog`}
   </Button>

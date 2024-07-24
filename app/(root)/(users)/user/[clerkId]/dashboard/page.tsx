@@ -3,7 +3,7 @@ import React from 'react'
 import DoctorDashboard from '@/components/user/DoctorDashboard'
 import PatientDashboard from '@/components/user/PatientDashboard'
 import PharmacyAdminDashboard from '@/components/user/PharmacyAdminDashboard'
-import useDBUser from '@/hooks/useDBUser'
+import useDBUser from '@/constants/hooks/useDBUser'
 import HospitalAdminDashboard from '@/components/user/HospitalAdminDashboard'
 
 

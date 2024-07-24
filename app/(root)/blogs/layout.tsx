@@ -20,11 +20,14 @@ const RootLayout = ({
   children
 }: {children:ReactNode}) => {
   return (
-    <main className='w-full min-h-screen bg-dark-2 text-green-1'>
+    <main className='w-full min-h-screen bg-dark-2 text-green-1 '>
       <Header
         navigations={navs}
       />
+      <div className="px-8 py-4">
       {children}
+
+      </div>
     </main>
   )
 }

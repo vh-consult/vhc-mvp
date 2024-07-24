@@ -1,6 +1,6 @@
 "use client"
 
-import useDBUser from '@/hooks/useDBUser'
+import useDBUser from '@/constants/hooks/useDBUser'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import ClickableCard from '../general/ClickableCard'
