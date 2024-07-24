@@ -16,16 +16,18 @@ export interface NavLinkProps {
 }
 
 export interface HeaderProps {
+  className?: string;
   logo?: string;
+  seachFieldStyles?: string;
   navigations?: Array<NavLinkProps>
 }
 
 
-const Header = ({navigations, logo}: HeaderProps) => {
+const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) => {
   const pathname = usePathname()
   const {isLoaded} = useUser()
   return (
-    <nav className='flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-dark-1 px-6 py-4 lg:px-10'>
+    <nav className={cn('flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-dark-1 px-6 py-4 lg:px-10', className)}>
       <div className="w-2/5 flex flex-between ">
         <Link href={"/"} className='flex items-center gap-1'>
           <div className="w-5/6">
@@ -66,12 +68,15 @@ const Header = ({navigations, logo}: HeaderProps) => {
       <div className="flex items-center justify-end gap-3 w-2/5 ">
 
         <SearchBar 
-          className='border border-dark-1 bg-dark-3 
-           hidden md:flex md:w-[250px]'
+          className={
+            cn(
+              'border border-dark-1 bg-dark-3 hidden md:flex md:w-[250px]',
+              seachFieldStyles
+            )}
         />
         <Link href={'/chat'}>        
           <AiOutlineMessage 
-            className='text-green-1 
+            className='text-inherit
             cursor-pointer w-[30px] h-[30px]' 
           />
         </Link>
