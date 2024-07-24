@@ -75,15 +75,15 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
 
     return (
         <section className='w-full h-full flex flex-col flex-between p-4'>
-            <div className="w-full h-[25%] bg-dark-1 relative px-8 py-3">
-                <div className="w-full h-1/2 bg-dark-4 absolute top-0 left-0 z-0"></div>
+            <div className="w-full h-[25%] bg-white relative px-8 py-3">
+                <div className="w-full h-1/2 bg-gray-100 absolute top-0 left-0 z-0"></div>
                 <div className="w-full flex ">
                     <Image 
                         alt=''
                         src={companyData?.logo!}
                         width={100}
                         height={100}
-                        className='w-[100px] h-[100px] z-[1000]'
+                        className='w-[80px] h-[80px] z-[10]'
                     />
                     <div className="z-[1000000] ml-4 mt-4">
                         <h2 className="text-2xl font-medium">
@@ -113,7 +113,7 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
                     }
                 </div>
             </div>
-            <div className="w-full h-[73%] bg-dark-1 px-8 py-4">
+            <div className="w-full h-[73%] bg-white px-8 py-4">
                 {
                     companyData?.companyType && navsForRendering[companyData.companyType]?.map((component, index) => (
                         <div className="" key={index}>
