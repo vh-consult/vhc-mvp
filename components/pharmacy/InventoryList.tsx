@@ -44,7 +44,7 @@ const InventoryCard = (
     : InventoryItemProps
 ) => {
     return(
-        <div className="w-full h-10 grid grid-cols-6 px-6 items-center bg-white">
+        <div className="w-full h-10 grid  grid-cols-6 px-6 items-center bg-black">
             <div className="flex items-center">
                 <span>
                     {count}
@@ -76,7 +76,7 @@ const InventoryCard = (
     )
 }
 
-const InventoryList = ({pharmacyId}: {pharmacyId: string}) => {
+const InventoryList =  ({pharmacyId}: {pharmacyId: string}) => {
     const [inventory, setInventory] = useState<DrugParams[]>([])
     useEffect( () => {
         const fetch = async () => {
@@ -87,25 +87,29 @@ const InventoryList = ({pharmacyId}: {pharmacyId: string}) => {
         fetch()
     }, [inventory, pharmacyId]) 
     // const drugs = await getPharmacyInventory(pharmacyId)
+    // console.log(drugs)
   return (
     <div className='w-full'>
       <Header/>
-      <>
+      <div className='w-full'>
         {
-            inventory?.length >= 1 ? (inventory?.map((drug:DrugParams, index:number) => {
+            inventory?.map((drug:any, index:number) => (
                 <InventoryCard
                     key={index}
-                    catalog={drug.catalog}
+                    catalog={drug?.catalog}
                     count={1}
                     expiryDate={new Date(2025, 5, 12)}
-                    imageUrl={drug.image as string}
-                    name={drug.name}
-                    price={drug.price}
+                    imageUrl={drug?.image as string}
+                    name={drug?.name}
+                    price={drug?.price}
                     quantity={drug.quantity}
                 />
-            })): 'No item in inventory'
+            ))
         }
-      </>
+        {
+            inventory?.length === 0 ? 'No drugs in inventory': ''
+        }
+      </div>
       
     </div>
   )

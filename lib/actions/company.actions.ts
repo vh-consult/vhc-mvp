@@ -74,14 +74,19 @@ export async function getAllPharmacyShops() {
 export async function getPharmacyInventory(pharmacyId: string) {
     try {
         await connectToDatabase()
+
+
         if (!pharmacyId || pharmacyId.trim() === '') {
             throw new Error('Invalid company ID');
-          }
-        const pharmacy = await Company.findById(pharmacyId).populate('inventory');
+        }
+        const pharmacy = await Company.findById(pharmacyId).populate({
+            path: 'inventory',
+            model: 'Drug'
+        });
         
         if (!pharmacy) throw new Error('No pharmacy found');
         if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
-        console.log(pharmacy.inventory)
+        // console.log(pharmacy.inventory)
         return JSON.parse(JSON.stringify(pharmacy.inventory));
     } catch (error) {
         console.log(error)
