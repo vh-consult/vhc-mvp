@@ -39,10 +39,10 @@ const ConsultationTypeList = () => {
   const { user } = useUser();
   const { toast } = useToast();
 
-  // useEffect(() => {
-  //   console.log('Client:', client);
-  //   console.log('User:', user);
-  // }, [client, user]);
+  useEffect(() => {
+    console.log('Client:', client);
+    console.log('User:', user);
+  }, [client, user]);
 
   const createConsultation = async () => {
     if (!client || !user) return;

@@ -90,7 +90,7 @@ const RenderUserLanding = () => {
                 )))
             }
             {
-                role === "Patient" || role === "Doctor" ? (
+                role === "Patient" || role === "Doctor"  ? (
                     ClickableCardData.patientAndDoctor.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -117,7 +117,7 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : (
+                ) : companyId === undefined && role !== "Patient" ? (
                     <ClickableCard 
                     title="Register Company"
                     description="Create company profile"
@@ -125,7 +125,7 @@ const RenderUserLanding = () => {
                     handleClick={() => { router.push("/company/set-up")}}
                     className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
                 />
-                )
+                ): ''
             }
         </>
   )
