@@ -55,7 +55,7 @@ const ConsultationRoom = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden pt-2 text-green-1">
+    <section className="relative h-full w-full overflow-hidden pt-2 text-green-1">
       <div className="relative flex size-full items-center justify-center">
         <div className=" flex size-full max-w-[1000px] items-center">
           <CallLayout /> 
