@@ -1,30 +1,24 @@
-// "use client"
 import { getAllBlogs } from '@/lib/actions/blog.actions'
 import React from 'react'
 import CustomBlogCard from './CustomBlogCard'
 import { BlogParams } from '@/lib/database/models/blog.model'
+import Link from 'next/link'
 
 const AllBlogs =async () => {
-  // const [blogs, setBlogs] = useState<BlogParams[] | any[]>([])
-  // const fetchBlogs = async () => {
     const blogs = await getAllBlogs()
-  //   setBlogs(blogs)
-  // }
-  // useEffect(()=> {
-  //   fetchBlogs()
-  // }, [blogs])
   return (
     <div className="w-full grid grid-cols-4 px-10">
         {
             blogs.map((blog:BlogParams|any, index:number) => (
+              <Link key={index} href={`/blogs/${blog?._id}`}>
                 <CustomBlogCard
-                  key={index}
-                  snippet={blog.content.slice(0, 60)}
-                  coverImage={blog.coverImage}
-                  title= {blog.title}
-                  author={blog.author as string}
-                  datePublished={blog.createdAt}
+                  snippet={blog?.content.slice(0, 60)} 
+                  coverImage={blog?.coverImage}
+                  title= {blog?.title}
+                  author={blog?.author.firstName + ' ' + blog?.author.lastName}
+                  datePublished={blog?.createdAt}
                 />
+              </Link>
             ))
         }
   </div>

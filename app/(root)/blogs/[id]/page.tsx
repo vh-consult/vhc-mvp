@@ -7,8 +7,9 @@ import { currentUser } from "@clerk/nextjs/server";
 import React from 'react'
 
 const BlogPage = async ({params}: {params: {id: string}}) => {
-  const user = await currentUser();
-  const blog:BlogParams|any = getBlogById(params.id)
+  // const user = await currentUser();
+  const blog:BlogParams|any = await getBlogById(params.id)
+
   return (
     <div className='w-full py-8 min-h-screen flex justify-center'>
       <div className="w-[60%]">
@@ -35,7 +36,7 @@ const BlogPage = async ({params}: {params: {id: string}}) => {
             Finding joy in your worst health conditions'
             author='NY Ayisi'
           />
-                    <BlogPostSnippet
+            <BlogPostSnippet
             authorImg='/images/doc-3.jpg'
             comments={1232}
             datePublished={new Date()}

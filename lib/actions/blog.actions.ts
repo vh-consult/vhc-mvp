@@ -37,7 +37,7 @@ export async function createBlog(clerkId:string, blogData:BlogDataParams) {
 export async function getAllBlogs() {
     try {
         await connectToDatabase();
-        const blogs = await Blog.find()
+        const blogs = await Blog.find().populate("author")
         return JSON.parse(JSON.stringify(blogs))
     } catch (error) {
         handleError(error)
@@ -47,6 +47,7 @@ export async function getAllBlogs() {
 export async function getBlogById(blogId:string) {
     try {
         await connectToDatabase();
+        // console.log(blogId)
         const blog:BlogParams|any = await Blog.findById(blogId).populate("author")
         if(!blog) throw new Error("Blog not found!")
         const authorName = blog.author.firstName + ' ' + blog.author.lastName
@@ -62,7 +63,7 @@ export async function getBlogById(blogId:string) {
             coverImg: blog.coverImage,
             datePublished: blog.createdAt
         }
-
+        // console.log(blogData)
         return JSON.parse(JSON.stringify(blogData))
     } catch (error) {
         handleError(error)

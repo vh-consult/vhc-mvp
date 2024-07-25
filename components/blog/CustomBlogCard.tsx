@@ -1,6 +1,6 @@
+import React from 'react'
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react'
 import { GoDot } from 'react-icons/go';
 
 interface CustomBlogProps {
@@ -24,10 +24,10 @@ const CustomBlogCard = ({author, datePublished, title, snippet, coverImage}: Cus
         />
       </div>
       <div className="p-2">
-        <div className="flex items-center text-sm font-medium text-green-2">
+        <div className="flex flex-between items-center text-sm font-medium text-green-2">
             <span className="">{author}</span>
             <GoDot className='mx-1'/>
-            <span className="">{datePublished.toLocaleDateString()}</span>
+            <>{new Date(datePublished).toLocaleDateString()}</>
         </div>
         <div className="w-full flex my-1">
             <span className="text-base w-[95%] font-medium">{title}</span>
