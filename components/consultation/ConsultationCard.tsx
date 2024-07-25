@@ -50,7 +50,7 @@ const ConsultationCard = ({
               className={cn("rounded-full")}
             />
             <span className="text-lg font-medium text-green-1">
-              With Patient
+              
             </span>
         </div>
         {!isPreviousConsultation && (
