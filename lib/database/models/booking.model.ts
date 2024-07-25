@@ -6,8 +6,9 @@ const BookingSchema = new Schema({
         ref: 'User'
     },
     host: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        // type: Schema.Types.ObjectId,
+        // ref: 'User',
+        type: String
     },
     link: {
         type: String,

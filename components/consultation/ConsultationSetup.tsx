@@ -60,8 +60,8 @@ const ConsultationSetup = ({
     );
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center gap-3 text-white">
-      <h1 className="text-center text-2xl font-bold">Setup</h1>
+    <div className="flex w-full flex-col py-6 items-center justify-center gap-3 text-white">
+      <h1 className="text-center text-2xl font-bold">Waiting Room</h1>
       <VideoPreview />
       <div className="flex h-16 items-center justify-center gap-3">
         <label className="flex items-center justify-center gap-2 font-medium">

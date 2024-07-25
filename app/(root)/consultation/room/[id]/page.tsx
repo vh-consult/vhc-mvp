@@ -31,7 +31,7 @@ const ConsultationPage = () => {
   if (notAllowed) return <Alert title="You are not allowed to join this Consultation" />;
 
   return (
-    <main className="h-screen w-full">
+    <main className="h-full w-full">
       <StreamCall call={call}>
         <StreamTheme>
 

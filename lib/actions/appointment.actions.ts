@@ -108,13 +108,13 @@ export async function fetchAllConsultationSummary() {
 export async function newBooking(clerkId: string, formData?: BookingParams) {
     try {
         await connectToDatabase()
-        const creator = await User.findOne({clerkId, userRole: "Patient"})
+        const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
         
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
         appointment.save()
-        creator.appointments.push(appointment._id)
+        creator.bookings.push(appointment._id)
         await creator.save()  
 
         return {message: "created"}
