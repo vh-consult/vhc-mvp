@@ -1,10 +1,10 @@
 import OrderList from '@/components/pharmacy/OrderList'
 import React from 'react'
 
-const CompanyOrdersPage = () => {
+const CompanyOrdersPage = ({params}:{params: {id: string}}) => {
   return (
     <div>
-      <OrderList/>
+      <OrderList shopId={params.id}/>
     </div>
   )
 }

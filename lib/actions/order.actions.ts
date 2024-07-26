@@ -83,10 +83,3 @@ export async function cancelOrder(clerkId: string, orderId: string) {
     }
 }
 
-export async function fetchAllOrders(adminId:string, shopId:string) {
-    try {
-        await connectToDatabase()
-    } catch (error) {
-        handleError(error)
-    }
-}

@@ -1,3 +1,5 @@
+import { fetchAllShopOrders } from '@/lib/actions/company.actions';
+import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import React from 'react'
 
@@ -57,10 +59,23 @@ const OrderCard = (
     )
   }
 
-const OrderList = () => {
+const OrderList = async ({shopId}: {shopId: string}) => {
+  const user = await currentUser()
+  const orders = await fetchAllShopOrders(user?.id!, shopId)
   return (
     <div className='grid grid-cols-2 gap-4'>
-
+      {
+        orders.map((order:any, index: number) => {
+          <OrderCard 
+            key={index}
+            buyerName=''
+            deliverySatus=''
+            hasPaid
+            imageUrl={''}
+            items={[]}
+          />
+        })
+      }
     </div>
   )
 }
