@@ -69,7 +69,7 @@ const UserSchema = new Schema(
     bookings: [
       {
         type: Schema.Types.ObjectId,
-        refPath: 'Bookings',
+        ref: 'Booking',
       },
     ],
     affiliateHospital: {

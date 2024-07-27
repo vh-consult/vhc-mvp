@@ -4,19 +4,20 @@ import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { BookingParams, fetchBookings } from '@/lib/actions/appointment.actions';
 import useDBUser from '@/hooks/useDBUser';
+import { useUser } from '@clerk/nextjs';
 
 const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [appointments, setAppointments] = useState<BookingParams[]>([]);
-  const {clerkId} = useDBUser()
+  const {user} = useUser()
   useEffect(()=> {
     const getBookings = async () => {
-      const bookings = await fetchBookings(clerkId)
+      const bookings = await fetchBookings(user?.id as string)
       console.log(bookings)
       setAppointments(bookings)
     }
     getBookings()
-  }, [clerkId])
+  }, [user])
   
   const daysInMonth = (month: number, year: number) => 
     {
@@ -56,7 +57,7 @@ const AppointmentCalendar = () => {
         <td
           key={day}
           className={`w-full relative h-full p-1 border 
-            border-l-0 border-gray-700 ${
+             border-gray-700 ${
             isToday ? `bg-green-2 text-green-1` : 
             ``
           }`}
@@ -73,7 +74,7 @@ const AppointmentCalendar = () => {
               <span className="text-lg ">{
               appointment.host}</span>
               <span className="text-[12px] font-semibold">
-                {appointment.date.toLocaleTimeString()}</span>
+                {new Date(appointment.date).toLocaleTimeString()}</span>
             </div>
           )}
         </td>

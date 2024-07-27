@@ -129,7 +129,7 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
 
         const userCancelingBooking = await User.findOne({
             clerkId,
-        })
+        }).populate("bookings")
         if (!userCancelingBooking) throw new Error("User not found")
         if (!userCancelingBooking.booking.includes(sessionId)) throw new Error("Booking session not found in user's bookings")
 
@@ -156,10 +156,13 @@ export async function searchDoctor() {
 export async function fetchBookings(clerkId:string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId }).populate("bookings")
+        const user = await User.findOne(
+            {clerkId }
+        ).populate("bookings")
         if (!user) throw new Error("User not found")
         
         const bookings = user.bookings
+        console.log(bookings)
         return JSON.parse(JSON.stringify(bookings))
     } catch (error) {
       handleError(error)  
