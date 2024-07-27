@@ -6,6 +6,7 @@ import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/m
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
+
 // CREATE
 export async function createUser(user: CreateUserParams) {
   try {
@@ -149,3 +150,6 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
+export async function fetchAffiliates(userId:string) {
+  
+}
