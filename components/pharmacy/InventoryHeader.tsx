@@ -2,17 +2,19 @@
 import React, {useState} from 'react'
 import { Button } from '../ui/button'
 import { BiFilter, BiPlus } from 'react-icons/bi'
-import { Input } from '../ui/input'
 import SearchBar from '../general/SearchBar'
 import AddToInventory from './AddToInventory'
-import HighlightCard from '../general/HighlightCard'
+import CompanyHiglightCard from './CompanyHiglightCard'
 
 const InventoryHeader = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false)
   return (
     <section className="w-full flex flex-col mb-6">
-      <div className="flex flex-between w-full">
-        {/* <HighlightCard/> */}
+      <div className="flex flex-between w-full mb-3">
+        <CompanyHiglightCard/>
+        <CompanyHiglightCard/>
+        <CompanyHiglightCard/>
+        <CompanyHiglightCard/>
       </div>
       <div className='w-full flex flex-between'>
         <SearchBar 

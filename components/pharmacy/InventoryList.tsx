@@ -1,8 +1,6 @@
-"use client"
 import { getPharmacyInventory } from '@/lib/actions/company.actions';
-import { DrugParams } from '@/lib/database/models/drug.model';
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const Header = () => {
     return(
@@ -44,7 +42,7 @@ const InventoryCard = (
     : InventoryItemProps
 ) => {
     return(
-        <div className="w-full h-10 grid  grid-cols-6 px-6 items-center bg-black">
+        <div className="w-full h-10 grid  grid-cols-6 px-6 items-center bg-white">
             <div className="flex items-center">
                 <span>
                     {count}
@@ -76,24 +74,15 @@ const InventoryCard = (
     )
 }
 
-const InventoryList =  ({pharmacyId}: {pharmacyId: string}) => {
-    const [inventory, setInventory] = useState<DrugParams[]>([])
-    useEffect( () => {
-        const fetch = async () => {
-            const drugs = await getPharmacyInventory(pharmacyId)
-            console.log(drugs)
-            setInventory(drugs)
-        }
-        fetch()
-    }, [inventory, pharmacyId]) 
-    // const drugs = await getPharmacyInventory(pharmacyId)
-    // console.log(drugs)
+const InventoryList =  async ({pharmacyId}: {pharmacyId: string}) => {
+    const drugs = await getPharmacyInventory(pharmacyId)
+    console.log(drugs)
   return (
     <div className='w-full'>
       <Header/>
       <div className='w-full'>
         {
-            inventory?.map((drug:any, index:number) => (
+            drugs?.map((drug:any, index:number) => (
                 <InventoryCard
                     key={index}
                     catalog={drug?.catalog}
@@ -107,7 +96,7 @@ const InventoryList =  ({pharmacyId}: {pharmacyId: string}) => {
             ))
         }
         {
-            inventory?.length === 0 ? 'No drugs in inventory': ''
+            drugs?.length === 0 ? 'No drugs in inventory': ''
         }
       </div>
       

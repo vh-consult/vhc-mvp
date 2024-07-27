@@ -1,11 +1,9 @@
-"use client"
 import React from 'react'
 import { BiCar } from 'react-icons/bi'
 import { BsStarFill } from 'react-icons/bs';
 import { GoLocation } from 'react-icons/go'
 import { PiPerson } from 'react-icons/pi'
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 interface PharmacyShopCardProps {
   imageSrc: string;
@@ -14,7 +12,6 @@ interface PharmacyShopCardProps {
   distance_by_car: number;
   distance_by_walk: number;
   number_of_stars: number;
-  _id: string
 }
 
 const ShopCard = ({
@@ -24,25 +21,23 @@ const ShopCard = ({
   distance_by_walk,
   distance_by_car,
   number_of_stars,
-  _id
 }: PharmacyShopCardProps) => {
-  const router = useRouter()
   return (
-    <div onClick={()=> router.push(`/pharmacy/shop/${_id}`)} className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
-    -200 rounded-xl hover:shadow-lg">
+    <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
+    -200 rounded-lg hover:shadow-lg">
     <div className="h-[55%] w-full ">
         <Image
           alt='' 
           width={100}
           height={100}
           src={imageSrc} 
-          className="h-full w-full rounded-t-xl 
+          className="h-full w-full rounded-t-lg 
           object-cover" 
         />
     </div>
-    <div className="p-2 flex items-center justify-between">
+    <div className="p-1.5 flex items-center justify-between">
         <div className="w-full">
-            <h4 className="text-lg font-bold">
+            <h4 className="text-lg leading-tight font-bold">
               {name}
             </h4>
             <div className="flex flex-between ">

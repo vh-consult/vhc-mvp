@@ -9,8 +9,7 @@ import Image from 'next/image'
 import { fetchCompanyData } from '@/lib/actions/company.actions'
 import ClientsComponent from './ClientsComponent'
 import DeliveryService from './DeliveryService'
-import InventoryComponent from './InventoryComponent'
-import OrdersComponent from './OrdersComponent'
+import LocationComponent from './LocationComponent'
 
 const CompanyProfile = ({companyId}:{companyId: string}) => {
     const [companyData, setCompanyData] = useState<CompanyParams>()
@@ -46,16 +45,12 @@ const CompanyProfile = ({companyId}:{companyId: string}) => {
                 componentToRender: <AboutComponent companyDescription={companyData?.description!}/>
             },
             {
-                label: 'Inventory',
-                componentToRender: <InventoryComponent companyId={companyId}/>
-            },
-            {
-                label: 'Orders',
-                componentToRender: <OrdersComponent/>
-            },
-            {
                 label: 'Delivery Services',
                 componentToRender: <DeliveryService/>
+            },
+            {
+                label: 'Location',
+                componentToRender: <LocationComponent/>
             },
         ]
     };
