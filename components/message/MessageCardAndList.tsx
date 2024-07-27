@@ -1,14 +1,16 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { getMessages } from '@/lib/actions/appointment.actions'
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 export interface MessageCardProps {
   imageUrl: string;
   sender: string;
   message: string;
   time: Date;
+  className?: string
 }
 
 const Messages = [
@@ -44,10 +46,12 @@ const Messages = [
   },
 ]
 
-const MessageCard = ({imageUrl, sender, message, time}: MessageCardProps) => {
+const MessageCard = ({imageUrl, sender, message, time, className}: MessageCardProps) => {
   const [openMessage, setOpenMessage] = useState<boolean>(false)
   return (
-    <div onClick={() => {setOpenMessage(true)}} className="flex flex-row w-full p-3 bg-white hover:bg-gray-100 cursor-pointer">
+    <div 
+      onClick={() => {setOpenMessage(true)}} 
+      className={cn("flex flex-row w-full p-3 bg-white hover:bg-gray-100 cursor-pointer", className)}>
       <Image 
         src={imageUrl}
         alt='user_picture'
@@ -58,7 +62,7 @@ const MessageCard = ({imageUrl, sender, message, time}: MessageCardProps) => {
       <div className="flex flex-col">
       <div className="flex flex-row flex-between">
         <span className='text-base'>{sender}</span>
-        <span className='text-xs'>{time.toLocaleTimeString()}</span>
+        <span className='text-xs'>{new Date(time).toLocaleTimeString()}</span>
       </div>
       <p className="text-sm">{message.slice(0, 35)}...</p>
     </div>
@@ -66,20 +70,22 @@ const MessageCard = ({imageUrl, sender, message, time}: MessageCardProps) => {
   )
 }
 
-const MessageList = () => {
+const MessageList = ({className}: {className?: string}) => {
   const {user} = useUser()
-  // const [Messages, setMessages] = useState<MessageCardProps[]>()
-
-  // const fetchMessages = async () => {
-  //   const allMessages = await getMessages(user?.id!)
-  //   setMessages(allMessages)
-  // }
+  // useEffect(()=>{
+      // const fetchMessages = async () => {
+      //   const allMessages = await getMessages(user?.id!)
+      //   setMessages(allMessages)
+      // }
+      // fetchMessages()
+  // }, [user?.id])
     
   return (
     <div className='w-full flex flex-col flex-center'>
       {
         Messages ? (Messages.map((Message, index) => (
           <MessageCard 
+            className={className}
             key={index}
             imageUrl={Message.imageUrl}
             time={Message.time}

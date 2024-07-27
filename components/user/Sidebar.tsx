@@ -116,10 +116,10 @@ const Sidebar = () => {
 
         </div> */}
         {
-            role === "Doctor"? 
-            doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            role === "Patient"? 
-            patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ''
+          role !== "Doctor"? 
+          patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
+          role === "Doctor"? 
+          doctorSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ''
         }
       </div>
       <div className='w-full'>

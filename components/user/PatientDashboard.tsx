@@ -43,9 +43,9 @@ const PatientDashboard = () => {
             ))
           }
         </div>
-        <div className="w-full mt-4 flex flex-between">
+        <div className="w-full mt-4 gap-x-3 flex flex-between">
             <Medication/>
-            <Message/>
+            <Message className='bg-dark-1 w-[500px]'/>
         </div>
       </main>
     )

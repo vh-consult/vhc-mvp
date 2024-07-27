@@ -1,14 +1,15 @@
 import React from 'react'
 import MessageList from './MessageCardAndList'
+import { cn } from '@/lib/utils'
 
-const Message = () => {
+const Message = ({className}: {className?:string}) => {
   return (
-    <div className='w-full h-[400px] bg-white rounded-lg'>
+    <div className={cn(`w-full h-[400px] bg-white rounded-lg`, className)}>
         <h3 className="w-full text-sm  font-semibold p-3">
           Recent Messages
         </h3>
         <div className="w-full">
-          <MessageList/>
+          <MessageList className='bg-dark-1 hover:bg-dark-3'/>
         </div>
     </div>
   )

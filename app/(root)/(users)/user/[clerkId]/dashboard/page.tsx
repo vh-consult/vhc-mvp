@@ -11,7 +11,7 @@ const DashboardPage = () => {
   return (
     <div>
       {
-        role === "Patient"? (<PatientDashboard/>) : 
+        role !== "Doctor" ? (<PatientDashboard/>) : 
         role === "Doctor"? (<DoctorDashboard/>) : <Loader/>
       }
     </div>
