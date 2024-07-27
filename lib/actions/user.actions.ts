@@ -161,7 +161,7 @@ export async function fetchAffiliates(userId:string) {
     const hospital = user.affiliateHospital
     const doctor =user.personalPhysician
 
-    return JSON.parse(JSON.stringify({...hospital, ...doctor}))
+    return JSON.parse(JSON.stringify({...hospital, ...doctor }))
     
   } catch (error) {
     handleError(error)

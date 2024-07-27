@@ -136,10 +136,10 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
         const booking = await Booking.findById(sessionId)
         if (!booking) throw new Error("Booking not found")
         
-        booking.status = "canceled"
+        booking.status = "cancelled"
         await booking.save()
 
-        return {message: "Booking canceled"}
+        return {message: "Booking cancelled"}
     } catch (error) {
         handleError(error)
     }

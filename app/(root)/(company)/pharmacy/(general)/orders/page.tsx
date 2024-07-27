@@ -17,9 +17,9 @@ const OrdersPage = () => {
     {
       displayText: 'Delivered',
       route: '/api/order',
-    },
+    }, 
     {
-      displayText: 'Canceled',
+      displayText: 'Cancelled',
       route: '/api/order',
     }
   ]

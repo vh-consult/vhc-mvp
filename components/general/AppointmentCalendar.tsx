@@ -2,17 +2,21 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { BookingParams } from '@/lib/actions/appointment.actions';
+import { BookingParams, fetchBookings } from '@/lib/actions/appointment.actions';
+import useDBUser from '@/hooks/useDBUser';
 
 const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [appointments, setAppointments] = useState<BookingParams[]>([
-
-  ]);
-
+  const [appointments, setAppointments] = useState<BookingParams[]>([]);
+  const {clerkId} = useDBUser()
   useEffect(()=> {
-
-  })
+    const getBookings = async () => {
+      const bookings = await fetchBookings(clerkId)
+      console.log(bookings)
+      setAppointments(bookings)
+    }
+    getBookings()
+  }, [clerkId])
   
   const daysInMonth = (month: number, year: number) => 
     {

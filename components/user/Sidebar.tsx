@@ -53,8 +53,8 @@ const Sidebar = () => {
         icon: AiOutlineHistory
     },
     {
-        route: `/user/${clerkId}/settings`,
-        label: 'Settings',
+        route: `/user/${clerkId}/account`,
+        label: 'Account',
         icon: MdOutlineSettings
     },
 ]

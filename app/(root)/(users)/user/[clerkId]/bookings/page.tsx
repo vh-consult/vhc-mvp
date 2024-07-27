@@ -4,7 +4,7 @@ import React from 'react'
 const BookingsPage = () => {
   return (
     <div>
-      No bookings yet.
+      <AppointmentCalendar/>
     </div>
   )
 }

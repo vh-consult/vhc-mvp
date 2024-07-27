@@ -1,11 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const protectedRoute = createRouteMatcher([
-  // '/chat(.*)',
-  // '/user(.*)',
-  // '/consultation(.*)',
-  // '/company(.*)',
-  // '/pharmacy(.*)',
+  '/chat(.*)',
+  '/user(.*)',
+  '/consultation(.*)',
+  '/company(.*)',
+  '/pharmacy(.*)',
 ])
 
 

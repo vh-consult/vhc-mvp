@@ -8,7 +8,7 @@ const OrderSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ["pending", "delivered", "canceled"]
+        enum: ["pending", "delivered", "cancelled"]
     },
     client: {
         type: Schema.Types.ObjectId,
