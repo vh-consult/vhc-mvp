@@ -1,7 +1,13 @@
+import { getUser } from '@/lib/actions/user.actions'
+import { currentUser } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React from 'react'
 
-const cardsContent = {
+const Account = async () => {
+  const user = await currentUser()
+  const fetchedUser = await getUser(user?.id as string)
+  console.log(fetchedUser)
+  const cardsContent = {
     personalDetails: {
       header: 'Personal Details',
       contents: [
@@ -40,7 +46,7 @@ const cardsContent = {
       },
       {
         title: 'personal physician',
-        body: 'Dr Monroe Xiav'
+        body: 'Dr Monroe Samuella'
       },
       {
         title: 'insurance subscription',
@@ -96,25 +102,24 @@ const cardsContent = {
   },
 }
 
-const Account = () => {
   return (
-    <div className='w-[90%] mx-auto'>
-      <div className="w-full h-[225px] rounded-lg p-3 border border-dark-3 ">
+    <div className='w-full'>
+      <div className="w-full h-[245px] rounded-lg p-3 border border-dark-3 ">
         <h2 className="text-lg capitalize font-medium">
           {
             cardsContent.personalDetails.header
           }
         </h2>
-        <div className="flex w-[80%]">
+        <div className="flex items-center">
           <Image
             width={150}
             height={150} 
-            src="/images/doc-3.jpg" 
+            src={fetchedUser?.image} 
             alt="" 
-            className='w-[150px] h-[150px] object-cover border
+            className='w-[185px] h-[185px] object-cover border
             border-dark-3 rounded-full'
             />
-          <div className="w-2/3 flex flex-wrap">
+          <div className="w-[calc(100%-195px)] grid grid-cols-4 grid-rows-2 gap-8">
             {
               cardsContent.personalDetails.contents.map((content, index)=>{
                 return(
@@ -135,9 +140,9 @@ const Account = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-between mt-3">
+      <div className="w-full grid grid-cols-3 gap-x-4 mt-4">
 
-        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.healthcare.header
@@ -164,7 +169,7 @@ const Account = () => {
           </div>
         </div>
 
-        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.contact.header
@@ -190,7 +195,7 @@ const Account = () => {
             }
           </div>
         </div>
-        <div className="w-[300px] rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.address.header

@@ -162,7 +162,6 @@ export async function fetchBookings(clerkId:string) {
         if (!user) throw new Error("User not found")
         
         const bookings = user.bookings
-        console.log(bookings)
         return JSON.parse(JSON.stringify(bookings))
     } catch (error) {
       handleError(error)  

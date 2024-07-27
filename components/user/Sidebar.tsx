@@ -5,7 +5,9 @@ import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 import { IconType } from 'react-icons'
 import { AiOutlineHistory } from 'react-icons/ai'
+import { BiSolidUserAccount } from 'react-icons/bi'
 import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
+import { CgProfile } from 'react-icons/cg'
 import {  MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
@@ -55,7 +57,7 @@ const Sidebar = () => {
     {
         route: `/user/${clerkId}/account`,
         label: 'Account',
-        icon: MdOutlineSettings
+        icon: CgProfile
     },
 ]
   const doctorSidebarElements = {
