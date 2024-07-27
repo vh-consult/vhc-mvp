@@ -68,7 +68,7 @@ const InventoryCard = (
                 {price}
             </span>
             <span className='pl-4'>
-                {expiryDate.toLocaleDateString()}
+                {new Date(expiryDate).toLocaleDateString()}
             </span>
         </div>
     )

@@ -18,7 +18,7 @@ const InventoryHeader = () => {
       </div>
       <div className='w-full flex flex-between'>
         <SearchBar 
-          className=' w-1/3 h-full rounded-full bg-gray-100 shadow-sm border-none'
+          className=' w-1/3 h-full rounded-full bg-white shadow-sm border-none'
         />
         <div className="flex items-center">
           <Button 
@@ -28,7 +28,7 @@ const InventoryHeader = () => {
               Add Item 
               <BiPlus className='font-bold text-xl'/> 
           </Button>
-          <span className="w-10 h-10 rounded-md text-xl flex flex-center bg-gray-100 border-2">
+          <span className="w-10 h-10 rounded-md text-xl flex flex-center bg-white shadow-sm">
               <BiFilter/>
           </span>
         </div>

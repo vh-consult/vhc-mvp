@@ -1,13 +1,13 @@
 "use client"
 import useDBUser from '@/hooks/useDBUser'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 import { IconType } from 'react-icons'
-import { AiOutlineHistory, AiOutlineOrderedList } from 'react-icons/ai'
+import { AiOutlineOrderedList } from 'react-icons/ai'
 import { BiSolidInstitution } from 'react-icons/bi'
 import { FaAffiliatetheme } from 'react-icons/fa'
-import { MdMeetingRoom, MdMessage, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
+import { MdMeetingRoom, MdMessage, MdOutlineHome, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
 export interface SideNavProps {
@@ -20,7 +20,7 @@ export interface SideNavProps {
 
 const AdminSidebar = () => {
   const pathname = usePathname()
-  const {role, clerkId, companyId} = useDBUser()
+  const {role, companyId} = useDBUser()
 
   const renderNavigation = (nav: SideNavProps, index: number) => {
     const isActive = pathname === nav.route || pathname.startsWith(`${nav.route}/`);
@@ -99,10 +99,10 @@ const AdminSidebar = () => {
         icon: BiSolidInstitution
     },
     {
-        route: `/company/${companyId}/settings`,
-        label: 'Settings',
-        icon: MdOutlineSettings
-    },
+      route: `/user/landing`,
+      label: 'Go to Home',
+      icon: MdOutlineHome
+  },
 ]
   return (
     <aside className={`w-[170px] h-[calc(100vh-64px)] sticky left-0 top-[64px] bg-white  flex flex-col flex-between py-4`}
