@@ -72,12 +72,23 @@ const UserSchema = new Schema(
         refPath: 'Bookings',
       },
     ],
+    affiliateHospital: {
+      type: Schema.Types.ObjectId,
+      ref: 'Company',
+    },
+    personalPhysician: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    }
   },
   options
 );
 
 const DoctorSchema = new Schema({
-  specialty: {
+  bio: {
+    type: String,
+  },
+  personalRoom: {
     type: String,
   },
   clients: [
@@ -86,10 +97,6 @@ const DoctorSchema = new Schema({
       ref: 'User',
     },
   ],
-  affiliateHospital: {
-    type: Schema.Types.ObjectId,
-    ref: 'Company',
-  },
   consultationHistory: [
     {
       type: Schema.Types.ObjectId,
@@ -115,14 +122,7 @@ const PatientSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Insurance'
     },
-    affiliateHospital: {
-      type: Schema.Types.ObjectId,
-      ref: 'Company',
-    },
-    personalPhysician: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    }
+
 });
 
 const PharmacyAdminSchema = new Schema({

@@ -151,5 +151,19 @@ export async function deleteUser(clerkId: string) {
 }
 
 export async function fetchAffiliates(userId:string) {
-  
+  try {
+    await connectToDatabase()
+    const user = await User.findOne(
+      {clerkId: userId}
+    ).populate("affiliateHospital").populate("personalPhysician")
+    if (!user) throw new Error("User Not Found")
+    
+    const hospital = user.affiliateHospital
+    const doctor =user.personalPhysician
+
+    return JSON.parse(JSON.stringify({...hospital, ...doctor}))
+    
+  } catch (error) {
+    handleError(error)
+  }
 }

@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { MdMeetingRoom, MdOutlineEmail, MdOutlineRoom } from 'react-icons/md'
+import { MdMeetingRoom, MdMessage, MdOutlineEmail, MdOutlineRoom, MdSchedule } from 'react-icons/md'
+import { Button } from '../ui/button'
 
 const AffiliateDoctor = () => {
   return (
@@ -23,7 +24,10 @@ const AffiliateDoctor = () => {
                 Bio
             </h1>
             <p className="text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus quas delectus fugit sint incidunt, itaque, tempora perferendis animi, magni eius aspernatur velit possimus quidem consequatur eaque quam adipisci asperiores voluptas culpa laudantium cupiditate. Ratione itaque impedit vero nemo unde sapiente reiciendis ipsa minus accusantium quis.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus quas delectus fugit sint incidunt, 
+                itaque, tempora perferendis animi, magni eius aspernatur velit possimus quidem consequatur eaque quam adipisci 
+                asperiores voluptas culpa laudantium cupiditate. Ratione itaque impedit vero nemo unde sapiente reiciendis ipsa 
+                minus accusantium quis.
             </p>
         </div>
         <div className="grid grid-cols-2">
@@ -46,7 +50,19 @@ const AffiliateDoctor = () => {
                 </ul>
             </div>
             <div className="">
-                Actions
+            <h1 className="font-medium">
+                    Actions
+                </h1>
+                <div className="flex gap-x-6">
+                    <Button>
+                        <MdSchedule className='mr-2'/>
+                        Book An Appointment
+                    </Button>
+                    <Button>
+                        <MdMessage className='mr-2'/>
+                        Send Message
+                    </Button>
+                </div>
             </div>
         </div>
       </div>
