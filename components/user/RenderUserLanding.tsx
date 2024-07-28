@@ -42,12 +42,6 @@ const RenderUserLanding = () => {
         ],
         patientAndDoctor: [
             {
-                title: 'Affiliation',
-                description: 'Visit affiliate page',
-                imageSrc: '/icons/userlist.svg',
-                action: `/user/${clerkId}/affiliation`
-            },
-            {
                 title: 'Pharmacy',
                 description: 'Order for drugs',
                 imageSrc: '/icons/Pill.svg',

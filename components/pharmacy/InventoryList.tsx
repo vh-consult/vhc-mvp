@@ -1,4 +1,4 @@
-import { getPharmacyInventory } from '@/lib/actions/company.actions';
+import { getPharmacyInventory } from '@/lib/actions/inventory.actions';
 import Image from 'next/image'
 import React from 'react'
 
@@ -76,7 +76,6 @@ const InventoryCard = (
 
 const InventoryList =  async ({pharmacyId}: {pharmacyId: string}) => {
     const drugs = await getPharmacyInventory(pharmacyId)
-    console.log(drugs)
   return (
     <div className='w-full'>
       <Header/>

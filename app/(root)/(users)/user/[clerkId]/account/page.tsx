@@ -13,15 +13,15 @@ const Account = async () => {
       contents: [
         {
           title: 'Full Name',
-          body: 'Solomon Aries'
+          body: fetchedUser?.firstName + ' ' + fetchedUser?.lastName
         },
         {
           title: 'Date of Birth',
-          body: '12th July, 1996'
+          body: new Date(fetchedUser?.dateOfBirth)
         },
         {
           title: 'Gender',
-          body: 'Male'
+          body: fetchedUser?.gender
         },
         {
           title: 'Language(s) Spoken',
@@ -29,7 +29,7 @@ const Account = async () => {
         },
         {
           title: 'Country',
-          body: 'Ghana'
+          body: fetchedUser?.country
         },
         {
           title: 'National ID',
@@ -42,11 +42,11 @@ const Account = async () => {
     contents: [
       {
         title: 'hospital of affiliation',
-        body: 'Serwise hospital LLC'
+        body: fetchedUser?.affiliateHospital
       },
       {
         title: 'personal physician',
-        body: 'Dr Monroe Samuella'
+        body: fetchedUser?.personalDoctor
       },
       {
         title: 'insurance subscription',
@@ -114,7 +114,7 @@ const Account = async () => {
           <Image
             width={150}
             height={150} 
-            src={fetchedUser?.image} 
+            src={fetchedUser?.photo} 
             alt="" 
             className='w-[185px] h-[185px] object-cover border
             border-dark-3 rounded-full'

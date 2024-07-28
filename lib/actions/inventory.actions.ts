@@ -117,3 +117,22 @@ export async function getDrug(drugId: string , shopId: string) {
         handleError(error)
     }
 }
+
+
+export async function getPharmacyInventory(pharmacyId: string) {
+    try {
+        await connectToDatabase()
+        if (!pharmacyId || pharmacyId.trim() === '') {
+            throw new Error('Invalid company ID');
+        }
+        const pharmacy = await Company.findOne(
+            {_id: pharmacyId, companyType: "Pharmacy"}
+        ).populate("inventory");
+        
+        if (!pharmacy) throw new Error('No pharmacy found');
+        if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
+        return JSON.parse(JSON.stringify(pharmacy.inventory));
+    } catch (error) {
+        handleError(error);
+    }
+}
