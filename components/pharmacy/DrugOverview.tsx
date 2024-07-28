@@ -40,8 +40,8 @@ const DrugOverview = ({
 }: ShopDrugOverviewProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className='w-[400px] px-4 py-3 rounded-xl border 
-        border-gray-200'>
+      <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
+         bg-dark-1 text-green-1'>
             <div className="w-full flex justify-between">
               <div className="w-[70%]">
                 <h3 className="text-xl font-medium">
@@ -70,8 +70,6 @@ const DrugOverview = ({
                   }
                 </p>
               </div>
-              <CgClose className="w-6 h-6 
-              hover:text-red-600"/>
             </div>
             <div className="flex mt-4 items-center 
             justify-between">
@@ -116,15 +114,15 @@ const DrugOverview = ({
               <h2 className="text-lg font-medium">
                 Order Section
               </h2>
-              <div className="flex items-center my-2">
-                <span className="mr-6">
+              <div className="flex flex-between my-2">
+                <span className="">
                   How many are you buying? 
                 </span>
                 <span>
                   <Input 
-                    className="border outline-none 
-                    border-gray-200 rounded-md w-[70px] h-[30px] 
-                    p-1 text-sm font-medium"
+                    className="outline-none 
+                    bg-dark-3 rounded-md w-[70px] h-[30px] 
+                    p-1 text-sm font-medium focus-visible:ring-0"
                     type="number"
                     min={1}
                     max={numberOfStock}
@@ -132,21 +130,21 @@ const DrugOverview = ({
                 </span>
               </div>
               <Textarea 
-                className="w-full border h-[100px] p-2 
-                rounded-lg border-gray-200 outline-none text-sm" 
+                className="w-full h-[100px] p-2 
+                rounded-lg bg-dark-3 outline-none text-sm" 
                 placeholder="Anything we need to know before 
                 we assign the doses?"
               />
             </div>
             <div>
                 <Button  
-                  className="w-full h-[35px] border border-blue 
-                  rounded-md my-2 text-sm text-blue font-medium"
+                  className="w-full h-[35px] border border-green-2 
+                  rounded-md my-2 text-sm text-green-2 font-medium"
                 >
                   Add to cart
                 </Button>
                 <Button  
-                  className='w-full h-[35px] bg-blue rounded-md 
+                  className='w-full h-[35px] bg-green-2 rounded-md 
                   text-white font-medium text-sm'
                 >
                   Buy Now

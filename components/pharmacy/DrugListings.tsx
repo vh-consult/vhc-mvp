@@ -42,7 +42,7 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
               image: string, name: string , quantity: number, price: number
               }, index: React.Key | null | undefined) => {
               return(
-                
+                <>
                   <DrugCard
                     name={drug.name}
                     key={index}
@@ -50,22 +50,22 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
                     imageSRC={drug.image}
                     price={drug.price}
                   />
-                
-              ) 
+                  {
+                    showBuyPopUp === true? (
+                      <DrugOverview
+                        imageSrc={drug.image}
+                        isOpen = {showBuyPopUp}
+                        name={drug.name}
+                        numberOfStock={drug.quantity}
+                        onClose={() => {setShowBuyPopUp(false)}}
+                        price={drug.price}
+          
+                      /> 
+                    ): ''
+                  }  
+                </>
+              )
           }))
-        }
-        {
-          showBuyPopUp === true? (
-            <DrugOverview
-              imageSrc='/images/drug 0.jpg'
-              isOpen = {showBuyPopUp}
-              name='Simadold dh'
-              numberOfStock={3}
-              onClose={() => {setShowBuyPopUp(false)}}
-              price={34}
-
-            /> 
-          ): ''
         }
       </div>
     </div>

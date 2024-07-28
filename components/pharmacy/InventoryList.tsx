@@ -42,7 +42,7 @@ const InventoryCard = (
     : InventoryItemProps
 ) => {
     return(
-        <div className="w-full h-10 grid  grid-cols-6 px-6 items-center bg-white">
+        <div className="w-full h-10 grid cursor-pointer hover: bg-gray-100  grid-cols-6 px-6 items-center bg-white">
             <div className="flex items-center">
                 <span>
                     {count}
