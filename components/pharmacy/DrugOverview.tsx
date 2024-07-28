@@ -1,6 +1,6 @@
+
 import React from 'react'
 import { Button } from '../ui/button'
-import { CgClose } from 'react-icons/cg'
 import Image from 'next/image';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -8,6 +8,8 @@ import {
   Dialog, 
   DialogContent
 } from "@/components/ui/dialog"
+import { PaystackButton } from 'react-paystack';
+import PayWithPaystack from '../general/PayWithPaystack';
 
 interface ShopDrugOverviewProps {
   name: string;
@@ -23,6 +25,7 @@ interface ShopDrugOverviewProps {
   onClose: () => void;
   isOpen: boolean
 }
+
 
 const DrugOverview = ({
   name, 
@@ -143,12 +146,7 @@ const DrugOverview = ({
                 >
                   Add to cart
                 </Button>
-                <Button  
-                  className='w-full h-[35px] bg-green-2 rounded-md 
-                  text-white font-medium text-sm'
-                >
-                  Buy Now
-                </Button>
+                <PayWithPaystack amount={5} />
             </div>
       </DialogContent>
     </Dialog>
