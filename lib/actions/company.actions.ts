@@ -72,32 +72,6 @@ export async function getAllPharmacyShops() {
 }
 
 
-
-export async function fetchAllShopOrders(adminId: string, shopId:string) {
-    try {
-        await connectToDatabase()
-        
-        const admin = await User.findOne(
-            {clerkId: adminId, userrole: "PharmacyAdmin"}
-        ).populate("company")
-        if(!admin) throw new Error("User Not Found")
-
-        const pharmacy = await Company.findOne(
-            {_id: shopId, companyType: "Pharmacy"}
-        )
-        .populate("admins")
-        .populate("orders")
-        if(!pharmacy) throw new Error("Pharmacy Not Found")
-        if (!pharmacy.admin.includes(admin._id) || admin.company !== shopId) throw new Error("User can't fetch orders of shop")
-        
-        const orders = pharmacy.OrderSchema
-
-        return JSON.parse(JSON.stringify(orders))
-    } catch (error) {
-        handleError(error)
-    }
-}
-
 // export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
 //     try {
 //         await connectToDatabase()

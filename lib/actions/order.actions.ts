@@ -4,7 +4,8 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import Drug from "../database/models/drug.model";
 import { User } from "../database/models/user.model";
-import { Pharmacy } from "../database/models/company.model";
+import { Company, Pharmacy } from "../database/models/company.model";
+import { startSession } from "mongoose";
 
 
 export async function addToCart(clerkId: string, drugId: string) {
@@ -48,28 +49,33 @@ export async function removeFromCart(clerkId: string, drugId: string) {
 
 export async function placeOrder(
     clerkId: string, 
-    drugs: Array<string>, 
+    drugs: Array<string> , 
     shopId: string
 ) {
     try {
         await connectToDatabase()
-
+        console.log("started")
         const userOrderingItem = await User.findOne({clerkId})
         if (!userOrderingItem) throw new Error("User not found")
 
-        const shop = await Pharmacy.findById({_id: shopId})
-        if (!shop) throw new Error("Pharmacy not found")    
-
+        const shop = await Pharmacy.findById(shopId)
+        if (!shop) throw new Error("Pharmacy not found")  
+        console.log("shop found")
+        const session = await startSession()
+        session.startTransaction()
         drugs.forEach(async (drugID) => {
-            const drug = await Drug.findById({_id: drugID})
+            const drug = await Drug.findById(drugID)
             if(!drug) throw new Error("Drug not found")
-            
-            userOrderingItem.orders.push(drug)
+            console.log(drug)
+            userOrderingItem.orders.push(drug._id)
             await userOrderingItem.save()
         });
         
-        
+        await session.commitTransaction();
+        session.endSession();
+        return {message: "Order placed successfully"}
     } catch (error) {
+ 
         handleError(error)
     }
 }
@@ -78,6 +84,19 @@ export async function placeOrder(
 export async function cancelOrder(clerkId: string, orderId: string) {
     try {
         await connectToDatabase()
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function retrieveShopOrders(shopId:string) {
+    try {
+        await connectToDatabase()
+        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"}).populate("orders")
+        if (!shop) throw new Error("Shop not found")
+
+        const orders = shop.orders
+        return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)
     }

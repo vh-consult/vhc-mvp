@@ -1,7 +1,6 @@
-import { fetchAllShopOrders } from '@/lib/actions/company.actions';
-import { currentUser } from '@clerk/nextjs/server';
-import Image from 'next/image'
 import React from 'react'
+import { retrieveShopOrders } from '@/lib/actions/order.actions';
+import Image from 'next/image'
 
 interface OrderCardProps {
   imageUrl: string;
@@ -60,8 +59,7 @@ const OrderCard = (
   }
 
 const OrderList = async ({shopId}: {shopId: string}) => {
-  const user = await currentUser()
-  const orders = await fetchAllShopOrders(user?.id!, shopId)
+  const orders = await retrieveShopOrders(shopId)
   return (
     <div className='grid grid-cols-2 gap-4'>
       {

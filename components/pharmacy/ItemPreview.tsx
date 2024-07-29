@@ -9,7 +9,7 @@ import {
   DialogContent
 } from "@/components/ui/dialog"
 
-interface ItemDataProps {
+interface DrugProps {
   image: string;
   name: string;
   catalog: string;
@@ -19,6 +19,10 @@ interface ItemDataProps {
   expiryDate?: Date;
   createdAt: Date;
   updatedAt?: Date;
+}
+
+interface ItemDataProps {
+  item: DrugProps|any;
   isOpen: boolean;
   onClose: () => void
 }
@@ -39,18 +43,18 @@ const itemData = {
 
 const ItemPreview =  (
   {
-    image, name, catalog, caution, createdAt, 
-    isOpen, onClose, price, quantity, expiryDate, updatedAt
+    item,
+    isOpen, onClose,
 
   }: ItemDataProps
 ) => {
     return (
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className='w-[650px] p-4 rounded-lg bg-dark-1'>
+        <DialogContent className='w-[650px] p-4 rounded-lg bg-white'>
             <div className="flex flex-between ">
               <div className="flex flex-center">
                 <Image
-                  src={itemData.image}
+                  src={item?.image}
                   alt=''
                   width={150}
                   height={150}
@@ -58,16 +62,16 @@ const ItemPreview =  (
                 />
                 <span className="flex flex-col">
                   <h2 className="text-2xl font-semibold">
-                    {itemData.name}
+                    {item?.name}
                   </h2>
                   <p className="">
-                    Catalog: {itemData.catalog}
+                    Catalog: {item?.catalog}
                   </p>
                 </span> 
               </div>
-              <Button className='border-2 '>
+              <Button className='border-2 border-blue-4'>
                 Edit
-                <MdEdit/>
+                <MdEdit className='ml-1'/>
               </Button>
             </div>
             <div className="flex flex-col flex-between gap-3 pt-4 ">
@@ -76,7 +80,7 @@ const ItemPreview =  (
                   Quantity: 
                 </span>
                 <span className="">
-                  {itemData.quantity}
+                  {item?.quantity}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -84,7 +88,7 @@ const ItemPreview =  (
                   Price ($): 
                 </span>
                 <span className="">
-                {itemData.price}
+                {item?.price}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -92,7 +96,7 @@ const ItemPreview =  (
                   Caution: 
                 </span>
                 <span className="">
-                {itemData.caution}
+                {item?.caution}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -100,7 +104,7 @@ const ItemPreview =  (
                   Expiry Date: 
                 </span>
                 <span className="">
-                  {itemData.expiryDate}
+                  {new Date(item?.expiryDate!).toLocaleDateString()}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -108,7 +112,7 @@ const ItemPreview =  (
                   Uploaded On: 
                 </span>
                 <span className="">
-                  {itemData.createdAt}
+                  {new Date(item?.createdAt!).toLocaleDateString()}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -116,7 +120,7 @@ const ItemPreview =  (
                   Last Updated: 
                 </span>
                 <span className="">
-                  {itemData.updatedAt}
+                  {new Date(item?.updatedAt!).toLocaleDateString()}
                 </span>
               </span>
             </div>

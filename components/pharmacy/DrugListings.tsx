@@ -18,7 +18,7 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
   }, [pharmacyId, query])
   const {id} = useParams()
   return (
-    <div className="py-6" onClick={()=>{setShowBuyPopUp(true)}}>
+    <div className="py-6">
       <h1 className="text-lg font-sembold pl-[5%] ">Available Drugs</h1>
       <div className='w-[90%] mx-auto ptx -3 grid grid-cols-6 '>
 
@@ -27,7 +27,10 @@ const DrugListings = ({pharmacyId, query}: {pharmacyId: string, query?: string})
               image: string, name: string , quantity: number, _id: string, price: number
               }, index: React.Key | null | undefined) => {
               return(
-                <div key={index} onClick={() => setDrug(drug)}>
+                <div key={index} onClick={() => {
+                setDrug(drug)
+                setShowBuyPopUp(true)
+                }}>
                   <DrugCard
                     name={drug.name}
                     
