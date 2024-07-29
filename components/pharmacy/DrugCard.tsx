@@ -12,7 +12,8 @@ const DrugCard = ({
   name, 
   imageSRC, 
   price,
-  quantity
+  quantity,
+
 }: DrugCardProps) => {
   return (
     <div className='w-[165px] h-[185px] rounded-lg border 

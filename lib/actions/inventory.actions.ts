@@ -97,21 +97,26 @@ export async function updateInventory(clerkId: string, shopId: string) {
     }
 }
 
-export async function getDrug(drugId: string , shopId: string) {
+export async function getDrug(drugId: string, shopId: string) {
     try {
         await connectToDatabase()
-
+        console.log(drugId, shopId)
+        
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"}).populate("inventory")
         if (!shop) throw new Error("Shop not found")
 
         const inventory = shop.inventory
-        let drug
-        if (inventory.includes(drugId)) {
-            drug = await Drug.findById(drugId)
-
-        }else {
+        
+        // Check if the drugId exists in the inventory
+        const drugInInventory = inventory.some((item: any) => item._id.toString() === drugId)
+        
+        if (!drugInInventory) {
             throw new Error("Drug not in shop inventory")
         }
+
+        const drug = await Drug.findById(drugId)
+        if (!drug) throw new Error("Drug not found")
+
         return JSON.parse(JSON.stringify(drug))
     } catch (error) {
         handleError(error)

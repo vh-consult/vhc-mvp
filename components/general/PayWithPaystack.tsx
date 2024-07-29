@@ -1,7 +1,8 @@
+"use client"
 import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
-import { currentUser } from '@clerk/nextjs/server';
+import { useUser } from '@clerk/nextjs';
 
 const PayWithPaystack = async (
   {amount}: 
@@ -11,14 +12,14 @@ const PayWithPaystack = async (
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
 
-  const user = await currentUser()
-
+  const {user} = useUser()
+  console.log(user)
   const componentProps = {
-    email: user?.emailAddresses[0] as any,
+    email: user?.emailAddresses[0].emailAddress as string,
     amount,
     metadata: {
       name: user?.fullName,
-      phone: user?.phoneNumbers[0],
+      phone: user?.phoneNumbers[0].phoneNumber,
       custom_fields: [
 
       ],
@@ -27,9 +28,10 @@ const PayWithPaystack = async (
     publicKey,
     text: 'Buy Now',
     onSuccess: (response:any) => {
+      
       toast({title:`Your purchase was successful! Transaction reference: ${response.reference}`});
     },
-    onClose: () => toast({title: "Don't you wanna purchase it again? :("}),
+    onClose: () => toast({title: "Order will be terminated"}),
   };
 
   return (

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Button } from '../ui/button'
 import Image from 'next/image';
@@ -8,65 +7,65 @@ import {
   Dialog, 
   DialogContent
 } from "@/components/ui/dialog"
-import { PaystackButton } from 'react-paystack';
 import PayWithPaystack from '../general/PayWithPaystack';
+import { getDrug } from '@/lib/actions/inventory.actions';
 
-interface ShopDrugOverviewProps {
+interface DrugProps {
   name: string;
   price: number;
   category?: string;
   description?: string;
   batchID?: string;
   caution?: string;
-  imageSrc: string; 
-  numberOfStock: number;
+  image: string; 
+  quantity: number;
   expiryDate?: Date;
-  producer?: string;
+  producer?: string; 
+}
+
+interface ShopDrugOverviewProps {
+
+  shopId: string;
+  drug: DrugProps;
   onClose: () => void;
   isOpen: boolean
 }
 
 
-const DrugOverview = ({
-  name, 
-  price, 
-  category,
-  description,
-  batchID,
-  caution,
-  imageSrc,
-  expiryDate,
-  numberOfStock,
-  producer,
+const DrugOverview = async ({
+  drug,
+  shopId,
   isOpen,
   onClose
 }: ShopDrugOverviewProps) => {
+
+  // const drug = await getDrug(drug, shopId)
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
-         bg-dark-1 text-green-1'>
+         bg-dark-1 text-green-1 border-none'>
             <div className="w-full flex justify-between">
               <div className="w-[70%]">
                 <h3 className="text-xl font-medium">
-                  Batch ID: {batchID}
+                  Batch ID: {drug?.batchID}
                 </h3>
                 <div className="flex justify-between text-sm 
                 opacity-75">
                   <span>
-                    In stock - {numberOfStock}
+                    In stock - {drug?.quantity}
                   </span>
                   <span>
                     Expiry date: 
-                    {expiryDate && new Date(expiryDate).toLocaleDateString()}
+                    {drug?.expiryDate && new Date(drug?.expiryDate).toLocaleDateString()}
                   </span>
                 </div>
                 <p>
-                  {
+                  {drug?.
                     caution? (
                       <>
                         <p className="text-sm text-red-600 
                         font-medium">
-                          {caution}
+                          {drug?.caution}
                         </p>
                       </>
                     ) : null
@@ -78,7 +77,7 @@ const DrugOverview = ({
             justify-between">
               <div className="flex items-center">
                 <Image 
-                  src={imageSrc} 
+                  src={drug?.image} 
                   alt="" 
                   width={100}
                   height={105}
@@ -87,28 +86,28 @@ const DrugOverview = ({
                 />
                 <div className="ml-4">
                   <h4 className="text-lg font-medium">
-                    {name}
+                    {drug?.name}
                   </h4>
                   <p className="">
-                    {producer}
+                    {drug?.producer}
                   </p>
                   <p className="text-sm">
-                    {category}
+                    {drug?.category}
                   </p>
                 </div>
               </div>
               <span className="font-medium">
-                {`$ ${price}.00`}
+                {`$ ${drug?.price}.00`}
               </span>
             </div>
             <div className="mt-2">
               {
-                description? (
+                drug?.description? (
                   <>
                     <h4 className="font-medium text-lg">
                       Description
                     </h4>
-                    <p className="text-sm">{description}</p>
+                    <p className="text-sm">{drug?.description}</p>
                   </>
               ) : null
               }
@@ -128,7 +127,7 @@ const DrugOverview = ({
                     p-1 text-sm font-medium focus-visible:ring-0"
                     type="number"
                     min={1}
-                    max={numberOfStock}
+                    max={drug?.quantity}
                   />
                 </span>
               </div>
