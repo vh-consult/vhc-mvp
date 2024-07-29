@@ -5,9 +5,10 @@ import { toast } from '../ui/use-toast';
 import { useUser } from '@clerk/nextjs';
 
 const PayWithPaystack = async (
-  {amount}: 
+  {amount, items}: 
   {
     amount: number,
+    items: string[] | string
   }
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
@@ -17,6 +18,7 @@ const PayWithPaystack = async (
   const componentProps = {
     email: user?.emailAddresses[0].emailAddress as string,
     amount,
+    items,
     metadata: {
       name: user?.fullName,
       phone: user?.phoneNumbers[0].phoneNumber,
@@ -28,7 +30,9 @@ const PayWithPaystack = async (
     publicKey,
     text: 'Buy Now',
     onSuccess: (response:any) => {
-      
+      const createOrderPurchase = async () => {
+        // const createTransaction = await 
+      }
       toast({title:`Your purchase was successful! Transaction reference: ${response.reference}`});
     },
     onClose: () => toast({title: "Order will be terminated"}),

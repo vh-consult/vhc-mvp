@@ -11,6 +11,7 @@ import PayWithPaystack from '../general/PayWithPaystack';
 import { getDrug } from '@/lib/actions/inventory.actions';
 
 interface DrugProps {
+  _id: string;
   name: string;
   price: number;
   category?: string;
@@ -145,7 +146,7 @@ const DrugOverview = async ({
                 >
                   Add to cart
                 </Button>
-                <PayWithPaystack amount={5} />
+                <PayWithPaystack amount={5} items={drug?._id}/>
             </div>
       </DialogContent>
     </Dialog>

@@ -4,7 +4,7 @@ const OrderSchema = new Schema({
     reference: { type: String },
     payment: {
         type: Schema.Types.ObjectId,
-        ref: 'Payment'
+        ref: 'Transaction'
     },
     status: {
         type: String,
@@ -27,7 +27,7 @@ const OrderSchema = new Schema({
         enum: ["homeDelivery", "inPerson"]
     },
     shipping_address: {
-        
+        type: String
     },
     note: {
         type: String,
