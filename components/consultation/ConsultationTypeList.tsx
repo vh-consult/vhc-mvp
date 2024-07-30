@@ -54,6 +54,7 @@ const ConsultationTypeList = () => {
       params.delete("query")
     }
     const host = await searchHost(query)
+    setHostList(host)
   })
   const createConsultation = async () => {
     if (!client || !user) return;
@@ -169,11 +170,15 @@ const ConsultationTypeList = () => {
             />
             {
               hostList.length > 0 && (
-                <div>
+                <div className='w-full bg-dark-2'>
                   {
-                    hostList.map((host, index) => (
-                      <div key={index} onClick={()=>setValues({...values, host: host})}>
-                        {host}
+                    hostList.map((host:any, index) => (
+                      <div 
+                        key={index} 
+                        onClick={()=>setValues({...values, host: host._id})} 
+                        className='p-2 cursor-pointer hover:bg-dark-3'
+                      >
+                        {host.name}
                       </div>
                     ))
                   }

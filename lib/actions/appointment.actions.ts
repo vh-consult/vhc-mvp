@@ -1,6 +1,7 @@
 "use server"
 
 import Booking from "../database/models/booking.model";
+import { Company } from "../database/models/company.model";
 import Consultation from "../database/models/consultation.model";
 import { User } from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
@@ -147,10 +148,47 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
 
 export async function searchHost(query: string) {
     try {
-        // await connectToDatabase()
-        console.log(query)
+        await connectToDatabase()
+
+        // Search for hospitals
+        const hospitalHosts = await Company.find({
+            name: { $regex: query, $options: 'i' },
+            companyType: "Hospital"
+        }).select('_id name')
+
+        // Search for doctors
+        const doctorHosts = await User.find({
+            userRole: "Doctor",
+            $or: [
+                { firstName: { $regex: query, $options: 'i' } },
+                { lastName: { $regex: query, $options: 'i' } },
+                { $expr: { $regexMatch: { 
+                    input: { $concat: ["$firstName", " ", "$lastName"] }, 
+                    regex: query, 
+                    options: "i" 
+                } } }
+            ]
+        }).select('_id firstName lastName')
+
+        // Combine and format results
+        const results = [
+            ...hospitalHosts.map(hospital => ({
+                id: hospital._id,
+                name: hospital.name,
+                hostType: 'Company'
+            })),
+            ...doctorHosts.map(doctor => ({
+                id: doctor._id,
+                name: `${doctor.firstName} ${doctor.lastName}`,
+                hostType: 'User'
+            }))
+        ]
+        console.log(results)
+        return JSON.parse(JSON.stringify(results))
+
     } catch (error) {
-      handleError(error)  
+        handleError(error)
+        return []
     }
 }
 

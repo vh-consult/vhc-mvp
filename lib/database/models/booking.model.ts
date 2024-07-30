@@ -6,9 +6,12 @@ const BookingSchema = new Schema({
         ref: 'User'
     },
     host: {
-        // type: Schema.Types.ObjectId,
-        // ref: 'User',
-        type: String
+        type: Schema.Types.ObjectId,
+        refPath: 'hostType',
+    },
+    hostType: {
+        type: String,
+        enum: ["User", "Company"]  
     },
     link: {
         type: String,
