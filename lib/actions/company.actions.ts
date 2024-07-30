@@ -89,6 +89,7 @@ export async function getAllPharmacyShops() {
 //     }
 // }
 
+
 export async function getPharmacyById(pharmacyId: string) {
     try {
         await connectToDatabase();

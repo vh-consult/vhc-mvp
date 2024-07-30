@@ -38,15 +38,10 @@ const DrugOverview = async ({
   isOpen,
   onClose
 }: ShopDrugOverviewProps) => {
-  const handleAddToCart = async (e: ChangeEvent) => {
-    e.preventDefault()
-    alert("nothing")
-  }
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
          bg-dark-1 text-green-1 border-none'>
-          <form action="handleAddToCart">
             <div className="w-full flex justify-between">
               <div className="w-[70%]">
                 <h3 className="text-xl font-medium">
@@ -131,7 +126,6 @@ const DrugOverview = async ({
                     type="number"
                     min={1}
                     max={drug?.quantity}
-                    name='orderQuantity'
                   />
                 </span>
               </div>
@@ -140,12 +134,10 @@ const DrugOverview = async ({
                 rounded-lg bg-dark-3 outline-none text-sm" 
                 placeholder="Anything we need to know before 
                 we assign the doses?"
-                name='notes'
               />
             </div>
             <div>
                 <Button  
-                  type='submit'
                   className="w-full h-[35px] border border-green-2 
                   rounded-md  text-sm text-green-2 font-medium"
                 >
@@ -153,7 +145,6 @@ const DrugOverview = async ({
                 </Button>
                 <PayWithPaystack amount={drug?.price} items={[drug?._id]}/>
             </div>
-          </form>
       </DialogContent>
     </Dialog>
   )

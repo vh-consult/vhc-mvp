@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import ClickableCard from '../general/ClickableCard';
 import FormModal from './FormModal';
 import Loader from '../general/Loader';
@@ -12,7 +12,8 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { newBooking } from '@/lib/actions/appointment.actions';
+import { newBooking, searchHost } from '@/lib/actions/appointment.actions';
+import { useDebouncedCallback } from 'use-debounce';
 
 const initialValues = {
   date: new Date(),
@@ -32,18 +33,28 @@ type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultatio
 
 const ConsultationTypeList = () => {
   const router = useRouter();
+  const searchParams = useSearchParams()
   const [ConsultationState, setConsultationState] = useState<ConsultationStateProps>(undefined);
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call | null>(null);
   const client = useStreamVideoClient();
   const { user } = useUser();
   const { toast } = useToast();
-
+  const [hostList, setHostList] = useState<any[]>([])
+  
   useEffect(() => {
     console.log('Client:', client);
     console.log('User:', user);
   }, [client, user]);
-
+  const handleSearch = useDebouncedCallback(async (query: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (query) {
+      params.set("query", query)
+    } else {
+      params.delete("query")
+    }
+    const host = await searchHost(query)
+  })
   const createConsultation = async () => {
     if (!client || !user) return;
     try {
@@ -148,16 +159,28 @@ const ConsultationTypeList = () => {
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
             />
           </div>
-          {values.appointmentType === "specialBooking" && (
             <div>
-              <Label>Search & Select Physician</Label>
-              <Input 
-                className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-                placeholder='Type name...' 
-                onChange={(e)=>setValues({...values, host: e.target.value})}
-              />
-            </div>
-          )}
+            <Label>Search & Select Physician</Label>
+            <Input 
+              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              placeholder='Type name...' 
+              defaultValue={'Serwise Hospital LLC'}
+              onChange={(e)=>handleSearch(e.target.value)}
+            />
+            {
+              hostList.length > 0 && (
+                <div>
+                  {
+                    hostList.map((host, index) => (
+                      <div key={index} onClick={()=>setValues({...values, host: host})}>
+                        {host}
+                      </div>
+                    ))
+                  }
+                </div>
+              )
+            }
+          </div>
         </FormModal>
       ) : (
         <FormModal

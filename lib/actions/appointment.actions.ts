@@ -145,9 +145,10 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
     }
 }
 
-export async function searchDoctor() {
+export async function searchHost(query: string) {
     try {
-        await connectToDatabase()
+        // await connectToDatabase()
+        console.log(query)
     } catch (error) {
       handleError(error)  
     }
