@@ -4,11 +4,11 @@ import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
 import { useUser } from '@clerk/nextjs';
 
-const PayWithPaystack = async (
+const PayWithPaystack = (
   {amount, items, shopId, notes}: 
   {
     amount: number,
-    items: string[],
+    items?: string[],
     shopId?: string,
     notes?: string
   }
