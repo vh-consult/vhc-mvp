@@ -173,17 +173,16 @@ export async function searchHost(query: string) {
         // Combine and format results
         const results = [
             ...hospitalHosts.map(hospital => ({
-                id: hospital._id,
+                id: hospital._id.toString(),
                 name: hospital.name,
                 hostType: 'Company'
             })),
             ...doctorHosts.map(doctor => ({
-                id: doctor._id,
+                id: doctor._id.toString(),
                 name: `${doctor.firstName} ${doctor.lastName}`,
                 hostType: 'User'
             }))
         ]
-        console.log(results)
         return JSON.parse(JSON.stringify(results))
 
     } catch (error) {

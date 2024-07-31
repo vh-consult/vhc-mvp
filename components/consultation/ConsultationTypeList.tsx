@@ -95,7 +95,7 @@ const ConsultationTypeList = () => {
     console.log('Client or user not available yet:', { client, user });
     return <Loader />;
   }
-
+  const [hostName, setHostName] = useState('')
   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${callDetail?.id}`;
   
   return (
@@ -165,7 +165,7 @@ const ConsultationTypeList = () => {
             <Input 
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder='Type name...' 
-              defaultValue={'Serwise Hospital LLC'}
+              defaultValue={hostName}
               onChange={(e)=>handleSearch(e.target.value)}
             />
             {
@@ -175,8 +175,12 @@ const ConsultationTypeList = () => {
                     hostList.map((host:any, index) => (
                       <div 
                         key={index} 
-                        onClick={()=>setValues({...values, host: host._id})} 
-                        className='p-2 cursor-pointer hover:bg-dark-3'
+                        onClick={()=>{
+                          setValues({...values, host: host._id})
+                          setHostName(host.name)
+                          setHostList([])
+                        }} 
+                        className='p-2 cursor-pointer text-sm hover:bg-dark-3'
                       >
                         {host.name}
                       </div>
