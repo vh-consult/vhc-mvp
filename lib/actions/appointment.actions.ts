@@ -112,9 +112,15 @@ export async function newBooking(clerkId: string, formData?: BookingParams) {
         const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
         
+        if(formData && formData.host === "" ){
+            formData.host = creator.personalPhysician || creator.affiliateHospital
+        }
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
         appointment.save()
+        if (formData && creator.personalPhysician === null) {
+            creator.personalPhysician = formData.host
+        }
         creator.bookings.push(appointment._id)
         await creator.save()  
 

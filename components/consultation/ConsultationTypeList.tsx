@@ -20,7 +20,7 @@ const initialValues = {
   problem_statement: '',
   link: '',
   appointmentType: '',
-  host: ''
+  host: '' 
 };
 
 const ClickableCards = [

@@ -18,7 +18,7 @@ declare type UserParams = {
   country: string;
   company?: string;
   bookings?: any[];
-  requests?: any[]
+  messages?: any[]
 };
 
 declare type CreateDoctorParams = {
