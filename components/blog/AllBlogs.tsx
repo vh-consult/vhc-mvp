@@ -7,7 +7,7 @@ import Link from 'next/link'
 const AllBlogs =async () => {
     const blogs = await getAllBlogs()
   return (
-    <div className="w-full grid grid-cols-4 px-10">
+    <div className="w-full grid grid-cols-4 ">
         {
             blogs.map((blog:BlogParams|any, index:number) => (
               <Link key={index} href={`/blogs/${blog?._id}`}>

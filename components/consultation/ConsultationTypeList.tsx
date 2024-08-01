@@ -176,8 +176,9 @@ const ConsultationTypeList = () => {
                       <div 
                         key={index} 
                         onClick={()=>{
-                          setValues({...values, host: host._id})
-                          setHostName(host.name)
+                          setValues({...values, host: host._id}) 
+                          setHostName(host.name) 
+                          console.log(hostName)
                           setHostList([])
                         }} 
                         className='p-2 cursor-pointer text-sm hover:bg-dark-3'

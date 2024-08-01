@@ -64,7 +64,7 @@ const MessageCard = ({imageUrl, sender, message, time, className}: MessageCardPr
         <span className='text-base'>{sender}</span>
         <span className='text-xs'>{new Date(time).toLocaleTimeString()}</span>
       </div>
-      <p className="text-sm">{message.slice(0, 35)}...</p>
+      <p className="text-sm">{message.slice(0, 60)}...</p>
     </div>
   </div>
   )

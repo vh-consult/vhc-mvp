@@ -17,7 +17,7 @@ const Account = async () => {
         },
         {
           title: 'Date of Birth',
-          body: new Date(fetchedUser?.dateOfBirth)
+          body: new Date(fetchedUser?.dateOfBirth).toLocaleDateString()
         },
         {
           title: 'Gender',
