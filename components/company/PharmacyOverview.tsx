@@ -1,6 +1,8 @@
 import React from 'react'
-import AlertList from '../doctor/AlertList'
-import ClientList from '../doctor/ClientList'
+import ExpiringDrugsList from '../pharmacy/ExpiringDrugsList'
+import OutOfStockList from '../pharmacy/OutOfStockList'
+import PharmacyStatistics from '../pharmacy/PharmacyStatistics'
+import RecentOrders from '../pharmacy/RecentOrders'
 
 const PharmacyOverview = () => {
   return (
@@ -9,6 +11,7 @@ const PharmacyOverview = () => {
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Recent Orders
         </h3>
+        <RecentOrders orders={[]}/>
       </div>
 
       <div className="w-[35%] h-full flex flex-col flex-between">
@@ -17,7 +20,7 @@ const PharmacyOverview = () => {
                 Expiring Drugs
             </h3>
             <div className="w-full">
-                <AlertList/>
+                <ExpiringDrugsList drugs={[]}/>
             </div>
         </div>
         <div className="w-full h-[48%] bg-white rounded-lg">
@@ -25,7 +28,7 @@ const PharmacyOverview = () => {
                 Out of Stock
             </h3>
             <div className="w-full">
-              No drugs yet.
+              <OutOfStockList/>
             </div>
         </div>
       </div>
@@ -33,6 +36,7 @@ const PharmacyOverview = () => {
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Statistics
         </h3>
+        <PharmacyStatistics/>
       </div>
     </main>
   )

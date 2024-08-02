@@ -1,6 +1,6 @@
 import React from 'react'
 import AppointmentList from '../doctor/AppointmentList'
-import AlertList from '../doctor/AlertList'
+import AlertList from '../pharmacy/AlertList'
 import ClientList from '../doctor/ClientList'
 
 const DoctorDashboard = () => {
