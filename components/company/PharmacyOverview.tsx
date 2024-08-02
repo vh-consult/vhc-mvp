@@ -36,7 +36,7 @@ const PharmacyOverview = () => {
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Statistics
         </h3>
-        <PharmacyStatistics/>
+        <PharmacyStatistics statData={[]}/>
       </div>
     </main>
   )

@@ -6,7 +6,7 @@ import { SignedIn, UserButton, useUser } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { AiOutlineMessage } from 'react-icons/ai'
+import { AiOutlineMessage, AiOutlineNotification } from 'react-icons/ai'
 import SearchBar from '../general/SearchBar'
 
 export interface NavLinkProps {
@@ -65,7 +65,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
 
 
 
-      <div className="flex items-center justify-end gap-3 w-2/5 ">
+      <div className="flex items-center justify-end  gap-3 w-2/5 ">
 
         <SearchBar 
           className={
@@ -75,9 +75,9 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
             )}
         />
         <Link href={'/chat'}>        
-          <AiOutlineMessage 
+          <AiOutlineNotification 
             className='text-inherit
-            cursor-pointer w-[30px] h-[30px]' 
+            cursor-pointer w-[24px] h-[24px]' 
           />
         </Link>
         {
@@ -88,7 +88,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
           ):
           (
             <div 
-            className='w-[30px] h-[30px] bg-dark-3 rounded-full'
+            className='w-[24px] h-[24px] bg-dark-3 rounded-full'
           >
           </div>
           )

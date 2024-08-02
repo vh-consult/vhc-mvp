@@ -9,7 +9,7 @@ import { HeaderProps } from "./Header"
 
 
 const MobileNav = ({navigations}: HeaderProps) => {
-  const generalNavs = [
+  const userNavs = [
     {
       route: `/user/account`,
       label: 'Account'
@@ -71,7 +71,7 @@ const MobileNav = ({navigations}: HeaderProps) => {
                 )})
               }
               {
-                generalNavs.map((link)=> {
+                userNavs.map((link)=> {
                   const isActive = pathname === link.route;
                   return(
                   <Link

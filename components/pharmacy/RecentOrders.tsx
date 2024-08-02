@@ -38,7 +38,7 @@ const RecentOrders = ({orders}: {orders: Array<any>}) => {
   return (
     <div> 
       {
-        orders.map((order,index)=>(
+        orders.length > 0 ? orders.map((order,index)=>(
             <RecentOrderCard 
                 key={index}
                 orderedBy={order.name}
@@ -46,7 +46,9 @@ const RecentOrders = ({orders}: {orders: Array<any>}) => {
                 drugImage={order.drugs[0].image}
                 hasPaid={order.paymentStatus === "Paid"? true : false}
             />
-        ))
+        )): (
+            <span className="text-sm">No recent orders</span>
+          )
       }
     </div>
   )

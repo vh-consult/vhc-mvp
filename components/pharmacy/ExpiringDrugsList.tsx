@@ -34,7 +34,7 @@ const ExpiringDrugsList = ({drugs}: {drugs: Array<any>}) => {
   return (
     <div>
       {
-        drugs.map((drug, index) => (
+        drugs.length > 0? drugs.map((drug, index) => (
           <ExpiringDrugCard 
             name={drug.name}
             image={drug.image}
@@ -42,7 +42,9 @@ const ExpiringDrugsList = ({drugs}: {drugs: Array<any>}) => {
             expiryDate={drug.expiryDate}
             key={index}
           />
-        ))
+        )): (
+          <span className="text-sm">No expiring drugs</span>
+        )
       }
     </div>
   )
