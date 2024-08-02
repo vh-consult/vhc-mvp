@@ -25,10 +25,23 @@ const Card = ({image, name, finishedDate}: CardProps) => {
   )
 }
 
-const OutOfStockList = () => {
+const OutOfStockList = ({finishedDrugs}: {finishedDrugs: Array<any>}) => {
   return (
     <div>
-      
+      {
+        finishedDrugs.length > 0 ? (
+          finishedDrugs.map((drug, index) => (
+            <Card
+              finishedDate={drug.finishedDate}
+              image={drug.image}
+              name={drug.name}
+              key={index}
+            />
+          ))
+        ): (
+          <span className="">No drugs out if stock</span>
+        )
+      }
     </div>
   )
 }

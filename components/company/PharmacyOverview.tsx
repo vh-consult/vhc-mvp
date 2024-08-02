@@ -28,7 +28,7 @@ const PharmacyOverview = () => {
                 Out of Stock
             </h3>
             <div className="w-full">
-              <OutOfStockList/>
+              <OutOfStockList finishedDrugs={[]}/>
             </div>
         </div>
       </div>
