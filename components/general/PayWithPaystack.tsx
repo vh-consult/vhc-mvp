@@ -3,23 +3,31 @@ import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
 import { useUser } from '@clerk/nextjs';
+import { placeOrder } from '@/lib/actions/order.actions';
 
 const PayWithPaystack = (
-  {amount, items, shopId, notes}: 
+  {data}: 
   {
-    amount: number,
-    items?: string[],
-    shopId?: string,
-    notes?: string
+    data: any
   }
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
 
   const {user} = useUser()
 
+  const createOrer = async (referenceNumber: string) => {
+    try {
+      const newOrder = await placeOrder(user?.id!, data.drug, data.shop, referenceNumber)
+      toast({title: "Item purchased successfully"})
+      
+    } catch (error) {
+      toast({title: "Order placement not successful"})
+    }
+  }
+
   const componentProps = {
     email: user?.emailAddresses[0].emailAddress as string,
-    amount,
+    amount: data.amount,
     metadata: {
       name: user?.fullName,
       phone: user?.phoneNumbers[0].phoneNumber,
@@ -28,8 +36,8 @@ const PayWithPaystack = (
     currency: "GHS",
     publicKey,
     text: 'Buy Now',
-    onSuccess: (response:any) => {
-      toast({title:`Your purchase was successful! Transaction reference: ${response.reference}`});
+    onSuccess: async (response:any) => {
+      await createOrer(response.reference)
     },
     onClose: () => toast({title: "Order will be terminated"}),
   };

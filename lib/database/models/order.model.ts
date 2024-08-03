@@ -1,8 +1,14 @@
 import { Schema, model, models } from "mongoose";
 
+
+
 const OrderSchema = new Schema({
     reference: { type: String },
-    payment: { type: Schema.Types.ObjectId, ref: 'Transaction'},
+    payment: { 
+        amount: { type: Number},
+        status: { type: String, enum: ["Not Paid", "Paid"]},
+        reference: { type: String}
+    },
     status: { type: String, enum: ["pending", "delivered", "cancelled"]},
     buyer: { type: Schema.Types.ObjectId, ref: 'User'},
     shop: { type: Schema.Types.ObjectId, ref: 'Company'},

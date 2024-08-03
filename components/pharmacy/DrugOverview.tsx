@@ -1,4 +1,5 @@
-import React, { ChangeEvent } from 'react'
+"use client"
+import React, { useState } from 'react'
 import { Button } from '../ui/button'
 import Image from 'next/image';
 import { Input } from '../ui/input';
@@ -8,6 +9,10 @@ import {
   DialogContent
 } from "@/components/ui/dialog"
 import PayWithPaystack from '../general/PayWithPaystack';
+import { addToCart } from '@/lib/actions/order.actions';
+import { useUser } from '@clerk/nextjs';
+import { toast } from '../ui/use-toast';
+
 
 interface DrugProps {
   _id: string;
@@ -24,20 +29,33 @@ interface DrugProps {
 }
 
 interface ShopDrugOverviewProps {
-
   shopId: string;
   drug: DrugProps;
   onClose: () => void;
   isOpen: boolean
 }
 
-
-const DrugOverview = async ({
+const DrugOverview = ({
   drug,
   shopId,
   isOpen,
   onClose
 }: ShopDrugOverviewProps) => {
+  const initialFieldValues = {
+    note: '',
+    quantity: 1,
+    amount: drug?.price,
+    shop: shopId,
+    drug: drug._id
+  }
+  const [values, setValues] = useState(initialFieldValues)
+  values.amount = drug?.price * values.quantity
+  const {user} = useUser()
+
+  const handleCartAddition = async () => {
+    const event = await addToCart(user?.id!, drug?._id)
+    toast({title: 'Item added to cart'})
+  }
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
@@ -126,6 +144,8 @@ const DrugOverview = async ({
                     type="number"
                     min={1}
                     max={drug?.quantity}
+                    defaultValue={1}
+                    onChange={(e) => setValues({...values, quantity: parseInt(e.target.value)})}
                   />
                 </span>
               </div>
@@ -140,10 +160,11 @@ const DrugOverview = async ({
                 <Button  
                   className="w-full h-[35px] border border-green-2 
                   rounded-md  text-sm text-green-2 font-medium"
+                  onClick={handleCartAddition}
                 >
                   Add to cart
                 </Button>
-                <PayWithPaystack amount={drug?.price} items={[drug?._id]}/>
+                <PayWithPaystack data={values}/>
             </div>
       </DialogContent>
     </Dialog>

@@ -72,22 +72,28 @@ export async function getAllPharmacyShops() {
 }
 
 
-// export async function fetchFilteredDrugs(pharmacyId: string, query: string) {
-//     try {
-//         await connectToDatabase()
+export async function fetchFilteredDrugs(
+    pharmacyId: string, query: string
+) {
+    try {
+        await connectToDatabase()
 
-//         const pharmacy = await Company.findById(pharmacyId).populate('inventory');
-//         if (!pharmacy) throw new Error('No pharmacy found');
-//         if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
+        const pharmacy = await Company.findOne(
+            {_id: pharmacyId, companyType: "Pharmacy"}
+        ).populate('inventory');
+        if (!pharmacy) throw new Error('No pharmacy found');
+        if (!pharmacy.inventory) throw new Error('No pharmacy drugs found');
 
-//         const inventory = pharmacy.inventory
-//         const filteredInventory = await inventory.find({name: query})
-//         return JSON.parse(JSON.stringify(filteredInventory))
-//     } catch (error) {
-//         console.log(error)
-//         handleError(error)
-//     }
-// }
+        const inventory = pharmacy.inventory
+        const filteredInventory = await inventory.find({
+            $regex: query, $options: 'i'
+        })
+        return JSON.parse(JSON.stringify(filteredInventory))
+    } catch (error) {
+        console.log(error)
+        handleError(error)
+    }
+}
 
 
 export async function getPharmacyById(pharmacyId: string) {
@@ -104,7 +110,9 @@ export async function getPharmacyById(pharmacyId: string) {
 export async function getHospitalById(hospitalId: string) {
     try {
         await connectToDatabase();
-        const hospitalFromDB = await Hospital.findById(hospitalId);
+        const hospitalFromDB = await Company.findById(
+            {_id: hospitalId, companyType: "Hospital"}
+        );
         if (!hospitalFromDB) throw new Error("hospital shop not found!");
         return JSON.parse(JSON.stringify(hospitalFromDB))
     } catch (error) {
@@ -115,7 +123,9 @@ export async function getHospitalById(hospitalId: string) {
 export async function getAllHospitals() {
     try {
         await connectToDatabase();
-        const allHospitals = await Hospital.find();
+        const allHospitals = await Company.find(
+            {companytpe: "Hospital"}
+        );
         return JSON.parse(JSON.stringify(allHospitals))
     } catch (error) {
         handleError(error)

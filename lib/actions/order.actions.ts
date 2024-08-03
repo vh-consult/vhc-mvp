@@ -16,7 +16,7 @@ export async function addToCart(clerkId: string, drugId: string) {
         const userAddingItem = await User.findOne({clerkId})
         if (!userAddingItem) throw new Error("User not found")
 
-        const itemToAdd = await Drug.findById({_id: drugId})
+        const itemToAdd = await Drug.findById(drugId)
         if (!itemToAdd) throw new Error("Drug not found")
         
         userAddingItem.cart.push(drugId)
@@ -35,8 +35,8 @@ export async function removeFromCart(clerkId: string, drugId: string) {
         const userRemovingItem = await User.findOne({clerkId})
         if (!userRemovingItem) throw new Error("User not found")
             
-        const itemToRemove = await Drug.findById({_id: drugId})
-        if (!itemToRemove) throw new Error("Drug not found")
+        const itemToRemove = await Drug.findById(drugId)
+        if (!itemToRemove || !userRemovingItem.cart.includes(drugId)) throw new Error("Drug not found")
 
         userRemovingItem.cart.remove(drugId)
         await userRemovingItem.save()
@@ -50,8 +50,9 @@ export async function removeFromCart(clerkId: string, drugId: string) {
 
 export async function placeOrder(
     clerkId: string, 
-    drugs: Array<string> , 
-    shopId: string
+    items: Array<string> , 
+    shopId: string,
+    reference?: string
 ) {
     try {
         await connectToDatabase()
@@ -59,13 +60,13 @@ export async function placeOrder(
         const userOrderingItem = await User.findOne({clerkId})
         if (!userOrderingItem) throw new Error("User not found")
 
-        const shop = await Pharmacy.findById(shopId)
+        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
         if (!shop) throw new Error("Pharmacy not found")  
         console.log("shop found")
 
         const session = await startSession()
         session.startTransaction()
-        drugs.forEach(async (drugID) => {
+        items.forEach(async (drugID) => {
             const drug = await Drug.findById(drugID)
             if(!drug) throw new Error("Drug not found")
             console.log(drug)
@@ -118,7 +119,6 @@ export async function retrieveShopOrders(shopId:string) {
         if (!shop) throw new Error("Shop not found")
 
         const orders = await shop.orders
-        .populate("payment")
         .populate("buyer")
         .populate("items")
         return JSON.parse(JSON.stringify(orders))

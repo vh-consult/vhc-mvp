@@ -51,7 +51,7 @@ const MessageCard = ({imageUrl, sender, message, time, className}: MessageCardPr
   return (
     <div 
       onClick={() => {setOpenMessage(true)}} 
-      className={cn("flex flex-row w-full p-3 bg-white hover:bg-gray-100 cursor-pointer", className)}>
+      className={cn("flex flex-row w-full p-3 cursor-pointer", className)}>
       <Image 
         src={imageUrl}
         alt='user_picture'

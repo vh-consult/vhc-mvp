@@ -108,9 +108,14 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
 
         </div>
       </nav>
-      <div className="w-[350px] z-30 absolute right-5">
+      <div className="w-[350px] bg-inherit z-30 absolute right-5">
         {
-          showNotifications? (<MessageList className=''/>): ''
+          showNotifications? (
+          <MessageList 
+            className={`${pathname.includes("company")? 
+              'bg-white hover:bg-gray-100': 'bg-dark-1 hover:bg-dark-3'}  
+            text-inherit`}
+          />): ''
         }
       </div>
     </header>
