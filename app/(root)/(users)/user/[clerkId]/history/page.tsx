@@ -1,4 +1,6 @@
 import HistoryCard from '@/components/patient/HistoryCard'
+import { fetchUserHistory } from '@/lib/actions/user.actions'
+import { currentUser } from '@clerk/nextjs/server'
 import React from 'react'
 
 const userHistoryList = [
@@ -163,7 +165,9 @@ const userHistoryList = [
       circleColor: 'bg-green-4'
     },
   ]
-const UserHistoryPage = () => {
+const UserHistoryPage = async () => {
+  const user = await currentUser()
+  const history = await fetchUserHistory(user?.id as string)
   return (
     <div>
     <div className='w-full flex  items-center px-6 sticky top-[64px]  h-[70px] mb-2 bg-dark-1 rounded-lg'>

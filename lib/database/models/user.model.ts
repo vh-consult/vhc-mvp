@@ -2,141 +2,59 @@ import { Schema, model, models } from "mongoose";
 
 const options = { discriminatorKey: "userRole", timestamps: true };
 
+const HistorySchema = new Schema({
+  activity: {type: String, required: true},
+  host: {type: Schema.Types.ObjectId, refPath: 'hostType'},
+  hostType: {type: String, enum: ["User", "Company"]},
+  summary: String,
+})
+
 const UserSchema = new Schema(
   {
-    clerkId: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-    photo: {
-      type: String,
-    },
-    firstName: {
-      type: String,
-    },
-    lastName: {
-      type: String,
-    },
-    dateOfBirth: {
-      type: Date,
-    },
-    country: {
-      type: String,
-    },
-    location: {
-      type: String,
-    },
-    gender: {
-      type: String,
-      enum: ["male", "female"],
-    },
-    blogsAuthored: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Blog',
-      },
-    ],
-    savedBlogs: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Blog',
-      },
-    ],
-    subscribedToNewsletter: {
-      type: Boolean,
-      default: false,
-    },
-    orders: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Order',
-      },
-    ],
-    messages: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Message',
-      },
-    ],
-    cart: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Drug',
-      },
-    ],
-    bookings: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Booking',
-      },
-    ],
-    affiliateHospital: {
-      type: Schema.Types.ObjectId,
-      ref: 'Company',
-    },
-    personalPhysician: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    }
+    clerkId: {type: String},
+    email: {type: String},
+    photo: {type: String},
+    firstName: {type: String},
+    lastName: {type: String},
+    dateOfBirth: {type: Date},
+    country: {type: String},
+    location: {type: String},
+    gender: {type: String, enum: ["male", "female"]},
+    blogsAuthored: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],
+    savedBlogs: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],
+    subscribedToNewsletter: {type: Boolean, default: false},
+    orders: [{type: Schema.Types.ObjectId,ref: 'Order'}],
+    messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
+    cart: [{type: Schema.Types.ObjectId, ref: 'Drug'}],
+    bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}],
+    affiliateHospital: {type: Schema.Types.ObjectId, ref: 'Company'},
+    personalPhysician: {type: Schema.Types.ObjectId, ref: 'User'},
+    history: [HistorySchema]
   },
   options
 );
 
+
+
 const DoctorSchema = new Schema({
-  bio: {
-    type: String,
-  },
-  personalRoom: {
-    type: String,
-  },
-  clients: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
-  consultationHistory: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Consultation',
-    },
-  ],
+  bio: {type: String},
+  personalRoom: {type: String},
+  clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  consultationHistory: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
 });
 
 const PatientSchema = new Schema({
-    healthRecord: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Consultation',
-      },
-    ],
-    currentMeds: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Medication',
-      },
-    ],
-    insurancePlan: {
-      type: Schema.Types.ObjectId,
-      ref: 'Insurance'
-    },
-
+  healthRecord: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
+  currentMeds: [{type: Schema.Types.ObjectId, ref: 'Medication'}],
+  insurancePlan: {type: Schema.Types.ObjectId,  ref: 'Insurance'},
 });
 
 const PharmacyAdminSchema = new Schema({
-  company: {
-    type: Schema.Types.ObjectId,
-    ref: 'Company',
-  },
+  company: {type: Schema.Types.ObjectId, ref: 'Company'}
 });
 
 const HospitalAdminSchema = new Schema({
-  company: {
-    type: Schema.Types.ObjectId,
-    ref: 'Company',
-  },
+  company: {type: Schema.Types.ObjectId, ref: 'Company'},
 });
 
 const User = models?.User || model("User", UserSchema);

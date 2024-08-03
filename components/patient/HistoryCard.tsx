@@ -47,15 +47,11 @@ const HistoryCard = ({
       usedAt === 'settings' ? (
         <div 
           className={`
-            ${className} 
-            ${eventType==='consultation'? 'bg-blue-4': 
-            eventType==='lab'? 'bg-green-4':
-            eventType==='check-up'? 'bg-dark-4':
-            eventType==='purchase'? 'bg-purple-2': ``
-            }`}>
+            ${className} bg-dark-1
+            `}>
           <h3>{activity}</h3>
           <p>
-            {date.toLocaleDateString()}
+            {new Date(date).toLocaleDateString()}
           </p>
           <div>
             {

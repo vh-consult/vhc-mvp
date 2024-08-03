@@ -150,6 +150,7 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
+
 export async function fetchAffiliates(userId:string) {
   try {
     await connectToDatabase()
@@ -163,6 +164,19 @@ export async function fetchAffiliates(userId:string) {
 
     return JSON.parse(JSON.stringify({...hospital, ...doctor }))
     
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+//fetching user's history
+export async function fetchUserHistory(userId:string) {
+  try {
+    await connectToDatabase()
+    const user = await User.findOne({clerkId: userId}).populate("history")
+    if (!user) throw new Error("User not found")
+    
+    return JSON.parse(JSON.stringify(user.history))
   } catch (error) {
     handleError(error)
   }

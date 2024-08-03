@@ -19,7 +19,7 @@ const PharmacyHomePage = async () => {
     <div className='px-10 grid grid-cols-5
       gap-10 pt-6'>
         {
-          shops.map((shop: ShopProps|any) => (
+          shops.length > 0 ? shops.map((shop: ShopProps|any) => (
             <Link
             key={shop?._id}
             href={`/pharmacy/shop/${shop?._id}`}
@@ -33,7 +33,9 @@ const PharmacyHomePage = async () => {
               number_of_stars={3.8}
             />
           </Link>
-          ))
+          )): (
+            <span className="">No registered pharmacy shops</span>
+          )
         }
     </div>
   )
