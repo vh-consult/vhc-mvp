@@ -63,16 +63,20 @@ const OrderList = async ({shopId}: {shopId: string}) => {
   return (
     <div className='grid grid-cols-2 gap-4'>
       {
-        orders.map((order:any, index: number) => {
+        orders.length > 0 ? orders.map((order:any, index: number) => {
           <OrderCard 
             key={index}
-            buyerName=''
-            deliverySatus=''
-            hasPaid
-            imageUrl={''}
-            items={[]}
+            buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
+            deliverySatus={order.status}
+            hasPaid={order.payment.status === "Paid"? true : false }
+            imageUrl={order.items[0].image}
+            items={order.items}
           />
-        })
+        }): (
+          <span className="text-sm">
+            No orders
+          </span>
+        )
       }
     </div>
   )

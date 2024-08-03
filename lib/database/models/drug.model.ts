@@ -11,34 +11,14 @@ export interface DrugParams {
 }
 
 const DrugSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "Please drug's name is required"],
-    },
-    image: {
-        type: String,
-    },
-    catalog: {
-        type: String,
-        required: [true, "Please drug's catalog is required"],
-    },
-    price: {
-        type: Number,
-        required: [true, "Please state the price"],
-    },
-    description: {
-        type: String,
-        required: [true, "Please add description"],
-    },
-    quantity: {
-        type: Number,
-        required: [true, "Please state the quantity being added"],
-    },
+    name: {type: String, required: [true, "Please drug's name is required"],},
+    image: {type: String, required: true},
+    catalog: {type: String, required: [true, "Please drug's catalog is required"],},
+    price: {type: Number, required: [true, "Please state the price"],},
+    description: {type: String, required: [true, "Please add description"],},
+    quantity: {type: Number, required: [true, "Please state the quantity being added"],},
     expiryDate: {type:Date, required:true},
-    shop: {
-        type: Schema.Types.ObjectId,
-        ref: 'Pharmacy'
-    }
+    shop: {type: Schema.Types.ObjectId,ref: 'Pharmacy'}
 });
 
 const Drug = models?.Drug || model("Drug", DrugSchema)

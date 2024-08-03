@@ -6,6 +6,7 @@ import Drug from "../database/models/drug.model";
 import { User } from "../database/models/user.model";
 import { Company, Pharmacy } from "../database/models/company.model";
 import { startSession } from "mongoose";
+import Order from "../database/models/order.model";
 
 
 export async function addToCart(clerkId: string, drugId: string) {
@@ -61,6 +62,7 @@ export async function placeOrder(
         const shop = await Pharmacy.findById(shopId)
         if (!shop) throw new Error("Pharmacy not found")  
         console.log("shop found")
+
         const session = await startSession()
         session.startTransaction()
         drugs.forEach(async (drugID) => {
@@ -84,6 +86,24 @@ export async function placeOrder(
 export async function cancelOrder(clerkId: string, orderId: string) {
     try {
         await connectToDatabase()
+        const user = await User.findOne({clerkId}).populate("orders")
+        if(!user) throw new Error("User not found")
+        
+        const order = await Order.findById(orderId)
+        if(!order) throw new Error("Order not found")
+
+        if (order.buyer !== user._id || !user.orders.includes(orderId)) throw new Error("Order not placed by user")
+            
+        const session = await startSession()
+        session.startTransaction()
+
+        order.status = "cancelled"
+        await order.save()
+        
+        await session.commitTransaction();
+        session.endSession();
+        
+        return {message: 'Order cancelled successfully'}
     } catch (error) {
         handleError(error)
     }
@@ -92,10 +112,15 @@ export async function cancelOrder(clerkId: string, orderId: string) {
 export async function retrieveShopOrders(shopId:string) {
     try {
         await connectToDatabase()
-        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"}).populate("orders")
+        const shop = await Company.findOne(
+            {_id: shopId, companyType: "Pharmacy"}
+        ).populate("orders")
         if (!shop) throw new Error("Shop not found")
 
-        const orders = shop.orders
+        const orders = await shop.orders
+        .populate("payment")
+        .populate("buyer")
+        .populate("items")
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)

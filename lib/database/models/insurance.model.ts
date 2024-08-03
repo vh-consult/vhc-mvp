@@ -4,35 +4,18 @@ export interface InsuranceParams extends Document {
     plan: "personal-care" | "family-care" | "unlimited";
     renewal_date: Date;
     start_date: Date;
-    user: Schema.Types.ObjectId
+    users: Schema.Types.ObjectId[]
 } 
 
 const InsuranceSchema = new Schema<InsuranceParams>({
-    plan: {
-        type: String,
-        enum: ["personal-care", "family-care", "unlimited"],
-        required: true
-    },
-    renewal_date: {
-        type: Date,
-        
-    },
-    start_date: {
-        type: Date,
-        default: Date.now()
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }
+    plan: { type: String, enum: ["personal-care", "family-care", "unlimited"], required: true},
+    renewal_date: { type: Date, },
+    start_date: { type: Date, default: Date.now()},
+    users: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 InsuranceSchema.pre('save', function(next) {
-    if (!this.renewal_date) {
-        const oneYearLater = new Date(this.start_date);
-        oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
-        this.renewal_date = oneYearLater;
-    }
+    if (!this.renewal_date) { const oneYearLater = new Date(this.start_date); oneYearLater.setFullYear(oneYearLater.getFullYear() + 1); this.renewal_date = oneYearLater;}
     next();
 });
 

@@ -87,7 +87,7 @@ const MedCard = ({
           <span className="text-xs">{condition}</span>
         </div>
         <span className="text base w-1/6">{quantity}</span>
-        <span className="w-[30px] h-[30px] rounded-full border border-dark-4 flex flex-center hover:bg-dark-4 ">
+        <span className="w-[30px] h-[30px] rounded-full bg-dark-2 flex flex-center hover:bg-dark-4 ">
           {drugsFinished? <MdDelete/> : <BiCheck/>}
         </span>
       </div>
