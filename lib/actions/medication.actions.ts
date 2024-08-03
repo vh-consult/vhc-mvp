@@ -22,7 +22,10 @@ export const fetchMeds = async (clerkId: string) => {
 }
 
 
-export const postMeds = async (clerkId: string, medData: MedicationParams) => {
+export const postMeds = async (
+    clerkId: string, 
+    medData: MedicationParams
+) => {
     try {
         await connectToDatabase()
         const user = await User.findOne({clerkId})

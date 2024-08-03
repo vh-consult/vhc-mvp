@@ -1,6 +1,5 @@
 import React from 'react'
 import AppointmentList from '../doctor/AppointmentList'
-import AlertList from '../pharmacy/AlertList'
 import ClientList from '../doctor/ClientList'
 
 const DoctorDashboard = () => {
@@ -20,7 +19,7 @@ const DoctorDashboard = () => {
                 Alerts
             </h3>
             <div className="w-full">
-                <AlertList/>
+                
             </div>
         </div>
         <div className="w-full h-[48%] bg-dark-1 rounded-lg">

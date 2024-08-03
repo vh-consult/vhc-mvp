@@ -7,6 +7,7 @@ export interface DrugParams {
     price:number;
     description: string;
     quantity:number;
+    expiryDate: Date
 }
 
 const DrugSchema = new Schema({
@@ -33,6 +34,7 @@ const DrugSchema = new Schema({
         type: Number,
         required: [true, "Please state the quantity being added"],
     },
+    expiryDate: {type:Date, required:true},
     shop: {
         type: Schema.Types.ObjectId,
         ref: 'Pharmacy'

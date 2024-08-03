@@ -11,7 +11,8 @@ export interface DrugParams {
     price: number;
     description: string;
     quantity: number,
-    image: string
+    image: string,
+    expiryDate: Date;
 }
 
 export async function addToInventory(
@@ -24,13 +25,13 @@ export async function addToInventory(
         if (!admin) throw new Error("User not found");
 
         if (admin.userRole === "PharmacyAdmin") {
-            const company = admin.company;
-            if (!company) throw new Error("No company found");
-            if (company.companyType !== "Pharmacy") throw new Error("Company is not a pharmacy");
+            const shop = admin.shop;
+            if (!shop) throw new Error("No shop found");
+            if (shop.companyType !== "Pharmacy") throw new Error("Company is not a pharmacy");
 
             let drugToAdd = null;
-            for (let i = 0; i < company.inventory.length; i++) {
-                const drug = await Drug.findById(company.inventory[i]);
+            for (let i = 0; i < shop.inventory.length; i++) {
+                const drug = await Drug.findById(shop.inventory[i]);
                 if (drug && drug.name === drugData.name && drug.catalog === drugData.catalog) {
                     drugToAdd = drug;
                     break;
@@ -41,15 +42,16 @@ export async function addToInventory(
                 drugToAdd.quantity += drugData.quantity;
                 drugToAdd.price = drugData.price;
                 drugToAdd.description = drugData.description;
+                drugToAdd.expiryDate = drugData.expiryDate
                 await drugToAdd.save();
                 return { message: "Drug in inventory updated" };
             } else {
                 const newDrug = await Drug.create(drugData);
-                newDrug.shop = company._id;
+                newDrug.shop = shop._id;
                 await newDrug.save();
 
-                company.inventory.push(newDrug._id);
-                await company.save();
+                shop.inventory.push(newDrug._id);
+                await shop.save();
 
                 return { message: 'Drug added to inventory' };
             }
@@ -74,14 +76,31 @@ export async function removeFromInventory(clerkId: string, drugId: string, shopI
         
         if (!shop.inventory.includes(drugId)) throw new Error("Drug not in shop inventory")
         
-        
+        let drugToRemove = null;
+        for (let i = 0; i < shop.inventory.length; i++) {
+            const drug = await Drug.findById(shop.inventory[i]);
+            if (drug && drug._id === drugId) {
+                drugToRemove = drug;
+                break;
+            }
+        }
+
+        if (drugToRemove) {
+            await Drug.findByIdAndDelete(drugId);
+            return { message: "Drug in inventory deleted" };
+        } else{
+            throw new Error("Drug not found in inventory")
+        }
 
         } catch (error) {
         handleError(error)
     }
 }
 
-export async function updateInventory(clerkId: string, shopId: string) {
+export async function updateInventory(
+    clerkId: string, shopId: string,
+    drugData: DrugParams
+) {
     try {
         await connectToDatabase()
         const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
@@ -92,6 +111,23 @@ export async function updateInventory(clerkId: string, shopId: string) {
 
         if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
         
+        let drugToUpdate = null;
+        for (let i = 0; i < shop.inventory.length; i++) {
+            const drug = await Drug.findById(shop.inventory[i]);
+            if (drug && drug.name === drugData.name && drug.catalog === drugData.catalog) {
+                drugToUpdate = drug;
+                break;
+            }
+        }
+
+        if (drugToUpdate) {
+            drugToUpdate.quantity += drugData.quantity;
+            drugToUpdate.price = drugData.price;
+            drugToUpdate.description = drugData.description;
+            drugToUpdate.expiryDate = drugData.expiryDate
+            await drugToUpdate.save();
+            return { message: "Drug in inventory updated" };
+        }
     } catch (error) {
         handleError(error)
     }

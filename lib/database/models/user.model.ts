@@ -7,10 +7,11 @@ const HistorySchema = new Schema({
   host: {type: Schema.Types.ObjectId, refPath: 'hostType'},
   hostType: {type: String, enum: ["User", "Company"]},
   summary: String,
+  orders: [{type: Schema.Types.ObjectId, ref:"Order"}],
+  meds: [{type: Schema.Types.ObjectId, ref: "Medication"}]
 })
 
-const UserSchema = new Schema(
-  {
+const UserSchema = new Schema({
     clerkId: {type: String},
     email: {type: String},
     photo: {type: String},
@@ -30,8 +31,7 @@ const UserSchema = new Schema(
     affiliateHospital: {type: Schema.Types.ObjectId, ref: 'Company'},
     personalPhysician: {type: Schema.Types.ObjectId, ref: 'User'},
     history: [HistorySchema]
-  },
-  options
+  }, options
 );
 
 

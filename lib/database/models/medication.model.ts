@@ -6,7 +6,7 @@ export interface MedicationParams extends Document {
     caution?: string;
     status:string;
     duration?: string;
-    prescribed_by?: Schema.Types.ObjectId
+    prescribed_by?: Schema.Types.ObjectId | string
 }
 
 const MedicationSchema = new Schema<MedicationParams>({
