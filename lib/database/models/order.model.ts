@@ -3,13 +3,10 @@ import { Schema, model, models } from "mongoose";
 
 
 const OrderSchema = new Schema({
-    reference: { type: String },
-    payment: { 
-        amount: { type: Number},
-        status: { type: String, enum: ["Not Paid", "Paid"]},
-        reference: { type: String}
-    },
-    status: { type: String, enum: ["pending", "delivered", "cancelled"]},
+    amount: { type: Number},
+    payment_status: { type: String, enum: ["Not Paid", "Paid"]},
+    reference: { type: String},
+    status: { type: String, enum: ["pending", "delivered", "cancelled"], default: "pending"},
     buyer: { type: Schema.Types.ObjectId, ref: 'User'},
     shop: { type: Schema.Types.ObjectId, ref: 'Company'},
     items: [{ type: Schema.Types.ObjectId, ref: 'Drug'}],

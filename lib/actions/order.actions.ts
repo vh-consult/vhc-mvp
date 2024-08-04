@@ -47,33 +47,38 @@ export async function removeFromCart(clerkId: string, drugId: string) {
     }
 }
 
+export interface OrderData {
+    item: string;
+    buyer: string;
+    note: string;
+    quantity: number;
+    shop: string;
+    amount: number;
+}
 
 export async function placeOrder(
     clerkId: string, 
-    items: Array<string> , 
-    shopId: string,
-    reference?: string
+    data: OrderData, 
 ) {
     try {
         await connectToDatabase()
-        console.log("started")
+        
         const userOrderingItem = await User.findOne({clerkId})
         if (!userOrderingItem) throw new Error("User not found")
 
-        const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
+        const shop = await Company.findOne({_id: data.shop, companyType: "Pharmacy"})
         if (!shop) throw new Error("Pharmacy not found")  
-        console.log("shop found")
 
         const session = await startSession()
         session.startTransaction()
-        items.forEach(async (drugID) => {
-            const drug = await Drug.findById(drugID)
-            if(!drug) throw new Error("Drug not found")
-            console.log(drug)
-            userOrderingItem.orders.push(drug._id)
-            await userOrderingItem.save()
-        });
-        
+        const drug = await Drug.findById(data.item)
+        if(!drug) throw new Error("Drug not found")        
+        const newOrder = await Order.create({...data, buyer: userOrderingItem._id})
+        console.log(newOrder)
+        userOrderingItem.orders.push(newOrder._id)
+        await userOrderingItem.save()
+        shop.orders.push(newOrder._id)
+        await shop.save()
         await session.commitTransaction();
         session.endSession();
         return {message: "Order placed successfully"}
@@ -119,8 +124,9 @@ export async function retrieveShopOrders(shopId:string) {
         if (!shop) throw new Error("Shop not found")
 
         const orders = await shop.orders
-        .populate("buyer")
-        .populate("items")
+        console.log(orders)
+        // .populate("buyer")
+        // .populate("items")
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)

@@ -41,6 +41,7 @@ const ConsultationTypeList = () => {
   const { user } = useUser();
   const { toast } = useToast();
   const [hostList, setHostList] = useState<any[]>([])
+  const [hostName, setHostName] = useState('')
   
   useEffect(() => {
     console.log('Client:', client);
@@ -95,7 +96,6 @@ const ConsultationTypeList = () => {
     console.log('Client or user not available yet:', { client, user });
     return <Loader />;
   }
-  const [hostName, setHostName] = useState('')
   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${callDetail?.id}`;
   
   return (

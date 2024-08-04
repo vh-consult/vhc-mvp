@@ -6,28 +6,20 @@ import { useUser } from '@clerk/nextjs';
 import { placeOrder } from '@/lib/actions/order.actions';
 
 const PayWithPaystack = (
-  {data}: 
+  {amount}: 
   {
-    data: any
+    amount: number
   }
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
 
   const {user} = useUser()
 
-  const createOrer = async (referenceNumber: string) => {
-    try {
-      const newOrder = await placeOrder(user?.id!, data.drug, data.shop, referenceNumber)
-      toast({title: "Item purchased successfully"})
-      
-    } catch (error) {
-      toast({title: "Order placement not successful"})
-    }
-  }
+
 
   const componentProps = {
     email: user?.emailAddresses[0].emailAddress as string,
-    amount: data.amount,
+    amount: amount * 100,
     metadata: {
       name: user?.fullName,
       phone: user?.phoneNumbers[0].phoneNumber,
@@ -36,17 +28,18 @@ const PayWithPaystack = (
     currency: "GHS",
     publicKey,
     text: 'Buy Now',
-    onSuccess: async (response:any) => {
-      await createOrer(response.reference)
+    onSuccess: (response:any) => {
+      toast({title: "Item purchased successfully"})
     },
-    onClose: () => toast({title: "Order will be terminated"}),
+    onClose: () => toast({title: "Purchase will be terminated"}),
   };
 
   return (
-    <PaystackButton 
-        className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium mt-3 bg-green-2" 
-        {...componentProps} 
-    />
+
+        <PaystackButton 
+            className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium mt-3 bg-green-2" 
+            {...componentProps} 
+        />
   );
 };
 
