@@ -8,7 +8,11 @@ import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
+const CallList = (
+  { type, host }: { 
+    type?: 'ended' | 'upcoming' | 'recordings',
+    host?: any[]
+  }) => {
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();

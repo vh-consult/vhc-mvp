@@ -212,6 +212,20 @@ export async function fetchBookings(clerkId:string) {
     }
 }
 
+export async function hostBookings(clerkId:string) {
+    try {
+        await connectToDatabase()
+        const user = await User.findOne({clerkId})
+        if(!user) throw new Error("User not found")
+        const bookings = await Booking.find({host: user._id, status:"pending"})
+        console.log(bookings)
+
+        return JSON.parse(JSON.stringify(bookings))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
 export async function getMessages(clerkId: string) {
     try {
         await connectToDatabase()

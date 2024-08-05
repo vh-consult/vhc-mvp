@@ -99,7 +99,7 @@ const ConsultationTypeList = () => {
   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${callDetail?.id}`;
   
   return (
-    <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <section className="grid grid-cols-1 gap-5 md:grid-cols-2">
       {ClickableCards.map((card, index) => (
         <ClickableCard
           key={index}
