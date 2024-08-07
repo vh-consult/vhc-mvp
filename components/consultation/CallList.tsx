@@ -7,17 +7,23 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { hostBookings } from '@/lib/actions/appointment.actions';
+import { useUser } from '@clerk/nextjs';
+import BookingCard from './BookingCard';
+import useDBUser from '@/hooks/useDBUser';
 
 const CallList = (
-  { type, host }: { 
-    type?: 'ended' | 'upcoming' | 'recordings',
-    host?: any[]
-  }) => {
+  { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
+  const {role, clerkId} = useDBUser()
+  useEffect (()=> {
+    const getBookings = async() => await hostBookings(clerkId!)
+    getBookings()
+  })
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-
+  const [bookings, setBookings] = useState<any>([])
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -68,7 +74,7 @@ const CallList = (
   const noCallsMessage = getNoCallsMessage();
 
   return (
-    <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 ">
       {calls && calls.length > 0 ? (
         calls.map((consultation: Call | CallRecording) => (
           <ConsultationCard
@@ -93,20 +99,34 @@ const CallList = (
             link={
               type === 'recordings'
                 ? (consultation as CallRecording).url
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/user/Consultation/room/${(consultation as Call).id}`
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/Consultation/room/${(consultation as Call).id}`
             }
             buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
             buttonText={type === 'recordings' ? 'Play' : 'Start'}
             handleClick={
               type === 'recordings'
                 ? () => router.push(`${(consultation as CallRecording).url}`)
-                : () => router.push(`/Consultation/${(consultation as Call).id}`)
+                : () => router.push(`/consultation/room/${(consultation as Call).id}`)
             }
           />
         ))
       ) : (
         <h1 className="text-2xl font-bold text-white">{noCallsMessage}</h1>
       )}
+      {
+        role === "Doctor" ? (
+          <div className="grid grid-cols-2">
+            {
+              bookings.length > 0 ? bookings.map((appointment:any, index:number) => (
+                <BookingCard 
+                  key={index}
+                  appointment={appointment}
+                />
+              )): ''
+            }
+          </div>
+        ): ''
+      }
     </div>
   );
 };

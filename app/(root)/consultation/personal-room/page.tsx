@@ -53,7 +53,7 @@ const PersonalRoom = () => {
     router.push(`/consultation/room/${consultationId}?personal=true`);
   };
 
-  const consultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/user/consultation/room/${consultationId}?personal=true`;
+  const consultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${consultationId}?personal=true`;
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">

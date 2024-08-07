@@ -1,12 +1,9 @@
-import { cookies } from 'next/headers'
 import React from 'react'
 
-const BookingCard = ({host}: {host:any}) => {
-  const cookieStore = cookies()
-  const userData = cookieStore.get("data")
+const BookingCard = ({appointment}: {appointment:any}) => {
   return (
-    <div>
-      
+    <div className='w-[350px] h-[125px] bg-dark-1'>
+      h
     </div>
   )
 }

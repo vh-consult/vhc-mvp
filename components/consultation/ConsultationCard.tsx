@@ -46,8 +46,8 @@ const ConsultationCard = ({
             <Image
               src='/images/patient-1.jpg'
               alt="attendees"
-              width={0}
-              height={0}
+              width={40}
+              height={40}
               className={cn("rounded-full")}
             />
             <span className="text-lg font-medium text-green-1">

@@ -66,7 +66,8 @@ export async function getUser(clerkId: string) {
     delete userToObject.password
 
     const userData = {...userToObject}
-    cookies().set("data", userData)
+    cookies().set("role", userData.userRole)
+    cookies().set("userId", userData._id)
     return JSON.parse(JSON.stringify(userData));
   } catch (error) {
     handleError(error);
