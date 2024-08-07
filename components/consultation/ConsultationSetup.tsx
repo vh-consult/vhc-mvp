@@ -31,7 +31,6 @@ const ConsultationSetup = ({
     );
   }
 
-  // https://getstream.io/video/docs/react/ui-cookbook/replacing-call-controls/
   const [isMicCamToggled, setIsMicCamToggled] = useState(false);
 
   useEffect(() => {
@@ -60,10 +59,10 @@ const ConsultationSetup = ({
     );
 
   return (
-    <div className="flex w-full flex-col py-2 items-center justify-center gap-3 text-white">
+    <div className="flex w-full flex-col py-4 items-center justify-center gap-1 text-white">
       <h1 className="text-center text-2xl font-bold">Waiting Room</h1>
       <VideoPreview />
-      <div className="flex h-16 items-center justify-center gap-3">
+      <div className="flex h-10 items-center justify-center gap-1">
         <label className="flex items-center justify-center gap-2 font-medium">
           <input
             type="checkbox"
@@ -78,7 +77,6 @@ const ConsultationSetup = ({
         className="rounded-md bg-green-2 px-4 py-2.5"
         onClick={() => {
           call.join();
-
           setIsSetupComplete(true);
         }}
       >

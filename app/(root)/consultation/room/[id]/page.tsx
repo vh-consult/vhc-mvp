@@ -34,7 +34,6 @@ const ConsultationPage = () => {
     <main className="h-full w-full">
       <StreamCall call={call}>
         <StreamTheme>
-
         {!isSetupComplete ? (
           <ConsultationSetup setIsSetupComplete={setIsSetupComplete} />
         ) : (
