@@ -12,8 +12,9 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { newBooking, searchHost } from '@/lib/actions/appointment.actions';
+import { appendConsultationLink, newBooking, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
+import useDBUser from '@/hooks/useDBUser';
 
 const initialValues = {
   date: new Date(),
@@ -42,7 +43,8 @@ const ConsultationTypeList = () => {
   const { toast } = useToast();
   const [hostList, setHostList] = useState<any[]>([])
   const [hostName, setHostName] = useState('')
-  
+  const {dbUser} = useDBUser()
+
   useEffect(() => {
     console.log('Client:', client);
     console.log('User:', user);
@@ -57,6 +59,11 @@ const ConsultationTypeList = () => {
     const host = await searchHost(query)
     setHostList(host)
   })
+  const handleHostSelection = (host: any) => {
+    values.host = host.id
+    setHostName(host.name) 
+    setHostList([])
+  }
   const createConsultation = async () => {
     if (!client || !user) return;
     try {
@@ -64,6 +71,7 @@ const ConsultationTypeList = () => {
         toast({ title: 'Please select a date and time' });
         return;
       }
+      
       const newCall = await newBooking(user?.id, values)
       if (newCall?.message === "created") {
         const id = crypto.randomUUID();
@@ -77,7 +85,7 @@ const ConsultationTypeList = () => {
             custom: { description },
           },
         });
-        
+        await appendConsultationLink(newCall.id, call.id)
         setCallDetail(call);
         if (!values.problem_statement) {
           router.push(`/consultation/room/${call.id}`);
@@ -165,7 +173,7 @@ const ConsultationTypeList = () => {
             <Input 
               className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder='Type name...' 
-              defaultValue={hostName}
+              defaultValue={dbUser?.personalPhysician}
               onChange={(e)=>handleSearch(e.target.value)}
             />
             {
@@ -175,12 +183,7 @@ const ConsultationTypeList = () => {
                     hostList.map((host:any, index) => (
                       <div 
                         key={index} 
-                        onClick={()=>{
-                          setValues({...values, host: host._id}) 
-                          setHostName(host.name) 
-                          console.log(hostName)
-                          setHostList([])
-                        }} 
+                        onClick={()=>{handleHostSelection(host)}} 
                         className='p-2 cursor-pointer text-sm hover:bg-dark-3'
                       >
                         {host.name}

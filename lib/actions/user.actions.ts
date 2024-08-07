@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import { cookies } from "next/headers";
 
 
 // CREATE
@@ -65,6 +66,7 @@ export async function getUser(clerkId: string) {
     delete userToObject.password
 
     const userData = {...userToObject}
+    cookies().set("data", userData)
     return JSON.parse(JSON.stringify(userData));
   } catch (error) {
     handleError(error);

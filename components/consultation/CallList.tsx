@@ -34,9 +34,9 @@ const CallList = (
   const getNoCallsMessage = () => {
     switch (type) {
       case 'ended':
-        return 'No Previous Calls';
+        return 'No Previous Consultations';
       case 'upcoming':
-        return 'No Upcoming Calls';
+        return 'No scheduled Consultations';
       case 'recordings':
         return 'No Recordings';
       default:

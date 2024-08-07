@@ -5,6 +5,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
+import { appendConsultationLink } from "@/lib/actions/appointment.actions";
 
 interface ConsultationCardProps {
   title: string;
@@ -62,10 +63,10 @@ const ConsultationCard = ({
               &nbsp; {buttonText}
             </Button>
             <Button
-              onClick={() => {
+              onClick={async () => {
                 navigator.clipboard.writeText(link);
                 toast({
-                  title: "Link Copied",
+                  title: "Link Saved",
                 });
               }}
               className="bg-dark-4 px-6"
@@ -76,7 +77,7 @@ const ConsultationCard = ({
                 width={20}
                 height={20}
               />
-              &nbsp; Copy Link
+              &nbsp; Save Link
             </Button>
           </div>
         )}
