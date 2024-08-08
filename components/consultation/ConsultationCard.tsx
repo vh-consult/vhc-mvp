@@ -16,6 +16,8 @@ interface ConsultationCardProps {
   buttonText?: string;
   handleClick: () => void;
   link: string;
+  hostImage?: string;
+  hostName?: string;
 }
 
 const ConsultationCard = ({
@@ -24,9 +26,11 @@ const ConsultationCard = ({
   date,
   isPreviousConsultation,
   buttonIcon1,
+  hostImage,
   handleClick,
   link,
   buttonText,
+  hostName
 }: ConsultationCardProps) => {
   const { toast } = useToast();
 
@@ -44,14 +48,14 @@ const ConsultationCard = ({
       <article className={cn("flex justify-center relative", {})}>
         <div className="flex w-full items-center">
             <Image
-              src='/images/patient-1.jpg'
+              src={hostImage ? hostImage: ''}
               alt="attendees"
               width={40}
               height={40}
               className={cn("rounded-full")}
             />
             <span className="text-lg font-medium text-green-1">
-              
+              {hostName}
             </span>
         </div>
         {!isPreviousConsultation && (

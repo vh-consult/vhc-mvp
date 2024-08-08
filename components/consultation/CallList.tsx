@@ -8,7 +8,6 @@ import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { hostBookings } from '@/lib/actions/appointment.actions';
-import { useUser } from '@clerk/nextjs';
 import BookingCard from './BookingCard';
 import useDBUser from '@/hooks/useDBUser';
 
@@ -90,6 +89,13 @@ const CallList = (
               (consultation as Call).state?.custom?.description ||
               (consultation as CallRecording).filename?.substring(0, 20) ||
               'No Description'
+            }
+            hostName={
+              (consultation as Call).state?.custom?.host ||
+              ""
+            }
+            hostImage={
+              (consultation as Call).state?.custom?.hostImage || ""
             }
             date={
               (consultation as Call).state?.startsAt?.toLocaleString() ||

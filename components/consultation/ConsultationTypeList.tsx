@@ -82,7 +82,7 @@ const ConsultationTypeList = () => {
         await call.getOrCreate({
           data: {
             starts_at: startsAt,
-            custom: { description },
+            custom: { description, host: hostName, hostImage: dbUser?.photo },
           },
         });
         await appendConsultationLink(newCall.id, call.id)
