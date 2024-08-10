@@ -52,7 +52,7 @@ const ConsultationCard = ({
               alt="attendees"
               width={40}
               height={40}
-              className={cn("rounded-full")}
+              className={cn("rounded-full w-[40px] h-[40px] object-cover")}
             />
             <span className="text-lg font-medium text-green-1">
               {hostName}
