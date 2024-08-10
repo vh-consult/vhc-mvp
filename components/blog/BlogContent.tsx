@@ -40,7 +40,7 @@ const BlogContent = ({
             className='w-full h-[40%] object-cover'
         />
       </div>
-      <p>
+      <div>
         {
           introduction 
           && 
@@ -49,19 +49,19 @@ const BlogContent = ({
           {introduction}
           </>
         }
-      </p>
-      <p>
+      </div>
+      <div>
         {content}
-      </p>
-      <p>
+      </div>
+      <div>
         {
           conclusion && 
           <>
-          <h2 className="text-3xl font-semibold">Conclusion</h2>
+          <h2 className="text-3xl font-semibold mt-5">Conclusion</h2>
           {conclusion}
           </>        
         }
-      </p>
+      </div>
     </div>
   )
 }

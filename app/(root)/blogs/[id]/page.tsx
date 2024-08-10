@@ -11,7 +11,7 @@ const BlogPage = async ({params}: {params: {id: string}}) => {
   const blog:BlogParams|any = await getBlogById(params.id)
 
   return (
-    <div className='w-full py-8 min-h-screen flex justify-center'>
+    <div className='relative w-full py-8 min-h-screen flex justify-center'>
       <div className="w-[60%]">
         <BlogContent
           author={blog?.authorName}
@@ -24,7 +24,7 @@ const BlogPage = async ({params}: {params: {id: string}}) => {
           datePublished={blog?.datePublished}
         />
       </div>
-      <div className="w-[30%] flex flex-col">
+      <div className="w-[30%] flex flex-col sticky top-[24px] right-0">
         <NewsLetterSubscription/>
         <div className="">
           <h2 className='text-xl font-medium mb-2'>Trending</h2>

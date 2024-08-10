@@ -16,22 +16,20 @@ const navs:Array<NavLinkProps> = [
   },
 ]
 
-const RootLayout = ({
+const BlogLayout = ({
   children
 }: {children:ReactNode}) => {
   return (
-    <>
+    <main className='bg-dark-2 text-green-1 '>
       <Header
         navigations={navs}
       />
-    {/* <main className='w-full min-h-screen bg-dark-2 text-green-1 '> */}
-      <div className="px-8 py-4">
+      <div className="px-8 py-4 w-full min-h-[calc(100vh-64px)]">
       {children}
- 
+
       </div>
-    {/* </main> */}
-    </>
+    </main>
   )
 }
 
-export default RootLayout
+export default BlogLayout

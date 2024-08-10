@@ -23,7 +23,7 @@ const BlogPostSnippet = ({authorImg, author, title, datePublished, comments}: Bl
         className='w-[60px] object-cover h-[60px] rounded-full'
       />
       <div className="ml-3">
-        <h2 className="text-lg font-medium leading-[22px] hover:underline hover:text-green-2">
+        <h2 className="text-base font-medium leading-[22px] hover:underline hover:text-green-2">
             {title}
         </h2>
         <div className="mt-2 flex flex-between opacity-75">
