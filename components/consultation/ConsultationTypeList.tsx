@@ -94,6 +94,7 @@ const ConsultationTypeList = () => {
       }else {
         toast({ title: 'Failed to create consultation session' });
       }
+      setValues(initialValues)
     } catch (error) {
       console.error(error);
       toast({ title: 'Failed to create Consultation' });

@@ -7,7 +7,7 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
 export interface BookingParams {
-    date: Date;
+    date?: Date;
     problem_statement?: string;
     link?: string;
     channel?: 'virtual'| 'inPerson'| 'lab';
@@ -20,19 +20,43 @@ export async function newBooking(clerkId: string, formData?: BookingParams) {
         await connectToDatabase()
         const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
-        if(formData && formData.host === "" ){
-            formData.host = creator.personalPhysician || creator.affiliateHospital
+        
+        
+        console.log(1)
+        
+        if (formData) {
+            let host: any | undefined | null
+            console.log(2)
+            if (formData.host === "" ) {
+                formData.host = creator.personalPhysician || creator.affiliateHospital
+            } else{
+                host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
+                if (!host) throw new Error("Host not found")
+            }
+            if (creator.personalPhysician === undefined) {
+                creator.personalPhysician = formData.host
+                host.clients.push(creator._id)
+                await host.save()
+            }
         }
+        
+        if(formData === undefined){
+            console.log(3)
+            formData = {} 
+            formData.host = creator.personalPhysician
+        }
+        console.log(4)
+
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
         appointment.save()
-        if (formData && creator.personalPhysician === null) {
-            creator.personalPhysician = formData.host
-        }
+        console.log(5)
+
         creator.bookings.push(appointment._id)
         await creator.save()  
 
-        return {message: "created", id: appointment._id}
+        console.log(6)
+        return {message: "created", id: JSON.parse(JSON.stringify(appointment._id))}
     } catch (error) {
         handleError(error)
     }

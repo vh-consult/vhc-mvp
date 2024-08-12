@@ -17,8 +17,11 @@ const ConsultationForm = () => {
   };
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState<boolean>(false)
+  const [showPrescriptionForm, setShowPrescriptionForm] = useState<boolean>(false)
   const {user} = useUser()
+  const openPrescriptionForm = () => {
 
+  }
   const addConsultationPost = async () => {
       try{
         setLoading(true)
@@ -46,7 +49,10 @@ const ConsultationForm = () => {
         className="my-2 w-full bg-dark-3 h-[80px] border-none"
         onChange={(e) => setValues({ ...values, diagnosis: e.target.value })}
     />
-    <Button>Add Prescription <BiPlus/> </Button>
+    <Button onClick={openPrescriptionForm}>Add Prescription <BiPlus/> </Button>
+    {
+      showPrescriptionForm ? (<PrescriptionForm/>) : ''
+    }
     <Button className='w-full mt-3 rounded-md 
     capitalize hover:shadow-md bg-green-2 text-whitish-violet 
     font-medium text-sm ' onClick={addConsultationPost}>
