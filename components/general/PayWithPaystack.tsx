@@ -27,7 +27,7 @@ const PayWithPaystack = (
     },
     currency: "GHS",
     publicKey,
-    text: 'Buy Now',
+    text: 'Pay Now',
     onSuccess: (response:any) => {
       toast({title: "Item purchased successfully"})
     },

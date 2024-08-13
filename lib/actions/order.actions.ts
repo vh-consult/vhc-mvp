@@ -71,16 +71,28 @@ export async function placeOrder(
 
         const session = await startSession()
         session.startTransaction()
+
         const drug = await Drug.findById(data.item)
-        if(!drug) throw new Error("Drug not found")        
+        if(!drug) throw new Error("Drug not found")    
+        
+        if (drug.quantity < data.quantity) throw new Error("Drug quantity exceeded")
+
         const newOrder = await Order.create({...data, buyer: userOrderingItem._id})
-        console.log(newOrder)
+        newOrder.items.push(data.item)
+        await newOrder.save()
+
+        drug.quantity -= data.quantity
+        await drug.save()
+
         userOrderingItem.orders.push(newOrder._id)
         await userOrderingItem.save()
+
         shop.orders.push(newOrder._id)
         await shop.save()
+
         await session.commitTransaction();
         session.endSession();
+
         return {message: "Order placed successfully"}
     } catch (error) {
  
@@ -119,14 +131,16 @@ export async function retrieveShopOrders(shopId:string) {
     try {
         await connectToDatabase()
         const shop = await Company.findOne(
-            {_id: shopId, companyType: "Pharmacy"}
-        ).populate("orders")
+            { _id: shopId, companyType: "Pharmacy" }
+        ).populate({
+            path: 'orders',
+            populate: [
+                { path: 'buyer', select: "firstName lastName" },
+                { path: 'items', select: "name image" },
+            ]
+        })
         if (!shop) throw new Error("Shop not found")
-
-        const orders = await shop.orders
-        console.log(orders)
-        // .populate("buyer")
-        // .populate("items")
+        const orders = shop.orders
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)

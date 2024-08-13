@@ -5,7 +5,7 @@ import Image from 'next/image'
 interface OrderCardProps {
   imageUrl: string;
   buyerName: string;
-  items: string[];
+  items: any[];
   hasPaid: boolean;
   deliverySatus: string
 }
@@ -35,7 +35,7 @@ const OrderCard = (
               {
                 items.map((item, index)=> (
                   <span className="" key={index}>
-                    {item}
+                    {item.name}
                   </span>
                 ))
               }
@@ -59,21 +59,22 @@ const OrderCard = (
   }
 
 const OrderList = async ({shopId}: {shopId: string}) => {
-  const orders = await retrieveShopOrders(shopId)
+  const results = await retrieveShopOrders(shopId)
+  console.log(results?.orders)
   return (
     <div className='grid grid-cols-2 gap-4'>
       {
-        orders.length > 0 ? orders.map((order:any, index: number) => {
+        results?.orders.length > 0 ? results?.orders.map((order:any, index: number) => {
           <OrderCard 
             key={index}
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
             deliverySatus={order.status}
-            hasPaid={order.payment.status === "Paid"? true : false }
-            imageUrl={order.items[0].image}
-            items={order.items}
+            hasPaid={order.payment_status === "Paid"? true : false }
+            imageUrl={''}
+            items={[]}
           />
         }): (
-          <span className="text-sm">
+          <span className="text-sm ">
             No orders
           </span>
         )
