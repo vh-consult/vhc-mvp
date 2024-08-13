@@ -48,7 +48,7 @@ const AppointmentCalendar = () => {
       const isToday = new Date().toDateString() === 
       new Date(year, month, day).toDateString();
       const appointment = appointments.find(
-        (appointment) => new Date(appointment.date).
+        (appointment) => new Date(appointment?.date!).
         toDateString() === new Date(year, month, day).
         toDateString()
       );
@@ -74,7 +74,7 @@ const AppointmentCalendar = () => {
               <span className="text-lg ">{
               appointment.host}</span>
               <span className="text-[12px] font-semibold">
-                {new Date(appointment.date).toLocaleTimeString()}</span>
+                {new Date(appointment?.date!).toLocaleTimeString()}</span>
             </div>
           )}
         </td>
