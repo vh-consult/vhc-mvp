@@ -28,8 +28,8 @@ const FormModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="flex w-full max-w-[520px] flex-col 
-      gap-6 border-none bg-white px-6 py-9 text-green-4">
-        <div className="flex flex-col gap-6">
+      gap-3 border-none bg-white px-6 py-5 text-green-4">
+        <div className="flex flex-col gap-3">
             {
                 image && (
                     <div className='flex justify-center'>
@@ -44,8 +44,8 @@ const FormModal = ({
             }
             <h1 
                 className={
-                    cn("text-3xl font-bold leading-[42px]", 
-                    className)
+                    cn("text-3xl font-bold mt-[-10px]"
+                    )
                 }
             >
                 {title}

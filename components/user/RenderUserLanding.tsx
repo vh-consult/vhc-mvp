@@ -68,7 +68,7 @@ const RenderUserLanding = () => {
                     description="Activate your account"
                     imgURL="/icons/Profile.svg"
                     handleClick={() => { router.push("/account-activation")}}
-                    className='bg-dark-1 hover:bg-dark-3 text-green-1 h-[250px] w-[100%]'
+                    className='bg-white hover:bg-gray-100 text-green-1 h-[250px] w-[100%]'
                 />
                 ) : 
                ( ClickableCardData.user.map((card, index) => (
@@ -77,7 +77,7 @@ const RenderUserLanding = () => {
                         description={card.description}
                         imgURL={card.imageSrc}
                         handleClick={() => { router.push(card.action)}}
-                        className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                        className='bg-white hover:bg-gray-100 text-green-1 w-[100%]'
                         key={index}
                     />
 
@@ -91,7 +91,7 @@ const RenderUserLanding = () => {
                             description={card.description}
                             imgURL={card.imageSrc}
                             handleClick={() => { router.push(card.action)}}
-                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                            className='bg-white hover:bg-gray-100 text-green-1 w-[100%]'
                             key={index}
                         />
         
@@ -106,7 +106,7 @@ const RenderUserLanding = () => {
                             description={card.description}
                             imgURL={card.imageSrc}
                             handleClick={() => { router.push(card.action)}}
-                            className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                            className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
                             key={index}
                         />
         
@@ -117,7 +117,7 @@ const RenderUserLanding = () => {
                     description="Create company profile"
                     imgURL="/icons/Company.svg"
                     handleClick={() => { router.push("/company/set-up")}}
-                    className='bg-dark-1 hover:bg-dark-3 text-green-1 w-[100%]'
+                    className='bg-white hover:bg-gray-100 text-green-1 w-[100%]'
                 />
                 ): ''
             }

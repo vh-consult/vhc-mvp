@@ -31,7 +31,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
   const [showNotifications, setshowNotifications] = useState<boolean>(false)
   return (
     <header className='relative'>
-      <nav className={cn('flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-dark-1 text-green-1 px-6 py-4 lg:px-5', className)}>
+      <nav className={cn('flex flex-between sticky top-0 left-0 h-16 z-50 w-full bg-white text-green-4 px-6 py-4 lg:px-5', className)}>
         <div className="w-2/5 flex flex-between ">
           <Link href={"/"} className='flex items-center gap-1'>
             <div className="w-5/6">
@@ -47,7 +47,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
           </Link>
           
           <div className=" w-1/2 ">
-            <ul className='flex flex-row flex-between text-green-1'>
+            <ul className='flex flex-row flex-between text-green-4'>
               {
                 navigations?.map((nav,index)=>{
                   const activeLink = pathname === nav.route
@@ -74,7 +74,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
           <SearchBar 
             className={
               cn(
-                'border border-dark-1 bg-dark-3 hidden md:flex md:w-[250px]',
+                'border bg-gray-100 hidden md:flex md:w-[250px]',
                 seachFieldStyles
               )}
           />
@@ -95,7 +95,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
             ):
             (
               <div 
-              className='w-[24px] h-[24px] bg-dark-3 rounded-full'
+              className='w-[24px] h-[24px] bg-gray-100 rounded-full'
             >
             </div>
             )
@@ -112,9 +112,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
         {
           showNotifications? (
           <MessageList 
-            className={`${pathname.includes("company")? 
-              'bg-white hover:bg-gray-100': 'bg-dark-1 hover:bg-dark-3'}  
-            text-inherit`}
+            className='bg-white hover:bg-gray-100 text-green-4'
           />): ''
         }
       </div>

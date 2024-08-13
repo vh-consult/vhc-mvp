@@ -19,7 +19,7 @@ const ClickableCard = ({imgURL, className, title, description, handleClick}:Clic
         cursor-pointer`, className)}
         onClick={handleClick}
     >
-        <div className="flex-center glassmorphism size-12 rounded-[10px]">
+        <div className="flex-center bg-gray-400 size-12 rounded-[10px]">
             <Image 
                 src={imgURL}
                 alt='icon'

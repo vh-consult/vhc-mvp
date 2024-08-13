@@ -59,7 +59,7 @@ const config = {
         },
       },
       backgroundImage: {
-        hero: "url('/images/bg.jpeg')",
+        hero: "url('/images/health.jpg')",
         landingHero: "url('/images/herobg.jpg')",
         story: "url('/images/laptopGirlSmiling.jpg')"
       },
