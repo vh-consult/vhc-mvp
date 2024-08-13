@@ -8,11 +8,11 @@ const About = () => {
     return (
       <div id='about' className='md:mb-8'>
         <section className='md:mt-0 w-full relative text-green-4 flex flex-col items-center justify-start'>
-            <div  className='md:w-1/2 h-auto mt-32 md:mt-24 mx-auto mb-4 '>
+            <div  className='md:w-2/3 h-auto mt-4 mx-auto mb-4 '>
               <p className='text-sm md:text-base font-medium'>
                 {landing.about.subtitle}
               </p> 
-              <h2 className='text-lg md:text-2xl font-semibold md:w-4/5'>
+              <h2 className='text-lg md:text-2xl font-semibold md:w-full'>
                 {landing.about.title}
               </h2>
             </div>

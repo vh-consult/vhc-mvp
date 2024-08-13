@@ -16,10 +16,10 @@ const UpcomingRenderer = () => {
     Upcoming Consultation at: 12:30 PM 
     </h2>
     <div  className="flex flex-col gap-2">
-      <h1 className="text-4xl text-green-1 font-extrabold lg:text-7xl">
+      <h1 className="text-4xl text-green-4 font-extrabold lg:text-7xl">
         {time}
       </h1>
-      <p className="text-lg font-medium text-green-1 lg:text-2xl">
+      <p className="text-lg font-medium text-green-4 lg:text-2xl">
         {date}
       </p>
     </div>

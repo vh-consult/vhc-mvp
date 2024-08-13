@@ -1,29 +1,39 @@
 import { landing } from "@/constants"
 import HeroCard from "./HeroCard"
+import { SignedIn } from "@clerk/nextjs"
+import { Button } from "../ui/button"
+import Link from "next/link"
 
 const Hero = () => {
     return (
-      <section className={` w-full text-green-4  h-[350px] bg-center bg-landingHero  bg-no-repeat bg-cover mb-6`}  id='home'
+      <section className={` w-full text-green-1 flex flex-center  h-[calc(100vh-64px)] bg-center bg-landingHero  bg-no-repeat bg-cover mb-2`}  id='home'
       >
         <div className="w-full h-full relative"> 
         <div className="absolute inset-0 bg-green-4 bg-opacity-50"></div>
           
-          <div className="content w-4/5 md:w-2/5 absolute text-white top-6 md:top-12 right-10 md:right-48">
-            <h5 className='text-sm md:text-lg font-medium text-start'>
+          <div className=" w-3/5 h-1/2 absolute left-[20%] top-[25%] md:text-center text-white">
+            <h5 className='text-sm md:text-2xl font-medium '>
               {landing.hero.subtitle}
             </h5>
-            <h1 className='font-semibold text-start my-2 text-2xl md:text-4xl capitalize'>
+            <h1 className='font-semibold my-2 md:text-6xl leading-tight capitalize'>
               {landing.hero.title}
             </h1>
-            <p className='font-medium text-base'>
+            <p className='font-medium text-lg'>
               {landing.hero.body}
             </p>
+            <SignedIn>
+              <Button className="h-[60px] px-8 mt-2 rounded-full bg-green-2 hover:opacity-85 text-xl">
+                <Link href={'/sign-up'}>
+                  Join Now!
+                </Link>
+              </Button>
+            </SignedIn>
           </div>
   
-          <div className="
+          {/* <div className="
             w-full card-section flex flex-row 
-            items-center justify-center  flex-wrap
-            absolute bottom-[-150px] md:bottom-[-80px]  
+            items-center justify-center  flex-wrap text-green-4
+            absolute bottom-[-150px] md:bottom-[80px]  
           ">
             {
               landing.hero.cards.map((card, index) =>
@@ -40,7 +50,7 @@ const Hero = () => {
                 }
               )
             }
-          </div>
+          </div> */}
   
         </div>
       </section>
