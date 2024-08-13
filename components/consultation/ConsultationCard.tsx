@@ -5,7 +5,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
-import { appendConsultationLink } from "@/lib/actions/appointment.actions";
 
 interface ConsultationCardProps {
   title: string;
@@ -18,6 +17,7 @@ interface ConsultationCardProps {
   link: string;
   hostImage?: string;
   hostName?: string;
+  hostId?: string;
 }
 
 const ConsultationCard = ({
@@ -30,7 +30,8 @@ const ConsultationCard = ({
   handleClick,
   link,
   buttonText,
-  hostName
+  hostName,
+  hostId
 }: ConsultationCardProps) => {
   const { toast } = useToast();
 

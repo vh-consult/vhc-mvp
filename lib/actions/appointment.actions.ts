@@ -21,7 +21,6 @@ export async function newBooking(clerkId: string, formData?: BookingParams) {
         const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
         
-        
         console.log(1)
         
         if (formData) {
@@ -49,6 +48,7 @@ export async function newBooking(clerkId: string, formData?: BookingParams) {
 
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
+        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
         appointment.save()
         console.log(5)
 
@@ -157,19 +157,18 @@ export async function hostBookings(clerkId:string) {
     }
 }
 
-export async function appendConsultationLink(bookingId: string, link:string) {
-    try {
-        await connectToDatabase()
-        const booking = await Booking.findById(bookingId)
-        if(!booking) throw new Error("Booking not found")
+// export async function appendConsultationLink(bookingId: string, link:string) {
+//     try {
+//         await connectToDatabase()
+//         const booking = await Booking.findById(bookingId)
+//         if(!booking) throw new Error("Booking not found")
         
-        booking.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${link}`
-        await booking.save()
-        return {message: "Link added"}
-    } catch (error) {
-        handleError(error)
-    }
-}
+//         await booking.save()
+//         return {message: "Link added"}
+//     } catch (error) {
+//         handleError(error)
+//     }
+// }
 
 export async function getMessages(clerkId: string) {
     try {

@@ -12,7 +12,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import { appendConsultationLink, newBooking, searchHost } from '@/lib/actions/appointment.actions';
+import {  newBooking, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import useDBUser from '@/hooks/useDBUser';
 
@@ -74,18 +74,23 @@ const ConsultationTypeList = () => {
       
       const newCall = await newBooking(user?.id, values)
       if (newCall?.message === "created") {
-        const id = crypto.randomUUID();
+        const id = newCall.id;
         const call = client.call('default', id);
-        if (!call) throw new Error('Failed to create Consultation');
+        if (!call) throw new Error('Failed to create consultation session');
         const startsAt = values.date.toISOString() || new Date(Date.now()).toISOString();
         const description = values.problem_statement || 'Emergency Consultation';
         await call.getOrCreate({
           data: {
             starts_at: startsAt,
-            custom: { description, host: hostName, hostImage: dbUser?.photo },
+            custom: { 
+              description, 
+              host: hostName, 
+              hostImage: dbUser?.photo,
+              hostId: dbUser?._id 
+            },
+            members: dbUser?._id
           },
         });
-        await appendConsultationLink(newCall.id, call.id)
         setCallDetail(call);
         if (!values.problem_statement) {
           router.push(`/consultation/room/${call.id}`);

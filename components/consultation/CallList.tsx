@@ -85,6 +85,9 @@ const CallList = (
                   ? '/icons/upcoming.svg'
                   : '/icons/recordings.svg'
             }
+            hostId={
+              (consultation as Call).state?.custom?.hostId
+            }
             title={
               (consultation as Call).state?.custom?.description ||
               (consultation as CallRecording).filename?.substring(0, 20) ||

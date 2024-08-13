@@ -4,7 +4,7 @@ const BookingSchema = new Schema({
     patient: {type: Schema.Types.ObjectId, ref: 'User'},
     host: {type: Schema.Types.ObjectId, refPath: 'hostType',},
     hostType: {type: String, enum: ["User", "Company"] },
-    link: {type: String,},
+    link: {type: String},
     date: {type: Date, required: true, default: new Date()},
     problem_statement: {type: String, default: 'Emergency'},
     channel: {type: String, enum: ['virtual', 'inPerson', 'lab'],default: 'virtual'},
