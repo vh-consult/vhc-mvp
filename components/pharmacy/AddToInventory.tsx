@@ -49,73 +49,73 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
     handleClick={postDrug}
     buttonText='Upload To Inventory'
     >
-            {
-              loading? (<Loader/>) : (
-                <>
-                <SingleImageDropzone
-            width={125}
-            height={150}
-            value={file}
-            onChange={(file) => {
-              setFile(file);
-            }}
-            className='mx-auto'
-          />
+      {
+        loading? (<Loader/>) : (
+          <>
+            <SingleImageDropzone
+              width={125}
+              height={150}
+              value={file}
+              onChange={(file) => {
+                setFile(file);
+              }}
+              className='mx-auto'
+            />
             <Input
-              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) =>
                 setValues({ ...values, name: e.target.value })
               }
               placeholder="Drug's name"
             />
-    
             <Select required onValueChange={(value) => setValues({ ...values, catalog: value })}>
-              <SelectTrigger id="catalog">
+              <SelectTrigger id="catalog" className='bg-green-3 text-sm'>
                 <SelectValue placeholder="Select catalog" />
               </SelectTrigger>
-              <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+              <SelectContent position="popper" className='bg-green-3 text-green-4'>
                 <SelectItem value="painkiller">Painkiller</SelectItem>
                 <SelectItem value="appetizer">Appetizer</SelectItem>
                 <SelectItem value="antiMalaria">Anti-malaria</SelectItem>
                 <SelectItem value="energizer">Energizer</SelectItem>
               </SelectContent>
             </Select>
-            <Textarea
-              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-              onChange={(e) =>
-                setValues({ ...values, description: e.target.value })
-              }
-              placeholder='Description'
-            />
-            <ReactDatePicker
-                  required
-                  minDate={new Date()}
-                  selected={values.expiryDate}
-                  onChange={(date) => setValues({ ...values, expiryDate: date! })}
-                  dateFormat="MMMM d, yyyy"
-                  className="w-full rounded bg-dark-3 p-2 focus:outline-none"
-            />
-          <div className="flex w-full gap-2">
-              <Input 
-                type='number'
-                min={0}
-                placeholder='Price' 
-                onChange={(e)=>setValues({...values, price: e.target.value as any | number })}
-                className="border-none w-1/2 bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
-              <Input 
-                type='number'
-                min={1}
-                placeholder='Quantity' 
-                onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
-                className="border-none w-1/2 bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-                />
-          </div>
-            </>
-              )
-            }
-          
-        </FormModal>
+      <Textarea
+        className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        onChange={(e) =>
+          setValues({ ...values, description: e.target.value })
+        }
+        placeholder='Description'
+      />
+      <ReactDatePicker
+            required
+            // minDate={new Date()}
+            placeholderText='Select expiry date'
+            selected={values.expiryDate}
+            onChange={(date) => setValues({ ...values, expiryDate: date! })}
+            dateFormat="MMMM d, yyyy"
+            className="w-full rounded bg-green-3 p-2 focus:outline-none"
+      />
+    <div className="flex w-full gap-2">
+        <Input 
+          type='number'
+          min={0}
+          placeholder='Price' 
+          onChange={(e)=>setValues({...values, price: e.target.value as any | number })}
+          className=" w-1/2 bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+        <Input 
+          type='number'
+          min={1}
+          placeholder='Quantity' 
+          onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
+          className=" w-1/2 bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
+    </div>
+      </>
+        )
+      }
+    
+    </FormModal>
   )
 }
 

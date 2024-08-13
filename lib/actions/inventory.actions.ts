@@ -25,7 +25,7 @@ export async function addToInventory(
         if (!admin) throw new Error("User not found");
 
         if (admin.userRole === "PharmacyAdmin") {
-            const shop = admin.shop;
+            const shop = admin.company;
             if (!shop) throw new Error("No shop found");
             if (shop.companyType !== "Pharmacy") throw new Error("Company is not a pharmacy");
 

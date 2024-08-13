@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 const useDBUser = () => {
     const {user} = useUser()
     const [companyId, setCompanyId] = useState<string>('')
-    const [bookings, setBookings] = useState<any>([])
     const [dbUser, setDbUser] = useState<any>([])
     const clerkId = user?.id as string
     const [role, setRole] = useState<
@@ -18,12 +17,11 @@ const useDBUser = () => {
             setDbUser(userData)
             setRole(userData.userRole)
             setCompanyId(userData.company as string)
-            setBookings(userData.bookings as any)
         }
         getUserFromDB()
     }, [clerkId])
 
-  return {role, clerkId, companyId, bookings, dbUser}
+  return {role, clerkId, companyId, dbUser}
 }
 
 export default useDBUser

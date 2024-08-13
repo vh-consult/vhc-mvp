@@ -78,7 +78,7 @@ const OrderList = async ({shopId}: {shopId: string}) => {
           </span>
         )
       }
-      hi
+      
     </div>
   )
 }

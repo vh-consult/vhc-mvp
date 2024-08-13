@@ -145,7 +145,7 @@ const ConsultationTypeList = () => {
               <SelectTrigger id="appointmentType">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
-              <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+              <SelectContent position="popper" className='bg-green-3 text-green-1'>
                 <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
                 <SelectItem value="virtual">Virtual Consultation</SelectItem>
                 <SelectItem value="lab">Lab Session</SelectItem>
@@ -156,7 +156,7 @@ const ConsultationTypeList = () => {
           <div className="flex flex-col gap-2.5">
             <Label className="text-base font-normal leading-[22.4px] text-green-1">What are some of your symptoms</Label>
             <Textarea
-              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="border-none bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) => setValues({ ...values, problem_statement: e.target.value })}
               placeholder='e.g: Headache and severe back pain...'
             />
