@@ -21,7 +21,7 @@ const useDBUser = () => {
             setBookings(userData.bookings as any)
         }
         getUserFromDB()
-    }, [user])
+    }, [clerkId])
 
   return {role, clerkId, companyId, bookings, dbUser}
 }

@@ -60,18 +60,17 @@ const OrderCard = (
 
 const OrderList = async ({shopId}: {shopId: string}) => {
   const results = await retrieveShopOrders(shopId)
-  console.log(results?.orders)
   return (
     <div className='grid grid-cols-2 gap-4'>
       {
-        results?.orders.length > 0 ? results?.orders.map((order:any, index: number) => {
+        results.length > 0 ? results.map((order:any, index: number) => {
           <OrderCard 
             key={index}
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
             deliverySatus={order.status}
             hasPaid={order.payment_status === "Paid"? true : false }
-            imageUrl={''}
-            items={[]}
+            imageUrl={'/images/drug 1.jpg'}
+            items={["para"]}
           />
         }): (
           <span className="text-sm ">
@@ -79,6 +78,7 @@ const OrderList = async ({shopId}: {shopId: string}) => {
           </span>
         )
       }
+      hi
     </div>
   )
 }
