@@ -4,7 +4,7 @@ import ClientList from '../doctor/ClientList'
 
 const DoctorDashboard = () => {
   return (
-    <main className='w-full h-[540px] mx-auto flex flex-between'>
+    <main className=' h-[540px] mx-auto flex flex-between'>
       <div className="w-[60%] h-full bg-white rounded-lg">
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Appointments
@@ -27,7 +27,7 @@ const DoctorDashboard = () => {
                 Clients
             </h3>
             <div className="w-full">
-                <ClientList/>
+                {/* <ClientList/> */}
             </div>
         </div>
       </div>

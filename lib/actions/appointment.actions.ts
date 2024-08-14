@@ -23,24 +23,27 @@ export async function newBooking(clerkId: string, formData?: BookingParams) {
         
         console.log(1)
         
-        if (formData) {
+        if (formData !== undefined) {
             let host: any | undefined | null
             console.log(2)
-            if (formData.host === "" ) {
-                formData.host = creator.personalPhysician || creator.affiliateHospital
-            } else{
-                host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
-                if (!host) throw new Error("Host not found")
-            }
-            if (creator.personalPhysician === undefined) {
+            if (formData.host === "" && creator.personalPhysician !== undefined) {
+                console.log(3)
+                formData.host = creator.personalPhysician
+            } else if (formData.host !== "" && creator.personalPhysician === undefined) {
+                console.log(4)
                 creator.personalPhysician = formData.host
                 host.clients.push(creator._id)
                 await host.save()
+            }else{
+                console.log(5)
+                host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
+                if (!host) throw new Error("Host not found")
             }
+
         }
         
         if(formData === undefined){
-            console.log(3)
+            console.log(5)
             formData = {} 
             formData.host = creator.personalPhysician
         }

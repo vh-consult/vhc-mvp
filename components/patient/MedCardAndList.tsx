@@ -73,7 +73,7 @@ const MedCard = ({
     const [drugsFinished, setDrugsFinished] = useState<boolean>(false)
   
     return(
-      <div className="w-full flex flex-between px-4 py-2 hover:bg-dark-3 ">
+      <div className="w-full flex flex-between bg-white px-4 py-2 hover:bg-gray-100 ">
         <Image 
           src={imageSrc}
           alt={drug + 'image'}
@@ -87,7 +87,7 @@ const MedCard = ({
           <span className="text-xs">{condition}</span>
         </div>
         <span className="text base w-1/6">{quantity}</span>
-        <span className="w-[30px] h-[30px] rounded-full bg-dark-2 flex flex-center hover:bg-dark-4 ">
+        <span className="w-[30px] h-[30px] rounded-full bg-green-1 flex flex-center hover:bg-white ">
           {drugsFinished? <MdDelete/> : <BiCheck/>}
         </span>
       </div>

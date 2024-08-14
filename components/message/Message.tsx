@@ -9,7 +9,7 @@ const Message = ({className}: {className?:string}) => {
           Recent Messages
         </h3>
         <div className="w-full">
-          <MessageList className='bg-dark-1 hover:bg-dark-3'/>
+          <MessageList className='bg-white hover:bg-gray-100'/>
         </div>
     </div>
   )

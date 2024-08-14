@@ -8,7 +8,7 @@ const layout = ({children}: {children: React.ReactNode}) => {
       <Header className='bg-white text-blue-4 ' seachFieldStyles='bg-gray-100 border-none'/>
       <section className='flex flex-between text-blue-4'>
         <AdminSidebar/>
-        <div className="w-[calc(100vw-170px)] h-[calc(100vh-64px)] p-3 bg-blue-50">
+        <div className="w-[calc(100vw-170px)] h-[calc(100vh-64px)] p-3 bg-green-3">
           {children}
         </div>
       </section>

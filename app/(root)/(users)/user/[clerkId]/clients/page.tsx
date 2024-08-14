@@ -13,7 +13,7 @@ const ClientsPage = () => {
         <h1 className='text-2xl font-medium'>Clientele</h1>
         <SearchBar className='border w-[225px] rounded-lg border-saturated-purple'/>
       </div>
-      <div className="flex  h-[30px] text-sm font-medium opacity-75 rounded-t-lg bg-dark-1 w-full items-center justify-between px-3">
+      <div className="flex  h-[30px] text-sm font-medium opacity-75 rounded-t-lg bg-gray-200 w-full items-center justify-between px-3">
         {
           headers.map((title, index) => (
             <span className="w-full ml-10" key={index}>

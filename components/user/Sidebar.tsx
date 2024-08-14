@@ -35,11 +35,6 @@ const Sidebar = () => {
               icon: BsHospital
           },
           {
-              route: `/user/${clerkId}/bookings`,
-              label: `Bookings`,
-              icon: MdOutlineSchedule
-          },
-          {
               route: `/user/${clerkId}/health-record`,
               label: `Record`,
               icon: BsDatabase
@@ -68,10 +63,10 @@ const Sidebar = () => {
               icon: RxDashboard
           },
           {
-              route: `/consultation/home`,
-              label: `Consultation`,
-              icon: MdMeetingRoom
-          },
+            route: `/user/${clerkId}/bookings`,
+            label: `Bookings`,
+            icon: MdOutlineSchedule
+        },
           {
               route: `/user/${clerkId}/clients`,
               label: `Clients`,
@@ -89,7 +84,7 @@ const Sidebar = () => {
               `flex-col mb-4 hover:rounded-lg hover:mx-auto 
               items-center py-3 hover:w-[85%] `}  
                 hover:bg-green-1 ${isActive? `bg-green-2 w-[85%] 
-              mx-auto rounded-lg hover:w-[100%]   hover:bg-green-2 hover:opacity-90`:
+              mx-auto rounded-lg hover:w-[100%]  text-green-1 hover:bg-green-2 hover:opacity-90`:
              'text-green-4'}
             `}
             

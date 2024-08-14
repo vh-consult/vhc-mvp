@@ -142,7 +142,7 @@ const ConsultationTypeList = () => {
           <div className="flex flex-col gap-2.5">
             <Label className="text-base font-normal leading-[22.4px] text-green-4" htmlFor="appointmentType">Appointment type</Label>
             <Select required onValueChange={(value) => setValues({ ...values, appointmentType: value })}>
-              <SelectTrigger id="appointmentType">
+              <SelectTrigger id="appointmentType" className='bg-green-3'>
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent position="popper" className='bg-green-3 text-green-4'>
