@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 
 const DeliveryInfoCard = () => {
   return (
-    <main className='bg-dark-1 w-1/2 h-[200px] rounded-lg p-2'>
+    <main className='bg-white w-1/2 h-[200px] rounded-lg p-2'>
       <h2 className='text-xl font-semibold'>
         Delivery
       </h2>
@@ -32,13 +32,13 @@ const DeliveryInfoCard = () => {
       </div>
       <div className="w-full flex flex-col">
         <Button 
-        className='bg-dark-2 text-sm mt-2 mb-1 
-        hover:bg-dark-4'>
+        className='bg-green-1 text-sm mt-2 mb-1 
+        hover:bg-green-3'>
             View Delivery Details
         </Button>
         <Button variant={'outline'} 
-        className='text-bg-dark-2 text-sm hover:bg-dark-4
-         border-2 border-dark-4'>
+        className='text-bg-dark-2 text-sm hover:bg-blue-50
+         border-2 '>
             Change Delivery Service
         </Button>
       </div>

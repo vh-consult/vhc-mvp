@@ -89,7 +89,7 @@ const CreateBlogPostPage = () => {
 
 
   return (
-  <form className='bg-dark-1 p-4 rounded-lg min-h-screen w-[600px] mx-auto py-5 flex flex-col'>
+  <form className='bg-white p-4 rounded-lg min-h-screen w-[600px] mx-auto py-5 flex flex-col'>
     <h1 className="text-xl font-medium">Create Post</h1>
     <div className="grid w-full items-center gap-4">
       <SingleImageDropzone
@@ -106,7 +106,7 @@ const CreateBlogPostPage = () => {
           Title
         </Label>
         <Input
-          className="w-full rounded bg-dark-3 p-2 focus:outline-none"
+          className="w-full rounded bg-green-1 p-2 focus:outline-none"
           onChange={(e) => setValues({...values, title: e.target.value})}
         />
         {errors.title && <span className="text-red-500">{errors.title}</span>}
@@ -115,7 +115,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='introduction'>Introduction</Label>
         <Textarea
           id='introduction'
-          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, introduction: e.target.value })}
         />
         {errors.introduction && <span className="text-red-500">{errors.introduction}</span>}
@@ -124,7 +124,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='content'>content</Label>
         <Textarea
           id='content'
-          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, content: e.target.value })}
         />
         {errors.content && <span className="text-red-500">{errors.content}</span>}
@@ -133,7 +133,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='conclusion'>conclusion</Label>
         <Textarea
           id='conclusion'
-          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, conclusion: e.target.value })}
         />
         {errors.conclusion && <span className="text-red-500">{errors.conclusion}</span>}
@@ -141,7 +141,7 @@ const CreateBlogPostPage = () => {
     </div>
   <Button
     onClick={handleSubmit}
-    className='w-full bg-green-2 mt-4'
+    className='w-full bg-green-2 mt-4 text-green-1'
   >
       {loading? <Loader />: `Post Blog`}
   </Button>

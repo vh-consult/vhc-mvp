@@ -20,8 +20,8 @@ const CartPage = () => {
           <DeliveryInfoCard/>
         </div>
       </div>
-      <div className="flex flex-col flex-between w-[30%]">
-        <PayWithPaystack amount={12}/>
+      <div className="flex flex-col  w-[30%]">
+        {/* <PayWithPaystack amount={12}/> */}
         <ShippingForm/>
       </div>
     </div>

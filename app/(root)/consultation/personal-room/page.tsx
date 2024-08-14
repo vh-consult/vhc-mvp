@@ -68,7 +68,7 @@ const PersonalRoom = () => {
           Start Consultation
         </Button>
         <Button
-          className="bg-dark-3"
+          className="bg-green-1"
           onClick={() => {
             navigator.clipboard.writeText(consultationLink);
             toast({

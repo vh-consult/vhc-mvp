@@ -30,7 +30,7 @@ const VideoLayout = ({children}: {children: React.ReactNode}) => {
             consultationSidebarLinks
           }
         />
-      <div className="w-full min-h-[calc(100vh-65px)] px-10 py-4 bg-dark-2">
+      <div className="w-full min-h-[calc(100vh-65px)] px-10 py-4 bg-green-3">
         {children}
       </div>
     </StreamVideoProvider>

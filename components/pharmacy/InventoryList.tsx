@@ -55,7 +55,7 @@ const InventoryList =  ({pharmacyId}: {pharmacyId: string}) => {
                     }} key={index}>
                     <InventoryCard
                         catalog={drug?.catalog}
-                        count={1}
+                        count={index+1}
                         expiryDate={new Date(2025, 5, 12)}
                         imageUrl={drug?.image as string}
                         name={drug?.name}

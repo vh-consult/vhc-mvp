@@ -55,7 +55,7 @@ const ConsultationRoom = () => {
   };
 
   return (
-    <section className="relative h-full w-full overflow-hidden pt-2 text-green-1">
+    <section className="relative h-full w-full overflow-hidden pt-2 text-green-4">
       <div className="relative flex size-full items-center justify-center">
         <div className=" flex size-full max-w-[1000px] items-center">
           <CallLayout /> 
@@ -97,10 +97,10 @@ const ConsultationRoom = () => {
           <div className="flex items-center">
             <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232d] px-4 
             py-2 hover:bg-[#4c535b]  ">
-              <LayoutList size={20} className="text-green-1" />
+              <LayoutList size={20} className="text-green-4" />
             </DropdownMenuTrigger>
           </div>
-          <DropdownMenuContent className="border-dark-1 bg-dark-1 text-green-1">
+          <DropdownMenuContent className=" bg-white text-green-4">
             {['Grid', 'Top-down'].map((item, index) => (
               <div key={index}>
                 <DropdownMenuItem
@@ -110,15 +110,15 @@ const ConsultationRoom = () => {
                 >
                   {item}
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="border-dark-1" />
+                <DropdownMenuSeparator className="" />
               </div>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
 
         <button onClick={() => setShowParticipants((prev) => !prev)}>
-          <div className=" cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
-            <Users size={20} className="text-green-1" />
+          <div className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-[#4c535b]  ">
+            <Users size={20} className="text-green-4" />
           </div>
         </button>
         {

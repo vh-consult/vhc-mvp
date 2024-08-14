@@ -12,28 +12,28 @@ const ShippingForm = async () => {
   return (
     <form
       action={postForm}
-      className='h-[200px] w-full bg-dark-1 
+      className='h-[200px] w-full bg-white
       flex flex-col flex-center gap-2 rounded-lg py-1'
     >
       <Input
         type='text'
         placeholder='Active phone number'
         name='contact'
-        className='w-[90%] bg-dark-3 border-none'
+        className='w-[90%] bg-green-3 '
       />
       <Input
         type='text'
         placeholder='Home address'
         name='homeAddress'
-        className='w-[90%] bg-dark-3 border-none'
+        className='w-[90%] bg-green-3 border-none'
 
       />
       {  
         <Select name="pickup">
-        <SelectTrigger className='w-[90%] border border-dark-4 text-green-1' id="companyType">
+        <SelectTrigger className='w-[90%] bg-green-3 border text-green-4' id="companyType">
           <SelectValue  placeholder="Preferred delivery choice" />
         </SelectTrigger>
-        <SelectContent position="popper" className='bg-dark-3  text-green-1'>
+        <SelectContent position="popper" className='bg-green-1  text-green-4'>
           <SelectItem  value="homeDelivery">Home Delivery</SelectItem>
           <SelectItem value="inPerson ">In person </SelectItem>
         </SelectContent>

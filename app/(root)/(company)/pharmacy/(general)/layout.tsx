@@ -19,7 +19,7 @@ const PharmacyGeneralLayout = ({children}: {children: React.ReactNode}) => {
   ]
   
   return (
-    <main className={cn('bg-dark-2 w-full min-h-screen text-green-1')}>
+    <main className={cn('bg-green-3 w-full min-h-screen text-green-4')}>
       <Header 
         navigations={navs}
       />

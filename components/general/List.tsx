@@ -29,7 +29,7 @@ const List = ({
   icons,
 }: ListProps) => {
   return (
-    <div className='w-[90%] px-1 hover:bg-dark-3 mx-auto py-2 flex flex-between'>
+    <div className='w-full px-1 hover:bg-gray-100 mx-auto py-2 flex flex-between'>
       <div className="flex items-center">
         {imageSrc && <Image
           alt='drug image'
@@ -57,8 +57,8 @@ const List = ({
       {
         icons?.map((icon, index) => (
         <span key={index} className='hover:cursor-pointer border-2 
-        border-dark-3 hover:bg-dark-4 w-[45px] h-[45px] 
-        flex flex-center rounded-full bg-dark-1' onClick={icon.action}>
+         hover:bg-green-1 w-[45px] h-[45px] 
+        flex flex-center rounded-full' onClick={icon.action}>
           {icon.icon}
         </span>
         ))

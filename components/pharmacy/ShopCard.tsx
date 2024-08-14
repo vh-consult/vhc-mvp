@@ -24,7 +24,8 @@ const ShopCard = ({
   number_of_stars,
 }: PharmacyShopCardProps) => {
   return (
-      <div className="w-[200px] h-[225px] cursor-pointer hover:opacity-90 bg-dark-3 text-green-1 
+      <div className="w-[220px] h-[225px] cursor-pointer 
+      hover:opacity-90 bg-white text-green-4 
       -200 rounded-lg hover:shadow-lg">
       <div className="h-[55%] w-full ">
           <Image

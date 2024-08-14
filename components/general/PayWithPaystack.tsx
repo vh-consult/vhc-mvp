@@ -37,7 +37,7 @@ const PayWithPaystack = (
   return (
 
         <PaystackButton 
-            className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium mt-3 bg-green-2" 
+            className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium text-green-1 mt-3 bg-green-2" 
             {...componentProps} 
         />
   );

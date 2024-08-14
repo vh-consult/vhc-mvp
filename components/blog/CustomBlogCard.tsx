@@ -13,7 +13,7 @@ interface CustomBlogProps {
 
 const CustomBlogCard = ({author, datePublished, title, snippet, coverImage}: CustomBlogProps) => {
   return (
-    <div className='bg-dark-1 md:w-[300px] md:h-[325px] rounded-none border-none my-2'>
+    <div className='bg-white md:w-[300px] md:h-[325px] rounded-none border-none my-2'>
       <div className="w-full h-2/3">
         <Image 
             src={coverImage}
