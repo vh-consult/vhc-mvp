@@ -40,7 +40,7 @@ const AppointmentCalendar = () => {
     // Add empty slots for days of the previous month
     for (let i = 0; i < firstDay; i++) {
       days.push(<td key={`empty-${i}`} className="w-full 
-        h-full p-1 border border-l-0 border-gray-700"></td>);
+        h-full p-1 border border-l-0 border-gray-100"></td>);
     }
 
     // Add days of the current month
@@ -57,7 +57,7 @@ const AppointmentCalendar = () => {
         <td
           key={day}
           className={`w-full relative h-full p-1 border 
-             border-gray-700 ${
+             border-gray-100 ${
             isToday ? `bg-green-2 text-green-1` : 
             ``
           }`}
@@ -68,7 +68,7 @@ const AppointmentCalendar = () => {
             <div className="absolute bottom-2 flex
             flex-col">
               <span className={`text-sm font-medium 
-                ${isToday ? 'text-green-1' : `text-green-2`}`}>
+                ${isToday ? 'text-green-4' : `text-green-2`}`}>
                 {appointment.channel}
               </span>
               <span className="text-lg ">{
@@ -84,7 +84,7 @@ const AppointmentCalendar = () => {
     // Add empty slots for days of the next month to fill the last week
     while (days.length % 7 !== 0) {
       days.push(<td key={`empty-next-${days.length}`} 
-        className="w-full h-full p-1 border border-l-0 border-gray-700">
+        className="w-full h-full p-1 border border-l-0 border-gray-100">
 
         </td>);
     }
@@ -110,7 +110,7 @@ const AppointmentCalendar = () => {
   };
 
   return (
-    <div className="w-full min=h-screen rounded-t-xl p-4 text-green-1">
+    <div className="w-full min=h-screen rounded-t-xl p-4 text-green-4">
       <div className="w-full mt-[1%] mb-[2%] flex items-center justify-between">
         <span className="text-lg font-medium">Calendar</span>
         <span className="">

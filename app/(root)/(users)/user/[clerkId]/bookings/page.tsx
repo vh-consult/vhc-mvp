@@ -5,6 +5,7 @@ const BookingsPage = () => {
   return (
     <div>
       {/* <AppointmentCalendar/> */}
+      <BookingsPage/>
     </div>
   )
 }
