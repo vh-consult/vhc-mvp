@@ -6,8 +6,8 @@ import { Button } from '../ui/button'
 
 const AffiliateDoctor = () => {
   return (
-    <div className="h-[260px] w-full flex bg-dark-1 rounded-lg p-4 items-center">
-      <div className="w-[250px] h-full bg-dark-1">
+    <div className="h-[260px] w-full flex bg-white rounded-lg p-4 items-center">
+      <div className="w-[250px] h-full bg-green-1">
         <Image 
             src={'/images/doc-1.jpg'}
             alt='hospital-image'

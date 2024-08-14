@@ -29,9 +29,9 @@ const AdminSidebar = () => {
         href={nav.route} 
         key={index} 
         className={`flex flex-row items-center p-3          
-            hover:bg-blue-1 ${isActive? `bg-blue-1 
-           hover:bg-blue-1 hover:opacity-90 text-blue-2 `:
-         'text-blue-4 hover:bg-blue-2 '}
+            hover:bg-green-1 ${isActive? `bg-green-2 
+           hover:bg-green-2 hover:opacity-90 text-green-1 `:
+         'text-green-4 hover:bg-green-1 '}
         `}
         
       >

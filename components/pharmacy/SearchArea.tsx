@@ -3,7 +3,7 @@ import SearchBar from '../general/SearchBar'
 
 const SearchArea = () => {
   return (
-    <div className={`relative w-full text-center z-0  h-[250px] bg-[url('/images/hosp-2.jpg')] flex flex-col justify-center items-center bg-no-repeat bg-cover`}>
+    <div className={`relative w-[90%] mx-auto text-center z-0  h-[250px] bg-[url('/images/hosp-2.jpg')] flex flex-col justify-center items-center bg-no-repeat bg-cover`}>
     <div className="absolute top-0 left-0 -z-10 bg-green-2 w-full h-full opacity-40"></div>
     <h1 className="text-4xl font-semibold text-white">
       Looking for any particular drug? <br />

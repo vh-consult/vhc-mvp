@@ -34,7 +34,7 @@ const PatientDashboard = () => {
           {
             vitals.map(vital => (
               <HighlightCard 
-                className='bg-dark-1 rounded-lg w-[24%] h-[125px]'
+                className='bg-white rounded-lg w-[24%] h-[125px]'
                 icon={vital.icon}
                 title={vital.title}
                 value={vital.value}
@@ -45,7 +45,7 @@ const PatientDashboard = () => {
         </div>
         <div className="w-full mt-4 gap-x-3 flex flex-between">
             <Medication/>
-            <Message className='bg-dark-1 w-[500px]'/>
+            <Message className='bg-white w-[500px]'/>
         </div>
       </main>
     )

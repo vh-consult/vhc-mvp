@@ -37,7 +37,7 @@ const DeliveryInfoCard = () => {
             View Delivery Details
         </Button>
         <Button variant={'outline'} 
-        className='text-bg-dark-2 text-sm hover:bg-blue-50
+        className='text-green-4 text-sm hover:bg-blue-50
          border-2 '>
             Change Delivery Service
         </Button>

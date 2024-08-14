@@ -41,7 +41,7 @@ const PrescriptionForm = () => {
     setValues(initialValues)
   }
   return (
-    <div className="w-[350px] min-h-[350px] bg-dark-1 p-3">
+    <div className="w-[350px] min-h-[350px] bg-white p-3">
       <h2 className="text-lg">
         Add Presciption
       </h2>
@@ -62,7 +62,7 @@ const PrescriptionForm = () => {
         <div className="flex flex-col gap-2 text-sm">
           {
             drugsAdded?.length === 0 ? 'No drugs yet': drugsAdded?.map((drug, index) => (
-              <div key={index} className=' flex flex-between bg-dark-3 text-sm'>
+              <div key={index} className=' flex flex-between bg-green-3 text-sm'>
                 <span className="max-w-[40%]">{drug.medicine}</span>
                 <span className="max-w-[30%]">{drug.caution}</span>
                 <span className="max-w-[15%]">{drug.duration}</span>
@@ -79,7 +79,7 @@ const PrescriptionForm = () => {
             <Input
               onChange={(e)=> setValues({...values, medicine:e.target.value})}
               type='string'
-              className='bg-dark-3 focus-visible:ring-0 border-none'
+              className='bg-green-3 focus-visible:ring-0 border-none'
               title='Enter name of medicine'
             />
           </span>
@@ -89,7 +89,7 @@ const PrescriptionForm = () => {
               onChange={(e)=> setValues({...values, dose:e.target.value as any})}
               type='number'
               min={1}
-              className='bg-dark-3 focus-visible:ring-0 border-none'
+              className='bg-green-3 focus-visible:ring-0 border-none'
               title='Enter quantity to take each time'
             />
           </span>
@@ -100,7 +100,7 @@ const PrescriptionForm = () => {
             <Input
               onChange={(e)=> setValues({...values, caution:e.target.value})}
               type='string'
-              className='bg-dark-3 focus-visible:ring-0 border-none'
+              className='bg-green-3 focus-visible:ring-0 border-none'
               title='Enter cautions. eg: 30 minutes before meal, etc'
             />
           </span>
@@ -110,7 +110,7 @@ const PrescriptionForm = () => {
               onChange={(e)=> setValues({...values, duration:e.target.value as any})}
               type='number'
               min={0}
-              className='bg-dark-3 focus-visible:ring-0 border-none'
+              className='bg-green-3 focus-visible:ring-0 border-none'
               title='Enter number of days to take drug'
             />
           </span>

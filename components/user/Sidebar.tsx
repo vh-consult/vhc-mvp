@@ -88,9 +88,9 @@ const Sidebar = () => {
             className={`flex ${isExpanded? ` flex-row items-center p-3 ` : 
               `flex-col mb-4 hover:rounded-lg hover:mx-auto 
               items-center py-3 hover:w-[85%] `}  
-                hover:bg-dark-3 ${isActive? `bg-dark-4 w-[85%] 
-              mx-auto rounded-lg hover:w-[100%]   hover:bg-dark-4 hover:opacity-90`:
-             'text-green-1'}
+                hover:bg-green-1 ${isActive? `bg-green-2 w-[85%] 
+              mx-auto rounded-lg hover:w-[100%]   hover:bg-green-2 hover:opacity-90`:
+             'text-green-4'}
             `}
             
           >
@@ -105,7 +105,7 @@ const Sidebar = () => {
         );
       };
   return (
-    <aside className={`${isExpanded? `w-[170px]`: `w-[80px]`} h-[calc(100vh-64px)]  fixed top-16 left-0 bg-dark-1
+    <aside className={`${isExpanded? `w-[170px]`: `w-[80px]`} h-[calc(100vh-64px)]  fixed top-16 left-0 bg-white
     py-3 flex flex-col items-center justify-between z-[1000000]`}
     onMouseLeave={()=>setIsExpanded(false)}
     >

@@ -73,7 +73,7 @@ const DrugOverview = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
-         bg-dark-1 text-green-1 border-none'>
+         bg-white text-green-4 border-none'>
         <div className="w-full flex justify-between">
           <div className="w-[70%]">
             <h3 className="text-xl font-medium">
@@ -146,8 +146,7 @@ const DrugOverview = ({
             </span>
             <span>
               <Input 
-                className="border-none 
-                bg-dark-3 rounded-md w-[150px] h-[35px] 
+                className="bg-green-3 rounded-md w-[150px] h-[35px] 
                 p-1 text-sm font-medium focus-visible:ring-0"
                 type="number"
                 min={1}
@@ -159,7 +158,7 @@ const DrugOverview = ({
           </div>
           <Textarea 
             className="w-full h-[100px] p-2 
-            rounded-lg bg-dark-3 border-none text-sm" 
+            rounded-lg bg-green-3 text-sm" 
             placeholder="Anything we need to know before 
             we assign the doses?"
             onChange={(e) => setValues({...values, note: e.target.value})}
