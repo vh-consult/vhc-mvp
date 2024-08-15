@@ -59,16 +59,12 @@ export async function getUser(clerkId: string) {
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerkId })
+    const user = await User.findOne({ clerkId }).populate("personalPhysician").populate("affiliateHospital")
     if (!user) throw new Error("User not found");
 
-    const userToObject = user.toObject()
-    delete userToObject.password
-
-    const userData = {...userToObject}
-    cookies().set("role", userData.userRole)
-    cookies().set("userId", userData._id)
-    return JSON.parse(JSON.stringify(userData));
+    cookies().set("role", user.userRole)
+    cookies().set("userId", user._id)
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
   }

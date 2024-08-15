@@ -95,8 +95,8 @@ const ConsultationRoom = () => {
 
         <DropdownMenu>
           <div className="flex items-center">
-            <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232d] px-4 
-            py-2 hover:bg-[#4c535b]  ">
+            <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-gray-100 px-4 
+            py-2 hover:bg-gray-200  ">
               <LayoutList size={20} className="text-green-4" />
             </DropdownMenuTrigger>
           </div>
@@ -117,17 +117,17 @@ const ConsultationRoom = () => {
         </DropdownMenu>
 
         <button onClick={() => setShowParticipants((prev) => !prev)}>
-          <div className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-[#4c535b]  ">
+          <div className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200  ">
             <Users size={20} className="text-green-4" />
           </div>
         </button>
         {
           role==="Doctor"? (
-            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
+            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200  ">
                 <FaStethoscope/>
             </button>
           ): (
-            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]  ">
+            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200 ">
               <BiComment/>
             </button>
           )

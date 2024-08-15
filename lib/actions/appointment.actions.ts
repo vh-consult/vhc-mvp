@@ -15,51 +15,36 @@ export interface BookingParams {
 }
 
 
-export async function newBooking(clerkId: string, formData?: BookingParams) {
+export async function newBooking(clerkId: string, formData: BookingParams) {
     try {
         await connectToDatabase()
         const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
-        
-        console.log(1)
-        
-        if (formData !== undefined) {
-            let host: any | undefined | null
-            console.log(2)
-            if (formData.host === "" && creator.personalPhysician !== undefined) {
-                console.log(3)
-                formData.host = creator.personalPhysician
-            } else if (formData.host !== "" && creator.personalPhysician === undefined) {
-                console.log(4)
-                creator.personalPhysician = formData.host
-                host.clients.push(creator._id)
-                await host.save()
-            }else{
-                console.log(5)
-                host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
-                if (!host) throw new Error("Host not found")
-            }
-
-        }
-        
-        if(formData === undefined){
-            console.log(5)
-            formData = {} 
+                
+        let host: any | undefined | null
+        if (formData.host === "" && creator.personalPhysician !== undefined) {
             formData.host = creator.personalPhysician
+        } else if (formData.host !== "" && creator.personalPhysician === undefined) {
+            creator.personalPhysician = formData.host
+            host.clients.push(creator._id)
+            await host.save()
+        }else{
+            host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
+            if (!host) throw new Error("Host not found")
         }
-        console.log(4)
-
+    
+        
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
+        
         appointment.save()
-        console.log(5)
+        console.log(appointment)
 
         creator.bookings.push(appointment._id)
         await creator.save()  
 
-        console.log(6)
-        return {message: "created", id: JSON.parse(JSON.stringify(appointment._id))}
+        return JSON.parse(JSON.stringify(appointment._id))
     } catch (error) {
         handleError(error)
     }

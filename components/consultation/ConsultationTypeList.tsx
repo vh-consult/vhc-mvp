@@ -73,11 +73,12 @@ const ConsultationTypeList = () => {
       }
       
       const newCall = await newBooking(user?.id, values)
-      if (newCall?.message === "created") {
-        const id = newCall.id;
+        const id = newCall;
         const call = client.call('default', id);
+        console.log(1)
         if (!call) throw new Error('Failed to create consultation session');
         const startsAt = values.date.toISOString() || new Date(Date.now()).toISOString();
+        console.log(2)
         const description = values.problem_statement || 'Emergency Consultation';
         await call.getOrCreate({
           data: {
@@ -87,18 +88,17 @@ const ConsultationTypeList = () => {
               host: hostName, 
               hostImage: dbUser?.photo,
               hostId: dbUser?._id 
-            },
-            members: dbUser?._id
+            }          
           },
         });
+        console.log(3)
         setCallDetail(call);
         if (!values.problem_statement) {
           router.push(`/consultation/room/${call.id}`);
         }
+        console.log(4)
         toast({ title: 'Consultation Created' });
-      }else {
-        toast({ title: 'Failed to create consultation session' });
-      }
+      
       setValues(initialValues)
     } catch (error) {
       console.error(error);
@@ -179,7 +179,7 @@ const ConsultationTypeList = () => {
             <Input 
               className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder='Type name...' 
-              defaultValue={dbUser?.personalPhysician}
+              defaultValue={''}
               onChange={(e)=>handleSearch(e.target.value)}
             />
             {
