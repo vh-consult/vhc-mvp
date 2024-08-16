@@ -27,7 +27,6 @@ const UserSchema = new Schema({
     orders: [{type: Schema.Types.ObjectId,ref: 'Order'}],
     messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
     cart: [{type: Schema.Types.ObjectId, ref: 'Drug'}],
-    bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}],
     affiliateHospital: {type: Schema.Types.ObjectId, ref: 'Company'},
     personalPhysician: {type: Schema.Types.ObjectId, ref: 'User'},
     history: [HistorySchema]
@@ -41,6 +40,7 @@ const DoctorSchema = new Schema({
   personalRoom: {type: String},
   clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
   consultationHistory: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
+  bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}],
 });
 
 const PatientSchema = new Schema({

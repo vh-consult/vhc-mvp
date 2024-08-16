@@ -7,22 +7,13 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { hostBookings } from '@/lib/actions/appointment.actions';
-import BookingCard from './BookingCard';
-import useDBUser from '@/hooks/useDBUser';
 
 const CallList = (
   { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
-  const {role, clerkId} = useDBUser()
-  useEffect (()=> {
-    const getBookings = async() => await hostBookings(clerkId!)
-    getBookings()
-  })
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-  const [bookings, setBookings] = useState<any>([])
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -122,20 +113,6 @@ const CallList = (
       ) : (
         <h1 className="text-2xl font-bold text-white">{noCallsMessage}</h1>
       )}
-      {
-        role === "Doctor" ? (
-          <div className="grid grid-cols-2">
-            {
-              bookings.length > 0 ? bookings.map((appointment:any, index:number) => (
-                <BookingCard 
-                  key={index}
-                  appointment={appointment}
-                />
-              )): ''
-            }
-          </div>
-        ): ''
-      }
     </div>
   );
 };

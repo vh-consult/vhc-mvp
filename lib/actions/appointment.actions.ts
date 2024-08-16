@@ -25,23 +25,19 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         if (formData.host === "" && creator.personalPhysician !== undefined) {
             formData.host = creator.personalPhysician
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
+            host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
+            if (!host) throw new Error("Host not found")
             creator.personalPhysician = formData.host
             host.clients.push(creator._id)
             await host.save()
-        }else{
-            host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
-            if (!host) throw new Error("Host not found")
-        }
-    
+        }    
         
         const appointment = await Booking.create(formData)
         appointment.patient = creator._id
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
-        
         appointment.save()
-        console.log(appointment)
 
-        creator.bookings.push(appointment._id)
+        host.bookings.push(appointment._id)
         await creator.save()  
 
         return JSON.parse(JSON.stringify(appointment._id))
@@ -117,11 +113,11 @@ export async function searchHost(query: string) {
     }
 }
 
-export async function fetchBookings(clerkId:string) {
+export async function fetchDoctorBookings(clerkId:string) {
     try {
         await connectToDatabase()
         const user = await User.findOne(
-            {clerkId }
+            {clerkId , uerRole: "Doctor"}
         ).populate("bookings")
         if (!user) throw new Error("User not found")
         
@@ -132,31 +128,20 @@ export async function fetchBookings(clerkId:string) {
     }
 }
 
-export async function hostBookings(clerkId:string) {
+export async function fetchHospitalBookings (hospitalId: string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId})
-        if(!user) throw new Error("User not found")
-        const bookings = await Booking.find({host: user._id}).populate("host")
-
+        const hospital = await Company.findOne(
+            {_id: hospitalId , companyType: "Hospital"}
+        ).populate("bookings")
+        if (!hospital) throw new Error("Hospital not found")
+        
+        const bookings = hospital.bookings
         return JSON.parse(JSON.stringify(bookings))
     } catch (error) {
-        handleError(error)
+      handleError(error)  
     }
 }
-
-// export async function appendConsultationLink(bookingId: string, link:string) {
-//     try {
-//         await connectToDatabase()
-//         const booking = await Booking.findById(bookingId)
-//         if(!booking) throw new Error("Booking not found")
-        
-//         await booking.save()
-//         return {message: "Link added"}
-//     } catch (error) {
-//         handleError(error)
-//     }
-// }
 
 export async function getMessages(clerkId: string) {
     try {
