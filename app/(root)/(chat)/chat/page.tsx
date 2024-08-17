@@ -65,7 +65,7 @@ const ChatPage = () => {
       name: "Dr Ries Monroe"
     })
   return(
-    <Chat client={chatClient} theme='messaging dark'>
+    <Chat client={chatClient} theme='messaging light'>
       <ChannelList Preview={CustomChannelPreview}/>
       <Channel >
       <Window>

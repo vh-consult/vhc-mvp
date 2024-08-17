@@ -65,11 +65,11 @@ const MessageModal = ({
             <div className='w-full relative '>
               <Textarea 
                 placeholder='Type your reply here...'
-                className='w-full h-14 border-2 border-dark-4 pr-8'
+                className='w-full h-14 border-2 border-gray-400 pr-8'
                 onChange={(e) => setResponse(e.target.value)}
               />
               <span 
-                className="h-full w-8 flex flex-center bg-dark-4  absolute bottom-0 right-0"
+                className="h-full w-8 flex flex-center bg-gray-400  absolute bottom-0 right-0"
                 onClick={() => sendReply('')}
               >
                 <BiSend/>
