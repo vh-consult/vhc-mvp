@@ -170,7 +170,7 @@ const UserHistoryPage = async () => {
   const history = await fetchUserHistory(user?.id as string)
   return (
     <div>
-    <div className='w-full flex  items-center px-6 sticky top-[64px]  h-[70px] mb-2 bg-dark-1 rounded-lg'>
+    <div className='w-full flex  items-center px-6 sticky top-[64px]  h-[70px] mb-2 bg-white rounded-lg'>
       {
         historyHeadbar.map((highlight, index) => {
             return(

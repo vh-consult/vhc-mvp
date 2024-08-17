@@ -76,8 +76,8 @@ const records = [
 
 const HealthRecordPage = () => {
   return (
-    <>
-      <div className="w-full text-sm h-[30px] sticky left-[120px] top-[64px] z-50 text-center text-green-1 font-medium bg-dark-1 flex justify-between items-center">
+    <main className='shadow-md'>
+      <div className="w-full text-sm h-[30px] sticky left-[120px] top-[64px] z-30 text-center text-green-4 font-medium bg-white flex justify-between items-center">
         <span className="w-1/12 ">Date</span>
         <span className="w-2/12 ">Host Details</span>
         <span className="w-2/12 ">Symptoms</span>
@@ -105,7 +105,7 @@ const HealthRecordPage = () => {
           })
         }
       </div>
-    </>
+    </main>
   )
 }
 

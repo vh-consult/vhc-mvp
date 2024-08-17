@@ -38,7 +38,9 @@ const ConsultationCard = ({
   return (
     <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-white px-5 py-8 xl:max-w-[568px]">
       <article className="flex flex-col gap-5">
-        <Image src={icon} alt="upcoming" width={28} height={28} />
+        <span className="w-[40px] h-[40px] flex flex-center rounded-md bg-gray-400">
+          <Image src={icon} alt="upcoming" width={28} height={28}  />
+        </span>
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">{title}</h1>
@@ -53,15 +55,15 @@ const ConsultationCard = ({
               alt="attendees"
               width={40}
               height={40}
-              className={cn("rounded-full w-[40px] h-[40px] object-cover")}
+              className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
             />
-            <span className="text-lg font-medium text-green-1">
+            <span className="text-lg font-medium text-green-4">
               {hostName}
             </span>
         </div>
         {!isPreviousConsultation && (
           <div className="flex gap-2">
-            <Button onClick={handleClick} className="rounded bg-blue-1 px-6">
+            <Button onClick={handleClick} className="rounded bg-blue-1 text-green-1 px-6">
               {buttonIcon1 && (
                 <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}

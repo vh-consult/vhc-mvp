@@ -62,8 +62,8 @@ export async function getUser(clerkId: string) {
     const user = await User.findOne({ clerkId }).populate("personalPhysician").populate("affiliateHospital")
     if (!user) throw new Error("User not found");
 
-    cookies().set("role", user.userRole)
-    cookies().set("userId", user._id)
+    // cookies().set("role", user.userRole)
+    // cookies().set("userId", user._id)
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);

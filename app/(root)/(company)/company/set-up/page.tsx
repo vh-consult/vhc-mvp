@@ -3,7 +3,7 @@ import React from 'react'
 
 const CompanySetUpPage = () => {
   return (
-    <div className='bg-dark-2 flex flex-center w-full h-screen text-green-1'>
+    <div className='bg-green-3 flex flex-center w-full min-h-screen text-green-4'>
       <RegisterCompany/>
     </div>
   )

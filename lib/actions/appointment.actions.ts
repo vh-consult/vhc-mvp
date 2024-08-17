@@ -21,28 +21,33 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         const creator = await User.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
                 
-        let host: any | undefined | null
         if (formData.host === "" && creator.personalPhysician !== undefined) {
             formData.host = creator.personalPhysician
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
-            host = await User.findOne({_id: formData?.host}) || await Company.findOne({_id: formData?.host}) 
-            if (!host) throw new Error("Host not found")
             creator.personalPhysician = formData.host
+        } 
+        const host = await User.findOne({_id: formData.host}) || await Company.findOne({_id: formData.host}) 
+        if (!host) throw new Error("Host not found")
+        if(!host.clients.includes(creator._id)){
             host.clients.push(creator._id)
             await host.save()
-        }    
+        }
         
-        const appointment = await Booking.create(formData)
-        appointment.patient = creator._id
+        const appointment = await Booking.create({
+            ...formData, 
+            patient:creator._id,
+        })
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
         appointment.save()
+        console.log(host)
 
         host.bookings.push(appointment._id)
-        await creator.save()  
-
+        await host.save()  
+        console.log(appointment._id)
         return JSON.parse(JSON.stringify(appointment._id))
     } catch (error) {
-        handleError(error)
+        // handleError(error)
+        console.error(error)
     }
 }
 

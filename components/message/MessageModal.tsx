@@ -38,7 +38,7 @@ const MessageModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
     <DialogContent className="flex w-full max-w-[520px] flex-col 
-    gap-4 border-none bg-dark-1 px-6 py-9 text-green-1">
+    gap-4 border-none bg-white px-6 py-9 text-green-4">
       <div className="flex flex-row w-full items-center">
         <Image 
           src={imageUrl}
@@ -55,7 +55,7 @@ const MessageModal = ({
           </div>
         </div>
       </div>
-      <span className="w-full h-[2px] bg-dark-3 mt-2"></span>
+      <span className="w-full h-[2px] bg-gray-400 mt-2"></span>
       <p className='my-2'>
         {message}
       </p>

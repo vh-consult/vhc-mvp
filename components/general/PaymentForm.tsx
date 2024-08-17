@@ -34,7 +34,7 @@ const PaymentForm = ({
     amount,
 }: PaymentFormProps) => {
   return (
-    <div className='p-3 rounded-lg w-full mb-3 h-[325px] bg-dark-1'>
+    <div className='p-3 rounded-lg w-full mb-3 h-[325px] bg-white'>
         <h2 className='w-full text-lg font-medium mb-2'>Select Your Preferred Payment Method</h2>
         {
             paymentMethods.map((method, index) => {
@@ -65,7 +65,7 @@ const PaymentForm = ({
         <div className='w-full mt-4'>
             <Input 
                 type='text' 
-                className='w-full bg-dark-3 border-none mb-2' 
+                className='w-full bg-green-1 mb-2' 
                 placeholder='Enter phone number'
             />
         </div>
@@ -81,7 +81,7 @@ const PaymentForm = ({
         </div>
         <Button 
             className={`bg-green-2 w-full h-[35px] rounded-md text-sm 
-            font-medium text-white hover:shadow-md hover:opacity-90`}>
+            font-medium text-green-1 hover:shadow-md hover:opacity-90`}>
                 Pay now!
         </Button>
     </div>

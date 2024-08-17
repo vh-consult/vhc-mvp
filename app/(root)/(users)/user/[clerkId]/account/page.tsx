@@ -6,7 +6,6 @@ import React from 'react'
 const Account = async () => {
   const user = await currentUser()
   const fetchedUser = await getUser(user?.id as string)
-  console.log(fetchedUser)
   const cardsContent = {
     personalDetails: {
       header: 'Personal Details',
@@ -46,7 +45,7 @@ const Account = async () => {
       },
       {
         title: 'personal physician',
-        body: fetchedUser?.personalDoctor
+        body: fetchedUser?.personalPhysician
       },
       {
         title: 'insurance subscription',
@@ -104,7 +103,7 @@ const Account = async () => {
 
   return (
     <div className='w-full'>
-      <div className="w-full h-[245px] rounded-lg p-3 border border-dark-3 ">
+      <div className="w-full h-[245px] rounded-lg p-3 border border-gray-400 ">
         <h2 className="text-lg capitalize font-medium">
           {
             cardsContent.personalDetails.header
@@ -117,7 +116,7 @@ const Account = async () => {
             src={fetchedUser?.photo} 
             alt="" 
             className='w-[185px] h-[185px] object-cover border
-            border-dark-3 rounded-full'
+            border-gray-400 rounded-full'
             />
           <div className="w-[calc(100%-195px)] grid grid-cols-4 grid-rows-2 gap-8">
             {
@@ -142,7 +141,7 @@ const Account = async () => {
       </div>
       <div className="w-full grid grid-cols-3 gap-x-4 mt-4">
 
-        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.healthcare.header
@@ -169,7 +168,7 @@ const Account = async () => {
           </div>
         </div>
 
-        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.contact.header
@@ -195,7 +194,7 @@ const Account = async () => {
             }
           </div>
         </div>
-        <div className=" rounded-lg p-2 h-[280px] border border-dark-3">
+        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.address.header

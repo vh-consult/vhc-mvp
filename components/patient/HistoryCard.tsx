@@ -47,7 +47,7 @@ const HistoryCard = ({
       usedAt === 'settings' ? (
         <div 
           className={`
-            ${className} bg-dark-1
+            ${className} bg-gray-50
             `}>
           <h3>{activity}</h3>
           <p>

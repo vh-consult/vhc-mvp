@@ -14,7 +14,7 @@ interface BlogPostSnippetProps {
 
 const BlogPostSnippet = ({authorImg, author, title, datePublished, comments}: BlogPostSnippetProps) => {
   return (
-    <div className='flex my-2 hover:bg-dark-1 p-2 hover:cursor-pointer'>
+    <div className='flex my-2 hover:bg-gray-100 p-2 hover:cursor-pointer'>
       <Image
         src={authorImg}
         alt={author+' image'}

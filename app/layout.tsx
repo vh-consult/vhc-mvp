@@ -34,17 +34,18 @@ export default function RootLayout({
           layout: {
             socialButtonsVariant: "iconButton",
             logoImageUrl: "/logo.svg",
-
+            
           },
           variables: {
-            colorText: "#fff",
+            colorText: "#041F20",
             colorPrimary: "#00AEA8",
-            colorBackground: "#1C1F2E",
-            colorInputBackground: "#252A41",
-            colorInputText: "#fff",
+            colorBackground: "#f5f5f5",
+            colorInputBackground: "#f4ffff",
+            colorInputText: "#041f20",
             colorTextOnPrimaryBackground: "#fff",
-            colorNeutral: "#f5f5f5"
+            colorTextSecondary: "#041F20",
           },
+          
         }}
       >
           <body className={`${inter.className} `}>

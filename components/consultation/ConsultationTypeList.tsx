@@ -44,7 +44,7 @@ const ConsultationTypeList = () => {
   const [hostList, setHostList] = useState<any[]>([])
   const [hostName, setHostName] = useState('')
   const {dbUser} = useDBUser()
-
+  const [hostImage, setHostImage] = useState('')
   useEffect(() => {
     console.log('Client:', client);
     console.log('User:', user);
@@ -62,6 +62,7 @@ const ConsultationTypeList = () => {
   const handleHostSelection = (host: any) => {
     values.host = host.id
     setHostName(host.name) 
+    setHostImage(host.photo)
     setHostList([])
   }
   const createConsultation = async () => {
@@ -86,20 +87,20 @@ const ConsultationTypeList = () => {
             custom: { 
               description, 
               host: hostName, 
-              hostImage: dbUser?.photo,
+              hostImage: hostImage,
               hostId: dbUser?._id 
             }          
           },
         });
-        console.log(3)
         setCallDetail(call);
         if (!values.problem_statement) {
           router.push(`/consultation/room/${call.id}`);
         }
-        console.log(4)
         toast({ title: 'Consultation Created' });
-      
       setValues(initialValues)
+      setTimeout(() => {
+        setCallDetail(null)
+      }, 5000);
     } catch (error) {
       console.error(error);
       toast({ title: 'Failed to create Consultation' });

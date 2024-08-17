@@ -108,8 +108,8 @@ const RegisterCompany = () => {
   };
 
   return (
-    <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-    <Card className={`relative w-[600px] border-none bg-dark-1 text-green-1`}>
+    <div className='h-full w-full py-5 flex flex-center'>
+    <Card className={`relative w-[600px] border-none bg-white text-green-4`}>
       <CardHeader>
         <CardTitle>Company Registration Form</CardTitle>
         <CardDescription>Fill the forms to register your company</CardDescription>
@@ -138,7 +138,7 @@ const RegisterCompany = () => {
             type='text'
             name='name'
             onChange={(e) => setValues({ ...values, name: e.target.value })}
-            className='border-none bg-dark-3 text-green-1'
+            className='bg-green-1 text-green-1'
           />
             {errors.name && 
               <span className="text-red-500">
@@ -154,7 +154,7 @@ const RegisterCompany = () => {
             type='text'
             name='location'
             onChange={(e) => setValues({ ...values, location: e.target.value })}
-            className='border-none bg-dark-3 text-green-1'
+            className='bg-green-1 text-green-1'
           />
           {errors.location && 
             <span className="text-red-500">
@@ -169,7 +169,7 @@ const RegisterCompany = () => {
           <Textarea
             placeholder=''
             name='description'
-            className='border-none bg-dark-3 text-green-1'
+            className=' bg-green-1 text-green-1'
             onChange={(e) => setValues({ ...values, description: e.target.value })}
           />
           {errors.description && 
@@ -209,7 +209,7 @@ const RegisterCompany = () => {
         <CardFooter className="flex justify-between">
           <Button
             onClick={handleSubmit}
-            className='w-full bg-green-2'
+            className='w-full bg-green-2 text-green-1'
           >
           {loading? <Loader />: 'Register Company'}
           </Button>

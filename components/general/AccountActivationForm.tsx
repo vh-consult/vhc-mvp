@@ -99,8 +99,8 @@ const ActivateAccount = () => {
   };
 
   return (
-    <div className='bg-dark-2 min-h-screen w-full py-5 flex flex-center'>
-      <Card className={`relative w-[400px] border-none bg-dark-1 text-green-1`}>
+    <div className='bg-green-3 min-h-screen w-full py-5 flex flex-center'>
+      <Card className={`relative w-[400px] border-none bg-white text-green-4`}>
         <CardHeader>
           <CardTitle>Account Activation</CardTitle>
           <CardDescription>Fill the forms to activate your account</CardDescription>
@@ -108,7 +108,7 @@ const ActivateAccount = () => {
         <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex w-full flex-col gap-2.5">
-                <Label className="leading-[22.4px] text-green-1">
+                <Label className="leading-[22.4px] text-green-4">
                   Select Date and Time
                 </Label>
                 <ReactDatePicker
@@ -118,17 +118,17 @@ const ActivateAccount = () => {
                   selected={values.dateOfBirth}
                   onChange={(date) => setValues({ ...values, dateOfBirth: date! })}
                   dateFormat="MMMM d, yyyy"
-                  className="w-full rounded bg-dark-3 p-2 focus:outline-none"
+                  className="w-full rounded bg-green-1 p-2 focus:outline-none"
                 />
                 {errors.dateOfBirth && <span className="text-red-500">{errors.dateOfBirth}</span>}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="country">Country</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, country: value })}>
-                  <SelectTrigger id="country">
-                    <SelectValue placeholder="Select" />
+                  <SelectTrigger id="country" className='bg-green-1'> 
+                    <SelectValue placeholder="Select"  />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
                     <SelectItem value="ghana">Ghana</SelectItem>
                     <SelectItem value="dubai">Dubai</SelectItem>
                     <SelectItem value="usa">USA</SelectItem>
@@ -143,7 +143,7 @@ const ActivateAccount = () => {
                 <Input
                   required
                   id='location'
-                  className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
                   onChange={(e) => setValues({ ...values, location: e.target.value })}
                 />
                 {errors.location && <span className="text-red-500">{errors.location}</span>}
@@ -151,10 +151,10 @@ const ActivateAccount = () => {
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="gender">Gender</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, gender: value })}>
-                  <SelectTrigger id="gender">
+                  <SelectTrigger id="gender" className='bg-green-1'>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
                     <SelectItem value="male">Male</SelectItem>
                     <SelectItem value="female">Female</SelectItem>
                   </SelectContent>
@@ -164,10 +164,10 @@ const ActivateAccount = () => {
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="role">What are you?</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, role: value })}>
-                  <SelectTrigger id="role">
+                  <SelectTrigger id="role" className='bg-green-1'>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
-                  <SelectContent position="popper" className='bg-dark-3 text-green-1'>
+                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
                     <SelectItem value="patient">Patient</SelectItem>
                     <SelectItem value="doctor">Doctor</SelectItem>
                     <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem>
@@ -181,7 +181,7 @@ const ActivateAccount = () => {
         <CardFooter className="flex justify-between">
           <Button
             onClick={handleClick}
-            className='w-full bg-green-2'
+            className='w-full bg-green-2 text-green-1'
           >
             {loading ? <Loader /> : `Activate`}
           </Button>
