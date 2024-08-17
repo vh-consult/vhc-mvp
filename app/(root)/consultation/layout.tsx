@@ -25,6 +25,7 @@ const VideoLayout = ({children}: {children: React.ReactNode}) => {
   ];
   return (
     <StreamVideoProvider>
+      
         <Header
           navigations={
             consultationSidebarLinks

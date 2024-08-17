@@ -15,7 +15,7 @@
 }
 
 .str-video__speaker-layout__wrapper {
-  max-height: 900px;
+  max-height: auto;
 }
 
 .str-video__call-controls__button{
@@ -44,7 +44,7 @@
 }
 
 .str-video__call-controls__button {
-  height: 40px;
+  /* padding: 40px; */
   background-color: inherit;
 }
 

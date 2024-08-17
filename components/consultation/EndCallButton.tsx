@@ -27,11 +27,11 @@ const EndCallButton = () => {
 
   const endCall = async () => {
     await call.endCall();
-    router.push('/');
+    router.push('/consultation/home');
   };
 
   return (
-    <Button onClick={endCall} className="bg-red-500">
+    <Button onClick={endCall} className="bg-red-500 text-white">
       End call for everyone
     </Button>
   );

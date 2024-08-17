@@ -28,7 +28,7 @@ import useDBUser from '@/hooks/useDBUser';
 import { BiComment } from 'react-icons/bi';
 import ConsultationComment from './ConsultationComment';
 
-type CallLayoutType = 'grid' | 'Top-down' ;
+type CallLayoutType = 'grid' | 'left' ;
 
 const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
   const searchParams = useSearchParams();
@@ -43,25 +43,27 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
   const [showComment, setShowComment] = useState<boolean>(false)
 
   
-  if (callingState !== CallingState.JOINED) return <Loader />;
+  if (callingState !== CallingState.JOINED) return (<span className='bg-green-2 w-14 h-14 rounded-lg shadow-lg'>
+    <Loader/>
+  </span>);
 
   const CallLayout = () => {
     switch (layout) {
       case 'grid':
-        return <PaginatedGridLayout />;
+        return <PaginatedGridLayout groupSize={2} />;
       default:
-        return <SpeakerLayout participantsBarPosition="bottom" />;
+        return <SpeakerLayout participantsBarPosition="left" />;
     }
   };
 
   return (
     <section className="relative h-full w-full overflow-hidden pt-2 text-green-4">
       <div className="relative flex size-full items-center justify-center">
-        <div className=" flex size-full max-w-[1000px] items-center">
+        <div className=" flex size-full h-[500px] bg-dark-2 max-w-[1000px] items-center">
           <CallLayout /> 
         </div>
         <div
-          className={cn('h-[calc(100vh-86px)] hidden ml-2', {
+          className={cn('h-full hidden ml-2', {
             'show-block': showParticipants || showComment || showConsultationForm,
           })} 
         >
@@ -90,14 +92,14 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
       </div>
 
       {/* video layout and call controls */}
-      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
+      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 ">
         <CallControls onLeave={() => router.push(`/consultation/home`)} />
 
         <DropdownMenu>
           <div className="flex items-center">
-            <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-gray-100 px-4 
-            py-2 hover:bg-gray-200  ">
-              <LayoutList size={20} className="text-green-4" />
+            <DropdownMenuTrigger className="cursor-pointer bg-dark-1 p-2 rounded-full
+             hover:opacity-85  ">
+              <LayoutList size={20} className="text-green-1" />
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent className=" bg-white text-green-4">
@@ -117,17 +119,17 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
         </DropdownMenu>
 
         <button onClick={() => setShowParticipants((prev) => !prev)}>
-          <div className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200  ">
-            <Users size={20} className="text-green-4" />
+          <div className=" cursor-pointer rounded-full bg-dark-1 p-2 hover:opacity-85  ">
+            <Users size={20} className="text-green-1" />
           </div>
         </button>
         {
           role==="Doctor"? (
-            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200  ">
+            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer text-green-1 rounded-full bg-dark-1 p-2 hover:opacity-85  ">
                 <FaStethoscope/>
             </button>
           ): (
-            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer rounded-2xl bg-gray-100 px-4 py-2 hover:bg-gray-200 ">
+            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer text-green-1 rounded-full bg-dark-1 p-2 hover:opacity-85 ">
               <BiComment/>
             </button>
           )
