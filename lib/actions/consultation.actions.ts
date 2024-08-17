@@ -22,19 +22,17 @@ interface ConsultationParams {
 }
 
 export async function postConsultationForm(
-    doctorId:string, 
     formData: ConsultationParams, 
-    patientId: string,
-    bookingId?: string
+    bookingId: string,
+    doctorId: string
 ) {
     try {
         await connectToDatabase()
 
         const booking = await Booking.findOne({
             _id: bookingId, 
-            patient: patientId, 
-            doctor: doctorId
-        })
+            host: doctorId
+        }).populate("patient").populate("host")
         if(!booking) throw new Error("No booking found")
 
         const doctor = await User.findOne({
@@ -42,23 +40,22 @@ export async function postConsultationForm(
             userRole: "Doctor"
         })
         if (!doctor) throw new Error("Doctor not found")
-        
-        const patient = await User.findById(patientId)
-        if (!patient) throw new Error("Patient not found")
+        const patient = booking.patient
 
         const bookingObject = booking.toObject();
         delete bookingObject._id
 
+
         const newConsultationSession = await Consultation.create({...bookingObject, ...formData})
         patient.healthRecord.push(newConsultationSession._id)
         await patient.save()
-
+        console.log(patient.healthRecord)
+        
         doctor.consultationHistory.push(newConsultationSession._id)
         await doctor.save()
         
         await Booking.findOneAndDelete({
             _id: bookingId, 
-            patient: patientId, 
             doctor: doctorId
         })
  

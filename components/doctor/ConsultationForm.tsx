@@ -8,7 +8,7 @@ import PrescriptionForm from '../pharmacy/PrescriptionForm'
 import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 
-const ConsultationForm = () => {
+const ConsultationForm = ({bookingId}: {bookingId:string}) => {
   const initialValues = {
     complaint: '',
     diagnosis: '',
@@ -25,8 +25,7 @@ const ConsultationForm = () => {
   const addConsultationPost = async () => {
       try{
         setLoading(true)
-        //not the correct implementation. I need to pass in the client's id somehow
-        const message = await postConsultationForm(user?.id as string, values, user?.id!)
+        const message = await postConsultationForm(values,  bookingId, user?.id!)
       }finally{
         setLoading(false)
       }

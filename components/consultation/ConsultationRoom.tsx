@@ -30,7 +30,7 @@ import ConsultationComment from './ConsultationComment';
 
 type CallLayoutType = 'grid' | 'Top-down' ;
 
-const ConsultationRoom = () => {
+const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
@@ -82,7 +82,7 @@ const ConsultationRoom = () => {
                 'show-block': showConsultationForm,
                 })} 
               >          
-                <ConsultationForm/>
+                <ConsultationForm bookingId={bookingId}/>
               </div>  
             ): ``
           }

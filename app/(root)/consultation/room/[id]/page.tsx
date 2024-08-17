@@ -33,11 +33,11 @@ const ConsultationPage = () => {
   return (
     <main className="h-full w-full">
       <StreamCall call={call}>
-        <StreamTheme>
+        <StreamTheme className='text-green-4 bg-green-3'>
         {!isSetupComplete ? (
           <ConsultationSetup setIsSetupComplete={setIsSetupComplete} />
         ) : (
-          <ConsultationRoom />
+          <ConsultationRoom bookingId={id[0]} />
         )}
         </StreamTheme>
       </StreamCall>

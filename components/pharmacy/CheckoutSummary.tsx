@@ -13,7 +13,7 @@ const CheckoutSummary = ({subtotalPrice, shippingFee, tax, totalCost}: CheckoutS
       <h2 className='text-xl font-semibold'>
         Checkout Summary
       </h2>
-      <div className="w-full flex flex-col flex-center gap-y-2 h-[60%] border-b border-sky-1">
+      <div className="w-full flex flex-col flex-center gap-y-2 h-[60%] border-b border-blue-50">
         <p className='w-full flex flex-between'>
             Subtotal <b>{subtotalPrice}</b>
         </p>
