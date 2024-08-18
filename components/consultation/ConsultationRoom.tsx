@@ -59,7 +59,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
   return (
     <section className="relative h-full w-full overflow-hidden pt-2 text-green-4">
       <div className="relative flex size-full items-center justify-center">
-        <div className=" flex size-full h-[500px] bg-dark-2 max-w-[1000px] items-center">
+        <div className=" flex size-full h-[500px] max-w-[1000px] items-center">
           <CallLayout /> 
         </div>
         <div

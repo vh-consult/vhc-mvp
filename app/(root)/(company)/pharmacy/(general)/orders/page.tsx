@@ -1,34 +1,57 @@
 'use client'
 import List from '@/components/general/List'
 import { Button } from '@/components/ui/button'
+import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
+import useDBUser from '@/hooks/useDBUser'
+import { OrderCard } from '@/components/pharmacy/OrderList'
 
 const OrdersPage = () => {
   const [isClicked, setIsClicked] = useState<boolean>()
-  const filters = [
-    {
-      displayText: 'All',
-      route: '/api/order',
-    },
-    {
-      displayText: 'Pending',
-      route: '/api/order',
-    },
-    {
-      displayText: 'Delivered',
-      route: '/api/order',
-    }, 
-    {
-      displayText: 'Cancelled',
-      route: '/api/order',
+  const {clerkId} = useDBUser()
+  const [allOrders, setAllOrders] = useState([])
+  const [displayOrders, setDisplayOrders] = useState([])
+  const filters = ['All',  'Pending',  'Delivered', 'Canceled'  ]
+  const filterOrders = async (filter: string) => {
+    switch (filter) {
+      case "all":
+        setDisplayOrders(allOrders)
+        break;
+      case "pending":
+        allOrders.forEach((order:any) => {
+          const pendingOrders:any = []
+          if(order.status === "pending") {
+            pendingOrders.push(order)
+          }
+          setDisplayOrders(pendingOrders) 
+        })
+        break;
+      case "delivered":
+        allOrders.forEach((order:any) => {
+          const deliveredOrders:any = []
+          if(order.status === "delivered") {
+            deliveredOrders.push(order)
+          }
+          setDisplayOrders(deliveredOrders) 
+        })
+        break;
+      case "canceled":
+        allOrders.forEach((order:any) => {
+          const canceledOrders:any = []
+          if(order.status === "canceled") {
+            canceledOrders.push(order)
+          }
+          setDisplayOrders(canceledOrders)
+        })
+        break;
+      default:
+        break;
     }
-  ]
-  const filterOrders = async (route: string) => {
-
   }
   useEffect(()=>{
     const fetchOrders = async () => {
-  
+      const orders = await fetchUserOrders(clerkId)
+      setAllOrders(orders)
     }
     fetchOrders()
 
@@ -41,20 +64,29 @@ const OrdersPage = () => {
         </h2>
         <div className= "">
           {
-            filters.map(filter => (
+            filters.map((filter:string, index:number) => (
               <Button 
-              key={filter.route}
-                onClick={()=>filterOrders(filter.route)}
+                key={index}
+                onClick={()=>filterOrders(filter.toLowerCase())}
                 className={`${isClicked? 'bg-blue-1 text-green-1': 'border-2 '} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
               >
-                {filter.displayText}
+                {filter}
               </Button>
             ))
           }
         </div>
       </div>
-      <div className="">
-
+      <div className="grid grid-cols-2">
+        {
+          displayOrders.map((order:any, index:number) => (
+            <OrderCard 
+              key={index}
+              buyerName={order.buyerName}
+              imageUrl={''}
+              items={order.items}
+            />
+          ))
+        }
       </div>
     </main>
   )

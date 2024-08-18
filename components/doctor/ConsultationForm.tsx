@@ -16,12 +16,11 @@ const ConsultationForm = ({bookingId}: {bookingId:string}) => {
     prescription: [],
   };
   const [values, setValues] = useState(initialValues);
+  const [prescribedDrugs, setPrescribedDrugs] = useState(initialValues.prescription)
   const [loading, setLoading] = useState<boolean>(false)
   const [showPrescriptionForm, setShowPrescriptionForm] = useState<boolean>(false)
   const {user} = useUser()
-  const openPrescriptionForm = () => {
 
-  }
   const addConsultationPost = async () => {
       try{
         setLoading(true)
@@ -31,7 +30,8 @@ const ConsultationForm = ({bookingId}: {bookingId:string}) => {
       }
   }
   return(
-  <form className="w-[325px] bg-white p-3 text-green-4 rounded-lg shadow-sm border-none">
+    <>
+  <div className="w-[325px] bg-white p-3 text-green-4 rounded-lg shadow-sm border-none">
     <h2 className="font-medium text-lg mb-3">Consultation Form</h2>
     <Textarea 
         placeholder={`Enter complaint here`}
@@ -48,16 +48,23 @@ const ConsultationForm = ({bookingId}: {bookingId:string}) => {
         className="my-2 w-full bg-green-1 h-[80px]"
         onChange={(e) => setValues({ ...values, diagnosis: e.target.value })}
     />
-    <Button onClick={openPrescriptionForm}>Add Prescription <BiPlus/> </Button>
-    {
-      showPrescriptionForm ? (<PrescriptionForm/>) : ''
-    }
+    <Button onClick={()=>setShowPrescriptionForm(true)}>Add Prescription <BiPlus/> </Button>
     <Button className='w-full mt-3 rounded-md 
     capitalize hover:shadow-md bg-green-2 text-green-1 
     font-medium text-sm ' onClick={addConsultationPost}>
         {loading? <Loader/> : `Upload form`}
     </Button>
-  </form>
+  </div>
+      {
+        showPrescriptionForm === true ? (
+          <PrescriptionForm 
+            isOpen={showPrescriptionForm} 
+            onClose={()=>setShowPrescriptionForm(false)}
+            setPrescribedDrugs={setPrescribedDrugs}
+          />
+        ) : ''
+      }
+      </>
   )
 }
 

@@ -4,14 +4,15 @@ import Image from 'next/image'
 
 interface OrderCardProps {
   imageUrl: string;
-  buyerName: string;
+  buyerName?: string;
+  shopName?: string;
   items: any[];
-  hasPaid: boolean;
-  deliverySatus: string
+  hasPaid?: boolean;
+  deliveryStatus?: string
 }
 
-const OrderCard = (
-  {buyerName, hasPaid, deliverySatus, items, imageUrl}: 
+export const OrderCard = (
+  {buyerName, hasPaid, deliveryStatus, shopName, items, imageUrl}: 
   OrderCardProps
 ) => {
     return (
@@ -26,7 +27,12 @@ const OrderCard = (
           />
         </div>
         <div className="flex flex-col ml-2 w-[calc(100%-90px)] ">
-          <h1 className="text-lg font-medium">Ordered by: {buyerName}</h1>
+          {
+            buyerName && <h1 className="text-lg font-medium">Ordered by: {buyerName}</h1>
+          }
+          {
+            shopName && <h1 className="text-lg font-medium">Ordered at: {shopName}</h1>
+          }
           <div className="flex flex-col my-1 ">
             <span className="text-sm font-medium leading-none">
               Items:
@@ -42,16 +48,24 @@ const OrderCard = (
             </p>
           </div>
           <p className="flex">
-            <div className='flex flex-center mr-6'>
-              <span className={`w-3 h-3 ${hasPaid? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
-              <span className="text-sm ml-1">{hasPaid? 'Paid': 'Pending'}</span>
-            </div>
-            <div className='flex flex-center'>
-              <span className={`w-3 h-3 ${deliverySatus === "delivered"? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
-              <span className="text-sm ml-1">
-                {deliverySatus === "delivered"? 'Delivered': 'Not delivered'}
-              </span>
-            </div>
+            {
+              hasPaid && (
+              <div className='flex flex-center mr-6'>
+                <span className={`w-3 h-3 ${hasPaid? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
+                <span className="text-sm ml-1">{hasPaid? 'Paid': 'Pending'}</span>
+              </div>
+              )
+            }
+            {
+              deliveryStatus && (
+                <div className='flex flex-center'>
+                  <span className={`w-3 h-3 ${deliveryStatus === "delivered"? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
+                  <span className="text-sm ml-1">
+                    {deliveryStatus === "delivered"? 'Delivered': 'Not delivered'}
+                  </span>
+                </div>
+              )
+            }
           </p>
         </div>
       </div>
@@ -67,7 +81,7 @@ const OrderList = async ({shopId}: {shopId: string}) => {
           <OrderCard 
             key={index}
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
-            deliverySatus={order.status}
+            deliveryStatus={order.status}
             hasPaid={order.payment_status === "Paid"? true : false }
             imageUrl={'/images/drug 1.jpg'}
             items={["para"]}

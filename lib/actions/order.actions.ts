@@ -140,10 +140,30 @@ export async function retrieveShopOrders(shopId:string) {
             ]
         })
         if (!shop) throw new Error("Shop not found")
-        const orders = shop.orders
-        return JSON.parse(JSON.stringify(orders))
+        const orders = shop.orders.toObject()
+        const items = shop.orders.items
+
+        delete orders.items
+        return JSON.parse(JSON.stringify({...orders, ...items}))
     } catch (error) {
         handleError(error)
     }
 }
 
+export async function fetchUserOrders(clerkId:string) {
+    try {
+        await connectToDatabase()
+        const user = await User.findOne({clerkId}).populate({
+            path: "orders", 
+            populate: [
+                {path: "shop", select: "name location"},
+            ]
+        })
+        if(!user) throw new Error("User not found")
+
+        const orders = user.orders
+        return JSON.parse(JSON.stringify(orders))
+    } catch (error) {
+        handleError(error)
+    }
+}
