@@ -5,7 +5,6 @@ import { revalidatePath } from "next/cache";
 import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
-import { cookies } from "next/headers";
 
 
 // CREATE
@@ -62,8 +61,6 @@ export async function getUser(clerkId: string) {
     const user = await User.findOne({ clerkId }).populate("personalPhysician").populate("affiliateHospital")
     if (!user) throw new Error("User not found");
 
-    // cookies().set("role", user.userRole)
-    // cookies().set("userId", user._id)
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
@@ -190,7 +187,7 @@ export async function fetchHealthRecord(clerkId:string) {
     if(!user) throw new Error("User not found")
     const record = user.healthRecord
 
-    return JSON.parse(JSON.stringify(history))
+    return JSON.parse(JSON.stringify(record))
   } catch (error) {
     handleError(error)
   }

@@ -4,15 +4,19 @@ import PharmacyOverview from '@/components/company/PharmacyOverview'
 import useDBUser from '@/hooks/useDBUser'
 import HospitalOverview from '@/components/company/HospitalOverview'
 import Loader from '@/components/general/Loader'
+import { useParams } from 'next/navigation'
 
 
 const OverviewPage = () => {
   const {role} = useDBUser()
+  const {id} = useParams()
+  console.log(id)
   return (
     <div>
       {
-        role === "PharmacyAdmin"? (<PharmacyOverview/>) :
-        role === "HospitalAdmin"? (<HospitalOverview/>) : <Loader/>
+        role === undefined? <Loader/> :
+        role === "PharmacyAdmin"? (<PharmacyOverview id={id as string}/>) :
+        role === "HospitalAdmin"? (<HospitalOverview/>) : ''
       }
     </div>
   )

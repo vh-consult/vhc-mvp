@@ -3,8 +3,10 @@ import ExpiringDrugsList from '../pharmacy/ExpiringDrugsList'
 import OutOfStockList from '../pharmacy/OutOfStockList'
 import PharmacyStatistics from '../pharmacy/PharmacyStatistics'
 import RecentOrders from '../pharmacy/RecentOrders'
+import { fetchPharmacyOverviewData } from '@/lib/actions/company.actions'
 
-const PharmacyOverview = () => {
+const PharmacyOverview = async ({id}: {id: string}) => {
+  const overviewData = await fetchPharmacyOverviewData(id)
   return (
     <main className='w-full h-[540px] flex flex-between'>
       <div className="h-full w-[40%] bg-white">
