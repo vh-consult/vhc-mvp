@@ -6,7 +6,7 @@ const HistorySchema = new Schema({
   activity: {type: String, required: true},
   host: {type: Schema.Types.ObjectId, refPath: 'hostType'},
   hostType: {type: String, enum: ["User", "Company"]},
-  summary: String,
+  summary: {type: String},
   orders: [{type: Schema.Types.ObjectId, ref:"Order"}],
   meds: [{type: Schema.Types.ObjectId, ref: "Medication"}]
 })
@@ -29,7 +29,9 @@ const UserSchema = new Schema({
     cart: [{type: Schema.Types.ObjectId, ref: 'Drug'}],
     affiliateHospital: {type: Schema.Types.ObjectId, ref: 'Company'},
     personalPhysician: {type: Schema.Types.ObjectId, ref: 'User'},
-    history: [HistorySchema]
+    history: [{type: Schema.Types.ObjectId, ref: 'History'}],
+    healthRecord: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
+    currentMeds: [{type: Schema.Types.ObjectId, ref: 'Medication'}],
   }, options
 );
 
@@ -44,8 +46,6 @@ const DoctorSchema = new Schema({
 });
 
 const PatientSchema = new Schema({
-  healthRecord: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
-  currentMeds: [{type: Schema.Types.ObjectId, ref: 'Medication'}],
   insurancePlan: {type: Schema.Types.ObjectId,  ref: 'Insurance'},
 });
 

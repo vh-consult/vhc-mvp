@@ -11,18 +11,16 @@ interface PatientProps {
     complaint?: string;
     email?: string;
     imageSrc: string;
-    insurancePlan?: 'PersonalCare' | 'FamilyCare' | 'Unlimited'
-
 }
 
 const PatientList = ({
     name, email, 
-    insurancePlan, gender, 
+    gender, 
     age, imageSrc
 }: PatientProps) => {
   return (
-    <div className="flex hover:bg-gray-100 border-t border-t-green-1 h-[45px] px-5 bg-white w-full items-center justify-between">
-        <span className="flex rounded-full w-2/6">
+    <div className="grid grid-cols-5 hover:bg-gray-100 border-t border-t-green-1 h-[45px] px-5 bg-white w-full items-center ">
+        <span className="flex rounded-full w-full">
             <Image
                 width={30}
                 height={30} 
@@ -32,26 +30,23 @@ const PatientList = ({
             />
             {name}
         </span>
-        <span className="w-1/12">
+        <span className="ml-10 capitalize">
             {gender}
         </span>
-        <span className="w-1/12">
+        <span className="ml-10 ">
             {age}
         </span>
-        <span className="w-1/6">
+        <span className="lowercase ml-[-20px]">
             {email && email}
         </span>
-        <span className="w-1/6">
-            {insurancePlan && insurancePlan}
-        </span>
-        <div className="flex ">
-            <span className="w-[30px] h-[30px] hover:bg-saturated-purple hover:text-whitish-violet mr-2 border border-saturated-purple flex items-center justify-center rounded-md">
+        <div className="flex ml-10">
+            <span className="w-[30px] h-[30px] hover:bg-gray-200 hover:text-whitish-violet mr-2 border border-gray-200 flex items-center justify-center rounded-md">
                 <BsChat />
             </span>
-            <span className="w-[30px] h-[30px] hover:bg-saturated-purple hover:text-whitish-violet border border-saturated-purple flex items-center justify-center rounded-md">
+            <span className="w-[30px] h-[30px] hover:bg-gray-200 hover:text-whitish-violet border border-gray-200 flex items-center justify-center rounded-md">
                 <BiCalendar />
             </span>
-            <span className="w-[30px] h-[30px] hover:bg-saturated-purple hover:text-whitish-violet ml-2 border border-saturated-purple flex items-center justify-center rounded-md">
+            <span className="w-[30px] h-[30px] hover:bg-gray-200 hover:text-whitish-violet ml-2 border border-gray-200 flex items-center justify-center rounded-md">
                 <DiDatabase />
             </span>
         </div>

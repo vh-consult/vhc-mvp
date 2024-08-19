@@ -111,7 +111,7 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : companyId === undefined && role !== "Patient" ? (
+                ) : companyId === undefined && role !== "Patient"  ? (
                     <ClickableCard 
                     title="Register Company"
                     description="Create company profile"

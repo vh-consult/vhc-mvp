@@ -171,11 +171,26 @@ export async function fetchAffiliates(userId:string) {
 export async function fetchDoctorClients(clerkId:string) {
   try {
     await connectToDatabase()
-    const doctor = await User.findOne({clerkId, userRole: "Doctor"}).populate("clients")
+    const doctor = await User.findOne({clerkId, userRole: "Doctor"}).populate(
+      {path: "clients", select: "firstName lastName gender email photo dateOfBirth"}
+    )
     if(!doctor) throw new Error("Doctor not found")
     
     const clients = doctor.clients
     return JSON.parse(JSON.stringify(clients))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+export async function fetchHealthRecord(clerkId:string) {
+  try {
+    await connectToDatabase()
+    const user = await User.findOne({clerkId}).populate("healthRecord")
+    if(!user) throw new Error("User not found")
+    const record = user.healthRecord
+
+    return JSON.parse(JSON.stringify(history))
   } catch (error) {
     handleError(error)
   }
