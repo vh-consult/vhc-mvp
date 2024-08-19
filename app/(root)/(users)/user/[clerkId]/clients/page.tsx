@@ -1,12 +1,17 @@
 import SearchBar from '@/components/general/SearchBar'
 import PatientList from '@/components/doctor/PatientList'
 import React from 'react'
+import { currentUser } from '@clerk/nextjs/server'
+import { fetchDoctorClients } from '@/lib/actions/user.actions'
 
 const headers = [
   "Name", "Gender", "Age", "Email", "Insurance plan", "Actions"
 ]
 
-const ClientsPage = () => {
+const ClientsPage = async () => {
+  const user = await currentUser()
+
+  const clients = await fetchDoctorClients(user?.id!)
   return (
 <div>
       <div className="flex items-center justify-between">

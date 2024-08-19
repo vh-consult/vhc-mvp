@@ -168,6 +168,19 @@ export async function fetchAffiliates(userId:string) {
   }
 }
 
+export async function fetchDoctorClients(clerkId:string) {
+  try {
+    await connectToDatabase()
+    const doctor = await User.findOne({clerkId, userRole: "Doctor"}).populate("clients")
+    if(!doctor) throw new Error("Doctor not found")
+    
+    const clients = doctor.clients
+    return JSON.parse(JSON.stringify(clients))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
 //fetching user's history
 export async function fetchUserHistory(userId:string) {
   try {

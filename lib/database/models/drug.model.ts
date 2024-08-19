@@ -17,7 +17,7 @@ const DrugSchema = new Schema({
     price: {type: Number, required: [true, "Please state the price"],},
     description: {type: String, required: [true, "Please add description"],},
     quantity: {type: Number, required: [true, "Please state the quantity being added"],},
-    expiryDate: {type:Date, required:true},
+    expiryDate: {type:Date},
     shop: {type: Schema.Types.ObjectId,ref: 'Pharmacy'}
 });
 

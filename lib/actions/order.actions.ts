@@ -127,7 +127,7 @@ export async function cancelOrder(clerkId: string, orderId: string) {
     }
 }
 
-export async function retrieveShopOrders(shopId:string) {
+export async function retrieveShopOrders(shopId: string) {
     try {
         await connectToDatabase()
         const shop = await Company.findOne(
@@ -139,12 +139,21 @@ export async function retrieveShopOrders(shopId:string) {
                 { path: 'items', select: "name image" },
             ]
         })
+        
         if (!shop) throw new Error("Shop not found")
-        const orders = shop.orders.toObject()
-        const items = shop.orders.items
+        
+        const orders = shop.orders.map((order: any) => {
+            const plainOrder = order.toObject()
+            // Ensure items are properly mapped
+            plainOrder.items = plainOrder.items.map((item: any) => ({
+                _id: item._id.toString(),
+                name: item.name,
+                image: item.image
+            }))
+            return plainOrder
+        })
 
-        delete orders.items
-        return JSON.parse(JSON.stringify({...orders, ...items}))
+        return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)
     }

@@ -5,17 +5,20 @@ import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
 import useDBUser from '@/hooks/useDBUser'
 import { OrderCard } from '@/components/pharmacy/OrderList'
+import { useUser } from '@clerk/nextjs'
 
 const OrdersPage = () => {
-  const [isClicked, setIsClicked] = useState<boolean>()
-  const {clerkId} = useDBUser()
+  const {user} = useUser()
+  const [active, setActive] = useState<string>('all')
   const [allOrders, setAllOrders] = useState([])
-  const [displayOrders, setDisplayOrders] = useState([])
+  const [displayOrders, setDisplayOrders] = useState(allOrders)
   const filters = ['All',  'Pending',  'Delivered', 'Canceled'  ]
+
   const filterOrders = async (filter: string) => {
     switch (filter) {
       case "all":
         setDisplayOrders(allOrders)
+        setActive("all")
         break;
       case "pending":
         allOrders.forEach((order:any) => {
@@ -25,6 +28,8 @@ const OrdersPage = () => {
           }
           setDisplayOrders(pendingOrders) 
         })
+        setActive("pending")
+
         break;
       case "delivered":
         allOrders.forEach((order:any) => {
@@ -34,6 +39,7 @@ const OrdersPage = () => {
           }
           setDisplayOrders(deliveredOrders) 
         })
+        setActive("delivered")
         break;
       case "canceled":
         allOrders.forEach((order:any) => {
@@ -43,6 +49,7 @@ const OrdersPage = () => {
           }
           setDisplayOrders(canceledOrders)
         })
+        setActive("canceled")
         break;
       default:
         break;
@@ -50,7 +57,7 @@ const OrdersPage = () => {
   }
   useEffect(()=>{
     const fetchOrders = async () => {
-      const orders = await fetchUserOrders(clerkId)
+      const orders = await fetchUserOrders(user?.id!)
       setAllOrders(orders)
     }
     fetchOrders()
@@ -67,8 +74,11 @@ const OrdersPage = () => {
             filters.map((filter:string, index:number) => (
               <Button 
                 key={index}
-                onClick={()=>filterOrders(filter.toLowerCase())}
-                className={`${isClicked? 'bg-blue-1 text-green-1': 'border-2 '} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
+                onClick={()=>{
+                  filterOrders(filter.toLowerCase())
+                  
+                }}
+                className={`${active === filter.toLowerCase()? 'bg-green-2 text-green-1': 'border-2 '} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
               >
                 {filter}
               </Button>

@@ -122,11 +122,17 @@ export async function fetchDoctorBookings(clerkId:string) {
     try {
         await connectToDatabase()
         const user = await User.findOne(
-            {clerkId , uerRole: "Doctor"}
-        ).populate("bookings")
+            {clerkId , userRole: "Doctor"}
+        ).populate({
+            path: "bookings",
+            populate: [
+                {path: "patient", select:"firstName lastName photo"}
+            ]
+        })
         if (!user) throw new Error("User not found")
         
         const bookings = user.bookings
+
         return JSON.parse(JSON.stringify(bookings))
     } catch (error) {
       handleError(error)  

@@ -16,13 +16,16 @@ const BookingsPage = async () => {
   const user =await currentUser()
   const allBookings = await fetchDoctorBookings(user?.id!)
   return (
-    <div>
-      {
-        allBookings.map((booking:any, index:number) => (
-          <BookingCard appointment={booking} key={index}/>
-        ))
-      }
-    </div>
+    <main className="">
+      <h1 className="text-4xl font-semibold">Booked Appointments</h1>
+      <div className='grid grid-cols-3 gap-5'>
+        {
+          allBookings.map((booking:any, index:number) => (
+            <BookingCard appointment={booking} key={index}/>
+          ))
+        }
+      </div>
+    </main>
   )
 }
 

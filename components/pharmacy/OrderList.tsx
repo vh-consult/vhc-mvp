@@ -74,8 +74,19 @@ export const OrderCard = (
 
 const OrderList = async ({shopId}: {shopId: string}) => {
   const results = await retrieveShopOrders(shopId)
+  const items = results.map((order:any)=> order.items)
+  // console.log(results, items)
+
+  console.log(results.map((order:any)=> order.buyer.firstName))
   return (
     <div className='grid grid-cols-2 gap-4'>
+            <OrderCard 
+            buyerName={'dd'}
+            deliveryStatus={'pending'}
+            hasPaid={false }
+            imageUrl={'/images/drug 1.jpg'}
+            items={["para"]}
+          />
       {
         results.length > 0 ? results.map((order:any, index: number) => {
           <OrderCard 
