@@ -136,52 +136,54 @@ const DrugOverview = ({
             </>
           ) : null}
         </div>
-        <div className="my-1">
-          <h2 className="text-lg font-medium">
-            Order Section
-          </h2>
-          <div className="flex flex-between my-2">
-            <span className="">
-              How many are you buying? 
-            </span>
-            <span>
-              <Input 
-                className="bg-green-3 rounded-md w-[150px] h-[35px] 
-                p-1 text-sm font-medium focus-visible:ring-0"
-                type="number"
-                min={1}
-                max={drug?.quantity}
-                defaultValue={1}
-                onChange={(e) => setValues({...values, quantity: parseInt(e.target.value)})}
-              />
-            </span>
-          </div>
-          <Textarea 
-            className="w-full h-[100px] p-2 
-            rounded-lg bg-green-3 text-sm" 
-            placeholder="Anything we need to know before 
-            we assign the doses?"
-            onChange={(e) => setValues({...values, note: e.target.value})}
-          />
-        </div>
           <div className="">
             {isOrderCreated === false? (
-              <div className='flex md:flex-row md:gap-x-2'>
-                <Button  
-                  className="w-full h-[35px] border border-green-2 
-                  rounded-md  text-sm text-green-2 font-medium"
-                  onClick={handleCartAddition}
-                >
-                  Add to cart
-                </Button>
-                <Button
-                  className="w-full h-[35px] bg-green-2 
-                  rounded-md text-sm text-green-1 font-medium"
-                  onClick={createOrder}
-                >
-                  Create Order
-                </Button>
-              </div>
+              <>
+                <div className="my-1">
+                  <h2 className="text-lg font-medium">
+                    Order Section
+                  </h2>
+                  <div className="flex flex-between my-2">
+                    <span className="">
+                      How many are you buying? 
+                    </span>
+                    <span>
+                      <Input 
+                        className="bg-green-3 rounded-md w-[150px] h-[35px] 
+                        p-1 text-sm font-medium focus-visible:ring-0"
+                        type="number"
+                        min={1}
+                        max={drug?.quantity}
+                        defaultValue={1}
+                        onChange={(e) => setValues({...values, quantity: parseInt(e.target.value)})}
+                      />
+                    </span>
+                  </div>
+                  <Textarea 
+                    className="w-full h-[100px] p-2 
+                    rounded-lg bg-green-3 text-sm" 
+                    placeholder="Anything we need to know before 
+                    we assign the doses?"
+                    onChange={(e) => setValues({...values, note: e.target.value})}
+                  />
+                </div>
+                <div className='flex md:flex-row md:gap-x-2'>
+                  <Button  
+                    className="w-full h-[35px] border border-green-2 
+                    rounded-md  text-sm text-green-2 font-medium"
+                    onClick={handleCartAddition}
+                  >
+                    Add to cart
+                  </Button>
+                  <Button
+                    className="w-full h-[35px] bg-green-2 
+                    rounded-md text-sm text-green-1 font-medium"
+                    onClick={createOrder}
+                  >
+                    Create Order
+                  </Button>
+                </div>
+              </>
             ) :(
               <div className="">
               <PayWithPaystack amount={values.amount}/>

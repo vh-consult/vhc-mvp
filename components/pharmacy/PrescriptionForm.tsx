@@ -7,6 +7,7 @@ import { toast } from '../ui/use-toast'
 import Loader from '../general/Loader'
 import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
+import DrugPrescribed from './DrugPrescribed'
 
 interface DrugPrescriptionParams {
   medicine: string;
@@ -20,7 +21,10 @@ const initialValues = {
   caution: '',
   duration: null
 }
-const PrescriptionForm = ({isOpen, onClose, setPrescribedDrugs}:{isOpen:boolean, onClose: ()=>void, setPrescribedDrugs:any}) => {
+const PrescriptionForm = (
+  {isOpen, onClose, setPrescribedDrugs}:
+  {isOpen:boolean, onClose: ()=>void, setPrescribedDrugs:any}
+) => {
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
   const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
@@ -51,33 +55,7 @@ const PrescriptionForm = ({isOpen, onClose, setPrescribedDrugs}:{isOpen:boolean,
         <h2 className="text-lg">
           Add Presciption
         </h2>
-        <div className="my-4 bg-gray-100 p-2">
-          <h1 className="text-sm">Drugs Prescribed</h1>
-          <div className="flex flex-between text-xs font-light opacity-80">
-            {
-              drugsAdded?.length === 0 ? '' : (
-                <div className='grid grid-cols-4 gap-x-10'>
-                  <span className="">Medicine</span>
-                  <span className="">Caution</span>
-                  <span className="">Duration</span>
-                  <span className="">Dose</span>
-                </div>
-              )
-            } 
-          </div>
-          <div className="flex flex-col gap-2 text-sm">
-            {
-              drugsAdded?.length === 0 ? 'No drugs added yet': drugsAdded?.map((drug, index) => (
-                <div key={index} className='grid grid-cols-4 gap-x-8 bg-green-3 text-sm'>
-                  <span className="">{drug.medicine}</span>
-                  <span className="">{drug.caution}</span>
-                  <span className="">{drug.duration}</span>
-                  <span className="">{drug.dose}</span>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+        <DrugPrescribed drugs={drugsAdded} />
         <form className='flex flex-col gap-3'>
           <div className="w-full flex gap-1">
             <span className="w-[75%]">

@@ -7,6 +7,7 @@ import { useUser } from '@clerk/nextjs'
 import PrescriptionForm from '../pharmacy/PrescriptionForm'
 import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
+import DrugPrescribed from '../pharmacy/DrugPrescribed'
 
 const ConsultationForm = ({bookingId}: {bookingId:string}) => {
   const initialValues = {
@@ -62,7 +63,9 @@ const ConsultationForm = ({bookingId}: {bookingId:string}) => {
             onClose={()=>setShowPrescriptionForm(false)}
             setPrescribedDrugs={setPrescribedDrugs}
           />
-        ) : ''
+        ) : (
+          <DrugPrescribed drugs={prescribedDrugs} />
+        )
       }
       </>
   )
