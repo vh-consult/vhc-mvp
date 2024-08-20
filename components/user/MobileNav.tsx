@@ -6,16 +6,17 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
-
+import { useUser } from "@clerk/nextjs"
 
 const MobileNav = ({navigations}: HeaderProps) => {
+  const {user} = useUser()
   const userNavs = [
     {
-      route: `/user/account`,
+      route: `${user?.id}/account`,
       label: 'Account'
     },
     {
-      route: `/user/history`,
+      route: `${user?.id}/history`,
       label: 'History'
     },
   ]

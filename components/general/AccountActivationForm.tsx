@@ -85,7 +85,7 @@ const ActivateAccount = () => {
         case 'Patient':
         case 'Doctor':
           toast({title: 'Account activated successfully, you are being redirected'})
-          router.push('/user/landing');
+          router.push('/landing');
           break;
         case 'HospitalAdmin':
         case 'PharmacyAdmin':

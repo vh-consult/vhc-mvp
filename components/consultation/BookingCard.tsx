@@ -1,7 +1,8 @@
+"use client"
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
+import { BiChat } from 'react-icons/bi'
 
 const BookingCard = ({appointment}: {appointment:any}) => {
   return (
@@ -14,9 +15,13 @@ const BookingCard = ({appointment}: {appointment:any}) => {
         <p className="">
           {new Date(appointment.date).toLocaleDateString()}
         </p>
-        <Link href={appointment.link}>
-          <Button className='bg-blue-1 w-[100px] h-[30px] text-green-1 mt-2'>Start Session</Button>
-        </Link>
+          <Button onClick={()=>{}} className='bg-blue-1 w-[100px] h-[30px] text-green-1 mt-2'>
+            <BiChat/>
+            Message
+          </Button>
+          <Button onClick={()=>{}}>
+            View Details
+          </Button>
       </div>
     </div>
   )

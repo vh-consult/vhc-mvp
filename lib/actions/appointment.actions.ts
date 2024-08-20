@@ -37,7 +37,7 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
             ...formData, 
             patient:creator._id,
         })
-        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
+        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${appointment._id}`
         appointment.save()
         console.log(host)
 

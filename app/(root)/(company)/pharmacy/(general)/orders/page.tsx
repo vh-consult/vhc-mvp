@@ -92,7 +92,8 @@ const OrdersPage = () => {
             <OrderCard 
               key={index}
               buyerName={order.buyerName}
-              imageUrl={''}
+              imageUrl={order.shop.logo}
+              shopName={order.shop.name}
               items={order.items}
             />
           ))

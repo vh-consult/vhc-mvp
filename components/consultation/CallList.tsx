@@ -99,14 +99,14 @@ const CallList = (
             link={
               type === 'recordings'
                 ? (consultation as CallRecording).url
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/Consultation/room/${(consultation as Call).id}`
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/Consultation-room/${(consultation as Call).id}`
             }
             buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
             buttonText={type === 'recordings' ? 'Play' : 'Start'}
             handleClick={
               type === 'recordings'
                 ? () => router.push(`${(consultation as CallRecording).url}`)
-                : () => router.push(`/consultation/room/${(consultation as Call).id}`)
+                : () => router.push(`/consultation-room/${(consultation as Call).id}`)
             }
           />
         ))

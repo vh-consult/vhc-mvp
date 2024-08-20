@@ -31,7 +31,7 @@ const RenderUserLanding = () => {
                 title: 'Dashboard',
                 description: 'Enter your dashboard',
                 imageSrc: '/icons/dashboard.svg',
-                action: `/user/${clerkId}/dashboard`
+                action: `/${clerkId}/dashboard`
             },
             {
                 title: 'Consultation',

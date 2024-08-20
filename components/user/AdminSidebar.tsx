@@ -99,7 +99,7 @@ const AdminSidebar = () => {
         icon: BiSolidInstitution
     },
     {
-      route: `/user/landing`,
+      route: `/landing`,
       label: 'Go to Home',
       icon: MdOutlineHome
   },

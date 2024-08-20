@@ -85,16 +85,16 @@ const OrderList = async ({shopId}: {shopId: string}) => {
             items={["para"]}
           />
       {
-        results.length > 0 ? results.map((order:any, index: number) => {
+        results.length > 0 ? results.map((order:any, index: number) => (
           <OrderCard 
             key={index}
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
             deliveryStatus={order.status}
-            hasPaid={true }
+            hasPaid={true}
             imageUrl={''}
             items={order.items}
           />
-        }): (
+        )): (
           <span className="text-sm ">
             No orders
           </span>

@@ -25,17 +25,17 @@ const Sidebar = () => {
     const patientSidebarElements = {
       top: [
           {
-              route: `/user/${clerkId}/dashboard`,
+              route: `/${clerkId}/dashboard`,
               label: 'Dashboard',
               icon: RxDashboard
           },
           {
-              route: `/user/${clerkId}/affiliation`,
+              route: `/${clerkId}/affiliation`,
               label: `Affiliation`,
               icon: BsHospital
           },
           {
-              route: `/user/${clerkId}/health-record`,
+              route: `/${clerkId}/health-record`,
               label: `Record`,
               icon: BsDatabase
           },
@@ -45,12 +45,12 @@ const Sidebar = () => {
 
   const SidebarBbottomNavs = [
     {
-        route: `/user/${clerkId}/history`,
+        route: `/${clerkId}/history`,
         label: 'History',
         icon: AiOutlineHistory
     },
     {
-        route: `/user/${clerkId}/account`,
+        route: `/${clerkId}/account`,
         label: 'Account',
         icon: CgProfile
     },
@@ -58,17 +58,17 @@ const Sidebar = () => {
   const doctorSidebarElements = {
       top: [
           {
-              route: `/user/${clerkId}/dashboard`,
+              route: `/${clerkId}/dashboard`,
               label: `Dashboard`,
               icon: RxDashboard
           },
           {
-            route: `/user/${clerkId}/bookings`,
+            route: `/${clerkId}/bookings`,
             label: `Bookings`,
             icon: MdOutlineSchedule
         },
           {
-              route: `/user/${clerkId}/clients`,
+              route: `/${clerkId}/clients`,
               label: `Clients`,
               icon: BsPeople
           }

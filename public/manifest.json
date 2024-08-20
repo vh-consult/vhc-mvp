@@ -23,7 +23,7 @@
     ],
     "theme_color": "#161925",
     "background_color": "#161925",
-    "start_url": "/user/landing",
+    "start_url": "/landing",
     "display": "standalone",
     "orientation": "portrait"
   }

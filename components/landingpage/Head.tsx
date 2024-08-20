@@ -103,7 +103,7 @@ const Head = () => {
           <div className='hidden md:flex items-center justify-center button w-1/6'>
           <SignedIn>
             <Button className="bg-green-2 rounded-full text-green-1 mr-4">
-              <Link href="/user/landing">
+              <Link href="/landing">
                 Go to Home
               </Link>
             </Button>

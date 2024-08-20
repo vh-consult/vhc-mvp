@@ -94,7 +94,7 @@ const ConsultationTypeList = () => {
         });
         setCallDetail(call);
         if (!values.problem_statement) {
-          router.push(`/consultation/room/${call.id}`);
+          router.push(`/consultation-room/${call.id}`);
         }
         toast({ title: 'Consultation Created' });
       setValues(initialValues)
@@ -111,7 +111,7 @@ const ConsultationTypeList = () => {
     console.log('Client or user not available yet:', { client, user });
     return <Loader />;
   }
-  const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${callDetail?.id}`;
+  const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${callDetail?.id}`;
   
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-green-4">
