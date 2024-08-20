@@ -152,7 +152,7 @@ export async function retrieveShopOrders(shopId: string) {
             }))
             return plainOrder
         })
-
+        // console.log(orders)
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)

@@ -15,6 +15,7 @@ export const OrderCard = (
   {buyerName, hasPaid, deliveryStatus, shopName, items, imageUrl}: 
   OrderCardProps
 ) => {
+  console.log(items)
     return (
       <div className='w-full h-[150px] cursor-pointer hover:shadow-lg flex items-center px-4 bg-white shadow-sm rounded-lg'>
         <div className='relative w-[90px]'>
@@ -74,10 +75,6 @@ export const OrderCard = (
 
 const OrderList = async ({shopId}: {shopId: string}) => {
   const results = await retrieveShopOrders(shopId)
-  const items = results.map((order:any)=> order.items)
-  // console.log(results, items)
-
-  console.log(results.map((order:any)=> order.buyer.firstName))
   return (
     <div className='grid grid-cols-2 gap-4'>
             <OrderCard 
@@ -93,9 +90,9 @@ const OrderList = async ({shopId}: {shopId: string}) => {
             key={index}
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
             deliveryStatus={order.status}
-            hasPaid={order.payment_status === "Paid"? true : false }
-            imageUrl={'/images/drug 1.jpg'}
-            items={["para"]}
+            hasPaid={true }
+            imageUrl={''}
+            items={order.items}
           />
         }): (
           <span className="text-sm ">

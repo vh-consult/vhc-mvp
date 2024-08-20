@@ -4,6 +4,8 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { Company, Hospital, Pharmacy } from "../database/models/company.model";
 import { User } from "../database/models/user.model";
+import Order from "../database/models/order.model";
+import Drug from "../database/models/drug.model";
 
 export interface CompanyProps {
     name: string;
@@ -71,29 +73,63 @@ export async function getAllPharmacyShops() {
     }
 }
 
-export async function fetchPharmacyOverviewData(shopId:string) {
-    try {
-        await connectToDatabase()
-        const shop = await Company.findOne(
-            {_id: shopId, companyType: "Pharmacy"}
-        ).populate({
-            path: "orders",
-            populate: [
-                { path: "buyer", select: "firstName lastName email" }
-            ]
-        }).populate({
-            path: "inventory",
-            select: "name expiryDate quantity price catalog"
-        })
-        if(!shop) throw new Error("No shop found")
-        const orders = shop.orders
-        const inventory = shop.inventory
-        const shopData = shop.toObject()
+// export async function fetchPharmacyOverviewData(shopId:string) {
+//     try {
+//         await connectToDatabase()
+//         const shop = await Company.findOne(
+//             {_id: shopId, companyType: "Pharmacy"}
+//         ).populate({
+//             path: "orders",
+//             populate: [
+//                 { path: "buyer", select: "firstName lastName email" }
+//             ]
+//         }).populate({
+//             path: "inventory",
+//             select: "name expiryDate quantity price catalog"
+//         })
+//         if(!shop) throw new Error("No shop found")
+//         const orders = shop.orders
+//         const inventory = shop.inventory
+//         const shopData = shop.toObject()
         
-        return {orders, inventory, shopData}
+//         return {orders, inventory, shopData}
+        
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export async function fetchPharmacyOverviewData(shopId: string) {
+    try {
+        await connectToDatabase();
+        const shop = await Pharmacy.findOne(
+            { _id: shopId, companyType: "Pharmacy" }
+        ).lean();
+        if (!shop) throw new Error("No shop found");
+        console.log(shop)
+
+        // Fetch orders and inventory separately
+        //@ts-expect-error
+        const orders = await Order.find({ _id: { $in: shop.orders } })
+            .populate('buyer', 'firstName lastName email')
+            .lean();
+
+        //@ts-expect-error
+        const inventory = await Drug.find({ _id: { $in: shop.inventory } })
+            .select('name expiryDate quantity price catalog')
+            .lean();
+
+        // Remove circular references
+        const shopData = { ...shop, orders: undefined, inventory: undefined };
+        const shopDataResults = JSON.parse(JSON.stringify(shopData))
+        const orderDataResults = JSON.parse(JSON.stringify(shopData))
+        const inventoryDataResults = JSON.parse(JSON.stringify(shopData))
+
+        return { shopDataResults, orderDataResults, inventoryDataResults };
         
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching pharmacy overview data:", error);
+        throw error; // Re-throw the error to be handled by the caller
     }
 }
 
@@ -103,7 +139,7 @@ export async function fetchFilteredDrugs(
     try {
         await connectToDatabase()
 
-        const pharmacy = await Company.findOne(
+        const pharmacy = await Pharmacy.findOne(
             {_id: pharmacyId, companyType: "Pharmacy"}
         ).populate('inventory');
         if (!pharmacy) throw new Error('No pharmacy found');
