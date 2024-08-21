@@ -17,6 +17,7 @@ const ItemsInCart = ({items}:{items:any[]}) => {
       {
         items.length > 0 ? ( items.map((item, index)=> (
           <List
+            key={index}
             imageSrc={item.image}
             title={item.name}
             subtitle={item.catalog}
