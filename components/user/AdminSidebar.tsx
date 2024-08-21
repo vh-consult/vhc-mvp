@@ -60,11 +60,11 @@ const AdminSidebar = () => {
           label: `Inventory`,
           icon: MdOutlineInventory
         },
-        {
-            route: `/company/${companyId}/messages`,
-            label: `Messages`,
-            icon: MdMessage
-        },
+        // {
+        //     route: `/company/${companyId}/messages`,
+        //     label: `Messages`,
+        //     icon: MdMessage
+        // },
     ],
   }
   

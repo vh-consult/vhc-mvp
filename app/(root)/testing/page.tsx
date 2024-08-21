@@ -19,7 +19,7 @@ const page = () => {
         problemStatement='Menim mpo'
         scheduledAt={new Date(2024, 7, 25, 20, 30)}
       />
-      <BookingDetails
+      {/* <BookingDetails
         bookingType='Virtual consultation' 
         clientImage='/images/'
         clientName='Olokwa Nchewzu'
@@ -28,10 +28,10 @@ const page = () => {
         clientAge={22}
         clientGender='Male'
         isAccepted
-        open
-        onClose={() => !open}
+        isOpen={true}
+        onClose={() => {}}
         link='/hehe '
-      />
+      /> */}
     </div>
   )
 }

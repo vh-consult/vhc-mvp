@@ -15,7 +15,6 @@ export const OrderCard = (
   {buyerName, hasPaid, deliveryStatus, shopName, items, imageUrl}: 
   OrderCardProps
 ) => {
-  console.log(items)
     return (
       <div className='w-full h-[150px] cursor-pointer hover:shadow-lg flex items-center px-4 bg-white shadow-sm rounded-lg'>
         <div className='relative w-[90px]'>
@@ -24,7 +23,7 @@ export const OrderCard = (
             alt=''
             width={100}
             height={100}
-            className='w-full h-[100px] rounded-md'
+            className='w-full h-[100px] rounded-md object-cover'
           />
         </div>
         <div className="flex flex-col ml-2 w-[calc(100%-90px)] ">
@@ -34,8 +33,8 @@ export const OrderCard = (
           {
             shopName && <h1 className="text-lg font-medium">Ordered at: {shopName}</h1>
           }
-          <div className="flex flex-col my-1 ">
-            <span className="text-sm font-medium leading-none">
+          <div className="flex flex-row mb-1 items-center ">
+            <span className="text-sm mr-1 font-medium leading-none">
               Items:
             </span>
             <p className="text-sm flex flex-wrap gap-x-2 ">
@@ -77,13 +76,6 @@ const OrderList = async ({shopId}: {shopId: string}) => {
   const results = await retrieveShopOrders(shopId)
   return (
     <div className='grid grid-cols-2 gap-4'>
-            <OrderCard 
-            buyerName={'dd'}
-            deliveryStatus={'pending'}
-            hasPaid={false }
-            imageUrl={'/images/drug 1.jpg'}
-            items={["para"]}
-          />
       {
         results.length > 0 ? results.map((order:any, index: number) => (
           <OrderCard 
@@ -91,7 +83,7 @@ const OrderList = async ({shopId}: {shopId: string}) => {
             buyerName={order.buyer.firstName + ' ' + order.buyer.lastName}
             deliveryStatus={order.status}
             hasPaid={true}
-            imageUrl={''}
+            imageUrl={order.items[0].image}
             items={order.items}
           />
         )): (

@@ -38,7 +38,6 @@ const ClientsPage = async () => {
               imageSrc={client.photo}
               name={client.firstName + ' ' + client.lastName}
               email={client.email}
-              insurancePlan='PersonalCare'
             />
           ))
         }

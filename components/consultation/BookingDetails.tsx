@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { Dialog, DialogContent } from '../ui/dialog';
 import Image from 'next/image';
@@ -14,16 +15,16 @@ interface BookingDetailsProps {
     bookingType: string; 
     link: string;
     isAccepted: boolean;
-    open: boolean;
+    isOpen: boolean;
     onClose: () => void
 }
 
 const BookingDetails = ({
     problemStatement, scheduledAt, clientName, bookingType, isAccepted,
-    link, clientAge, clientGender, clientImage, open, onClose
+    link, clientAge, clientGender, clientImage, isOpen, onClose
 }:BookingDetailsProps) => {
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <div className="flex">
             <Image src={clientImage} alt='' width={50} height={50}/>
