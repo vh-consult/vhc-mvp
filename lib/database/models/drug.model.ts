@@ -18,7 +18,7 @@ const DrugSchema = new Schema({
     description: {type: String, required: [true, "Please add description"],},
     quantity: {type: Number, required: [true, "Please state the quantity being added"],},
     expiryDate: {type:Date},
-    shop: {type: Schema.Types.ObjectId,ref: 'Pharmacy'}
+    shop: {type: Schema.Types.ObjectId, ref: 'Pharmacy'}
 });
 
 const Drug = models?.Drug || model("Drug", DrugSchema)

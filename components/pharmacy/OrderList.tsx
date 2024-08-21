@@ -8,11 +8,13 @@ interface OrderCardProps {
   shopName?: string;
   items: any[];
   hasPaid?: boolean;
-  deliveryStatus?: string
+  deliveryStatus?: string;
+  location?: string;
+  description?: string;
 }
 
 export const OrderCard = (
-  {buyerName, hasPaid, deliveryStatus, shopName, items, imageUrl}: 
+  {buyerName, hasPaid, deliveryStatus, shopName, items, imageUrl, location, description}: 
   OrderCardProps
 ) => {
     return (
@@ -31,7 +33,12 @@ export const OrderCard = (
             buyerName && <h1 className="text-lg font-medium">Ordered by: {buyerName}</h1>
           }
           {
-            shopName && <h1 className="text-lg font-medium">Ordered at: {shopName}</h1>
+            shopName && (
+              <div className="">
+                <h1 className="text-lg font-medium leading-tight">Ordered at: {shopName}</h1>
+                <p className="">{location && <p className='text-base'>Location: {location}</p>}</p>
+              </div>
+            )
           }
           <div className="flex flex-row mb-1 items-center ">
             <span className="text-sm mr-1 font-medium leading-none">
@@ -47,6 +54,9 @@ export const OrderCard = (
               }
             </p>
           </div>
+          {
+            description && <p className='text-sm'>{description}</p>
+          }
           <p className="flex">
             {
               hasPaid && (

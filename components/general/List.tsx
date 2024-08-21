@@ -39,8 +39,8 @@ const List = ({
           className='w-[85px] h-[100px] mr-3 rounded-md object-cover'
         />}
         <div className="">
-          <h2 className="text-lg font-semibold">{title}</h2>
-          <p className="text-base font-normal">{subtitle}</p>
+          <h2 className="text-lg font-semibold leading-tight">{title}</h2>
+          <p className="text-base font-normal capitalize">{subtitle}</p>
           <p className="text-sm opacity-75">{descriptionBelowSubtitle}</p>
         </div>
       </div>

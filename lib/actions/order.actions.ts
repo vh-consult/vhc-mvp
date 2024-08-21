@@ -165,12 +165,31 @@ export async function fetchUserOrders(clerkId:string) {
         const user = await User.findOne({clerkId}).populate({
             path: "orders", 
             populate: [
-                {path: "shop", select: "name location"},
+                {path: "shop", select: "name location logo"},
+                {path: "items", select: "name price description"},
+
             ]
         })
         if(!user) throw new Error("User not found")
         const orders = user.orders
         return JSON.parse(JSON.stringify(orders))
+    } catch (error) {
+        handleError(error) 
+    }
+}
+
+export async function fetchItemsInCart(clerkId:string) {
+    try {
+        await connectToDatabase()
+        const user = await User.findOne({clerkId}).populate({
+            path: "cart", 
+            populate: [
+                {path: "shop", select: "name location logo"},
+            ]
+        })
+        if(!user) throw new Error("User not found")
+        const cart = user.cart
+        return JSON.parse(JSON.stringify(cart))
     } catch (error) {
         handleError(error) 
     }

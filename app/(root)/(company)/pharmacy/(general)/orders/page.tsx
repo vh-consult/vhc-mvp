@@ -4,6 +4,7 @@ import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
 import { OrderCard } from '@/components/pharmacy/OrderList'
 import { useUser } from '@clerk/nextjs'
+import Loader from '@/components/general/Loader'
 
 const OrdersPage = () => {
   const {user} = useUser()
@@ -61,7 +62,7 @@ const OrdersPage = () => {
     }
     fetchOrders()
 
-  }, [])
+  }, [user?.id])
   return (
     <main className='w-[90%] mx-auto min-h-screen py-4 bg-white'>
       <div className="flex px-11 flex-between sticky top-[60px]">
@@ -87,15 +88,17 @@ const OrdersPage = () => {
       </div>
       <div className="grid grid-cols-2">
         {
-          displayOrders.map((order:any, index:number) => (
+          displayOrders.length > 0 ? (displayOrders.map((order:any, index:number) => (
             <OrderCard 
               key={index}
               buyerName={order.buyerName}
               imageUrl={order.shop.logo}
               shopName={order.shop.name}
               items={order.items}
+              location={order.shop.location}
+              description={order.note}
             />
-          ))
+          ))): <Loader/>
         }
       </div>
     </main>
