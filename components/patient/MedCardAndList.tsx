@@ -98,7 +98,7 @@ const MedCard = ({
   const {user} = useUser() 
   const [currentDrugs, setCurrentDrugs] = useState()
   const fetchDrugs = async () => {
-    const medDrugs = await fetchMeds(user?.id!)
+    const medDrugs = await fetchMeds(user?.id as string)
     setCurrentDrugs(medDrugs)
   }
     return (

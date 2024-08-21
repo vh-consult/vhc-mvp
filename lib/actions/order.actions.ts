@@ -169,10 +169,9 @@ export async function fetchUserOrders(clerkId:string) {
             ]
         })
         if(!user) throw new Error("User not found")
-
         const orders = user.orders
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
-        handleError(error)
+        handleError(error) 
     }
 }

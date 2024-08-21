@@ -24,9 +24,9 @@ const OngoingNotification = ({
     return time;
   };
   return (
-    <div className='p-2 m-4 hover:bg-gray-100 h-[125px]'>
+    <div className='p-2 hover:bg-gray-100 h-[125px]'>
       <div className="flex">
-        <span className='rounded-lg bg-cyan-100 mr-4 font-bold text-2xl w-10 h-10 flex flex-center '>
+        <span className='rounded-lg bg-sky-2 mr-4 font-bold text-2xl w-10 h-10 flex flex-center '>
           {patient.slice(0,1)}
         </span>
         <div className='flex flex-col'>

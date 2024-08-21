@@ -1,9 +1,7 @@
 'use client'
-import List from '@/components/general/List'
 import { Button } from '@/components/ui/button'
 import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
-import useDBUser from '@/hooks/useDBUser'
 import { OrderCard } from '@/components/pharmacy/OrderList'
 import { useUser } from '@clerk/nextjs'
 
@@ -57,7 +55,8 @@ const OrdersPage = () => {
   }
   useEffect(()=>{
     const fetchOrders = async () => {
-      const orders = await fetchUserOrders(user?.id!)
+      const orders = await fetchUserOrders(user?.id as string)
+      console.log(orders)
       setAllOrders(orders)
     }
     fetchOrders()

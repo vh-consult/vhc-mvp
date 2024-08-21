@@ -8,7 +8,7 @@ const layout = (
       <Sidebar/>
       <section className='w-full 
       min-h-[calc(100vh-64px)] pl-[120px] 
-      pr-[40px] py-[20px]'>
+      pr-[40px] py-[15px]'>
        {children}
       </section>
     </main>

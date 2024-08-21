@@ -103,7 +103,7 @@ const Account = async () => {
 
   return (
     <div className='w-full'>
-      <div className="w-full h-[245px] rounded-lg p-3 border border-gray-400 ">
+      <div className="w-full h-[245px] bg-white rounded-lg p-3 shadow-sm ">
         <h2 className="text-lg capitalize font-medium">
           {
             cardsContent.personalDetails.header
@@ -115,8 +115,8 @@ const Account = async () => {
             height={150} 
             src={fetchedUser?.photo} 
             alt="" 
-            className='w-[185px] h-[185px] object-cover border
-            border-gray-400 rounded-full'
+            className='w-[185px] h-[185px] object-cover 
+            rounded-full'
             />
           <div className="w-[calc(100%-195px)] grid grid-cols-4 grid-rows-2 gap-8">
             {
@@ -141,7 +141,7 @@ const Account = async () => {
       </div>
       <div className="w-full grid grid-cols-3 gap-x-4 mt-4">
 
-        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
+        <div className=" rounded-lg p-2 h-[280px]  bg-white">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.healthcare.header
@@ -168,7 +168,7 @@ const Account = async () => {
           </div>
         </div>
 
-        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
+        <div className=" rounded-lg p-2 h-[280px]  bg-white">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.contact.header
@@ -194,7 +194,7 @@ const Account = async () => {
             }
           </div>
         </div>
-        <div className=" rounded-lg p-2 h-[280px] border border-gray-400">
+        <div className=" rounded-lg p-2 h-[280px]  bg-white">
           <h2 className='text-lg capitalize font-medium'>
             {
               cardsContent.address.header
