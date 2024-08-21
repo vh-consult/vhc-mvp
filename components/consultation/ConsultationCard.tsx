@@ -73,7 +73,7 @@ const ConsultationCard = ({
               onClick={async () => {
                 navigator.clipboard.writeText(link);
                 toast({
-                  title: "Link Saved",
+                  title: "Link copied",
                 });
               }}
               className="bg-green-3 px-6"
@@ -83,8 +83,9 @@ const ConsultationCard = ({
                 alt="feature"
                 width={20}
                 height={20}
+                className="bg-gray-300"
               />
-              &nbsp; Save Link
+              &nbsp; Copy Link
             </Button>
           </div>
         )}
