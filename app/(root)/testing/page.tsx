@@ -7,9 +7,8 @@ const page = () => {
   return (
     <div className='w-full h-screen bg-green-3 grid grid-cols-2'>
       <OngoingNotification 
-        startedAt={new Date()} 
+        startedAt={new Date(2024, 7, 21, 10, 30)} 
         patient='Samuel Luke' 
-        problemStatement='Just headache' 
         link=''
       />
       <RequestCard 
