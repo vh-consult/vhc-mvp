@@ -6,8 +6,8 @@ import RecentOrders from '../pharmacy/RecentOrders'
 import { fetchPharmacyOverviewData } from '@/lib/actions/company.actions'
 
 const PharmacyOverview = async ({id}: {id: string}) => {
-  // const overviewData = await fetchPharmacyOverviewData(id)
-  // console.log(overviewData)
+  const overviewData = await fetchPharmacyOverviewData(id)
+  console.log(overviewData)
   return (
     <main className='w-full h-[540px] flex flex-between'>
       <div className="h-full w-[40%] bg-white">

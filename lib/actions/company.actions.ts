@@ -73,31 +73,6 @@ export async function getAllPharmacyShops() {
     }
 }
 
-// export async function fetchPharmacyOverviewData(shopId:string) {
-//     try {
-//         await connectToDatabase()
-//         const shop = await Company.findOne(
-//             {_id: shopId, companyType: "Pharmacy"}
-//         ).populate({
-//             path: "orders",
-//             populate: [
-//                 { path: "buyer", select: "firstName lastName email" }
-//             ]
-//         }).populate({
-//             path: "inventory",
-//             select: "name expiryDate quantity price catalog"
-//         })
-//         if(!shop) throw new Error("No shop found")
-//         const orders = shop.orders
-//         const inventory = shop.inventory
-//         const shopData = shop.toObject()
-        
-//         return {orders, inventory, shopData}
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 export async function fetchPharmacyOverviewData(shopId: string) {
     try {
@@ -122,10 +97,10 @@ export async function fetchPharmacyOverviewData(shopId: string) {
         // Remove circular references
         const shopData = { ...shop, orders: undefined, inventory: undefined };
         const shopDataResults = JSON.parse(JSON.stringify(shopData))
-        const orderDataResults = JSON.parse(JSON.stringify(shopData))
-        const inventoryDataResults = JSON.parse(JSON.stringify(shopData))
+        const orderDataResults = JSON.parse(JSON.stringify(orders))
+        const inventoryDataResults = JSON.parse(JSON.stringify(inventory))
 
-        return { shopDataResults, orderDataResults, inventoryDataResults };
+        return { orderDataResults, inventoryDataResults };
         
     } catch (error) {
         console.error("Error fetching pharmacy overview data:", error);
