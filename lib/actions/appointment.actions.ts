@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache";
 import Booking from "../database/models/booking.model";
 import { Company } from "../database/models/company.model";
 import { User } from "../database/models/user.model";
@@ -14,6 +15,7 @@ export interface BookingParams {
     host?: string;
 }
 
+// I need to fix the booking host side by making hosts only doctors
 
 export async function newBooking(clerkId: string, formData: BookingParams) {
     try {
@@ -41,7 +43,7 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         appointment.save()
         console.log(host)
 
-        host.bookings.push(appointment._id)
+        host.requestedBookings.push(appointment._id)
         await host.save()  
         console.log(appointment._id)
         return JSON.parse(JSON.stringify(appointment._id))
@@ -64,10 +66,27 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
         const booking = await Booking.findById(sessionId)
         if (!booking) throw new Error("Booking not found")
         
-        booking.status = "cancelled"
+        booking.status = "canceled"
         await booking.save()
 
-        return {message: "Booking cancelled"}
+        return {message: "Booking canceled"}
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function notifyHost(patientId:string, bookingId:string) {
+    try {
+        await connectToDatabase()
+        const userNeedingEmergencyConsultation = await User.findOne({clerkId: patientId})
+        if (!userNeedingEmergencyConsultation) throw new Error("User creating session not found")
+        
+        const bookedAppointment = await Booking.findById(bookingId).populate("host")
+        if (!bookedAppointment) throw new Error("Non-existent appointment in database")
+        
+        bookedAppointment.host.ongoingSession = bookingId
+        revalidatePath(`/${bookedAppointment.host.clerkId}/overview`)
+        return {message: "Doctor notified"}
     } catch (error) {
         handleError(error)
     }

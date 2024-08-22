@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import {Doctor, HospitalAdmin, Patient, PharmacyAdmin, User} from "../database/models/user.model";
+import {Doctor, Patient, User} from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 

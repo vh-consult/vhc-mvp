@@ -12,7 +12,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import {  newBooking, searchHost } from '@/lib/actions/appointment.actions';
+import {  newBooking, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import useDBUser from '@/hooks/useDBUser';
 
@@ -89,11 +89,12 @@ const ConsultationTypeList = () => {
               host: hostName, 
               hostImage: hostImage,
               hostId: dbUser?._id 
-            }          
+            },
           },
         });
         setCallDetail(call);
         if (!values.problem_statement) {
+          await notifyHost(user?.id, newCall)
           router.push(`/consultation-room/${call.id}`);
         }
         toast({ title: 'Consultation Created' });

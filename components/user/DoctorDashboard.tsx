@@ -17,21 +17,7 @@ const DoctorDashboard = () => {
           clientName='Olokwa Nchewzu'
           problemStatement='Menim mpo'
           scheduledAt={new Date(2024, 7, 25, 20, 30)}
-        />   
-                <RequestCard 
-          bookingType='Virtual consultation' 
-          clientImage='/images/'
-          clientName='Olokwa Nchewzu'
-          problemStatement='Menim mpo'
-          scheduledAt={new Date(2024, 7, 25, 20, 30)}
-        />   
-                <RequestCard 
-          bookingType='Virtual consultation' 
-          clientImage='/images/'
-          clientName='Olokwa Nchewzu'
-          problemStatement='Menim mpo'
-          scheduledAt={new Date(2024, 7, 25, 20, 30)}
-        />        
+        />          
       </div>
       </div>
       <div className="w-[37%] h-full flex flex-col flex-between">

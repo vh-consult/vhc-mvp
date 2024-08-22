@@ -81,7 +81,6 @@ export async function fetchPharmacyOverviewData(shopId: string) {
             { _id: shopId, companyType: "Pharmacy" }
         ).lean();
         if (!shop) throw new Error("No shop found");
-        console.log(shop)
 
         // Fetch orders and inventory separately
         //@ts-expect-error
