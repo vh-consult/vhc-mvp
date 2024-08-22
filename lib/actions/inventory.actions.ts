@@ -66,7 +66,7 @@ export async function addToInventory(
 export async function removeFromInventory(clerkId: string, drugId: string, shopId: string) {
     try {
         await connectToDatabase()
-        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
+        const admin = await PharmacyAdmin.findOne({clerkId})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
@@ -103,7 +103,7 @@ export async function updateInventory(
 ) {
     try {
         await connectToDatabase()
-        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
+        const admin = await PharmacyAdmin.findOne({clerkId})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})

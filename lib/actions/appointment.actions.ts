@@ -6,6 +6,8 @@ import { Company } from "../database/models/company.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import Patient from "../database/models/patient.model";
+import Doctor from "../database/models/doctor.model";
 
 export interface BookingParams {
     date?: Date;
@@ -20,7 +22,7 @@ export interface BookingParams {
 export async function newBooking(clerkId: string, formData: BookingParams) {
     try {
         await connectToDatabase()
-        const creator = await User.findOne({clerkId})
+        const creator = await Patient.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
                 
         if (formData.host === "" && creator.personalPhysician !== undefined) {
@@ -28,7 +30,7 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
             creator.personalPhysician = formData.host
         } 
-        const host = await User.findOne({_id: formData.host}) || await Company.findOne({_id: formData.host}) 
+        const host = await Doctor.findOne({_id: formData.host})
         if (!host) throw new Error("Host not found")
         if(!host.clients.includes(creator._id)){
             host.clients.push(creator._id)
@@ -78,7 +80,8 @@ export async function cancelBooking(clerkId: string, sessionId:string) {
 export async function notifyHost(patientId:string, bookingId:string) {
     try {
         await connectToDatabase()
-        const userNeedingEmergencyConsultation = await User.findOne({clerkId: patientId})
+        console.log(patientId, bookingId)
+        const userNeedingEmergencyConsultation = await Patient.findOne({clerkId: patientId})
         if (!userNeedingEmergencyConsultation) throw new Error("User creating session not found")
         
         const bookedAppointment = await Booking.findById(bookingId).populate("host")
@@ -103,8 +106,7 @@ export async function searchHost(query: string) {
         }).select('_id name')
 
         // Search for doctors
-        const doctorHosts = await User.find({
-            userRole: "Doctor",
+        const doctorHosts = await Doctor.find({
             $or: [
                 { firstName: { $regex: query, $options: 'i' } },
                 { lastName: { $regex: query, $options: 'i' } },
@@ -137,20 +139,37 @@ export async function searchHost(query: string) {
     }
 }
 
-export async function fetchDoctorBookings(clerkId:string) {
+export async function fetchRequestedBookings(clerkId:string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne(
-            {clerkId , userRole: "Doctor"}
-        ).populate({
-            path: "bookings",
+        const user = await Doctor.findOne({clerkId }).populate({
+            path: "requestedBookings",
             populate: [
                 {path: "patient", select:"firstName lastName photo"}
             ]
         })
         if (!user) throw new Error("User not found")
         
-        const bookings = user.bookings
+        const bookings = user.requestedBookings
+
+        return JSON.parse(JSON.stringify(bookings))
+    } catch (error) {
+      handleError(error)  
+    }
+}
+
+export async function fetchAcceptedBookings(clerkId:string) {
+    try {
+        await connectToDatabase()
+        const user = await Doctor.findOne({clerkId }).populate({
+            path: "acceptedBookings",
+            populate: [
+                {path: "patient", select:"firstName lastName photo"}
+            ]
+        })
+        if (!user) throw new Error("User not found")
+        
+        const bookings = user.acceptedBookings
 
         return JSON.parse(JSON.stringify(bookings))
     } catch (error) {

@@ -15,7 +15,7 @@ const OverviewPage = () => {
     <div>
       {
         role === undefined? <Loader/> :
-        role === "PharmacyAdmin"? (<PharmacyOverview id={id as string}/>) :
+        role === "PharmacyAdmin"? (<PharmacyOverview id={id as string}/>) : 
         role === "HospitalAdmin"? (<HospitalOverview/>) : ''
       }
     </div>

@@ -35,9 +35,8 @@ export async function postConsultationForm(
         }).populate("patient").populate("host")
         if(!booking) throw new Error("No booking found")
 
-        const doctor = await User.findOne({
+        const doctor = await Doctor.findOne({
             clerkId: doctorId, 
-            userRole: "Doctor"
         })
         if (!doctor) throw new Error("Doctor not found")
         const patient = booking.patient
@@ -69,7 +68,7 @@ export async function postConsultationForm(
 export async function editConsultationSummary(doctorId:string, formData: any, sessionId: string) {
     try {
         await connectToDatabase()
-        const doctor = await User.findOne({clerkId: doctorId, userRole: "Doctor"})
+        const doctor = await Doctor.findOne({clerkId: doctorId})
         if (!doctor) throw new Error("Doctor not found")
         if(!doctor.consultationHistory.includes(sessionId)) throw new Error("You can't edit this session")
 

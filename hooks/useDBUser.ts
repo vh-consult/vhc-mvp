@@ -15,7 +15,7 @@ const useDBUser = () => {
         async function getUserFromDB() {
             const userData:any = await getUser(clerkId)
             setDbUser(userData)
-            setRole(userData.userRole)
+            setRole(userData.type)
             setCompanyId(userData.company as string)
         }
         getUserFromDB()

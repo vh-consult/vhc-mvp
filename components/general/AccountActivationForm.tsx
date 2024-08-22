@@ -87,7 +87,7 @@ const ActivateAccount = () => {
           toast({title: 'Account activated successfully, you are being redirected'})
           router.push('/landing');
           break;
-        case 'HospitalAdmin':
+        // case 'HospitalAdmin':
         case 'PharmacyAdmin':
           toast({title: 'Account activated successfully, you have to set your company up next'})
           router.push('/company/set-up');
@@ -170,7 +170,7 @@ const ActivateAccount = () => {
                   <SelectContent position="popper" className='bg-green-1 text-green-4'>
                     <SelectItem value="patient">Patient</SelectItem>
                     <SelectItem value="doctor">Doctor</SelectItem>
-                    <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem>
+                    {/* <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem> */}
                     <SelectItem value="pharmacyAdmin">Pharmacy Admin</SelectItem>
                   </SelectContent>
                 </Select>

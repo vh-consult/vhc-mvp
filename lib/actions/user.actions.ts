@@ -7,7 +7,7 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
-import CompanyAdmin from "../database/models/companyAdmin.model";
+import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 
 
 // CREATE
@@ -107,12 +107,13 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     switch (userData.role) {
       case 'patient':
         userToActivateAccount = await Patient.create({ ...userObject, ...userData });
+        console.log(userToActivateAccount)
         break;
       case 'pharmacyAdmin':
-        userToActivateAccount = await CompanyAdmin.create({ ...userObject, ...userData });
+        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
         break;
       case 'hospitalAdmin':
-        userToActivateAccount = await CompanyAdmin.create({ ...userObject, ...userData });
+        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
         break;
       case 'doctor':
         userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
@@ -121,7 +122,7 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
         throw new Error("Invalid role");
     }
 
-    return {userRole: userToActivateAccount.userRole};
+    return {userRole: userToActivateAccount.type};
   } catch (error) {
     handleError(error)
   }
@@ -171,7 +172,7 @@ export async function fetchAffiliates(userId:string) {
 export async function fetchDoctorClients(clerkId:string) {
   try {
     await connectToDatabase()
-    const doctor = await User.findOne({clerkId, userRole: "Doctor"}).populate(
+    const doctor = await Doctor.findOne({clerkId}).populate(
       {path: "clients", select: "firstName lastName gender email photo dateOfBirth"}
     )
     if(!doctor) throw new Error("Doctor not found")

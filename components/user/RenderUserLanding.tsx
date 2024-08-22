@@ -16,7 +16,6 @@ export interface ClickableCardProps {
 export interface ClickableCardDataStructure {
     patientAndDoctor: ClickableCardProps[];
     admin: ClickableCardProps[];
-    user: ClickableCardProps[];
 }
 
 
@@ -26,7 +25,7 @@ const RenderUserLanding = () => {
     const {role, clerkId, companyId} = useDBUser()
 
     const ClickableCardData: ClickableCardDataStructure = {
-        user: [
+        patientAndDoctor: [
             {
                 title: 'Dashboard',
                 description: 'Enter your dashboard',
@@ -39,8 +38,6 @@ const RenderUserLanding = () => {
                 imageSrc: '/icons/consultation.svg',
                 action: `/consultation/home`
             },
-        ],
-        patientAndDoctor: [
             {
                 title: 'Pharmacy',
                 description: 'Order for drugs',
@@ -70,18 +67,7 @@ const RenderUserLanding = () => {
                     handleClick={() => { router.push("/account-activation")}}
                     className='bg-white hover:bg-gray-100 text-green-4 h-[250px] w-[100%]'
                 />
-                ) : 
-               ( ClickableCardData.user.map((card, index) => (
-                    <ClickableCard 
-                        title={card.title}
-                        description={card.description}
-                        imgURL={card.imageSrc}
-                        handleClick={() => { router.push(card.action)}}
-                        className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
-                        key={index}
-                    />
-
-                )))
+                ) : ''
             }
             {
                 role === "Patient" || role === "Doctor"  ? (
@@ -111,7 +97,7 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : companyId === undefined && role !== "Patient"  ? (
+                ) : (companyId === undefined && role === "PharmacyAdmin" ) ? (
                     <ClickableCard 
                     title="Register Company"
                     description="Create company profile"

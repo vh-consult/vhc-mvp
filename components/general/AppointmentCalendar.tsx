@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import { BookingParams, fetchDoctorBookings } from '@/lib/actions/appointment.actions';
+import { BookingParams, fetchAcceptedBookings } from '@/lib/actions/appointment.actions';
 import useDBUser from '@/hooks/useDBUser';
 import { useUser } from '@clerk/nextjs';
 
@@ -12,7 +12,7 @@ const AppointmentCalendar = () => {
   const {user} = useUser()
   useEffect(()=> {
     const getBookings = async () => {
-      const bookings = await fetchDoctorBookings(user?.id as string)
+      const bookings = await fetchAcceptedBookings(user?.id as string)
       console.log(bookings)
       setAppointments(bookings)
     }
