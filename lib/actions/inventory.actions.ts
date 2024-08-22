@@ -4,6 +4,7 @@ import { connectToDatabase } from "../database/mongoose";
 import { Company, Pharmacy } from "../database/models/company.model";
 import Drug from "../database/models/drug.model";
 import User from "../database/models/user.model";
+import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 
 export interface DrugParams {
     name: string;
@@ -21,7 +22,7 @@ export async function addToInventory(
 ) {
     try {
         await connectToDatabase();
-        const admin = await User.findOne({ clerkId: adminId }).populate('company');
+        const admin = await PharmacyAdmin.findOne({ clerkId: adminId }).populate('company');
         if (!admin) throw new Error("User not found");
 
         if (admin.userRole === "PharmacyAdmin") {
