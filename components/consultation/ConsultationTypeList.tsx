@@ -15,6 +15,7 @@ import { useUser } from '@clerk/nextjs';
 import {  newBooking, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import useDBUser from '@/hooks/useDBUser';
+import DoctorDashboard from '../user/DoctorDashboard';
 
 const initialValues = {
   date: new Date(),
@@ -248,7 +249,7 @@ const ConsultationTypeList = () => {
             />
           </>
         ): role === "Doctor"? (
-          <>None</>
+          <DoctorDashboard/>
         ): ''
       }
     </section>

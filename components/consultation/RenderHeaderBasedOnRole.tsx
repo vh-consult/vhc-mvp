@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Header from '../user/Header';
 import useDBUser from '@/hooks/useDBUser';
@@ -42,7 +43,7 @@ const RenderHeaderBasedOnRole = () => {
   return (
     <Header
         navigations={
-            role === "Patient" ? consultationHeaderLinks.patient
+            role === "Patient" ? consultationHeaderLinks.patient: consultationHeaderLinks.doctor
     }
   />
   )
