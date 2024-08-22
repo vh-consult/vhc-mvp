@@ -3,7 +3,7 @@
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import Blog, { BlogParams } from "../database/models/blog.model";
-import { User } from "../database/models/user.model";
+import User from "../database/models/user.model";
 import { WriteStream } from "fs";
 import { File } from "buffer";
 

@@ -2,9 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
-import {Doctor, Patient, User} from "../database/models/user.model";
+import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import Patient from "../database/models/patient.model";
+import Doctor from "../database/models/doctor.model";
+import CompanyAdmin from "../database/models/companyAdmin.model";
 
 
 // CREATE
@@ -106,10 +109,10 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
         userToActivateAccount = await Patient.create({ ...userObject, ...userData });
         break;
       case 'pharmacyAdmin':
-        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
+        userToActivateAccount = await CompanyAdmin.create({ ...userObject, ...userData });
         break;
       case 'hospitalAdmin':
-        userToActivateAccount = await HospitalAdmin.create({ ...userObject, ...userData });
+        userToActivateAccount = await CompanyAdmin.create({ ...userObject, ...userData });
         break;
       case 'doctor':
         userToActivateAccount = await Doctor.create({ ...userObject, ...userData });

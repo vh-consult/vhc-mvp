@@ -1,8 +1,8 @@
 import {Schema, models, model} from "mongoose"
 
 const ConsultationSchema = new Schema({
-    patient: {type: Schema.Types.ObjectId, ref: "User"},
-    doctor: {type: Schema.Types.ObjectId, ref: "User"},
+    patient: {type: Schema.Types.ObjectId, ref: "Patient"},
+    doctor: {type: Schema.Types.ObjectId, ref: "Doctor"},
     date: {type: Date, required: true},
     problem_statement: {type: String,},
     channel: {type: String, enum: ['virtual', 'inPerson', 'lab']},

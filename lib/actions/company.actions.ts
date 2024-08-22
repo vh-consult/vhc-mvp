@@ -3,7 +3,7 @@
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { Company, Hospital, Pharmacy } from "../database/models/company.model";
-import { User } from "../database/models/user.model";
+import User from "../database/models/user.model";
 import Order from "../database/models/order.model";
 import Drug from "../database/models/drug.model";
 

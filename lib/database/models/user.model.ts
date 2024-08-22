@@ -21,11 +21,7 @@ const UserSchema = new Schema({
     country: {type: String},
     location: {type: String},
     gender: {type: String, enum: ["male", "female"]},
-    savedBlogs: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],
-    subscribedToNewsletter: {type: Boolean, default: false},
-    orders: [{type: Schema.Types.ObjectId,ref: 'Order'}],
     messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
-    cart: [{type: Schema.Types.ObjectId, ref: 'Drug'}],
     history: [HistorySchema],
   }, options
 );
@@ -37,7 +33,4 @@ const UserSchema = new Schema({
 
 const User = models?.User || model("User", UserSchema);
 
-export {
-  User,
-  Doctor,
-};
+export default User

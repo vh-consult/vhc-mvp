@@ -1,7 +1,7 @@
 "use server"
 
 import Medication, { MedicationParams } from "../database/models/medication.model"
-import { User } from "../database/models/user.model"
+import User from "../database/models/user.model"
 import { connectToDatabase } from "../database/mongoose"
 import { handleError } from "../utils"
 

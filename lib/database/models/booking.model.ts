@@ -1,9 +1,9 @@
 import { Schema, model, models } from "mongoose";
 
 const BookingSchema = new Schema({
-    patient: {type: Schema.Types.ObjectId, ref: 'User'},
+    patient: {type: Schema.Types.ObjectId, ref: 'Patient'},
     host: {type: Schema.Types.ObjectId, refPath: 'hostType',},
-    hostType: {type: String, enum: ["User", "Company"] },
+    hostType: {type: String, enum: ["User", "Company"]},
     link: {type: String},
     date: {type: Date, required: true, default: new Date()},
     problem_statement: {type: String, default: 'Emergency'},

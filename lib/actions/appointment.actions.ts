@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import Booking from "../database/models/booking.model";
 import { Company } from "../database/models/company.model";
-import { User } from "../database/models/user.model";
+import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 

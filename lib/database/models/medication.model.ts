@@ -6,7 +6,8 @@ export interface MedicationParams extends Document {
     caution?: string;
     status:string;
     duration?: string;
-    prescribed_by?: Schema.Types.ObjectId | string
+    prescribed_by?: Schema.Types.ObjectId | string;
+    presciptionMadeBy?: string;
 }
 
 const MedicationSchema = new Schema<MedicationParams>({
@@ -15,7 +16,8 @@ const MedicationSchema = new Schema<MedicationParams>({
     caution: { type: String, required: [true, "caution for taking drugs is required"],},
     status: { type: String, enum: ["notFinished", "finished"], default: "notFinished",},
     duration: { type: String,},
-    prescribed_by: { type: Schema.Types.ObjectId, ref: "User"}
+    prescribed_by: { type: Schema.Types.ObjectId, refPath: "Doctor"},
+    presciptionMadeBy: {type: String, enum: ["Doctor", "Pharmacy"]}
 });
 
 const Medication = models?.Medication || model("Medication", MedicationSchema)

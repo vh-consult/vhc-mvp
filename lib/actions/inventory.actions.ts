@@ -1,9 +1,9 @@
 "use server"
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
-import { PharmacyAdmin, User } from "../database/models/user.model";
 import { Company, Pharmacy } from "../database/models/company.model";
 import Drug from "../database/models/drug.model";
+import User from "../database/models/user.model";
 
 export interface DrugParams {
     name: string;
