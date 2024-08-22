@@ -107,7 +107,6 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     switch (userData.role) {
       case 'patient':
         userToActivateAccount = await Patient.create({ ...userObject, ...userData });
-        console.log(userToActivateAccount)
         break;
       case 'pharmacyAdmin':
         userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });

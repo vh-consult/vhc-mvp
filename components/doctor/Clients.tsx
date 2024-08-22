@@ -8,16 +8,15 @@ const headers = [
   "Name", "Gender", "Age", "Email", "Actions"
 ]
 
-const ClientsPage = async () => {
+const Clients = async () => {
   const user = await currentUser()
 
   const clients = await fetchDoctorClients(user?.id!)
-  console.log(clients)
   return (
-<div>
-      <div className="flex items-center justify-between">
+    <div className='px-16'>
+      <div className="flex items-center justify-between mb-2">
         <h1 className='text-2xl font-medium'>Clientele</h1>
-        <SearchBar className='border w-[225px] rounded-lg border-saturated-purple'/>
+        <SearchBar className='border w-[300px] rounded-full bg-gray-100'/>
       </div>
       <div className="grid grid-cols-5  h-[30px] text-sm font-medium opacity-75 rounded-t-lg bg-gray-200 w-full items-center px-3">
         {
@@ -46,4 +45,4 @@ const ClientsPage = async () => {
   )
 }
 
-export default ClientsPage
+export default Clients

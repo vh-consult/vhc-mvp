@@ -5,14 +5,13 @@ import React from 'react'
 
 const UserHomePage = () => {
   return (
-    <section className="pt-6">
-      <div className="h-[300px] w-[90%] mx-auto rounded-[20px] bg-hero bg-cover">
-      <UpcomingRenderer/>
-    </div>
-    <div className='w-[90%] mx-auto py-10 md:grid md:grid-cols-3 flex-wrap gap-10'>
-      <RenderUserLanding/>
-    </div>
-
+    <section className="w-full flex flex-row p-3">
+      <div className=" mx-auto w-[33%] rounded-[20px] bg-hero bg-cover">
+        <UpcomingRenderer/>
+      </div>
+      <div className='mx-auto w-[65%] grid grid-cols-2 flex-wrap gap-6'>
+        <RenderUserLanding/>
+      </div>
     </section>
   )
 }

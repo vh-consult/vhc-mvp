@@ -11,12 +11,12 @@ const UpcomingRenderer = () => {
       dateStyle: 'full'
     })).format(now);
   return (
-    <div className="flex h-full flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11">
-    <h2 className="bg-green-1 max-w-[300px] rounded py-2 text-center text-base font-normal">
-    Upcoming Consultation at: 12:30 PM 
+    <div className="flex h-[90%] flex-col justify-between max-md:px-5 max-md:py-8 lg:p-11">
+    <h2 className="bg-green-1 rounded py-2 text-center text-base font-normal">
+      
     </h2>
     <div  className="flex flex-col gap-2">
-      <h1 className="text-4xl text-green-4 font-extrabold lg:text-7xl">
+      <h1 className="text-4xl text-green-4 font-extrabold lg:text-6xl">
         {time}
       </h1>
       <p className="text-lg font-medium text-green-4 lg:text-2xl">

@@ -16,6 +16,9 @@ export interface ClickableCardProps {
 export interface ClickableCardDataStructure {
     patientAndDoctor: ClickableCardProps[];
     admin: ClickableCardProps[];
+    patient: ClickableCardProps[];
+    doctor: ClickableCardProps[];
+
 }
 
 
@@ -27,12 +30,6 @@ const RenderUserLanding = () => {
     const ClickableCardData: ClickableCardDataStructure = {
         patientAndDoctor: [
             {
-                title: 'Dashboard',
-                description: 'Enter your dashboard',
-                imageSrc: '/icons/dashboard.svg',
-                action: `/${clerkId}/dashboard`
-            },
-            {
                 title: 'Consultation',
                 description: 'Visit consultation room',
                 imageSrc: '/icons/consultation.svg',
@@ -43,6 +40,28 @@ const RenderUserLanding = () => {
                 description: 'Order for drugs',
                 imageSrc: '/icons/Pill.svg',
                 action: `/pharmacy/home`
+            },
+            {
+                title: 'Blogs',
+                description: 'Access health-related information',
+                imageSrc: '/icons/dashboard.svg',
+                action: `/blogs/home`
+            },
+        ],
+        patient: [
+            {
+                title: 'Dashboard',
+                description: 'Enter your dashboard',
+                imageSrc: '/icons/dashboard.svg',
+                action: `/${clerkId}/dashboard`
+            },
+        ],
+        doctor: [
+            {
+                title: 'Affiliates & Clients',
+                description: 'Manage your affiliate contacts',
+                imageSrc: '/icons/Company.svg',
+                action: `/affiliates`
             },
         ],
         admin: [
@@ -70,8 +89,38 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
+                role === "Patient" ? (
+                    ClickableCardData.patient.map((card, index) => (
+                        <ClickableCard 
+                            title={card.title}
+                            description={card.description}
+                            imgURL={card.imageSrc}
+                            handleClick={() => { router.push(card.action)}}
+                            className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
+                            key={index}
+                        />
+        
+                    ))
+                ) : ''
+            }
+            {
                 role === "Patient" || role === "Doctor"  ? (
                     ClickableCardData.patientAndDoctor.map((card, index) => (
+                        <ClickableCard 
+                            title={card.title}
+                            description={card.description}
+                            imgURL={card.imageSrc}
+                            handleClick={() => { router.push(card.action)}}
+                            className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
+                            key={index}
+                        />
+        
+                    ))
+                ) : ''
+            }
+            {
+                role === "Doctor" ? (
+                    ClickableCardData.doctor.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
                             description={card.description}
