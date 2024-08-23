@@ -3,6 +3,7 @@
 import Booking from "../database/models/booking.model";
 import { Company } from "../database/models/company.model";
 import Consultation from "../database/models/consultation.model";
+import Doctor from "../database/models/doctor.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
