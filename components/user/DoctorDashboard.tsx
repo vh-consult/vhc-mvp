@@ -5,7 +5,7 @@ import RequestCard from '../consultation/RequestCard'
 
 const DoctorDashboard = () => {
   return (
-    <main className=' h-[535px] mx-auto flex flex-between'>
+    <main className=' h-[535px] mx-auto text-green-4 flex flex-between'>
       <div className="w-[60%] h-full bg-white rounded-lg">
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Appointment Requests

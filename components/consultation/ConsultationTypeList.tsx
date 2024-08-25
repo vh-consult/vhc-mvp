@@ -117,142 +117,143 @@ const ConsultationTypeList = () => {
   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${callDetail?.id}`;
   
   return (
-    <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-green-4">
-      {
-        role === "Patient" ? (
-          <>
-          {ClickableCards.map((card, index) => (
-            <ClickableCard
-              key={index}
-              imgURL={card.imageSrc}
-              title={card.title}
-              description={card.description}
-              handleClick={() => setConsultationState(card.action as ConsultationStateProps)}
-              className='bg-white hover:bg-gray-100'
-            />
-            ))}
-            <ClickableCard
-              imgURL="/icons/recordings.svg"
-              title="View Recordings"
-              description="Consultation Recordings"
-              className="bg-white hover:bg-gray-100"
-              handleClick={() => router.push('/consultation/recordings')}
-            />
+    <>
+        {
+          role === "Patient" ? (
+            <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-green-4">
+            {ClickableCards.map((card, index) => (
+              <ClickableCard
+                key={index}
+                imgURL={card.imageSrc}
+                title={card.title}
+                description={card.description}
+                handleClick={() => setConsultationState(card.action as ConsultationStateProps)}
+                className='bg-white hover:bg-gray-100'
+              />
+              ))}
+              <ClickableCard
+                imgURL="/icons/recordings.svg"
+                title="View Recordings"
+                description="Consultation Recordings"
+                className="bg-white hover:bg-gray-100"
+                handleClick={() => router.push('/consultation/recordings')}
+              />
 
-            {!callDetail ? (
+              {!callDetail ? (
+                <FormModal
+                  isOpen={ConsultationState === 'isSchedulingConsultation'}
+                  onClose={() => setConsultationState(undefined)}
+                  title="Create Consultation"
+                  handleClick={createConsultation}
+                >
+                  <div className="flex flex-col gap-2.5">
+                    <Label className="text-base font-normal leading-[22.4px] text-green-4" htmlFor="appointmentType">Appointment type</Label>
+                    <Select required onValueChange={(value) => setValues({ ...values, appointmentType: value })}>
+                      <SelectTrigger id="appointmentType" className='bg-green-3'>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent position="popper" className='bg-green-3 text-green-4'>
+                        <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
+                        <SelectItem value="virtual">Virtual Consultation</SelectItem>
+                        <SelectItem value="lab">Lab Session</SelectItem>
+                        <SelectItem value="specialBooking">Special Booking</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="flex flex-col gap-2.5">
+                    <Label className="text-base font-normal leading-[22.4px] text-green-4">What are some of your symptoms</Label>
+                    <Textarea
+                      className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      onChange={(e) => setValues({ ...values, problem_statement: e.target.value })}
+                      placeholder='e.g: Headache and severe back pain...'
+                    />
+                  </div>
+                  <div className="flex w-full flex-col gap-2.5">
+                    <Label className="text-base font-normal leading-[22.4px] text-green-4">Select Date and Time</Label>
+                    <ReactDatePicker
+                      selected={values.date}
+                      onChange={(date) => setValues({ ...values, date: date! })}
+                      showTimeSelect
+                      timeFormat="HH:mm"
+                      timeIntervals={15}
+                      timeCaption="time"
+                      dateFormat="MMMM d, yyyy h:mm aa"
+                      className="w-full rounded bg-green-3 p-2 focus:outline-none"
+                    />
+                  </div>
+                    <div>
+                    <Label>Search & Select Physician</Label>
+                    <Input 
+                      className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      placeholder='Type name...' 
+                      defaultValue={''}
+                      onChange={(e)=>handleSearch(e.target.value)}
+                    />
+                    {
+                      hostList.length > 0 && (
+                        <div className='w-full bg-white'>
+                          {
+                            hostList.map((host:any, index) => (
+                              <div 
+                                key={index} 
+                                onClick={()=>{handleHostSelection(host)}} 
+                                className='p-2 cursor-pointer text-sm hover:bg-green-3'
+                              >
+                                {host.name}
+                              </div>
+                            ))
+                          }
+                        </div>
+                      )
+                    }
+                  </div>
+                </FormModal>
+              ) : (
+                <FormModal
+                  isOpen={ConsultationState === 'isSchedulingConsultation'}
+                  onClose={() => setConsultationState(undefined)}
+                  title="Consultation Created"
+                  handleClick={() => {
+                    navigator.clipboard.writeText(ConsultationLink);
+                    toast({ title: 'Link Copied' });
+                  }}
+                  image={'/icons/checked.svg'}
+                  buttonIcon="/icons/copy.svg"
+                  className="text-center"
+                  buttonText="Copy Consultation Link"
+                />
+              )}
+
               <FormModal
-                isOpen={ConsultationState === 'isSchedulingConsultation'}
+                isOpen={ConsultationState === 'isJoiningConsultation'}
                 onClose={() => setConsultationState(undefined)}
-                title="Create Consultation"
-                handleClick={createConsultation}
-              >
-                <div className="flex flex-col gap-2.5">
-                  <Label className="text-base font-normal leading-[22.4px] text-green-4" htmlFor="appointmentType">Appointment type</Label>
-                  <Select required onValueChange={(value) => setValues({ ...values, appointmentType: value })}>
-                    <SelectTrigger id="appointmentType" className='bg-green-3'>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent position="popper" className='bg-green-3 text-green-4'>
-                      <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
-                      <SelectItem value="virtual">Virtual Consultation</SelectItem>
-                      <SelectItem value="lab">Lab Session</SelectItem>
-                      <SelectItem value="specialBooking">Special Booking</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  <Label className="text-base font-normal leading-[22.4px] text-green-4">What are some of your symptoms</Label>
-                  <Textarea
-                    className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-                    onChange={(e) => setValues({ ...values, problem_statement: e.target.value })}
-                    placeholder='e.g: Headache and severe back pain...'
-                  />
-                </div>
-                <div className="flex w-full flex-col gap-2.5">
-                  <Label className="text-base font-normal leading-[22.4px] text-green-4">Select Date and Time</Label>
-                  <ReactDatePicker
-                    selected={values.date}
-                    onChange={(date) => setValues({ ...values, date: date! })}
-                    showTimeSelect
-                    timeFormat="HH:mm"
-                    timeIntervals={15}
-                    timeCaption="time"
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                    className="w-full rounded bg-green-3 p-2 focus:outline-none"
-                  />
-                </div>
-                  <div>
-                  <Label>Search & Select Physician</Label>
-                  <Input 
-                    className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-                    placeholder='Type name...' 
-                    defaultValue={''}
-                    onChange={(e)=>handleSearch(e.target.value)}
-                  />
-                  {
-                    hostList.length > 0 && (
-                      <div className='w-full bg-white'>
-                        {
-                          hostList.map((host:any, index) => (
-                            <div 
-                              key={index} 
-                              onClick={()=>{handleHostSelection(host)}} 
-                              className='p-2 cursor-pointer text-sm hover:bg-green-3'
-                            >
-                              {host.name}
-                            </div>
-                          ))
-                        }
-                      </div>
-                    )
-                  }
-                </div>
-              </FormModal>
-            ) : (
-              <FormModal
-                isOpen={ConsultationState === 'isSchedulingConsultation'}
-                onClose={() => setConsultationState(undefined)}
-                title="Consultation Created"
-                handleClick={() => {
-                  navigator.clipboard.writeText(ConsultationLink);
-                  toast({ title: 'Link Copied' });
-                }}
-                image={'/icons/checked.svg'}
-                buttonIcon="/icons/copy.svg"
+                title="Type the link here"
                 className="text-center"
-                buttonText="Copy Consultation Link"
-              />
-            )}
+                buttonText="Join Consultation"
+                handleClick={() => router.push(values.link)}
+              >
+                <Input
+                  placeholder="Consultation link"
+                  onChange={(e) => setValues({ ...values, link: e.target.value })}
+                  className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                />
+              </FormModal>
 
-            <FormModal
-              isOpen={ConsultationState === 'isJoiningConsultation'}
-              onClose={() => setConsultationState(undefined)}
-              title="Type the link here"
-              className="text-center"
-              buttonText="Join Consultation"
-              handleClick={() => router.push(values.link)}
-            >
-              <Input
-                placeholder="Consultation link"
-                onChange={(e) => setValues({ ...values, link: e.target.value })}
-                className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              <FormModal
+                isOpen={ConsultationState === 'isEmergencyConsultation'}
+                onClose={() => setConsultationState(undefined)}
+                title="Start an Emergency Consultation"
+                className="text-center"
+                buttonText="Start Consultation"
+                handleClick={createConsultation}
               />
-            </FormModal>
+                  </section>
 
-            <FormModal
-              isOpen={ConsultationState === 'isEmergencyConsultation'}
-              onClose={() => setConsultationState(undefined)}
-              title="Start an Emergency Consultation"
-              className="text-center"
-              buttonText="Start Consultation"
-              handleClick={createConsultation}
-            />
-          </>
-        ): role === "Doctor"? (
-          <DoctorDashboard/>
-        ): ''
-      }
-    </section>
+          ): role === "Doctor"? (
+            <DoctorDashboard/>
+          ): ''
+        }
+    </>
   );
 };
 
