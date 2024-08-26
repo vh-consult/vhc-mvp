@@ -47,8 +47,8 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
               </div>
             </Link>
             
-            <div className=" w-1/2 ">
-              <ul className='flex flex-row flex-between text-green-4'>
+            <div className=" min-w-1/2 ">
+              <ul className='flex flex-row flex-between gap-x-2 text-green-4'>
                 {
                   navigations?.map((nav,index)=>{
                     const activeLink = pathname === nav.route
@@ -56,7 +56,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
                       <li key={index}>
                         <Link
                           href={nav.route}
-                          className={` font-normal text-sm hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
+                          className={` font-normal text-sm  hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
                         >
                           {nav.label}
                         </Link>

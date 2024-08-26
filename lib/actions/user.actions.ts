@@ -150,52 +150,6 @@ export async function deleteUser(clerkId: string) {
 }
 
 
-export async function fetchAffiliates(userId:string) {
-  try {
-    await connectToDatabase()
-    const user = await User.findOne(
-      {clerkId: userId}
-    ).populate("affiliateHospital").populate("personalPhysician")
-    if (!user) throw new Error("User Not Found")
-    
-    const hospital = user.affiliateHospital
-    const doctor =user.personalPhysician
-
-    return JSON.parse(JSON.stringify({...hospital, ...doctor }))
-    
-  } catch (error) {
-    handleError(error)
-  }
-}
-
-export async function fetchDoctorClients(clerkId:string) {
-  try {
-    await connectToDatabase()
-    const doctor = await Doctor.findOne({clerkId}).populate(
-      {path: "clients", select: "firstName lastName gender email photo dateOfBirth"}
-    )
-    if(!doctor) throw new Error("Doctor not found")
-    
-    const clients = doctor.clients
-    return JSON.parse(JSON.stringify(clients))
-  } catch (error) {
-    handleError(error)
-  }
-}
-
-export async function fetchHealthRecord(clerkId:string) {
-  try {
-    await connectToDatabase()
-    const user = await User.findOne({clerkId}).populate("healthRecord")
-    if(!user) throw new Error("User not found")
-    const record = user.healthRecord
-
-    return JSON.parse(JSON.stringify(record))
-  } catch (error) {
-    handleError(error)
-  }
-}
-
 //fetching user's history
 export async function fetchUserHistory(userId:string) {
   try {

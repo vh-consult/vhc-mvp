@@ -1,9 +1,19 @@
-import React from 'react'
+"use client"
+import React, {useState, useEffect} from 'react'
 import ClientList from '../doctor/ClientList'
 import OngoingNotification from '../consultation/OngoingNotification'
 import RequestCard from '../consultation/RequestCard'
 
+
 const DoctorDashboard = () => {
+  const [] = useState()
+  const [] = useState()
+  const [] = useState()
+
+  useEffect(() => {
+    
+  }, [])
+  
   return (
     <main className=' h-[535px] mx-auto text-green-4 flex flex-between'>
       <div className="w-[60%] h-full bg-white rounded-lg">
@@ -23,7 +33,7 @@ const DoctorDashboard = () => {
       <div className="w-[37%] h-full flex flex-col flex-between">
         <div className="w-full h-[48%] bg-white rounded-lg ">
             <h3 className="text-sm opacity-75 font-semibold p-3">
-                Ongoing Session(s)
+              Ongoing Session(s)
             </h3>
             <div className="w-full">
             <OngoingNotification 

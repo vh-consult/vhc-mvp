@@ -1,5 +1,5 @@
 import RecordList from '@/components/patient/RecordList'
-import { fetchHealthRecord } from '@/lib/actions/user.actions'
+import { fetchHealthRecord } from '@/lib/actions/patient.actions'
 import { currentUser } from '@clerk/nextjs/server'
 import React from 'react'
 
