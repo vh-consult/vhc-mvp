@@ -51,7 +51,7 @@ const ConsultationCard = ({
       <article className={cn("flex justify-center relative", {})}>
         <div className="flex w-full items-center">
             <Image
-              src={hostImage ? hostImage: ''}
+              src={hostImage ? hostImage: '/images/'}
               alt="attendees"
               width={40}
               height={40}

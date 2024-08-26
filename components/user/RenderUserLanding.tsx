@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import ClickableCard from '../general/ClickableCard'
 import { getAdminCompany } from '@/lib/actions/company.actions'
+import Loader from '../general/Loader'
 
 export interface ClickableCardProps {
     title: string;
@@ -155,6 +156,9 @@ const RenderUserLanding = () => {
                     className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
                 />
                 ): ''
+            }
+            {
+                role === "" ? <Loader/> : ''
             }
         </>
   )

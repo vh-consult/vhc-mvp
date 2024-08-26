@@ -5,13 +5,27 @@ import OngoingNotification from '../consultation/OngoingNotification'
 import RequestCard from '../consultation/RequestCard'
 import { doctorDashboardData } from '@/lib/actions/doctor.actions'
 import useDBUser from '@/hooks/useDBUser'
+import UpcomingConsultationCard from '../consultation/UpcomingConsultationCard'
 
+type TPatient = {
+  firstName: string;
+  lastName: string;
+  dateOfBirth?: Date;
+  healthRecord?: any
+}
 
+type BookingDataType = {
+  date: Date;
+  patient: TPatient;
+  link?: string;
+  problemStatement?: string;
+  channel?: string
+}
 
 const DoctorDashboard = () => {
-  const [requests, setRequests] = useState([])
-  const [ongoing, setOngoing] = useState<any>()
-  const [upcoming, setUpcoming] = useState([])
+  const [requests, setRequests] = useState<BookingDataType[]>([])
+  const [ongoing, setOngoing] = useState<BookingDataType>()
+  const [upcoming, setUpcoming] = useState<BookingDataType[]>([])
   const {clerkId} = useDBUser()
 
   useEffect(() => {
@@ -33,9 +47,10 @@ const DoctorDashboard = () => {
         <div className="w-full grid grid-cols-2 gap-6 px-4">
           {
             requests.length > 0 ? (
-              requests.map((request:any)=>(
+              requests.map((request:BookingDataType, index: number)=>(
                 <RequestCard 
-                  bookingType={request.channel} 
+                  key={index}
+                  bookingType={request.channel!} 
                   clientName={request.patient.firstName + ' '+ request.patient.lastName}
                   scheduledAt={new Date(request.date)}
                 />          
@@ -59,7 +74,7 @@ const DoctorDashboard = () => {
                   <OngoingNotification 
                     startedAt={new Date(ongoing.date)} 
                     patient={ongoing.patient.firstName + ' ' + ongoing.patient.lastName} 
-                    link={ongoing.link}
+                    link={ongoing.link!}
                   />
                 ): (
                   <span className="">No ongoing session</span>
@@ -69,10 +84,22 @@ const DoctorDashboard = () => {
         </div>
         <div className="w-full h-full bg-white shadow-sm rounded-lg">
             <h3 className="text-sm opacity-75 font-semibold p-3">
-                Upcoming
+              Pending Prescriptions
             </h3>
             <div className="w-full">
-                {/* <ClientList/> */}
+                {
+                  upcoming.length > 0 ? upcoming.map((appointment: BookingDataType, index:number)=>(
+                    <UpcomingConsultationCard 
+                      key={index}
+                      bookingType={appointment.channel!}
+                      clientName={appointment.patient.firstName + ' ' + appointment.patient.lastName}
+                      problemStatement={appointment.problemStatement}
+                      scheduledAt={new Date(appointment.date)}
+                    />
+                  )) : (
+                    <span className="">No upcoming appointments</span>
+                  )
+                }
             </div>
         </div>
       </div>

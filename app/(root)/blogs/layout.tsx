@@ -24,7 +24,7 @@ const BlogLayout = ({
       <Header
         navigations={navs}
       />
-      <div className="px-8 py-4 w-full min-h-[calc(100vh-64px)]">
+      <div className=" w-full min-h-[calc(100vh-64px)]">
       {children}
 
       </div>
