@@ -24,12 +24,8 @@ const consultationHeaderLinks = {
             label: 'Home',
         },
         {
-            route: `/consultation/`,
-            label: 'Recordings',
-        },
-        {
-            route: `/consultation/history`,
-            label: 'Past Sessions',
+            route: `/consultation/upcoming`,
+            label: 'Upcoming',
         },
         {
             route: `/consultation/history`,

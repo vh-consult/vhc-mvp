@@ -117,7 +117,7 @@ const ConsultationTypeList = () => {
   const ConsultationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${callDetail?.id}`;
   
   return (
-    <>
+    <main className='w-full'>
         {
           role === "Patient" ? (
             <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-green-4">
@@ -253,7 +253,7 @@ const ConsultationTypeList = () => {
             <DoctorDashboard/>
           ): ''
         }
-    </>
+    </main>
   );
 };
 

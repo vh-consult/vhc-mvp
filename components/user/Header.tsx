@@ -47,8 +47,8 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
               </div>
             </Link>
             
-            <div className=" min-w-1/2 ">
-              <ul className='flex flex-row flex-between gap-x-2 text-green-4'>
+            <div className=" w-1/2 ">
+              <ul className='flex flex-row flex-between  text-green-4'>
                 {
                   navigations?.map((nav,index)=>{
                     const activeLink = pathname === nav.route

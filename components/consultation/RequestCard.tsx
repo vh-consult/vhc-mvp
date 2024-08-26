@@ -5,15 +5,14 @@ import { MdApproval, MdDeleteOutline } from 'react-icons/md';
 import { Button } from '../ui/button';
 
 interface RequestCardProps {
-    problemStatement: string;
+    problemStatement?: string;
     scheduledAt: Date;
     clientName: string;
-    clientImage: string;
     bookingType: string; 
 }
 
 const RequestCard = ({
-    problemStatement, scheduledAt, clientImage,
+    problemStatement, scheduledAt, 
     bookingType, clientName
 }: RequestCardProps) => {
   return (
@@ -23,8 +22,8 @@ const RequestCard = ({
       </span>
       <div className="">
         <div className="">
-          <h1 className="text-lg leading-tight">{clientName}</h1>
-          <p className="text-sm">{new Date(scheduledAt).toLocaleString()}</p>
+          <h1 className="text-lg leading-tight capitalize">{clientName}</h1>
+          <p className="text-sm">Date: {new Date(scheduledAt).toLocaleString()}</p>
         </div>
         <div className="flex mt-2 text-sm">
           <Button className="w-[100px] h-8 mr-2 rounded-md text-white flex flex-center bg-red-400 hover:bg-red-600">
