@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
-import Booking from "../database/models/booking.model";
+import Appointment from "../database/models/appointment.model";
 import { Company } from "../database/models/company.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
@@ -9,7 +9,7 @@ import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
 
-export interface BookingParams {
+export interface AppointmentParams {
     date?: Date;
     problem_statement?: string;
     link?: string;
@@ -17,9 +17,9 @@ export interface BookingParams {
     host?: string;
 }
 
-// I need to fix the booking host side by making hosts only doctors
+// I need to fix the Appointment host side by making hosts only doctors
 
-export async function newBooking(clerkId: string, formData: BookingParams) {
+export async function newAppointment(clerkId: string, formData: AppointmentParams) {
     try {
         await connectToDatabase()
         const creator = await Patient.findOne({clerkId})
@@ -38,14 +38,14 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
             await host.save()
         }
         
-        const appointment = await Booking.create({
+        const appointment = await Appointment.create({
             ...formData, 
             patient:creator._id,
         })
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${appointment._id}`
         appointment.save()
 
-        host.requestedBookings.push(appointment._id)
+        host.requestedAppointments.push(appointment._id)
         await host.save()  
         return JSON.parse(JSON.stringify(appointment._id))
     } catch (error) {
@@ -54,39 +54,39 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
     }
 }
 
-export async function cancelBooking(clerkId: string, sessionId:string) {
+export async function cancelAppointment(clerkId: string, sessionId:string) {
     try {
         await connectToDatabase()
 
-        const userCancelingBooking = await User.findOne({
+        const userCancelingAppointment = await Patient.findOne({
             clerkId,
-        }).populate("bookings")
-        if (!userCancelingBooking) throw new Error("User not found")
-        if (!userCancelingBooking.booking.includes(sessionId)) throw new Error("Booking session not found in user's bookings")
+        }).populate("appointments")
+        if (!userCancelingAppointment) throw new Error("User not found")
+        if (!userCancelingAppointment.appointments.includes(sessionId)) throw new Error("Appointment session not found in user's Appointments")
 
-        const booking = await Booking.findById(sessionId)
-        if (!booking) throw new Error("Booking not found")
+        const appointment = await Appointment.findById(sessionId)
+        if (!appointment) throw new Error("Appointment not found")
         
-        booking.status = "canceled"
-        await booking.save()
+        appointment.status = "canceled"
+        await appointment.save()
 
-        return {message: "Booking canceled"}
+        return {message: "Appointment canceled"}
     } catch (error) {
         handleError(error)
     }
 }
 
-export async function notifyHost(patientId:string, bookingId:string) {
+export async function notifyHost(patientId:string, appointmentId:string) {
     try {
         await connectToDatabase()
-        console.log(patientId, bookingId)
+        console.log(patientId, appointmentId)
         const userNeedingEmergencyConsultation = await Patient.findOne({clerkId: patientId})
         if (!userNeedingEmergencyConsultation) throw new Error("User creating session not found")
         
-        const bookedAppointment = await Booking.findById(bookingId).populate("host")
+        const bookedAppointment = await Appointment.findById(appointmentId).populate("host")
         if (!bookedAppointment) throw new Error("Non-existent appointment in database")
         
-        bookedAppointment.host.ongoingSession = bookingId
+        bookedAppointment.host.ongoingSession = appointmentId
         revalidatePath(`/${bookedAppointment.host.clerkId}/overview`)
         return {message: "Doctor notified"}
     } catch (error) {
@@ -138,54 +138,54 @@ export async function searchHost(query: string) {
     }
 }
 
-export async function fetchRequestedBookings(clerkId:string) {
+export async function fetchRequestedAppointments(clerkId:string) {
     try {
         await connectToDatabase()
         const user = await Doctor.findOne({clerkId }).populate({
-            path: "requestedBookings",
+            path: "requestedAppointments",
             populate: [
                 {path: "patient", select:"firstName lastName photo"}
             ]
         })
         if (!user) throw new Error("User not found")
         
-        const bookings = user.requestedBookings
+        const appointments = user.requestedAppointments
 
-        return JSON.parse(JSON.stringify(bookings))
+        return JSON.parse(JSON.stringify(appointments))
     } catch (error) {
       handleError(error)  
     }
 }
 
-export async function fetchAcceptedBookings(clerkId:string) {
+export async function fetchAcceptedAppointments(clerkId:string) {
     try {
         await connectToDatabase()
         const user = await Doctor.findOne({clerkId }).populate({
-            path: "acceptedBookings",
+            path: "acceptedAppointments",
             populate: [
                 {path: "patient", select:"firstName lastName photo"}
             ]
         })
         if (!user) throw new Error("User not found")
         
-        const bookings = user.acceptedBookings
+        const appointments = user.acceptedAppointments
 
-        return JSON.parse(JSON.stringify(bookings))
+        return JSON.parse(JSON.stringify(appointments))
     } catch (error) {
       handleError(error)  
     }
 }
 
-export async function fetchHospitalBookings (hospitalId: string) {
+export async function fetchHospitalAppointments (hospitalId: string) {
     try {
         await connectToDatabase()
         const hospital = await Company.findOne(
             {_id: hospitalId , companyType: "Hospital"}
-        ).populate("bookings")
+        ).populate("appointments")
         if (!hospital) throw new Error("Hospital not found")
         
-        const bookings = hospital.bookings
-        return JSON.parse(JSON.stringify(bookings))
+        const appointments = hospital.appointments
+        return JSON.parse(JSON.stringify(appointments))
     } catch (error) {
       handleError(error)  
     }

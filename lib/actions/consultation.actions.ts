@@ -1,6 +1,6 @@
 "use server"
 
-import Booking from "../database/models/booking.model";
+import Appointment from "../database/models/appointment.model";
 import { Company } from "../database/models/company.model";
 import Consultation from "../database/models/consultation.model";
 import Doctor from "../database/models/doctor.model";
@@ -24,29 +24,29 @@ interface ConsultationParams {
 
 export async function postConsultationForm(
     formData: ConsultationParams, 
-    bookingId: string,
+    appointmentId: string,
     doctorId: string
 ) {
     try {
         await connectToDatabase()
 
-        const booking = await Booking.findOne({
-            _id: bookingId, 
+        const appointment = await Appointment.findOne({
+            _id: appointmentId, 
             host: doctorId
-        }).populate("patient").populate("host")
-        if(!booking) throw new Error("No booking found")
+        }).populate("patient").populate("doctor")
+        if(!appointment) throw new Error("No Appointment found")
 
         const doctor = await Doctor.findOne({
             clerkId: doctorId, 
         })
         if (!doctor) throw new Error("Doctor not found")
-        const patient = booking.patient
+        const patient = appointment.patient
 
-        const bookingObject = booking.toObject();
-        delete bookingObject._id
+        const appointmentObject = appointment.toObject();
+        delete appointmentObject._id
 
 
-        const newConsultationSession = await Consultation.create({...bookingObject, ...formData})
+        const newConsultationSession = await Consultation.create({...appointmentObject, ...formData})
         patient.healthRecord.push(newConsultationSession._id)
         await patient.save()
         console.log(patient.healthRecord)
@@ -54,8 +54,8 @@ export async function postConsultationForm(
         doctor.consultationHistory.push(newConsultationSession._id)
         await doctor.save()
         
-        await Booking.findOneAndDelete({
-            _id: bookingId, 
+        await Appointment.findOneAndDelete({
+            _id: appointmentId, 
             doctor: doctorId
         })
  

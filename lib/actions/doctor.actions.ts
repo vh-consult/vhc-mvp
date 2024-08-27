@@ -45,7 +45,7 @@ export async function fetchAppointmentRequests(doctorId:string) {
       const doctor = await Doctor.findOne(
         {clerkId: doctorId}
       ).populate({
-        path: "requestedBookings",
+        path: "requestedAppointments",
         select: "patient problemStatement channel date",
         populate: [
             {path: "patient", select: "firstName lastName dateOfBirth healthRecord currentMeds"}
@@ -54,7 +54,7 @@ export async function fetchAppointmentRequests(doctorId:string) {
       })
       if (!doctor) throw new Error("Doctor Not Found")
       
-      const requests = doctor.requestedBookings
+      const requests = doctor.requestedAppointments
   
       return JSON.parse(JSON.stringify(requests))
       
@@ -92,14 +92,14 @@ export async function fetchUpcoming(doctorId:string) {
         const doctor = await Doctor.findOne(
             {clerkId: doctorId}
         ).populate({
-            path: "acceptedBookings", 
+            path: "acceptedAppointments", 
             populate: [{path: "patient", select: "firstName lastName healthRecord"}], 
             select: "patient link date problemStatement"
         })
         if (!doctor) throw new Error("Doctor Not Found")
         
         const now = new Date()
-        const upcoming = doctor.acceptedBookings.filter((booking:any) => {return (new Date(booking.date) > now)})
+        const upcoming = doctor.acceptedAppointments.filter((appointment:any) => {return (new Date(appointment.date) > now)})
         
         return JSON.parse(JSON.stringify(upcoming))
     } catch (error) {

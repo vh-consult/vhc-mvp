@@ -9,7 +9,7 @@ import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
 
-const ConsultationForm = ({bookingId}: {bookingId:string}) => {
+const ConsultationForm = ({appointmentId}: {appointmentId:string}) => {
   const initialValues = {
     complaint: '',
     diagnosis: '',
@@ -25,7 +25,7 @@ const ConsultationForm = ({bookingId}: {bookingId:string}) => {
   const addConsultationPost = async () => {
       try{
         setLoading(true)
-        const message = await postConsultationForm(values,  bookingId, user?.id!)
+        const message = await postConsultationForm(values,  appointmentId, user?.id!)
       }finally{
         setLoading(false)
       }

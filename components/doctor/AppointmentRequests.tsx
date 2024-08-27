@@ -1,5 +1,5 @@
 import React from 'react'
-import { BookingDataType } from './DoctorDashboard'
+import { AppointmentDataType } from './DoctorDashboard'
 import RequestCard from '../consultation/RequestCard'
 import { fetchAppointmentRequests } from '@/lib/actions/doctor.actions'
 import { currentUser } from '@clerk/nextjs/server'
@@ -10,10 +10,10 @@ const AppointmentRequests = async () => {
     <div className="w-full grid grid-cols-2 gap-6 px-4">
     {
       requests.length > 0 ? (
-        requests.map((request:BookingDataType, index: number)=>(
+        requests.map((request:AppointmentDataType, index: number)=>(
           <RequestCard 
             key={index}
-            bookingType={request.channel as string} 
+            appointmentType={request.channel as string} 
             clientName={request.patient.firstName + ' '+ request.patient.lastName}
             scheduledAt={new Date(request.date)}
           />          

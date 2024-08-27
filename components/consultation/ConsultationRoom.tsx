@@ -26,11 +26,11 @@ import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
 import useDBUser from '@/hooks/useDBUser';
 import { BiComment } from 'react-icons/bi';
-import ConsultationComment from './ConsultationComment';
+import ConsultationSummaryCard from './ConsultationSummaryCard';
 
 type CallLayoutType = 'grid' | 'left' ;
 
-const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
+const ConsultationRoom = ({appointmentId}:{appointmentId: string}) => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
@@ -76,7 +76,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
                   'show-block': showComment,
                 })} 
               >          
-              <ConsultationComment/>
+              <ConsultationSummaryCard id=''/>
               </div>
             ): showConsultationForm? (
               <div
@@ -84,7 +84,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
                 'show-block': showConsultationForm,
                 })} 
               >          
-                <ConsultationForm bookingId={bookingId}/>
+                <ConsultationForm appointmentId={appointmentId}/>
               </div>  
             ): ``
           }

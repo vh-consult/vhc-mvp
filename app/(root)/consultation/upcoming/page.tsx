@@ -1,4 +1,3 @@
-import BookingCard from '@/components/consultation/BookingCard';
 import CallList from '@/components/consultation/CallList';
 import { currentUser } from '@clerk/nextjs/server';
 import { cookies } from 'next/headers';

@@ -9,7 +9,7 @@ export type TPatient = {
   healthRecord?: any
 }
 
-export type BookingDataType = {
+export type AppointmentDataType = {
   date: Date;
   patient: TPatient;
   link?: string;

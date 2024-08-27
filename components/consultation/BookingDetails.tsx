@@ -4,24 +4,24 @@ import Image from 'next/image';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
 
-interface BookingDetailsProps {
+interface AppointmentDetailsProps {
     problemStatement: string;
     scheduledAt: Date;
     clientName: string;
     clientImage: string;
     clientGender: string;
     clientAge: number;
-    bookingType: string; 
+    appointmentType: string; 
     link: string;
     isAccepted: boolean;
     isOpen: boolean;
     onClose: () => void
 }
 
-const BookingDetails = ({
-    problemStatement, scheduledAt, clientName, bookingType, isAccepted,
+const AppointmentDetails = ({
+    problemStatement, scheduledAt, clientName, appointmentType, isAccepted,
     link, clientAge, clientGender, clientImage, isOpen, onClose
-}:BookingDetailsProps) => {
+}:AppointmentDetailsProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -43,7 +43,7 @@ const BookingDetails = ({
         </div>
         <div className="">
             <Label>Type of Appointment</Label>
-            <span className="">{bookingType}</span>
+            <span className="">{appointmentType}</span>
         </div>
         <div className="">
             <Label>Problem Statement</Label>
@@ -69,4 +69,4 @@ const BookingDetails = ({
   )
 }
 
-export default BookingDetails
+export default AppointmentDetails

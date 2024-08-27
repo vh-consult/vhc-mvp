@@ -4,7 +4,7 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { BiChat } from 'react-icons/bi'
 
-const BookingCard = ({appointment}: {appointment:any}) => {
+const AppointmentCard = ({appointment}: {appointment:any}) => {
   return (
     <div className='w-[350px] h-[125px] bg-white p-4 shadow-sm hover:shadow-md cursor-pointer flex items-center'>
       <Image src={appointment.patient.photo} alt='' width={80} height={80} className='mr-4 w-[80px] h-[90px]' />
@@ -27,4 +27,4 @@ const BookingCard = ({appointment}: {appointment:any}) => {
   )
 }
 
-export default BookingCard
+export default AppointmentCard

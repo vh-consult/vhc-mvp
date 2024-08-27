@@ -12,7 +12,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import {  newBooking, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
+import {  newdAppointment, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import useDBUser from '@/hooks/useDBUser';
 import DoctorDashboard from '../doctor/DoctorDashboard';
@@ -75,7 +75,7 @@ const ConsultationTypeList = () => {
         return;
       }
       
-      const newCall = await newBooking(user?.id, values)
+      const newCall = await newdAppointment(user?.id, values)
         const id = newCall;
         const call = client.call('default', id);
         console.log(1)
@@ -156,7 +156,7 @@ const ConsultationTypeList = () => {
                         <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
                         <SelectItem value="virtual">Virtual Consultation</SelectItem>
                         <SelectItem value="lab">Lab Session</SelectItem>
-                        <SelectItem value="specialBooking">Special Booking</SelectItem>
+                        <SelectItem value="specialdAppointment">Special dAppointment</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

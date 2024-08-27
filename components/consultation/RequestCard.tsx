@@ -5,12 +5,12 @@ import { Button } from '../ui/button';
 interface RequestCardProps {
     scheduledAt: Date;
     clientName: string;
-    bookingType: string; 
+    appointmentType: string; 
 }
 
 const RequestCard = ({
     scheduledAt, 
-    bookingType, clientName
+    appointmentType, clientName
 }: RequestCardProps) => {
   return (
     <div className='w-[300px] h-[100px] flex p-2 hover:bg-gray-100'>
@@ -21,7 +21,7 @@ const RequestCard = ({
         <div className="">
           <h1 className="text-lg leading-tight capitalize">{clientName}</h1>
           <p className="text-sm">Date: {new Date(scheduledAt).toLocaleString()}</p>
-          <p className="text-sm">Channel: {bookingType}</p>
+          <p className="text-sm">Channel: {appointmentType}</p>
         </div>
         <div className="flex mt-2 text-sm">
           <Button className="w-[100px] h-8 mr-2 rounded-md text-white flex flex-center bg-red-400 hover:bg-red-600">

@@ -1,10 +1,10 @@
-import BookingCard from '@/components/consultation/BookingCard'
+import AppointmentCard from '@/components/consultation/AppointmentCard'
 import AppointmentCalendar from '@/components/general/AppointmentCalendar'
-import { fetchAcceptedBookings } from '@/lib/actions/appointment.actions'
+import { fetchAcceptedAppointments } from '@/lib/actions/appointment.actions'
 import { currentUser } from '@clerk/nextjs/server'
 import React from 'react'
 
-const BookingsHeader = () => {
+const AppointmentsHeader = () => {
   return(
     <>
     
@@ -12,16 +12,16 @@ const BookingsHeader = () => {
   )
 }
 
-const BookingsPage = async () => {
+const AppointmentsPage = async () => {
   const user =await currentUser()
-  const allBookings = await fetchAcceptedBookings(user?.id!)
+  const allAppointments = await fetchAcceptedAppointments(user?.id!)
   return (
     <main className="">
       <h1 className="text-4xl font-semibold">Booked Appointments</h1>
       <div className='grid grid-cols-3 gap-5'>
         {
-          allBookings.map((booking:any, index:number) => (
-            <BookingCard appointment={booking} key={index}/>
+          allAppointments.map((Appointment:any, index:number) => (
+            <AppointmentCard appointment={Appointment} key={index}/>
           ))
         }
       </div>
@@ -29,4 +29,4 @@ const BookingsPage = async () => {
   )
 }
 
-export default BookingsPage
+export default AppointmentsPage

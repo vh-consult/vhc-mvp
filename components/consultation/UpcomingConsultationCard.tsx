@@ -8,12 +8,12 @@ interface UpcomingConsultationCardProps {
     problemStatement?: string;
     scheduledAt: Date;
     clientName: string;
-    bookingType: string; 
+    appointment: string; 
 }
 
 const UpcomingConsultationCard = ({
     problemStatement, scheduledAt, 
-    bookingType, clientName
+    appointment, clientName
 }: UpcomingConsultationCardProps) => {
   return (
     <div className='w-[300px] h-[100px] flex p-2 hover:bg-gray-100'>
@@ -23,7 +23,7 @@ const UpcomingConsultationCard = ({
     <div className="">
         <h1 className="text-lg leading-tight capitalize">{clientName}</h1>
         <p className="text-sm">Date: {new Date(scheduledAt).toLocaleString()}</p>
-        <p className="text-sm">Channel: {bookingType}</p>
+        <p className="text-sm">Channel: {appointment}</p>
         <p className="text-sm">Problem: {problemStatement}</p>
     </div>
     </div>

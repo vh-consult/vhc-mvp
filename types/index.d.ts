@@ -17,7 +17,7 @@ declare type UserParams = {
   type: "Patient" | "Doctor" | "HospitalAdmin" | "PharmacyAdmin";
   country: string;
   company?: string;
-  bookings?: any[];
+  appointments?: any[];
   messages?: any[]
 };
 
