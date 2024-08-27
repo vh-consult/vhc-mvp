@@ -30,6 +30,7 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
             creator.personalPhysician = formData.host
         } 
+        console.log(formData)
         const host = await Doctor.findOne({_id: formData.host})
         if (!host) throw new Error("Host not found")
         if(!host.clients.includes(creator._id)){
@@ -43,11 +44,9 @@ export async function newBooking(clerkId: string, formData: BookingParams) {
         })
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${appointment._id}`
         appointment.save()
-        console.log(host)
 
         host.requestedBookings.push(appointment._id)
         await host.save()  
-        console.log(appointment._id)
         return JSON.parse(JSON.stringify(appointment._id))
     } catch (error) {
         // handleError(error)

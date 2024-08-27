@@ -1,5 +1,5 @@
-import AffiliateDoctor from '@/components/user/AffiliateDoctor'
-import AffiliateHospital from '@/components/user/AffiliateHospital'
+import AffiliateDoctor from '@/components/patient/AffiliateDoctor'
+import AffiliateHospital from '@/components/patient/AffiliateHospital'
 import React from 'react'
 
 const page = () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { FaLevelUpAlt, FaWeight } from 'react-icons/fa'
 import { MdHeight, MdScale } from 'react-icons/md'
 import HighlightCard from '@/components/general/HighlightCard'
-import Medication from '../patient/Medication'
+import Medication from './Medication'
 import Message from '../message/Message'
 
 const PatientDashboard = () => {

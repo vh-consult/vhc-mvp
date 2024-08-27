@@ -1,9 +1,10 @@
 "use client"
 import useDBUser from '@/hooks/useDBUser';
 import React from 'react'
+import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 
 const LandingPageBanner = () => {
-  const {role} = useDBUser()
+  const {role, clerkId} = useDBUser()
   const now = new Date();
     const time = now.toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -31,7 +32,13 @@ const LandingPageBanner = () => {
           </h2>
     </div>
     <div className="">
-
+        {
+          role === "Doctor" ? (
+            <DoctorAppointmentList clerkId={clerkId}/>
+          ): (
+            <span></span>
+          )
+        }
     </div>
   </div>
   )
