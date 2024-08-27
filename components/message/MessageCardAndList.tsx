@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs'
 import { getMessages } from '@/lib/actions/appointment.actions'
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import MessageModal from './MessageModal';
 
 export interface MessageCardProps {
   imageUrl: string;
@@ -66,6 +67,18 @@ const MessageCard = ({imageUrl, sender, message, time, className}: MessageCardPr
       </div>
       <p className="text-sm">{message.slice(0, 60)}...</p>
     </div>
+    {
+      openMessage === true? (
+        <MessageModal 
+          imageUrl={imageUrl}
+          isOpen={openMessage}
+          message={message}
+          onClose={()=>setOpenMessage(!openMessage)}
+          sender={sender}
+          time={new Date(time)}
+        /> 
+      ): ''
+    }
   </div>
   )
 }

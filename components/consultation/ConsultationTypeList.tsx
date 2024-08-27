@@ -12,7 +12,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
-import {  newdAppointment, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
+import {  newAppointment, notifyHost, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import useDBUser from '@/hooks/useDBUser';
 import DoctorDashboard from '../doctor/DoctorDashboard';
@@ -75,7 +75,7 @@ const ConsultationTypeList = () => {
         return;
       }
       
-      const newCall = await newdAppointment(user?.id, values)
+      const newCall = await newAppointment(user?.id, values)
         const id = newCall;
         const call = client.call('default', id);
         console.log(1)

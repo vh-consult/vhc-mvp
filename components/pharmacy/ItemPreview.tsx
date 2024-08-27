@@ -96,7 +96,7 @@ const ItemPreview =  (
                   Caution: 
                 </span>
                 <span className="">
-                {item?.caution}
+                  {item?.caution}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -104,7 +104,7 @@ const ItemPreview =  (
                   Expiry Date: 
                 </span>
                 <span className="">
-                  {new Date(item?.expiryDate!).toLocaleDateString()}
+                  {new Date(item?.expiryDate).toLocaleDateString()}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -112,7 +112,7 @@ const ItemPreview =  (
                   Uploaded On: 
                 </span>
                 <span className="">
-                  {new Date(item?.createdAt!).toLocaleDateString()}
+                  {new Date(item?.createdAt).toLocaleDateString()}
                 </span>
               </span>
               <span className="w-full grid grid-cols-2">
@@ -120,7 +120,7 @@ const ItemPreview =  (
                   Last Updated: 
                 </span>
                 <span className="">
-                  {new Date(item?.updatedAt!).toLocaleDateString()}
+                  {new Date(item?.updatedAt).toLocaleDateString()}
                 </span>
               </span>
             </div>
