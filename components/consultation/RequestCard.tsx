@@ -1,6 +1,4 @@
-import Image from 'next/image';
 import React from 'react'
-import { CgClose } from 'react-icons/cg';
 import { MdApproval, MdDeleteOutline } from 'react-icons/md';
 import { Button } from '../ui/button';
 

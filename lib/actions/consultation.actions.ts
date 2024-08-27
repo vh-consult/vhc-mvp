@@ -92,3 +92,19 @@ export async function fetchAllConsultationSummary() {
         handleError(error)
     }
 }
+
+export async function fetchConsultationSession(consultationId:string) {
+    try {
+        await connectToDatabase()
+        const session = await Consultation.findById(consultationId).populate([
+            { path: "patient", select: "firstName lastName healthRecord dateOfBirth email"  },
+            { path: "doctor", select: "firstName lastName "  },
+            { path: "medication" },
+        ])
+        if(!session) throw new Error("Session not found")
+            console.log(session)
+        return JSON.parse(JSON.stringify(session))
+    } catch (error) {
+        handleError(error)
+    }
+}

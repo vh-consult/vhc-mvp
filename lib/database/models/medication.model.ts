@@ -16,8 +16,7 @@ const MedicationSchema = new Schema<MedicationParams>({
     caution: { type: String, required: [true, "caution for taking drugs is required"],},
     status: { type: String, enum: ["notFinished", "finished"], default: "notFinished",},
     duration: { type: String,},
-    prescribed_by: { type: Schema.Types.ObjectId, refPath: "Doctor"},
-    presciptionMadeBy: {type: String, enum: ["Doctor", "Pharmacy"]}
+    prescribed_by: { type: Schema.Types.ObjectId, ref: "Doctor"},
 });
 
 const Medication = models?.Medication || model("Medication", MedicationSchema)
