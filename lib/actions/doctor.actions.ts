@@ -100,7 +100,7 @@ export async function fetchUpcoming(doctorId:string) {
         
         const now = new Date()
         const upcoming = doctor.acceptedAppointments.filter((appointment:any) => {return (new Date(appointment.date) > now)})
-        
+        console.log(upcoming)
         return JSON.parse(JSON.stringify(upcoming))
     } catch (error) {
         handleError(error)

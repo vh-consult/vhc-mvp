@@ -24,14 +24,20 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
         await connectToDatabase()
         const creator = await Patient.findOne({clerkId})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
-                
+        
+        console.log(creator.personalPhysician)
+
         if (formData.host === "" && creator.personalPhysician !== undefined) {
             formData.host = creator.personalPhysician
+        console.log(formData.host)
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
             creator.personalPhysician = formData.host
+            await creator.save()
+        console.log(creator.personalPhysician)
+
         } 
         console.log(formData)
-        const host = await Doctor.findOne({_id: formData.host})
+        const host = await Doctor.findById(formData.host)
         if (!host) throw new Error("Host not found")
         if(!host.clients.includes(creator._id)){
             host.clients.push(creator._id)
@@ -42,7 +48,7 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
             ...formData, 
             patient:creator._id,
         })
-        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation-room/${appointment._id}`
+        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
         appointment.save()
 
         host.requestedAppointments.push(appointment._id)
