@@ -8,16 +8,16 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
+import { notifyHost } from "./consultation.actions";
 
 export interface AppointmentParams {
     date?: Date;
-    problem_statement?: string;
+    problemStatement?: string;
     link?: string;
     channel?: 'virtual'| 'inPerson'| 'lab';
     host?: string;
 }
 
-// I need to fix the Appointment host side by making hosts only doctors
 
 export async function newAppointment(clerkId: string, formData: AppointmentParams) {
     try {
@@ -46,7 +46,12 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
         appointment.save()
 
         host.requestedAppointments.push(appointment._id)
-        await host.save()  
+        await host.save()
+        
+        if (formData.problemStatement === "") {
+            await notifyHost(appointment._id)
+        }
+        
         return JSON.parse(JSON.stringify(appointment._id))
     } catch (error) {
         // handleError(error)
@@ -76,23 +81,7 @@ export async function cancelAppointment(clerkId: string, sessionId:string) {
     }
 }
 
-export async function notifyHost(patientId:string, appointmentId:string) {
-    try {
-        await connectToDatabase()
-        console.log(patientId, appointmentId)
-        const userNeedingEmergencyConsultation = await Patient.findOne({clerkId: patientId})
-        if (!userNeedingEmergencyConsultation) throw new Error("User creating session not found")
-        
-        const bookedAppointment = await Appointment.findById(appointmentId).populate("host")
-        if (!bookedAppointment) throw new Error("Non-existent appointment in database")
-        
-        bookedAppointment.host.ongoingSession = appointmentId
-        revalidatePath(`/${bookedAppointment.host.clerkId}/overview`)
-        return {message: "Doctor notified"}
-    } catch (error) {
-        handleError(error)
-    }
-}
+
 
 export async function searchHost(query: string) {
     try {

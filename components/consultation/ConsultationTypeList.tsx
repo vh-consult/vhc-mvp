@@ -51,6 +51,7 @@ const ConsultationTypeList = () => {
     console.log('Client:', client);
     console.log('User:', user);
   }, [client, user]);
+  
   const handleSearch = useDebouncedCallback(async (query: string) => {
     const params = new URLSearchParams(searchParams)
     if (query) {
@@ -96,14 +97,13 @@ const ConsultationTypeList = () => {
         });
         setCallDetail(call);
         if (!values.problem_statement) {
-          await notifyHost(user?.id, newCall)
           router.push(`/consultation-room/${call.id}`);
         }
         toast({ title: 'Consultation Created' });
       setValues(initialValues)
       setTimeout(() => {
         setCallDetail(null)
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error(error);
       toast({ title: 'Failed to create Consultation' });

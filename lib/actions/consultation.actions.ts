@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache";
 import Appointment from "../database/models/appointment.model";
 import { Company } from "../database/models/company.model";
 import Consultation from "../database/models/consultation.model";
@@ -16,37 +17,31 @@ interface MedicationParams {
 }
 
 interface ConsultationParams {
-    prescription: Array<MedicationParams>;
+    prescription?: Array<MedicationParams>;
     summary?: string;
-    diagnosis: string;
+    diagnosis?: string;
     examination?: string
 }
 
-export async function postConsultationForm(
-    formData: ConsultationParams, 
-    appointmentId: string,
-    doctorId: string
-) {
+export async function notifyHost(appointmentId:string) {
     try {
         await connectToDatabase()
+        console.log(appointmentId)
 
-        const appointment = await Appointment.findOne({
-            _id: appointmentId, 
-            host: doctorId
-        }).populate("patient").populate("doctor")
-        if(!appointment) throw new Error("No Appointment found")
-
-        const doctor = await Doctor.findOne({
-            clerkId: doctorId, 
-        })
-        if (!doctor) throw new Error("Doctor not found")
-        const patient = appointment.patient
-
-        const appointmentObject = appointment.toObject();
+        const bookedAppointment = await Appointment.findById(appointmentId).populate("doctor").populate("patient")
+        if (!bookedAppointment) throw new Error("Non-existent appointment in database")
+        
+        bookedAppointment.doctor.ongoingSession = appointmentId
+        revalidatePath(`/consultation/home`)
+        
+        const appointmentObject = bookedAppointment.toObject();
         delete appointmentObject._id
 
+        const newConsultationSession = await Consultation.create({...appointmentObject})
+        const patient = bookedAppointment.patient
+        const doctor = bookedAppointment.doctor
 
-        const newConsultationSession = await Consultation.create({...appointmentObject, ...formData})
+
         patient.healthRecord.push(newConsultationSession._id)
         await patient.save()
         console.log(patient.healthRecord)
@@ -56,11 +51,23 @@ export async function postConsultationForm(
         
         await Appointment.findOneAndDelete({
             _id: appointmentId, 
-            doctor: doctorId
         })
- 
-        return JSON.parse(JSON.stringify(newConsultationSession))
+        return {consultationId: newConsultationSession._id}
+    } catch (error) {
+        handleError(error)
+    }
+}
 
+export async function postConsultationForm(
+    formData: ConsultationParams, 
+    consultationId: string,
+) {
+    try {
+        await connectToDatabase()
+        const updated = await Consultation.findByIdAndDelete({_id: consultationId}, formData)
+        if(!updated) throw new Error("consultation not found and updated")
+        
+        return {message: "Summary added successfully"}
     } catch (error) {
         handleError(error)
     }
