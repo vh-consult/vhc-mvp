@@ -39,29 +39,6 @@ export async function fetchDoctorClients(clerkId:string) {
     }
 }
 
-export async function fetchAppointmentRequests(doctorId:string) {
-    try {
-      await connectToDatabase()
-      const doctor = await Doctor.findOne(
-        {clerkId: doctorId}
-      ).populate({
-        path: "requestedAppointments",
-        select: "patient problemStatement channel date",
-        populate: [
-            {path: "patient", select: "firstName lastName dateOfBirth healthRecord currentMeds"}
-        ],
-        
-      })
-      if (!doctor) throw new Error("Doctor Not Found")
-      
-      const requests = doctor.requestedAppointments
-  
-      return JSON.parse(JSON.stringify(requests))
-      
-    } catch (error) {
-      handleError(error)
-    }
-}
 
 export async function fetchOngoing(doctorId:string) {
     try {
@@ -75,6 +52,7 @@ export async function fetchOngoing(doctorId:string) {
         })
         if (!doctor) throw new Error("Doctor Not Found")
         const session = doctor.ongoingSession
+      console.log(session)
         if(session===undefined) {
             return "no ongoing session"
         } else {
@@ -86,35 +64,31 @@ export async function fetchOngoing(doctorId:string) {
 }
 
 
-export async function fetchUpcoming(doctorId:string) {
-    try {
-        await connectToDatabase()
-        const doctor = await Doctor.findOne(
-            {clerkId: doctorId}
-        ).populate({
-            path: "acceptedAppointments", 
-            populate: [{path: "patient", select: "firstName lastName healthRecord"}], 
-            select: "patient link date problemStatement"
-        })
-        if (!doctor) throw new Error("Doctor Not Found")
-        
-        const now = new Date()
-        const upcoming = doctor.acceptedAppointments.filter((appointment:any) => {return (new Date(appointment.date) > now)})
-        console.log(upcoming)
-        return JSON.parse(JSON.stringify(upcoming))
-    } catch (error) {
-        handleError(error)
-    }
+export async function fetchUpcoming(doctorId: string) {
+  try {
+      await connectToDatabase();
+
+      const doctor = await Doctor.findOne(
+          { clerkId: doctorId }
+      ).populate({
+          path: "appointments",
+          populate: [{ path: "patient", select: "firstName lastName healthRecord" }],
+          select: "patient link date problemStatement"
+      });
+
+      if (!doctor) throw new Error("Doctor Not Found");
+
+      const now = new Date();
+      now.setHours(0, 0, 0, 0); 
+
+      const upcoming = doctor.appointments.filter((appointment: any) => {
+          return new Date(appointment.date) >= now;
+      });
+
+      console.log(upcoming);
+      return JSON.parse(JSON.stringify(upcoming));
+  } catch (error) {
+      handleError(error);
+  }
 }
 
-export async function doctorDashboardData(doctorId:string) {
-    try {
-        const requests = await fetchAppointmentRequests(doctorId)
-        const upcoming = await fetchUpcoming(doctorId)
-        const ongoing = await fetchOngoing(doctorId)
-        // console.log({requests, upcoming, ongoing})
-        return {requests, upcoming, ongoing}
-    } catch (error) {
-        handleError(error)
-    }
-}

@@ -7,6 +7,7 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { notifyHost } from '@/lib/actions/consultation.actions';
 
 const CallList = (
   { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
@@ -62,7 +63,10 @@ const CallList = (
 
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
-
+  const handleStartConsultation = async (consultation:Call) => {
+    await notifyHost(consultation.id)
+    router.push(`/consultation/room/${(consultation as Call).id}`)
+  }
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 ">
       {calls && calls.length > 0 ? (
@@ -106,7 +110,7 @@ const CallList = (
             handleClick={
               type === 'recordings'
                 ? () => router.push(`${(consultation as CallRecording).url}`)
-                : () => router.push(`/consultation/room/${(consultation as Call).id}`)
+                : () => { handleStartConsultation(consultation as Call) }
             }
           />
         ))

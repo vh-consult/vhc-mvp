@@ -7,13 +7,10 @@ const AppointmentSchema = new Schema({
     date: {type: Date, required: true, default: new Date()},
     problemStatement: {type: String, default: 'Emergency'},
     channel: {type: String, enum: ['virtual', 'inPerson', 'lab'],default: 'virtual'},
-    status: {type: String, enum: ["pending", "cancelled", "completed"],default: 'pending'},
+    status: {type: String, enum: ["pending", "canceled", "accepted"],default: 'pending'},
 },{
     timestamps: true
 })
 
-
 const Appointment = models?.Appointment ||  model("Appointment", AppointmentSchema);
-
-
 export default Appointment

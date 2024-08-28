@@ -1,22 +1,29 @@
+"use client"
+import React, {useEffect, useState} from 'react'
 import { fetchOngoing } from '@/lib/actions/doctor.actions'
-import React from 'react'
-import { currentUser } from '@clerk/nextjs/server'
 import OngoingNotification from './OngoingNotification'
+import useDBUser from '@/hooks/useDBUser'
+import { AppointmentDataType } from '../doctor/DoctorDashboard'
 
 const OngoingConsultationAlert = async () => {
-    const user = await currentUser()
-    const ongoing = await fetchOngoing(user?.id as string)
+  const {clerkId} = useDBUser()
+  const [ongoing, setOngoing] = useState<AppointmentDataType | undefined>(undefined)
+  useEffect(() => {
+    if (!clerkId) return;
+    const fetch = async() => {
+      const ongoing = await fetchOngoing(clerkId)
+      console.log(ongoing)
+      setOngoing(ongoing)
+    }
+    fetch()
+  }, [clerkId])
   return (
     <div className="w-full">
     {
-      ongoing === undefined ? (
-        <span className="size-full flex flex-center">No ongoing session</span>
+      ongoing !== undefined ? (
+<></>
       ): (
-        <OngoingNotification 
-        startedAt={new Date(ongoing.date)} 
-        patient={ongoing.patient.firstName + ' ' + ongoing.patient.lastName} 
-        link={ongoing.link as string}
-      />
+        <span className="size-full flex flex-center">No ongoing session</span>
       )  
     }
   </div>

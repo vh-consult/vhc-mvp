@@ -51,7 +51,7 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
         appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
         appointment.save()
 
-        host.requestedAppointments.push(appointment._id)
+        host.appointments.push(appointment._id)
         await host.save()
         
         if (formData.problemStatement === "") {
@@ -136,17 +136,18 @@ export async function searchHost(query: string) {
 export async function fetchRequestedAppointments(clerkId:string) {
     try {
         await connectToDatabase()
-        const user = await Doctor.findOne({clerkId }).populate({
-            path: "requestedAppointments",
+        const doctor = await Doctor.findOne({ clerkId }).populate({
+            path: "appointments",
+            match: { status: "pending" },
             populate: [
-                {path: "patient", select:"firstName lastName photo"}
+              { path: "patient", select: "firstName lastName photo" }
             ]
-        })
-        if (!user) throw new Error("User not found")
-        
-        const appointments = user.requestedAppointments
-
-        return JSON.parse(JSON.stringify(appointments))
+          });
+      
+          if (!doctor) {
+            throw new Error("Doctor not found");
+          }
+          return doctor.appointments;
     } catch (error) {
       handleError(error)  
     }
@@ -155,17 +156,19 @@ export async function fetchRequestedAppointments(clerkId:string) {
 export async function fetchAcceptedAppointments(clerkId:string) {
     try {
         await connectToDatabase()
-        const user = await Doctor.findOne({clerkId }).populate({
-            path: "acceptedAppointments",
+        const doctor = await Doctor.findOne({ clerkId }).populate({
+            path: "appointments",
+            match: { status: "accepted" },
             populate: [
-                {path: "patient", select:"firstName lastName photo"}
+              { path: "patient", select: "firstName lastName photo" }
             ]
-        })
-        if (!user) throw new Error("User not found")
-        
-        const appointments = user.acceptedAppointments
-
-        return JSON.parse(JSON.stringify(appointments))
+          });
+      
+          if (!doctor) {
+            throw new Error("Doctor not found");
+          }
+      
+          return doctor.appointments;
     } catch (error) {
       handleError(error)  
     }

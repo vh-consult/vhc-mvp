@@ -50,13 +50,21 @@ const ConsultationCard = ({
       </article>
       <article className={cn("flex justify-center relative", {})}>
         <div className="flex w-full items-center">
-            <Image
-              src={hostImage ? hostImage: '/images/'}
-              alt="attendees"
-              width={40}
-              height={40}
-              className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
-            />
+          {
+            hostImage ? (
+                <Image
+                  src={hostImage}
+                  alt="attendees"
+                  width={40}
+                  height={40}
+                  className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
+                />
+            ) : (
+              <span className="w-7 h-7 rounded-full">
+                {hostName?.slice(0,1)}
+              </span>
+            )
+          }
             <span className="text-lg font-medium text-green-4">
               {hostName}
             </span>
