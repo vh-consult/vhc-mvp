@@ -27,11 +27,13 @@ const DoctorDashboard = () => {
         <AppointmentRequests/>
       </div>
       <div className="w-[37%] h-full flex flex-col gap-y-3 flex-between">
-        <div className="w-full  bg-white shadow-sm rounded-lg ">
+        <div className="w-full h-[125px] bg-white shadow-sm rounded-lg ">
             <h3 className="text-sm opacity-75 font-semibold p-3">
-              Ongoing Session(s)
+              Next Consultation
             </h3>
-            <OngoingConsultationAlert/>
+            <p className="">
+              10 minutes
+            </p>
         </div>
         <div className="w-full h-full bg-white shadow-sm rounded-lg">
             <h3 className="text-sm opacity-75 font-semibold p-3">

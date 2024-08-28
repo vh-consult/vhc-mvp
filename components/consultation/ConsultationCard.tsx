@@ -60,7 +60,7 @@ const ConsultationCard = ({
                   className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
                 />
             ) : (
-              <span className="w-7 h-7 rounded-full">
+              <span className="w-[40px] h-[40px] bg-sky-2 flex flex-center mr-2 text-xl text-violet-1 font-bold rounded-full">
                 {hostName?.slice(0,1)}
               </span>
             )

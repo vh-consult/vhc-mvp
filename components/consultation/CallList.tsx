@@ -5,9 +5,10 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk';
 import Loader from '../general/Loader';
 import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { notifyHost } from '@/lib/actions/consultation.actions';
+import { sendNotification } from '@/lib/utils';
 
 const CallList = (
   { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
@@ -63,8 +64,28 @@ const CallList = (
 
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
-  const handleStartConsultation = async (consultation:Call) => {
-    await notifyHost(consultation.id)
+
+
+
+  const requestNotificationPermission = useCallback(() => {
+    if ('Notification' in window) {
+      Notification.requestPermission().then(function (permission){
+        if (permission === 'granted') {
+          console.log('Permission granted')
+          sendNotification();
+        }
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if ('Notification' in window) {
+      requestNotificationPermission();
+    }
+  }, [requestNotificationPermission])
+
+  const handleStartConsultation = (consultation:Call) => {
+    sendNotification()
     router.push(`/consultation/room/${(consultation as Call).id}`)
   }
   return (
