@@ -5,7 +5,7 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk';
 import Loader from '../general/Loader';
 import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 

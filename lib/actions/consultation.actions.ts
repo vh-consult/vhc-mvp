@@ -30,9 +30,11 @@ export async function postConsultationForm(
 ) {
     try {
         await connectToDatabase()
+        console.log(formData)
         const updated = await Consultation.findOneAndUpdate({_id: consultationId}, formData, {new: true})
         if(!updated) throw new Error("consultation not found and updated")
-        
+        updated.status = "finished"
+        await updated.save()
         return {message: "Summary added successfully"}
     } catch (error) {
         handleError(error)

@@ -1,5 +1,6 @@
+'use client';
+import { useEffect, useState } from 'react';
 import { fetchConsultationSession } from '@/lib/actions/consultation.actions'
-import React from 'react'
 import { TPatient } from '../doctor/DoctorDashboard';
 import { MedicationParams } from '@/lib/database/models/medication.model';
 
@@ -12,57 +13,71 @@ export type TConsultation = {
     doctor: TDoctor;
     patient: TPatient;
     date: Date;
-    medication: MedicationParams;
+    medication: any[];
     channel: string;
     examination: string;
-    diagnosis: string
+    diagnosis: string;
+    problemStatement: string
+
 }
 
-const ConsultationSummaryCard = async ({id}: {id: string}) => {
-  const consultation = await fetchConsultationSession(id)
-  return (
+const ConsultationSummaryCard = ({consultationId}: {consultationId:string}) => {
+    const [summary, setSummary] = useState<TConsultation>()
+    
+    useEffect(()=> {
+    const fetch = async () => {
+      const consultation = await fetchConsultationSession(consultationId)
+      setSummary(consultation)
+    }
+    fetch()
+  },[consultationId])
+    return (
     <div className='w-[500px] p-3 bg-gray-200 mt-20 ml-20 rounded-lg'>
       <h1 className="text-3xl font-medium">Consultation Summary</h1>
-      <table className="">
-        <tbody className="">
-            <tr className=''>
-                <td>Doctor</td>
-                <td>{consultation.doctor.firstName + ' ' + consultation.doctor.lastName}</td>
-            </tr>
-            <tr>
-                <td>Patient</td>
-                <td>{consultation.patient.firstName + ' ' + consultation.patient.lastName}</td>
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>{new Date(consultation.date).toLocaleString()}</td>
-            </tr>
-            <tr className=''>
-                <td>Problem</td>
-                <td>{consultation.problemStatement}</td>
-            </tr>
-            <tr>
-                <td>Examination</td>
-                <td>{consultation.examination}</td>
-            </tr>
-            <tr>
-                <td>Prescriptions</td>
-                <td>
-                    {
-                        consultation.medication.map(
-                            (med:any, index:number) => (
-                                <div className="" key={index}>
-                                    <span className="">{med.drug}</span>
-                                    <span className="">{med.dose}</span>
-                                    <span className="">{med.status}</span>
-                                    <span className="">{med.duration}</span>
-                                </div>
-                            )
-                        )}
-                </td>
-            </tr>
-        </tbody>
-      </table>
+      {
+        summary ? (
+            <table className="">
+                <tbody className="">
+                    <tr className=''>
+                        <td>Doctor</td>
+                        <td>{summary?.doctor.firstName + ' ' + summary?.doctor.lastName}</td>
+                    </tr>
+                    <tr>
+                        <td>Patient</td>
+                        <td>{summary?.patient.firstName + ' ' + summary?.patient.lastName}</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>{new Date(summary?.date).toLocaleString()}</td>
+                    </tr>
+                    <tr className=''>
+                        <td>Problem</td>
+                        <td>{summary?.problemStatement}</td>
+                    </tr>
+                    <tr>
+                        <td>Examination</td>
+                        <td>{summary?.examination}</td>
+                    </tr>
+                    <tr>
+                        <td>Prescriptions</td>
+                        <td>
+                            {
+                                summary?.medication.map(
+                                    (med:any, index:number) => (
+                                        <div className="" key={index}>
+                                            <span className="">{med.drug}</span>
+                                            <span className="">{med.dose}</span>
+                                            <span className="">{med.status}</span>
+                                            <span className="">{med.duration}</span>
+                                        </div>
+                                    )
+                                )}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        ): ''
+      }
     </div>
   )
 }

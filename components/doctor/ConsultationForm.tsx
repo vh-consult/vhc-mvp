@@ -8,24 +8,26 @@ import PrescriptionForm from '../pharmacy/PrescriptionForm'
 import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
+import { toast } from '../ui/use-toast'
 
-const ConsultationForm = ({consultation}: {consultation:string}) => {
+const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const initialValues = {
     complaint: '',
     diagnosis: '',
     examination: '',
-    prescription: [],
   };
   const [values, setValues] = useState(initialValues);
-  const [prescribedDrugs, setPrescribedDrugs] = useState(initialValues.prescription)
+  const [prescribedDrugs, setPrescribedDrugs] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [showPrescriptionForm, setShowPrescriptionForm] = useState<boolean>(false)
   const {user} = useUser()
 
-  const addConsultationPost = async () => {
+  const addConsultationPost = async (e:FormEvent) => {
+    e.preventDefault()
       try{
         setLoading(true)
-        const message = await postConsultationForm(values,  consultation)
+        const message = await postConsultationForm(values,  consultationId)
+        toast({title: message?.message })
       }catch(error){
         console.log(error)
       }finally{
@@ -34,6 +36,18 @@ const ConsultationForm = ({consultation}: {consultation:string}) => {
   }
   return(
     <>
+      {
+        showPrescriptionForm === true ? (
+          <PrescriptionForm 
+            consultationId={consultationId}
+            isOpen={showPrescriptionForm} 
+            onClose={()=>setShowPrescriptionForm(false)}
+            setPrescribedDrugs={setPrescribedDrugs}
+          />
+        ) : (
+          <DrugPrescribed drugs={prescribedDrugs} />
+        )
+      }
   <div className="w-[325px] bg-white p-3 text-green-4 rounded-lg shadow-sm border-none">
     <h2 className="font-medium text-lg mb-3">Consultation Form</h2>
     <Textarea 
@@ -54,21 +68,10 @@ const ConsultationForm = ({consultation}: {consultation:string}) => {
     <Button onClick={()=>setShowPrescriptionForm(true)}>Add Prescription <BiPlus/> </Button>
     <Button className='w-full mt-3 rounded-md 
     capitalize hover:shadow-md bg-green-2 text-green-1 
-    font-medium text-sm ' onClick={addConsultationPost}>
+    font-medium text-sm ' onClick={(e) => addConsultationPost(e)}>
         {loading? <Loader/> : `Upload form`}
     </Button>
   </div>
-      {
-        showPrescriptionForm === true ? (
-          <PrescriptionForm 
-            isOpen={showPrescriptionForm} 
-            onClose={()=>setShowPrescriptionForm(false)}
-            setPrescribedDrugs={setPrescribedDrugs}
-          />
-        ) : (
-          <DrugPrescribed drugs={prescribedDrugs} />
-        )
-      }
       </>
   )
 }

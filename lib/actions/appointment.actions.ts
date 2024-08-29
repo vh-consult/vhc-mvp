@@ -32,21 +32,26 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
             creator.personalPhysician = formData.host
             await creator.save()
-
         } 
         const host = await Doctor.findById(formData.host)
         if (!host) throw new Error("Host not found")
+
         if(!host.clients.includes(creator._id)){
             host.clients.push(creator._id)
             await host.save()
         }
+        console.log(formData)
         const session = await Consultation.create({
             ...formData, 
             patient:creator._id,
+            doctor: host._id
         })
 
         session.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${session._id}`
-        session.save()
+        if(formData.problemStatement === ''){
+            session.status = "accepted"
+        }
+        await session.save()
 
         host.appointments.push(session._id)
         await host.save()

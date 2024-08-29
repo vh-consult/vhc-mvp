@@ -10,8 +10,8 @@ const ConsultationSchema = new Schema({
     summary: {type: String},
     diagnosis: [{type: String}],
     examination: [{type: String}],
-    status: {type: String, enum: ["pending", "canceled", "accepted"],default: 'pending'},
-
+    status: {type: String, enum: ["pending", "canceled", "accepted", "finished"],default: 'pending'},
+    link: {type: String}
 },{
     timestamps: true
 })
