@@ -46,7 +46,7 @@ const ConsultationSetup = ({
   if (callTimeNotArrived)
     return (
       <Alert
-        title={`Your Consultation has not started yet. It is scheduled for ${callStartsAt.toLocaleString()}`}
+        title={`Your consultation has not started yet. It is scheduled for ${callStartsAt.toLocaleString()}`}
       />
     );
 

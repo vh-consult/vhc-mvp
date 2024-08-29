@@ -28,7 +28,7 @@ const initialValues = {
 const ClickableCards = [
   { title: 'Emergency Consultation', description: 'Start an emergency session', imageSrc: '/icons/add-meeting.svg', action: 'isEmergencyConsultation' },
   { title: 'Join Consultation', description: 'via invitation link', imageSrc: '/icons/join-meeting.svg', action: 'isJoiningConsultation' },
-  { title: 'Schedule Consultation', description: 'Plan your Consultation', imageSrc: '/icons/schedule.svg', action: 'isSchedulingConsultation' }
+  { title: 'Schedule Consultation', description: 'Plan your consultation', imageSrc: '/icons/schedule.svg', action: 'isSchedulingConsultation' }
 ];
 
 type ConsultationStateProps = 'isSchedulingConsultation' | 'isJoiningConsultation' | 'isEmergencyConsultation' | undefined;

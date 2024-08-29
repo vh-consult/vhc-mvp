@@ -26,6 +26,8 @@ const ConsultationForm = ({consultation}: {consultation:string}) => {
       try{
         setLoading(true)
         const message = await postConsultationForm(values,  consultation)
+      }catch(error){
+        console.log(error)
       }finally{
         setLoading(false)
       }
