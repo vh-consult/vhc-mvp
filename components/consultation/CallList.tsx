@@ -7,8 +7,7 @@ import { useGetCalls } from '@/hooks/useGetCalls';
 import ConsultationCard from './ConsultationCard';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { notifyHost } from '@/lib/actions/consultation.actions';
-import { sendNotification } from '@/lib/utils';
+
 
 const CallList = (
   { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
@@ -16,6 +15,7 @@ const CallList = (
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
+
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -65,17 +65,29 @@ const CallList = (
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 
+  const sendNotification = () => {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      const notification = new Notification('Ongoing Consultation', {
+        body: `Click to open `,
+        tag: 'consultation started'
+      })
+  
+      // notification.addEventListener('click', ()=>{
 
+      // })
+    }
+  }
 
   const requestNotificationPermission = useCallback(() => {
     if ('Notification' in window) {
       Notification.requestPermission().then(function (permission){
         if (permission === 'granted') {
           console.log('Permission granted')
-          sendNotification();
+          sendNotification( )        
         }
       })
     }
+    
   }, [])
 
   useEffect(() => {
@@ -85,7 +97,7 @@ const CallList = (
   }, [requestNotificationPermission])
 
   const handleStartConsultation = (consultation:Call) => {
-    sendNotification()
+    sendNotification( )
     router.push(`/consultation/room/${(consultation as Call).id}`)
   }
   return (

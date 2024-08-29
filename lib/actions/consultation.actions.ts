@@ -23,7 +23,7 @@ interface ConsultationParams {
     examination?: string
 }
 
-export async function notifyHost(appointmentId:string) {
+export async function startConsultation(appointmentId:string) {
     try {
         await connectToDatabase()
         console.log(appointmentId)
@@ -64,7 +64,7 @@ export async function postConsultationForm(
 ) {
     try {
         await connectToDatabase()
-        const updated = await Consultation.findByIdAndDelete({_id: consultationId}, formData)
+        const updated = await Consultation.findOneAndUpdate({_id: consultationId}, formData, {new: true})
         if(!updated) throw new Error("consultation not found and updated")
         
         return {message: "Summary added successfully"}

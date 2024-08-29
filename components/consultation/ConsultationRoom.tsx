@@ -30,7 +30,7 @@ import ConsultationSummaryCard from './ConsultationSummaryCard';
 
 type CallLayoutType = 'grid' | 'left' ;
 
-const ConsultationRoom = ({appointmentId}:{appointmentId: string}) => {
+const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
@@ -84,7 +84,7 @@ const ConsultationRoom = ({appointmentId}:{appointmentId: string}) => {
                 'show-block': showConsultationForm,
                 })} 
               >          
-                <ConsultationForm appointmentId={appointmentId}/>
+                <ConsultationForm consultation={consultationId}/>
               </div>  
             ): ``
           }

@@ -8,7 +8,8 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
-import { notifyHost } from "./consultation.actions";
+import { startConsultation } from "./consultation.actions";
+import Consultation from "../database/models/consultation.model";
 
 export interface AppointmentParams {
     date?: Date;
@@ -29,36 +30,38 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
 
         if (formData.host === "" && creator.personalPhysician !== undefined) {
             formData.host = creator.personalPhysician
-        console.log(formData.host)
         } else if (formData.host !== "" && creator.personalPhysician === undefined) {
             creator.personalPhysician = formData.host
             await creator.save()
-        console.log(creator.personalPhysician)
 
         } 
-        console.log(formData)
         const host = await Doctor.findById(formData.host)
         if (!host) throw new Error("Host not found")
         if(!host.clients.includes(creator._id)){
             host.clients.push(creator._id)
             await host.save()
         }
-        
-        const appointment = await Appointment.create({
-            ...formData, 
-            patient:creator._id,
-        })
-        appointment.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${appointment._id}`
-        appointment.save()
+        let session
+        if(formData.problemStatement = ""){
+            session = await Consultation.create({
+                ...formData, 
+                patient:creator._id,
+            })
+        } else{
+            session = await Appointment.create({
+                ...formData, 
+                patient:creator._id,
+            })
 
-        host.appointments.push(appointment._id)
-        await host.save()
-        
-        if (formData.problemStatement === "") {
-            await notifyHost(appointment._id)
         }
+        session.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${session._id}`
+        session.save()
+
+        host.appointments.push(session._id)
+        await host.save()
+
         
-        return JSON.parse(JSON.stringify(appointment._id))
+        return JSON.parse(JSON.stringify(session._id))
     } catch (error) {
         // handleError(error)
         console.error(error)

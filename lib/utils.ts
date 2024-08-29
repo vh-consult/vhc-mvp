@@ -21,12 +21,3 @@ export const handleError = (error: unknown) => {
     throw new Error(`Unknown error: ${JSON.stringify(error)}`);
   }
 };
-
-
-export const sendNotification = () => {
-  if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification('Ongoing Consultation', {
-      body: 'Join using this link',
-    })
-  }
-}
