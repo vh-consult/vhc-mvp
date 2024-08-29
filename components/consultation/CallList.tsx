@@ -65,39 +65,8 @@ const CallList = (
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 
-  const sendNotification = () => {
-    if ('Notification' in window && Notification.permission === 'granted') {
-      const notification = new Notification('Ongoing Consultation', {
-        body: `Click to open `,
-        tag: 'consultation started'
-      })
-  
-      // notification.addEventListener('click', ()=>{
-
-      // })
-    }
-  }
-
-  const requestNotificationPermission = useCallback(() => {
-    if ('Notification' in window) {
-      Notification.requestPermission().then(function (permission){
-        if (permission === 'granted') {
-          console.log('Permission granted')
-          sendNotification( )        
-        }
-      })
-    }
-    
-  }, [])
-
-  useEffect(() => {
-    if ('Notification' in window) {
-      requestNotificationPermission();
-    }
-  }, [requestNotificationPermission])
 
   const handleStartConsultation = (consultation:Call) => {
-    sendNotification( )
     router.push(`/consultation/room/${(consultation as Call).id}`)
   }
   return (

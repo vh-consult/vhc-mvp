@@ -38,7 +38,7 @@ const ConsultationCard = ({
   return (
     <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-white px-5 py-8 xl:max-w-[568px]">
       <article className="flex flex-col gap-5">
-        <span className="w-[40px] h-[40px] flex flex-center rounded-md bg-gray-400">
+        <span className="w-[40px] h-[40px] flex flex-center rounded-md bg-dark-4">
           <Image src={icon} alt="upcoming" width={28} height={28}  />
         </span>
         <div className="flex justify-between">

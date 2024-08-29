@@ -23,40 +23,6 @@ interface ConsultationParams {
     examination?: string
 }
 
-export async function startConsultation(appointmentId:string) {
-    try {
-        await connectToDatabase()
-        console.log(appointmentId)
-
-        const bookedAppointment = await Appointment.findById(appointmentId).populate("doctor").populate("patient")
-        if (!bookedAppointment) throw new Error("Non-existent appointment in database")
-        
-        bookedAppointment.doctor.ongoingSession = appointmentId
-        revalidatePath(`/consultation/home`)
-        
-        const appointmentObject = bookedAppointment.toObject();
-        delete appointmentObject._id
-
-        const newConsultationSession = await Consultation.create({...appointmentObject})
-        const patient = bookedAppointment.patient
-        const doctor = bookedAppointment.doctor
-
-
-        patient.healthRecord.push(newConsultationSession._id)
-        await patient.save()
-        console.log(patient.healthRecord)
-        
-        doctor.consultationHistory.push(newConsultationSession._id)
-        await doctor.save()
-        
-        await Appointment.findOneAndDelete({
-            _id: appointmentId, 
-        })
-        return {consultationId: newConsultationSession._id}
-    } catch (error) {
-        handleError(error)
-    }
-}
 
 export async function postConsultationForm(
     formData: ConsultationParams, 
@@ -111,6 +77,37 @@ export async function fetchConsultationSession(consultationId:string) {
         if(!session) throw new Error("Session not found")
             console.log(session)
         return JSON.parse(JSON.stringify(session))
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+
+export async function acceptConsultationRequest(consultationId:string) {
+    try {
+        await connectToDatabase()
+        const session = await Consultation.findById(consultationId)
+        if(!session) throw new Error("Consultation session not found")
+        
+        session.status = "accepted"
+        await session.save()
+
+        return {message: "Request accepted"}
+    } catch (error) {
+        handleError(error)
+    }
+}
+
+export async function rejectConsultationRequest(consultationId:string) {
+    try {
+        await connectToDatabase()
+        const session = await Consultation.findById(consultationId)
+        if(!session) throw new Error("Consultation session not found")
+        
+        session.status = "accepted"
+        await session.save()
+
+        return {message: "Request accepted"}
     } catch (error) {
         handleError(error)
     }

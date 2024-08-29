@@ -80,7 +80,7 @@ export async function fetchUpcoming(doctorId: string) {
 
       const now = new Date();
       now.setHours(0, 0, 0, 0); 
-
+      console.log(doctor.appointments)
       const upcoming = doctor.appointments.filter((appointment: any) => {
           return new Date(appointment.date) >= now;
       });

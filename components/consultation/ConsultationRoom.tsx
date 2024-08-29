@@ -76,7 +76,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
                   'show-block': showComment,
                 })} 
               >          
-              <ConsultationSummaryCard id=''/>
+              <ConsultationSummaryCard id={consultationId}/>
               </div>
             ): showConsultationForm? (
               <div

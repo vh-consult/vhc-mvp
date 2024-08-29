@@ -8,7 +8,7 @@ const DoctorSchema = new Schema({
     ongoingSession: {type: Schema.Types.ObjectId, ref: 'Consultation'},
     clients: [{type: Schema.Types.ObjectId, ref: 'Patient'}],
     consultationHistory: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
-    appointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
+    appointments: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
     blogsAuthored: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],
     affiliateHospital: {type: Schema.Types.ObjectId, ref: 'Hospital'},
     savedBlogs: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],

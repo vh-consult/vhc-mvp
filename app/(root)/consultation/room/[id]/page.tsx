@@ -37,7 +37,7 @@ const ConsultationPage = () => {
         {!isSetupComplete ? (
           <ConsultationSetup setIsSetupComplete={setIsSetupComplete} />
         ) : (
-          <ConsultationRoom appointmentId={id[0]} />
+          <ConsultationRoom consultationId={id[0]} />
         )}
         </StreamTheme>
       </StreamCall>

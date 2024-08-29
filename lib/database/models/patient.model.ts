@@ -3,7 +3,7 @@ import User from "./user.model";
 
 const PatientSchema = new Schema({
     insurancePlan: {type: Schema.Types.ObjectId,  ref: 'Insurance'},
-    bookedAppointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
+    bookedAppointments: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
     personalPhysician: {type: Schema.Types.ObjectId, ref: 'User'},
     healthRecord: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
     currentMeds: [{type: Schema.Types.ObjectId, ref: 'Medication'}],

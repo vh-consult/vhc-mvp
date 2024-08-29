@@ -44,7 +44,7 @@ const HospitalSchema = new Schema({
     clients: [{type: Schema.Types.ObjectId, ref: 'Patient'}],
     description: {type: String},
     services: [{type: String}],
-    appointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
+    appointments: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
     admins: [{type: Schema.Types.ObjectId, ref: 'HospitalAdmin'}],
 });
 

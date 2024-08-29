@@ -8,7 +8,6 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
-import { startConsultation } from "./consultation.actions";
 import Consultation from "../database/models/consultation.model";
 
 export interface AppointmentParams {
@@ -41,19 +40,11 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
             host.clients.push(creator._id)
             await host.save()
         }
-        let session
-        if(formData.problemStatement = ""){
-            session = await Consultation.create({
-                ...formData, 
-                patient:creator._id,
-            })
-        } else{
-            session = await Appointment.create({
-                ...formData, 
-                patient:creator._id,
-            })
+        const session = await Consultation.create({
+            ...formData, 
+            patient:creator._id,
+        })
 
-        }
         session.link = `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${session._id}`
         session.save()
 
@@ -78,7 +69,7 @@ export async function cancelAppointment(clerkId: string, sessionId:string) {
         if (!userCancelingAppointment) throw new Error("User not found")
         if (!userCancelingAppointment.appointments.includes(sessionId)) throw new Error("Appointment session not found in user's Appointments")
 
-        const appointment = await Appointment.findById(sessionId)
+        const appointment = await Consultation.findById(sessionId)
         if (!appointment) throw new Error("Appointment not found")
         
         appointment.status = "canceled"
