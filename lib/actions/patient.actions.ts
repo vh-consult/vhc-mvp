@@ -29,7 +29,7 @@ export async function fetchHealthRecord(patientId:string) {
     try {
       await connectToDatabase()
       console.log(patientId)
-      const user = await Patient.findById(patientId).populate({
+      const user = await Patient.findOne({clerkId: patientId}).populate({
         path: "healthRecord",
         populate: [{path: "doctor", select: "firstName lastName"}]
       })

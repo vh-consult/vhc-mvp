@@ -1,6 +1,7 @@
 "use client"
 import ConsultationSummaryCard from '@/components/consultation/ConsultationSummaryCard'
 import HealthRecordPreview from '@/components/consultation/HealthRecordPreview'
+import MedCard from '@/components/patient/MedCard'
 import RecordCard from '@/components/patient/RecordCard'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -37,10 +38,8 @@ const page = () => {
   // }, [requestNotificationPermission])
 
   return (
-    <div className='flex flex-center pt-[25%]'>
-      {/* <ConsultationSummaryCard consultationId='66d09bd3b68085d73829b0e4'/>
-      <HealthRecordPreview patientId='66c73bfb4615edace4459014'/> */}
-      <RecordCard/>
+    <div className='flex flex-center pt-[2%]'>
+
     </div>
   )
 }

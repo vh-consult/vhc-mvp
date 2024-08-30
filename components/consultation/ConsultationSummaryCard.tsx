@@ -4,13 +4,13 @@ import { fetchConsultationSession } from '@/lib/actions/consultation.actions'
 import { TPatient } from '../doctor/DoctorDashboard';
 import { MedicationParams } from '@/lib/database/models/medication.model';
 
-export type TDoctor = {
+export type spanoctor = {
     firstName: string;
     lastName: string;
 }
 
 export type TConsultation = {
-    doctor: TDoctor;
+    doctor: spanoctor;
     patient: TPatient;
     date: Date;
     medication: any[];
@@ -32,35 +32,34 @@ const ConsultationSummaryCard = ({consultationId}: {consultationId:string}) => {
     fetch()
   },[consultationId])
     return (
-    <div className='w-[500px] p-3 bg-gray-200 mt-20 ml-20 rounded-lg'>
-      <h1 className="text-3xl font-medium">Consultation Summary</h1>
+    <div className='w-full p-3 bg-white shadow rounded-lg'>
+      <h1 className="text-xl font-medium">Consultation Summary</h1>
       {
         summary ? (
-            <table className="">
-                <tbody className="">
-                    <tr className=''>
-                        <td>Doctor</td>
-                        <td>{summary?.doctor.firstName + ' ' + summary?.doctor.lastName}</td>
-                    </tr>
-                    <tr>
-                        <td>Patient</td>
-                        <td>{summary?.patient.firstName + ' ' + summary?.patient.lastName}</td>
-                    </tr>
-                    <tr>
-                        <td>Date</td>
-                        <td>{new Date(summary?.date).toLocaleString()}</td>
-                    </tr>
-                    <tr className=''>
-                        <td>Problem</td>
-                        <td>{summary?.problemStatement}</td>
-                    </tr>
-                    <tr>
-                        <td>Examination</td>
-                        <td>{summary?.examination}</td>
-                    </tr>
-                    <tr>
-                        <td>Prescriptions</td>
-                        <td>
+            <div className="w-full flex flex-col gap-6">
+                    <div className='flex flex-col'>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Doctor</h3>
+                        <p className=''>{summary?.doctor.firstName + ' ' + summary?.doctor.lastName}</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Patient</h3>
+                        <p className=''>{summary?.patient.firstName + ' ' + summary?.patient.lastName}</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Date</h3>
+                        <p className=''>{new Date(summary?.date).toLocaleString()}</p>
+                    </div>
+                    <div className=''>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Problem</h3>
+                        <p className=''>{summary?.problemStatement}</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Examination</h3>
+                        <p className=''>{summary?.examination}</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <h3 className='text-sm font-medium w-full p-1    flex items-center opacity-65 bg-gray-100'>Prescriptions</h3>
+                        <span>
                             {
                                 summary?.medication.map(
                                     (med:any, index:number) => (
@@ -72,11 +71,10 @@ const ConsultationSummaryCard = ({consultationId}: {consultationId:string}) => {
                                         </div>
                                     )
                                 )}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        ): ''
+                        </span>
+                    </div>
+            </div>
+        ): 'No comment added'
       }
     </div>
   )

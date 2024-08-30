@@ -2,6 +2,7 @@
 import useDBUser from '@/hooks/useDBUser';
 import React from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
+import MedCard from '../patient/MedCard';
 
 const LandingPageBanner = () => {
   const {role, clerkId} = useDBUser()
@@ -14,7 +15,7 @@ const LandingPageBanner = () => {
       dateStyle: 'full'
     })).format(now);
   return (
-    <div className="flex h-[calc(100vh-90px)] flex-col justify-between max-md:px-2 max-md:py-4 lg:p-5">
+    <div className="flex h-[calc(100vh-90px)] flex-col  max-md:px-2 max-md:py-4 lg:p-5">
     <div  className="flex flex-col gap-2">
       <p className="text-base font-medium text-green-4 lg:text-lg leading-tight">
         {date}
@@ -22,7 +23,7 @@ const LandingPageBanner = () => {
       <h1 className="text-2xl text-green-4 font-extrabold lg:text-3xl leading-none">
         {time}
       </h1>
-          <h2 className="bg-green-1 rounded py-2 text-center text-base font-normal">
+          <h2 className="bg-green-1 rounded py-2 text-center text-base mb-4 font-normal">
       {
         role === "Patient"? (
             "Medication Alert"
@@ -35,9 +36,14 @@ const LandingPageBanner = () => {
         {
           role === "Doctor" ? (
             <DoctorAppointmentList clerkId={clerkId}/>
-          ): (
-            <span></span>
-          )
+          ): role === "Patient"? (
+            <MedCard 
+            imageSrc={ '/images/drug 5.jpg'}
+            drug={ 'Zimadal 50mg'}
+            time={ new Date(0, 0, 0, 11, 30)}
+            condition={ 'Before Meal'}
+            quantity={ 4}
+        />          ): ''
         }
     </div>
   </div>

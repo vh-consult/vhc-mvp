@@ -87,7 +87,7 @@ export async function fetchConsultationSession(consultationId:string) {
         const session = await Consultation.findById(consultationId).populate([
             { path: "patient", select: "firstName lastName healthRecord dateOfBirth email"  },
             { path: "doctor", select: "firstName lastName "  },
-            { path: "medication" },
+            { path: "medication", select: "drug dose caution" },
         ])
         if(!session) throw new Error("Session not found")
             console.log(session)
