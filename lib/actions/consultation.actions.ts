@@ -8,6 +8,7 @@ import Doctor from "../database/models/doctor.model";
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import Patient from "../database/models/patient.model";
 
 interface MedicationParams {
     drug: string;
@@ -35,6 +36,18 @@ export async function postConsultationForm(
         if(!updated) throw new Error("consultation not found and updated")
         updated.status = "finished"
         await updated.save()
+
+        const patient = await Patient.findById(updated.patient)
+        if(!patient) throw new Error("no patient found")
+
+        const doctor = await Doctor.findById(updated.doctor)
+        if(!doctor) throw new Error("no doctor found")
+        
+        patient.healthRecord.push(updated._id)
+        await patient.save()
+
+        doctor.consultationHistory.push(updated._id)
+        await doctor.save()
         return {message: "Summary added successfully"}
     } catch (error) {
         handleError(error)

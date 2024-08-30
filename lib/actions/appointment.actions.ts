@@ -56,7 +56,6 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
         host.appointments.push(session._id)
         await host.save()
 
-        
         return JSON.parse(JSON.stringify(session._id))
     } catch (error) {
         // handleError(error)

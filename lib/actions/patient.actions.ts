@@ -25,11 +25,16 @@ export async function fetchAffiliates(userId:string) {
     }
 }
 
-export async function fetchHealthRecord(clerkId:string) {
+export async function fetchHealthRecord(patientId:string) {
     try {
       await connectToDatabase()
-      const user = await Patient.findOne({clerkId}).populate("healthRecord")
+      console.log(patientId)
+      const user = await Patient.findById(patientId).populate({
+        path: "healthRecord",
+        populate: [{path: "doctor", select: "firstName lastName"}]
+      })
       if(!user) throw new Error("User not found")
+      console.log(user)
       const record = user.healthRecord
   
       return JSON.parse(JSON.stringify(record))
