@@ -82,8 +82,25 @@ export const OrderCard = (
     )
   }
 
+const results = [
+  {
+    buyer: {firstName: 'Samuel', lastname: 'Inkoom'},
+    deliveryStatus: 'Not delivered',
+    items: [
+      {
+        name: 'Serum',
+        image: '/images/drug 0.jpg'
+      },
+      {
+        name: 'Paracetamol',
+        image: '/images/drug 6.jpg'
+      }
+    ]
+  }
+]
+
 const OrderList = async ({shopId}: {shopId: string}) => {
-  const results = await retrieveShopOrders(shopId)
+  // const results = await retrieveShopOrders(shopId)
   return (
     <div className='grid grid-cols-2 gap-4'>
       {
