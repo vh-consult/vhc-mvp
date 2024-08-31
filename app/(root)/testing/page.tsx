@@ -54,12 +54,18 @@
 
 // export default page
 
+import { StatCard } from '@/components/pharmacy/PharmacyStatistics'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      hi
+      <StatCard 
+          title= 'Sales'
+          figure= {120}
+          scaleOfReference= '$'
+          subtext= 'This month'
+      />
       
     </div>
   )
