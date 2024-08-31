@@ -60,12 +60,7 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-      <StatCard 
-          title= 'Sales'
-          figure= {120}
-          scaleOfReference= '$'
-          subtext= 'This month'
-      />
+hi
       
     </div>
   )

@@ -10,10 +10,6 @@ const UserHomePage = () => {
   const {role, companyId} = useDBUser()
   const router = useRouter()
 
-  if (role === undefined) {
-    return <Loader/>
-  }
-
   if (role === "PharmacyAdmin") {
     return router.push(`/company/${companyId}/overview}`)
   }
