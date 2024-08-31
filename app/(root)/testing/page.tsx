@@ -6,6 +6,7 @@ import RecordCard from '@/components/patient/RecordCard'
 import React, { useCallback, useEffect, useState } from 'react'
 
 const page = () => {
+  const [show, setShow] = useState(false)
   // const [show, setShow] = useState(false)
   // const sendNotification = () => {
   //   if ('Notification' in window && Notification.permission === 'granted') {
@@ -39,7 +40,14 @@ const page = () => {
 
   return (
     <div className='flex flex-center pt-[2%]'>
-
+      <span className="" onClick={() => setShow(true)}>
+      <RecordCard/>
+      </span>
+      {
+        show === true? (
+          <ConsultationSummaryCard consultationId='66d1cc0f0900dc0e6d2be461' />
+        ) : ''
+      }
     </div>
   )
 }

@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
 import Message from '../message/Message'
-import MessageList from '../message/MessageCardAndList'
+import MessageList from '../message/MessageCard'
 
 export interface NavLinkProps {
   imageURL?: string;

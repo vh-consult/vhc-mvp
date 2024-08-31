@@ -9,8 +9,8 @@ const RecordCard = () => {
             <MdVideoCall/>
         </span>
       <h1 className="text-lg font-medium">Dr Solomon Ayisi</h1>
-      <h3 className="text-base leading-tight">{new Date().toLocaleDateString()}</h3>
-      <p className="text-sm">{new Date().toLocaleTimeString()}</p>
+      <h3 className="text-base leading-tight">{new Date(2023, 3, 14, 11, 30).toLocaleDateString()}</h3>
+      <p className="text-sm">{new Date(2023, 3, 14, 11, 30).toLocaleTimeString()}</p>
     </div>
   )
 }
