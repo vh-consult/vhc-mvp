@@ -17,7 +17,7 @@ const PendingPrescriptiion = ({
     const [showSummary, setShowSummary] = useState<boolean>(false)
     const [showPrescription, setShowPrescription] = useState<boolean>(false)
   return (
-    <div className='w-[300px] h-[100px] flex p-2 hover:bg-gray-100'>
+    <div className='w-[300px]  flex p-2 hover:bg-gray-100'>
       <span className='rounded-lg bg-cyan-100 mr-4 font-bold text-2xl w-10 h-10 flex flex-center '>
         {clientName.slice(0,1)}
       </span>
