@@ -25,7 +25,6 @@ const CompanySchema = new Schema<CompanyParams>({
     location: {type: String},
     logo: {type: String},
     tagline: {type: String},
-    admins: [{type: Schema.Types.ObjectId, ref: 'User'}],
     description: {type: String},
     posts: {type: Schema.Types.ObjectId, ref: 'Blog'},
     isVerified: {type: Boolean, default: false},
@@ -36,14 +35,17 @@ const CompanySchema = new Schema<CompanyParams>({
 const PharmacySchema = new Schema({
     inventory: [{type: Schema.Types.ObjectId, ref: 'Drug'}],
     orders: [{type: Schema.Types.ObjectId, ref: 'Order'}],
+    admins: [{type: Schema.Types.ObjectId, ref: 'PharmacyAdmin'}],
+
 });
 
 const HospitalSchema = new Schema({
-    doctors: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    doctors: [{type: Schema.Types.ObjectId, ref: 'Doctor'}],
+    clients: [{type: Schema.Types.ObjectId, ref: 'Patient'}],
     description: {type: String},
     services: [{type: String}],
-    bookings: [{type: Schema.Types.ObjectId, ref: 'Booking'}]
+    appointments: [{type: Schema.Types.ObjectId, ref: 'Consultation'}],
+    admins: [{type: Schema.Types.ObjectId, ref: 'HospitalAdmin'}],
 });
 
 

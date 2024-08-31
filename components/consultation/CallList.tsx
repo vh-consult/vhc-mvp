@@ -8,12 +8,14 @@ import ConsultationCard from './ConsultationCard';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+
 const CallList = (
   { type }: { type?: 'ended' | 'upcoming' | 'recordings'}) => {
   const router = useRouter();
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
+
   const getCalls = () => {
     switch (type) {
       case 'ended':
@@ -63,6 +65,10 @@ const CallList = (
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 
+
+  const handleStartConsultation = (consultation:Call) => {
+    router.push(`/consultation/room/${(consultation as Call).id}`)
+  }
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 ">
       {calls && calls.length > 0 ? (
@@ -99,14 +105,14 @@ const CallList = (
             link={
               type === 'recordings'
                 ? (consultation as CallRecording).url
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/Consultation-room/${(consultation as Call).id}`
+                : `${process.env.NEXT_PUBLIC_BASE_URL}/consultation/room/${(consultation as Call).id}`
             }
             buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
             buttonText={type === 'recordings' ? 'Play' : 'Start'}
             handleClick={
               type === 'recordings'
                 ? () => router.push(`${(consultation as CallRecording).url}`)
-                : () => router.push(`/consultation-room/${(consultation as Call).id}`)
+                : () => { handleStartConsultation(consultation as Call) }
             }
           />
         ))

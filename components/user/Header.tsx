@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
 import Message from '../message/Message'
-import MessageList from '../message/MessageCardAndList'
 
 export interface NavLinkProps {
   imageURL?: string;
@@ -48,7 +47,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
             </Link>
             
             <div className=" w-1/2 ">
-              <ul className='flex flex-row flex-between text-green-4'>
+              <ul className='flex flex-row flex-between  text-green-4'>
                 {
                   navigations?.map((nav,index)=>{
                     const activeLink = pathname === nav.route
@@ -56,7 +55,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
                       <li key={index}>
                         <Link
                           href={nav.route}
-                          className={` font-normal text-sm hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
+                          className={` font-normal text-sm  hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
                         >
                           {nav.label}
                         </Link>
@@ -112,9 +111,8 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
         <div className="w-[350px] bg-inherit z-50 absolute right-5">
           {
             showNotifications? (
-            <MessageList 
-              className='bg-white hover:bg-gray-100 text-green-4'
-            />): ''
+              "no new notification"
+            ): ''
           }
         </div>
       </header>

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CallControls,
   CallParticipantsList,
@@ -26,11 +26,12 @@ import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
 import useDBUser from '@/hooks/useDBUser';
 import { BiComment } from 'react-icons/bi';
-import ConsultationComment from './ConsultationComment';
+import ConsultationSummaryCard, { TConsultation } from './ConsultationSummaryCard';
+import { fetchConsultationSession } from '@/lib/actions/consultation.actions';
 
 type CallLayoutType = 'grid' | 'left' ;
 
-const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
+const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
@@ -41,6 +42,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
   const callingState = useCallCallingState();
   const {role} = useDBUser()
   const [showComment, setShowComment] = useState<boolean>(false)
+  
 
   
   if (callingState !== CallingState.JOINED) return (<span className='bg-green-2 w-14 h-14 rounded-lg shadow-lg'>
@@ -76,7 +78,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
                   'show-block': showComment,
                 })} 
               >          
-              <ConsultationComment/>
+              <ConsultationSummaryCard consultationId={consultationId}/>
               </div>
             ): showConsultationForm? (
               <div
@@ -84,7 +86,7 @@ const ConsultationRoom = ({bookingId}:{bookingId: string}) => {
                 'show-block': showConsultationForm,
                 })} 
               >          
-                <ConsultationForm bookingId={bookingId}/>
+                <ConsultationForm consultationId={consultationId}/>
               </div>  
             ): ``
           }

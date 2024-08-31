@@ -38,7 +38,7 @@ const ConsultationCard = ({
   return (
     <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-white px-5 py-8 xl:max-w-[568px]">
       <article className="flex flex-col gap-5">
-        <span className="w-[40px] h-[40px] flex flex-center rounded-md bg-gray-400">
+        <span className="w-[40px] h-[40px] flex flex-center rounded-md bg-dark-4">
           <Image src={icon} alt="upcoming" width={28} height={28}  />
         </span>
         <div className="flex justify-between">
@@ -50,13 +50,21 @@ const ConsultationCard = ({
       </article>
       <article className={cn("flex justify-center relative", {})}>
         <div className="flex w-full items-center">
-            <Image
-              src={hostImage ? hostImage: ''}
-              alt="attendees"
-              width={40}
-              height={40}
-              className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
-            />
+          {
+            hostImage ? (
+                <Image
+                  src={hostImage}
+                  alt="attendees"
+                  width={40}
+                  height={40}
+                  className={cn("rounded-full w-[30px] h-[30px] mr-2 object-cover")}
+                />
+            ) : (
+              <span className="w-[40px] h-[40px] bg-sky-2 flex flex-center mr-2 text-xl text-violet-1 font-bold rounded-full">
+                {hostName?.slice(0,1)}
+              </span>
+            )
+          }
             <span className="text-lg font-medium text-green-4">
               {hostName}
             </span>

@@ -1,5 +1,5 @@
 import Message from '@/components/message/Message'
-import MessageList from '@/components/message/MessageCardAndList'
+import MessageList from '@/components/message/MessageCard'
 import React from 'react'
 
 const CompanyPostsPage = () => {

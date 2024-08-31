@@ -17,7 +17,6 @@ export interface SideNavProps {
 }
 
 
-
 const AdminSidebar = () => {
   const pathname = usePathname()
   const {role, companyId} = useDBUser()

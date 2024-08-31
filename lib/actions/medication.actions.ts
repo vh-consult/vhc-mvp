@@ -1,7 +1,11 @@
 "use server"
 
+import { DrugPrescriptionParams } from "@/components/pharmacy/PrescriptionForm"
+import Consultation from "../database/models/consultation.model"
+import Doctor from "../database/models/doctor.model"
 import Medication, { MedicationParams } from "../database/models/medication.model"
-import { User } from "../database/models/user.model"
+import Patient from "../database/models/patient.model"
+import User from "../database/models/user.model"
 import { connectToDatabase } from "../database/mongoose"
 import { handleError } from "../utils"
 
@@ -9,7 +13,7 @@ import { handleError } from "../utils"
 export const fetchMeds = async (clerkId: string) => {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId})
+        const user = await Patient.findOne({clerkId})
         if(!user) throw new Error("User not found")
         
         const meds = await user.populate("currentMeds")
@@ -23,17 +27,30 @@ export const fetchMeds = async (clerkId: string) => {
 
 
 export const postMeds = async (
-    clerkId: string, 
-    medData: MedicationParams
+    doctorId: string,
+    consultationId: string, 
+    medData: DrugPrescriptionParams[],
 ) => {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId})
-        if(!user) throw new Error("User not found")
+        const doctor = await Doctor.findOne({clerkId: doctorId})
+        if (!doctor) throw new Error('doctor not found')
+        
+        const session = await Consultation.findById(consultationId)
+        if (!session) throw new Error('consultation session not found')
+        
+        if(session.doctor.toString() === doctor._id.toString()){
+            medData.forEach(async (data: any)=> {
+                const meds = await Medication.create(data)
+                session.medication.push(meds._id)
+                await session.save()
+            })
 
-        const med = await Medication.create(medData)
-        user.currentMeds.push(med._id)
-        await user.save()
+            return {message: 'Drug added to meds'}
+        } else {
+            throw new Error("Doctor can't prescribe drugs")
+        }
+
     } catch (error) {
         handleError(error)
     }

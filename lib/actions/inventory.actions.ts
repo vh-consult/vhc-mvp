@@ -1,9 +1,10 @@
 "use server"
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
-import { PharmacyAdmin, User } from "../database/models/user.model";
 import { Company, Pharmacy } from "../database/models/company.model";
 import Drug from "../database/models/drug.model";
+import User from "../database/models/user.model";
+import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 
 export interface DrugParams {
     name: string;
@@ -21,7 +22,7 @@ export async function addToInventory(
 ) {
     try {
         await connectToDatabase();
-        const admin = await User.findOne({ clerkId: adminId }).populate('company');
+        const admin = await PharmacyAdmin.findOne({ clerkId: adminId }).populate('company');
         if (!admin) throw new Error("User not found");
 
         if (admin.userRole === "PharmacyAdmin") {
@@ -66,7 +67,7 @@ export async function addToInventory(
 export async function removeFromInventory(clerkId: string, drugId: string, shopId: string) {
     try {
         await connectToDatabase()
-        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
+        const admin = await PharmacyAdmin.findOne({clerkId})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
@@ -103,7 +104,7 @@ export async function updateInventory(
 ) {
     try {
         await connectToDatabase()
-        const admin = await User.findOne({clerkId, userRole: "PharmacyAdmin"})
+        const admin = await PharmacyAdmin.findOne({clerkId})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})

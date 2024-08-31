@@ -1,20 +1,16 @@
-import Image from 'next/image';
 import React from 'react'
-import { CgClose } from 'react-icons/cg';
 import { MdApproval, MdDeleteOutline } from 'react-icons/md';
 import { Button } from '../ui/button';
 
 interface RequestCardProps {
-    problemStatement: string;
     scheduledAt: Date;
     clientName: string;
-    clientImage: string;
-    bookingType: string; 
+    appointmentType: string; 
 }
 
 const RequestCard = ({
-    problemStatement, scheduledAt, clientImage,
-    bookingType, clientName
+    scheduledAt, 
+    appointmentType, clientName
 }: RequestCardProps) => {
   return (
     <div className='w-[300px] h-[100px] flex p-2 hover:bg-gray-100'>
@@ -23,8 +19,9 @@ const RequestCard = ({
       </span>
       <div className="">
         <div className="">
-          <h1 className="text-lg leading-tight">{clientName}</h1>
-          <p className="text-sm">{new Date(scheduledAt).toLocaleString()}</p>
+          <h1 className="text-lg leading-tight capitalize">{clientName}</h1>
+          <p className="text-sm">Date: {new Date(scheduledAt).toLocaleString()}</p>
+          <p className="text-sm">Channel: {appointmentType}</p>
         </div>
         <div className="flex mt-2 text-sm">
           <Button className="w-[100px] h-8 mr-2 rounded-md text-white flex flex-center bg-red-400 hover:bg-red-600">

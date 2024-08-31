@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { fetchUpcoming } from '@/lib/actions/doctor.actions';
 
 export const useGetCalls = () => {
   const { user } = useUser();
@@ -46,6 +47,10 @@ export const useGetCalls = () => {
   const upcomingCalls = calls?.filter(({ state: { startsAt } }: Call) => {
     return startsAt && new Date(startsAt) > now
   })
+
+  const upcoming = async () => {
+    const calls = await fetchUpcoming(user?.id as string)
+  }
 
   return { endedCalls, upcomingCalls, callRecordings: calls, isLoading }
 };

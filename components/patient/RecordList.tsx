@@ -1,12 +1,11 @@
 import React from 'react'
 
 
-interface HealthRecordProps {
+export interface HealthRecordProps {
     date: string;
     time: string;
     provider?: string;
     physician: string;
-    // consultationinterface: string;
     complaint: Array<string>;
     diagnosis: Array<string>;
     medications: Array<{drug: string, dose: string}>;

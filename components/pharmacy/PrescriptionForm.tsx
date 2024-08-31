@@ -8,36 +8,40 @@ import Loader from '../general/Loader'
 import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
+import { postMeds } from '@/lib/actions/medication.actions'
+import { useUser } from '@clerk/nextjs'
 
-interface DrugPrescriptionParams {
-  medicine: string;
+export interface DrugPrescriptionParams {
+  drug: string;
   dose: number | null;
   caution: string;
   duration: number | null;
 }
 const initialValues = {
-  medicine: '',
+  drug: '',
   dose: null,
   caution: '',
   duration: null
 }
 const PrescriptionForm = (
-  {isOpen, onClose, setPrescribedDrugs}:
-  {isOpen:boolean, onClose: ()=>void, setPrescribedDrugs:any}
+  {isOpen, onClose, setPrescribedDrugs, consultationId}:
+  {isOpen:boolean, onClose: ()=>void, setPrescribedDrugs:any, consultationId: string}
 ) => {
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
   const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
-
-  const handleDone = async () => {
+  const {user} = useUser()
+  const handleDone = async (e: FormEvent) => {
+    e.preventDefault()
     setPrescribedDrugs(drugsAdded)
+    const uploadedMeda = await postMeds(user?.id as string, consultationId, drugsAdded)
     isOpen = false
     toast({title: "drugs added"})  
   }
   const handlePush = async (e: FormEvent, values: DrugPrescriptionParams) => {
     e.preventDefault()
-    const {caution, dose, duration, medicine} = values
-    if(caution === '' || dose === null || duration === null || medicine === '') {
+    const {caution, dose, duration, drug} = values
+    if(caution === '' || dose === null || duration === null || drug === '') {
       throw new Error(
         `${
           toast({title: "Fill all form fields with valid data"}) 
@@ -59,12 +63,12 @@ const PrescriptionForm = (
         <form className='flex flex-col gap-3'>
           <div className="w-full flex gap-1">
             <span className="w-[75%]">
-              <Label>Medicine</Label>
+              <Label>drug</Label>
               <Input
-                onChange={(e)=> setValues({...values, medicine:e.target.value})}
+                onChange={(e)=> setValues({...values, drug:e.target.value})}
                 type='string'
                 className='bg-green-3 focus-visible:ring-0 border-gray-400'
-                title='Enter name of medicine'
+                title='Enter name of drug'
               />
             </span>
             <span className="w-[25%]">
@@ -107,7 +111,7 @@ const PrescriptionForm = (
           </Button>
             <Button
               className='w-full bg-blue-1 text-white'
-              onClick={handleDone}
+              onClick={(e)=>handleDone(e)}
               >
               {
                 loading? <Loader/> : (

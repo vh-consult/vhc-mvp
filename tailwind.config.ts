@@ -61,7 +61,8 @@ const config = {
       backgroundImage: {
         hero: "url('/images/health.jpg')",
         landingHero: "url('/images/meet-up.jpg')",
-        story: "url('/images/laptopGirlSmiling.jpg')"
+        story: "url('/images/laptopGirlSmiling.jpg')",
+        blog: "url('/images/laptopGirlSmiling.jpg')",
       },
       keyframes: {
         "accordion-down": {

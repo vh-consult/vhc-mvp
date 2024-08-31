@@ -9,13 +9,13 @@ const useDBUser = () => {
     const clerkId = user?.id as string
     const [role, setRole] = useState<
     "Doctor"|"Patient"|
-    "HospitalAdmin"|"PharmacyAdmin">()
+    "HospitalAdmin"|"PharmacyAdmin"| string>('')
     useEffect(() => {        
         if(!user) return;
         async function getUserFromDB() {
             const userData:any = await getUser(clerkId)
             setDbUser(userData)
-            setRole(userData.userRole)
+            setRole(userData.type)
             setCompanyId(userData.company as string)
         }
         getUserFromDB()

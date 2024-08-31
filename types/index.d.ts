@@ -14,10 +14,10 @@ declare type UserParams = {
   lastName: string;
   photo: string;
   contact: string;
-  userRole: "Patient" | "Doctor" | "HospitalAdmin" | "PharmacyAdmin";
+  type: "Patient" | "Doctor" | "HospitalAdmin" | "PharmacyAdmin";
   country: string;
   company?: string;
-  bookings?: any[];
+  appointments?: any[];
   messages?: any[]
 };
 

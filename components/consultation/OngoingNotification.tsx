@@ -15,11 +15,9 @@ const OngoingNotification = ({
     const now = new Date(); 
     const elapsed = now.getTime() - startedAt.getTime(); 
   
-    // Calculate the hours and minutes from the elapsed time
     const hours = Math.floor(elapsed / (1000 * 60 * 60));
     const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
   
-    // Format the output string
     const time = `${hours} hour${hours !== 1 ? 's' : ''}, ${minutes} minute${minutes !== 1 ? 's' : ''}`;
     return time;
   };

@@ -102,7 +102,7 @@ const CreateBlogPostPage = () => {
         className='mx-auto'
       />
       <div className="flex w-full flex-col gap-2.5">
-        <Label className="text-base font-normal leading-[22.4px] text-green-1">
+        <Label className="text-base font-normal leading-[22.4px] text-green-4">
           Title
         </Label>
         <Input
