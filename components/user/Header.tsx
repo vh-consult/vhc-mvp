@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
 import Message from '../message/Message'
-import MessageList from '../message/MessageCard'
 
 export interface NavLinkProps {
   imageURL?: string;
@@ -112,9 +111,8 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
         <div className="w-[350px] bg-inherit z-50 absolute right-5">
           {
             showNotifications? (
-            <MessageList 
-              className='bg-white hover:bg-gray-100 text-green-4'
-            />): ''
+              "no new notification"
+            ): ''
           }
         </div>
       </header>

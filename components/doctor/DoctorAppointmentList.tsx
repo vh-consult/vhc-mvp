@@ -5,28 +5,39 @@ import UpcomingConsultationCard from '../consultation/UpcomingConsultationCard';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
 import Loader from '../general/Loader';
 
-const DoctorAppointmentList = ({ clerkId }: { clerkId: string }) => {
-    const [upcoming, setUpcoming] = useState<Array<AppointmentDataType>>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+const upcoming:AppointmentDataType[] = [
+    {
+        channel: "In-person visitation",
+        date: new Date(2024, 8, 1, 9, 30),
+        patient: {firstName: 'Peter', lastName: 'Siel', dateOfBirth: new Date(2000, 11, 23)},
+        link: '',
+        problemStatement: 'Headache and abdominal pains',
 
-    useEffect(() => {
-        const getUpcomingAppointments = async () => {
-            try {
-                const upcomingAppointments = await fetchUpcoming(clerkId);
-                setUpcoming(upcomingAppointments);
-            } catch (error) {
-                console.error("Error fetching upcoming appointments:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        getUpcomingAppointments();
-    }, [clerkId]);
-
-    if (loading) {
-        return <Loader/>
     }
+]
+
+const DoctorAppointmentList = ({ clerkId }: { clerkId: string }) => {
+    // const [upcoming, setUpcoming] = useState<Array<AppointmentDataType>>([]);
+    // const [loading, setLoading] = useState<boolean>(true);
+
+    // useEffect(() => {
+    //     const getUpcomingAppointments = async () => {
+    //         try {
+    //             const upcomingAppointments = await fetchUpcoming(clerkId);
+    //             setUpcoming(upcomingAppointments);
+    //         } catch (error) {
+    //             console.error("Error fetching upcoming appointments:", error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     getUpcomingAppointments();
+    // }, [clerkId]);
+
+    // if (loading) {
+    //     return <Loader/>
+    // }
 
     return (
         <>

@@ -1,6 +1,7 @@
 import React from 'react'
 import AppointmentRequests from './AppointmentRequests';
-import OngoingConsultationAlert from '../consultation/OngoingConsultationAlert';
+import PendingPrescriptiion from './PendingPrescriptiion';
+import OngoingNotification from '../consultation/OngoingNotification';
 
 export type TPatient = {
   firstName: string;
@@ -29,17 +30,21 @@ const DoctorDashboard = () => {
       <div className="w-[37%] h-full flex flex-col gap-y-3 flex-between">
         <div className="w-full h-[125px] bg-white shadow-sm rounded-lg ">
             <h3 className="text-sm opacity-75 font-semibold p-3">
-              Next Consultation
+              Ongoing Session
             </h3>
             <p className="">
-              10 minutes
+              <OngoingNotification link='' patient='' startedAt={new Date(2024, 7, 31, 9, 55)} />
             </p>
         </div>
         <div className="w-full h-full bg-white shadow-sm rounded-lg">
             <h3 className="text-sm opacity-75 font-semibold p-3">
               Pending Prescriptions
             </h3>
-            
+            <PendingPrescriptiion
+              bookingType='Virtual Consultation'
+              clientName='Ayitey Michael'
+              scheduledAt={new Date(2024, 7, 29, 10, 15)}
+            />
         </div>
       </div>
     </main>
