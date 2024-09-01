@@ -6,6 +6,7 @@ import React from 'react'
 import ClickableCard from '../general/ClickableCard'
 import { getAdminCompany } from '@/lib/actions/company.actions'
 import Loader from '../general/Loader'
+import LandingDashboard from '../pharmacy/LandingDashboard'
 
 export interface ClickableCardProps {
     title: string;
@@ -155,7 +156,7 @@ const RenderUserLanding = () => {
                     handleClick={() => { router.push("/company/set-up")}}
                     className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
                 />
-                ): ''
+                ) :(companyId !== undefined && role === "PharmacyAdmin" ) ? (<LandingDashboard/>) :''
             }
             {
                 role === "" ? <Loader/> : ''
