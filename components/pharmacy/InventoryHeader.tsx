@@ -11,10 +11,32 @@ const InventoryHeader = () => {
   return (
     <section className="w-full flex flex-col mb-6">
       <div className="flex flex-between w-full mb-3">
-        <CompanyHiglightCard/>
-        <CompanyHiglightCard/>
-        <CompanyHiglightCard/>
-        <CompanyHiglightCard/>
+        <CompanyHiglightCard
+          color='red-400'
+          title='Expiring'
+          quantity={12}
+          subtext='Total items'
+        />
+        <CompanyHiglightCard
+          color='gray-300'
+          title='Out of Stock'
+          quantity={4}
+          subtext='Since 12/06/2024'
+        />
+        <CompanyHiglightCard
+          color='green-400'
+          title='Most Purchased'
+          quantity2={120}
+          quantity={5}
+          subtext2='Total Demand'
+          subtext='This Week'
+        />
+        <CompanyHiglightCard
+          color='gray-400'
+          title='Limited '
+          quantity={5}
+          subtext='In stock'
+        />
       </div>
       <div className='w-full flex flex-between'>
         <SearchBar 

@@ -5,6 +5,7 @@ import { Company, Pharmacy } from "../database/models/company.model";
 import Drug from "../database/models/drug.model";
 import User from "../database/models/user.model";
 import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
+import { revalidatePath } from "next/cache";
 
 export interface DrugParams {
     name: string;
@@ -25,7 +26,7 @@ export async function addToInventory(
         const admin = await PharmacyAdmin.findOne({ clerkId: adminId }).populate('company');
         if (!admin) throw new Error("User not found");
 
-        if (admin.userRole === "PharmacyAdmin") {
+        try{
             const shop = admin.company;
             if (!shop) throw new Error("No shop found");
             if (shop.companyType !== "Pharmacy") throw new Error("Company is not a pharmacy");
@@ -54,10 +55,11 @@ export async function addToInventory(
                 shop.inventory.push(newDrug._id);
                 await shop.save();
 
+                revalidatePath(`/company/${shop}/inventory`)
                 return { message: 'Drug added to inventory' };
             }
-        } else {
-            throw new Error("User not a pharmacy admin");
+        } catch (error) {
+            console.log("drug not added")
         }
     } catch (error) {
         handleError(error);

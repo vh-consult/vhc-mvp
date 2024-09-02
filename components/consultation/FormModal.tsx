@@ -29,7 +29,7 @@ const FormModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="flex w-full max-w-[520px] flex-col 
       gap-3 border-none bg-white px-6 py-5 text-green-4">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
             {
                 image && (
                     <div className='flex justify-center'>

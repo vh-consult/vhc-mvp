@@ -11,6 +11,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 import Loader from '../general/Loader';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
+import { Label } from '../ui/label';
 
 const initialValues = {
   name: '',
@@ -52,64 +53,82 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
       {
         loading? (<Loader/>) : (
           <>
-            <SingleImageDropzone
-              width={125}
-              height={150}
-              value={file}
-              onChange={(file) => {
-                setFile(file);
-              }}
-              className='mx-auto'
-            />
-            <Input
-              className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-              onChange={(e) =>
-                setValues({ ...values, name: e.target.value })
-              }
-              placeholder="Drug's name"
-            />
-            <Select required onValueChange={(value) => setValues({ ...values, catalog: value })}>
-              <SelectTrigger id="catalog" className='bg-green-3 text-sm'>
-                <SelectValue placeholder="Select catalog" />
-              </SelectTrigger>
-              <SelectContent position="popper" className='bg-green-3 text-green-4'>
-                <SelectItem value="painkiller">Painkiller</SelectItem>
-                <SelectItem value="appetizer">Appetizer</SelectItem>
-                <SelectItem value="antiMalaria">Anti-malaria</SelectItem>
-                <SelectItem value="energizer">Energizer</SelectItem>
-              </SelectContent>
-            </Select>
+        <SingleImageDropzone
+          width={125}
+          height={150}
+          value={file}
+          onChange={(file) => {
+            setFile(file);
+          }}
+          className='mx-auto'
+        />
+        <div className="">
+          <Label>Item's Name</Label>
+          <Input
+            className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            onChange={(e) =>
+              setValues({ ...values, name: e.target.value })
+            }
+            placeholder="e.g: Paracetamol 50mg"
+          />
+        </div>
+    <div className="flex flex-col">
+      <Label>Item's Catalog</Label>
+      <Select required onValueChange={(value) => setValues({ ...values, catalog: value })}>
+        <SelectTrigger id="catalog" className='bg-green-3 text-sm'>
+          <SelectValue placeholder="e.g: Painkiller" />
+        </SelectTrigger>
+        <SelectContent position="popper" className='bg-green-3 text-green-4'>
+          <SelectItem value="painkiller">Painkiller</SelectItem>
+          <SelectItem value="appetizer">Appetizer</SelectItem>
+          <SelectItem value="antiMalaria">Anti-malaria</SelectItem>
+          <SelectItem value="energizer">Energizer</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+    <div className="flex flex-col">
+      <Label>Description</Label>
       <Textarea
         className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
         onChange={(e) =>
           setValues({ ...values, description: e.target.value })
         }
-        placeholder='Description'
+        placeholder='e.g: Good for abdominal pains, body pains, etc.'
       />
+    </div>
+    <div className="flex flex-col">
+      <Label>Expiry Date</Label>
       <ReactDatePicker
             required
-            // minDate={new Date()}
+            minDate={new Date()}
             placeholderText='Select expiry date'
             selected={values.expiryDate}
             onChange={(date) => setValues({ ...values, expiryDate: date! })}
             dateFormat="MMMM d, yyyy"
             className="w-full rounded bg-green-3 p-2 focus:outline-none"
       />
+    </div>
     <div className="flex w-full gap-2">
-        <Input 
-          type='number'
-          min={0}
-          placeholder='Price' 
-          onChange={(e)=>setValues({...values, price: e.target.value as any | number })}
-          className=" w-1/2 bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
-        />
-        <Input 
-          type='number'
-          min={1}
-          placeholder='Quantity' 
-          onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
-          className=" w-1/2 bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+      <div className="flex flex-col w-full">
+          <Label>Price</Label>
+          <Input 
+            type='number'
+            min={0}
+            placeholder='e.g: 15.99' 
+            onChange={(e)=>setValues({...values, price: e.target.value as any | number })}
+            className=" w-full bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
           />
+        </div>
+        <div className="flex flex-col w-full">
+          <Label>Quantity In Stock</Label>
+          <Input 
+            type='number'
+            min={1}
+            placeholder='e.g: 50' 
+            onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
+            className=" w-full bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
+        </div>
     </div>
       </>
         )

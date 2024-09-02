@@ -28,10 +28,10 @@ const PendingPrescriptiion = ({
           <p className="text-sm">Channel: {bookingType}</p>
         </div>
         <div className="flex mt-2 text-sm">
-          <Button onClick={()=>setShowSummary(true)} className="w-[100px] h-8 mr-2 rounded-md text-white flex flex-center bg-red-400 hover:bg-red-600">
+          <Button onClick={()=>setShowSummary(true)} className="w-[100px] p-2 h-8 mr-2 rounded-md text-white flex flex-center bg-red-400 hover:bg-red-600">
               <AiOutlineFolderView className='mr-1'/> View Summary
           </Button>
-          <Button onClick={()=>setShowPrescription(true)} className="w-[120px] h-8 rounded-md flex text-white flex-center bg-green-400 hover:bg-green-600">
+          <Button onClick={()=>setShowPrescription(true)} className="w-[120px] p-2 h-8 rounded-md flex text-white flex-center bg-green-400 hover:bg-green-600">
               <BiPlus className='mr-1'/> Add Prescription
           </Button>
         </div>
