@@ -28,12 +28,12 @@ const DoctorDashboard = () => {
         <AppointmentRequests/>
       </div>
       <div className="w-[37%] h-full flex flex-col gap-y-3 flex-between">
-        <div className="w-full h-[125px] bg-white shadow-sm rounded-lg ">
+        <div className="w-full  bg-white shadow-sm rounded-lg ">
             <h3 className="text-sm opacity-75 font-semibold p-3">
               Ongoing Session
             </h3>
             <p className="">
-              <OngoingNotification link='' patient='' startedAt={new Date(2024, 7, 31, 9, 55)} />
+              <OngoingNotification link='' patient='Samuel Koomson' startedAt={new Date(2024, 7, 31, 9, 55)} />
             </p>
         </div>
         <div className="w-full h-full bg-white shadow-sm rounded-lg">

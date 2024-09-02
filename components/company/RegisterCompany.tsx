@@ -209,7 +209,7 @@ const RegisterCompany = () => {
         <CardFooter className="flex justify-between">
           <Button
             onClick={handleSubmit}
-            className='w-full bg-green-2 text-green-4'
+            className='w-full bg-green-2 text-green-1'
           >
           {loading? <Loader />: 'Register Company'}
           </Button>

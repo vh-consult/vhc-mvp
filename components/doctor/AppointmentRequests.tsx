@@ -7,24 +7,24 @@ import { fetchRequestedAppointments } from '@/lib/actions/appointment.actions'
 
 const requests = [
   {
-    appointmentType: "Virtual Consultation",
-    clientName: "Kofi Brown",
-    scheduledAt: new Date(2024, 7, 26, 11, 30)
+    channel: "Virtual Consultation",
+    patient:{firstName: "Kofi", lastName: "Brown"},
+    date: new Date(2024, 7, 26, 11, 30)
   },
   {
-    appointmentType: "Lab Session",
-    clientName: "Mensah Jonah",
-    scheduledAt: new Date(2024, 7, 26, 13, 30)
+    channel: "Lab Session",
+    patient:{firstName: "Kofi", lastName: "Brown"},
+    date: new Date(2024, 7, 26, 13, 30)
   },
   {
-    appointmentType: "Virtual Consultation",
-    clientName: "James Sowah",
-    scheduledAt: new Date(2024, 7, 27, 9, 30)
+    channel: "Virtual Consultation",
+    patient:{firstName: "Kofi", lastName: "Brown"},
+    date: new Date(2024, 7, 27, 9, 30)
   },
   {
-    appointmentType: "In-person Visitation",
-    clientName: "Anna Ankah",
-    scheduledAt: new Date(2024, 7, 28, 10, 30)
+    channel: "In-person Visitation",
+    patient:{firstName: "Kofi", lastName: "Brown"},
+    date: new Date(2024, 7, 28, 10, 30)
   },
 ]
 

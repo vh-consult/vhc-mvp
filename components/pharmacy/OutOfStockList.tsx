@@ -9,17 +9,17 @@ type CardProps = {
 
 const Card = ({image, name, finishedDate}: CardProps) => {
   return(
-    <div className="">
+    <div className="flex p-3 cursor-pointer hover:bg-red-50">
       <Image
         src={image}
         alt='drug_image'
         width={45}
         height={45}
-        className='object-cover rounded-md'
+        className='object-cover mr-2 w-[45px] h-[45px] rounded-md'
       />
       <div className="">
-        <h2 className="text-lg">{name}</h2>
-        <p className="">{new Date(finishedDate).toLocaleDateString()}</p>
+        <h2 className="text-lg font-medium">{name}</h2>
+        <p className="">Finished on: {new Date(finishedDate).toLocaleDateString()}</p>
       </div>
     </div>
   )
@@ -27,7 +27,7 @@ const Card = ({image, name, finishedDate}: CardProps) => {
 
 const OutOfStockList = ({finishedDrugs}: {finishedDrugs: Array<any>}) => {
   return (
-    <div>
+    <div className='flex flex-col gap-2'>
       {
         finishedDrugs.length > 0 ? (
           finishedDrugs.map((drug, index) => (

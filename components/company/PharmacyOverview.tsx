@@ -41,29 +41,19 @@ const expiring = [
     quantity: 13,
     image: '/images/drug 1.jpg'
   },
-  {
-    name: 'Serum',
-    expiryDate: new Date(2024, 7, 12),
-    quantity: 20,
-    image: '/images/drug 7.jpg'
-  },
+
 ]
 
 const outOfStock = [
   {
     name: 'Anadin',
     finishedDate: new Date(2024, 7, 23),
-    image: '/images/drug 3.jpg'
+    image: '/images/drug 8.jpg'
   },
   {
     name: 'Paracetamol',
     finishedDate: new Date(2024, 7, 26),
     image: '/images/drug 6.jpg'
-  },
-  {
-    name: 'Serum',
-    finishedDate: new Date(2024, 7, 28),
-    image: '/images/drug 8.jpg'
   },
 ]
 
@@ -84,8 +74,8 @@ const stats = [
 
 
 const PharmacyOverview = async ({id}: {id: string}) => {
-  const overviewData = await fetchPharmacyOverviewData(id)
-  console.log(overviewData)
+  // const overviewData = await fetchPharmacyOverviewData(id)
+  // console.log(overviewData)
   return (
     <main className='w-full h-[540px] flex flex-between'>
       <div className="h-full w-[40%] bg-white">

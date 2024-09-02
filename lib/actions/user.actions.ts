@@ -98,28 +98,31 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
       throw new Error("User not found");
     };
 
+    console.log(userData, findUserInDB)
     let userToActivateAccount;
-    const userObject = findUserInDB.toObject();
-    delete userObject._id;  
-    
-    await User.findOneAndDelete({ clerkId })
-
-    switch (userData.role) {
-      case 'patient':
-        userToActivateAccount = await Patient.create({ ...userObject, ...userData });
-        break;
-      case 'pharmacyAdmin':
-        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
-        break;
-      case 'hospitalAdmin':
-        userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
-        break;
-      case 'doctor':
-        userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
-        break;
-      default:
-        throw new Error("Invalid role");
+    try {
+      const userObject = findUserInDB.toObject();
+      delete userObject._id;  
+      await User.findOneAndDelete({ clerkId })
+  
+      switch (userData.role) {
+        case 'patient':
+          userToActivateAccount = await Patient.create({ ...userObject, ...userData });
+          break;
+        case 'pharmacyAdmin':
+          userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
+          break;
+        case 'doctor':
+          userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
+          break;
+        default:
+          throw new Error("Invalid role");
+      }
+      
+    } catch (error) {
+      console.log("activation attempt failed")
     }
+    console.log(userToActivateAccount)
 
     return {userRole: userToActivateAccount.type};
   } catch (error) {

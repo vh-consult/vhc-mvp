@@ -7,7 +7,7 @@ import { IconType } from 'react-icons'
 import { AiOutlineOrderedList } from 'react-icons/ai'
 import { BiSolidInstitution } from 'react-icons/bi'
 import { FaAffiliatetheme } from 'react-icons/fa'
-import { MdMeetingRoom, MdMessage, MdOutlineHome, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
+import { MdMedicalInformation, MdMeetingRoom, MdMessage, MdOutlineHome, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 
 export interface SideNavProps {
@@ -98,13 +98,13 @@ const AdminSidebar = () => {
         icon: BiSolidInstitution
     },
     {
-      route: `/landing`,
-      label: 'Go to Home',
-      icon: MdOutlineHome
+      route: `/blogs/home`,
+      label: 'Blogging',
+      icon: MdMedicalInformation
   },
 ]
   return (
-    <aside className={`w-[170px] h-[calc(100vh-64px)] sticky left-0 top-[64px] bg-white  flex flex-col flex-between py-4`}
+    <aside className={`w-[170px] h-[calc(100vh-64px)] sticky left-0 top-[64px] bg-white z-40 flex flex-col flex-between py-4`}
     >
       <div className='w-full'>
         {
