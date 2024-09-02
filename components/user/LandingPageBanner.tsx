@@ -15,11 +15,6 @@ const LandingPageBanner = () => {
       dateStyle: 'full'
     })).format(now);
   return (
-    <>
-      {
-        role === "PharmacyAdmin" ? (
-          <>h</>
-        ): (
             <div className="flex h-[calc(100vh-90px)] flex-col  max-md:px-2 max-md:py-4 lg:p-5">
             <div  className="flex flex-col gap-2">
               <p className="text-base font-medium text-green-4 lg:text-lg leading-tight">
@@ -35,7 +30,7 @@ const LandingPageBanner = () => {
                   ): role === "Doctor" ? ("Upcoming Appointments"
                   ): ''
                 }
-                  </h2>
+                  </h2> 
             </div>
             <div className="">
                 {
@@ -52,9 +47,6 @@ const LandingPageBanner = () => {
                 }
             </div>
           </div>
-        )
-      }
-    </>
   )
 }
 

@@ -10,24 +10,20 @@ type RecentOrderCardProps = {
 
 const RecentOrderCard = ({orderedBy, hasPaid, orderedDate, drugImage}: RecentOrderCardProps) => {
     return(
-        <div className="">
-            <Image 
-                src={drugImage}
-                alt='drugImage'
-                width={30}
-                height={30}
-                className='object-cover rounded-sm'
-            />
+        <div className="w-full flex  p-3 hover:bg-green-50">
+            <span className="w-[40px] h-[40px] rounded-md bg-yellow-50 text-yellow-1 font-bold border mr-2 flex flex-center">
+            {orderedBy.slice(0,1)}
+            </span>
             <div className="">
-                <h3 className="">{orderedBy}</h3>
-                <p className="">
-                    <span className="">{new Date(orderedDate).toLocaleDateString()}</span>
-                    <span className="">{new Date(orderedDate).toLocaleDateString()}</span>
+                <h3 className="text-xl font-medium">{orderedBy}</h3>
+                <p className="text-sm">
+                    <span className="mr-4">Ordered on: {new Date(orderedDate).toLocaleDateString()}</span>
                 </p>
-                <p className="">
-                    <span className={`w-5 h-5 rounded-full ${hasPaid? 'bg-green-500': 'bg-red-500'}`}>
-                        {hasPaid? 'Paid': 'Not Paid'}
+                <p className="flex items-center">
+                    <span className={`w-[10px] h-[10px] mr-1 block rounded-full ${hasPaid? 'bg-green-500': 'bg-red-500'}`}>
+                        
                     </span>
+                        {hasPaid? 'Paid': 'Not Paid'}
                 </p>
             </div>
         </div>
@@ -36,7 +32,7 @@ const RecentOrderCard = ({orderedBy, hasPaid, orderedDate, drugImage}: RecentOrd
 
 const RecentOrders = ({orders}: {orders: Array<any>}) => {
   return (
-    <div> 
+    <div className='flex flex-col gap-2'> 
       {
         orders.length > 0 ? orders.map((order,index)=>(
             <RecentOrderCard 

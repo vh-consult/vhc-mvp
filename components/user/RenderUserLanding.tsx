@@ -156,7 +156,7 @@ const RenderUserLanding = () => {
                     handleClick={() => { router.push("/company/set-up")}}
                     className='bg-white hover:bg-gray-100 text-green-4 w-[100%]'
                 />
-                ) :(companyId !== undefined && role === "PharmacyAdmin" ) ? (<LandingDashboard/>) :''
+                ) :''
             }
             {
                 role === "" ? <Loader/> : ''

@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
-import { OrderCard } from '@/components/pharmacy/OrderList'
+import OrderCard from '@/components/pharmacy/OrderCard'
 import { useUser } from '@clerk/nextjs'
 import Loader from '@/components/general/Loader'
 

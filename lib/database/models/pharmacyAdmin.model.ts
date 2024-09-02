@@ -4,7 +4,7 @@ import User from "./user.model";
 
 const PharmacyAdminSchema = new Schema({
     company: {type: Schema.Types.ObjectId, ref: 'Pharmacy'},
-    role: {type: String, enum: ["employee", "employer"]}
+    permission: {type: String, enum: ["employee", "admin"], default: "admin"}
   },
 );
 

@@ -10,19 +10,19 @@ type ExpiryDrugProps = {
 
 const ExpiringDrugCard = ({name, quantity, expiryDate, image}: ExpiryDrugProps) => {
     return (
-      <div>
+      <div className='w-full flex p-3 cursor-pointer hover:bg-pink-50'>
         <Image 
           src={image}
           alt='drug_image'
           width={60}
           height={60}
-          className='rounded-md object-cover'
+          className='w-[60px] h-[60px] mr-2 rounded-md object-cover'
         />
         <div className="">
-          <h3 className="text-lg font-meium">{name}</h3>
-          <p className="flex">
-            <span>{new Date(expiryDate).toLocaleDateString()}</span>
-            <span className="">{quantity}</span>
+          <h3 className="text-xl font-medium">{name}</h3>
+          <p className="flex flex-col">
+            <span>Expiry Date: {new Date(expiryDate).toLocaleDateString()}</span>
+            <span className="">Quantity: {quantity}</span>
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@ const ExpiringDrugCard = ({name, quantity, expiryDate, image}: ExpiryDrugProps) 
 
 const ExpiringDrugsList = ({drugs}: {drugs: Array<any>}) => {
   return (
-    <div>
+    <div className='flex flex-col gap-2'>
       {
         drugs.length > 0? drugs.map((drug, index) => (
           <ExpiringDrugCard 

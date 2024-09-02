@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import MobileNav from "../user/MobileNav";
+import useDBUser from "@/hooks/useDBUser";
 
 
 interface NavLink {
@@ -72,6 +73,7 @@ interface NavLink {
   };
 
 const Head = () => {
+    const {role, companyId} = useDBUser()
     useEffect(() => {
       const handleScroll = () => {
         const header:Element|null = document.querySelector('.header');
@@ -103,7 +105,7 @@ const Head = () => {
           <div className='hidden md:flex items-center justify-center button w-1/6'>
           <SignedIn>
             <Button className="bg-green-2 rounded-full text-green-1 mr-4">
-              <Link href="/landing">
+              <Link href={role==="PharmacyAdmin"? `/company/${companyId}/overview` :'landing'}>
                 Go to Home
               </Link>
             </Button>
