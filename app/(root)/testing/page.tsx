@@ -63,7 +63,5 @@ const page = () => {
 hi
       
     </div>
-  )
-}
 
 export default page
