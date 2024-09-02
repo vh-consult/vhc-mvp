@@ -27,19 +27,6 @@ interface ItemDataProps {
   onClose: () => void
 }
 
-const itemData = {
-  image: '/images/drug 5.jpg',
-  name: 'Collagen Mixture',
-  catalog: 'Painkiller',
-  quantity: 15,
-  price: 34,
-  caution: 'Not for children under 18, pregnant woman and lactating mothers',
-  expiryDate: '12/05/2025',
-  createdAt: '11/06/2024',
-  updatedAt: '15/08/2024'
-}
-
-
 
 const ItemPreview =  (
   {
@@ -91,14 +78,14 @@ const ItemPreview =  (
                 {item?.price}
                 </span>
               </span>
-              <span className="w-full grid grid-cols-2">
+              {/* <span className="w-full grid grid-cols-2">
                 <span className="font-medium">
                   Caution: 
                 </span>
                 <span className="">
                   {item?.caution}
                 </span>
-              </span>
+              </span> */}
               <span className="w-full grid grid-cols-2">
                 <span className="font-medium">
                   Expiry Date: 
@@ -107,7 +94,7 @@ const ItemPreview =  (
                   {new Date(item?.expiryDate).toLocaleDateString()}
                 </span>
               </span>
-              <span className="w-full grid grid-cols-2">
+              {/* <span className="w-full grid grid-cols-2">
                 <span className="font-medium">
                   Uploaded On: 
                 </span>
@@ -122,7 +109,7 @@ const ItemPreview =  (
                 <span className="">
                   {new Date(item?.updatedAt).toLocaleDateString()}
                 </span>
-              </span>
+              </span> */}
             </div>
         </DialogContent>
       </Dialog>

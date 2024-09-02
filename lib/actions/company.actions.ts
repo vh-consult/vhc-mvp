@@ -49,10 +49,10 @@ export async function getAdminCompany(adminId: string) {
         await connectToDatabase()
         const userClaimingToBeAdmin = await User.findOne({clerkId: adminId})
         if (!userClaimingToBeAdmin) throw new Error("User not found")
-        console.log(userClaimingToBeAdmin.userRole)
+        console.log(userClaimingToBeAdmin.type)
         if (
-            userClaimingToBeAdmin.userRole !== "HospitalAdmin" || 
-            userClaimingToBeAdmin.userRole !== "PharmacyAdmin"
+            userClaimingToBeAdmin.type !== "HospitalAdmin" || 
+            userClaimingToBeAdmin.type !== "PharmacyAdmin"
         ) throw new Error("User not an admin of a company")
 
         const admin = await userClaimingToBeAdmin.populate('company')
