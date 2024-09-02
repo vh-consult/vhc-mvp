@@ -1,6 +1,5 @@
 "use server"
 
-
 import Doctor from "../database/models/doctor.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";

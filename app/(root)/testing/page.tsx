@@ -54,14 +54,19 @@
 
 // export default page
 
-import { StatCard } from '@/components/pharmacy/PharmacyStatistics'
+import { fetchHealthRecord } from '@/lib/actions/patient.actions'
 import React from 'react'
 
-const page = () => {
+// 66d506b6ef110dc052bccebf | user_2lUZugFfUnUo3QExbro79HEpmjd - PATIENT
+// 66d5158904ba2fefbc5855f7 | user_2lUhdFBzenZC55C5X3GOG5YzbE3 - PharmacyAdmin
+// 66d5aeb9dd0aa3231b4f2ae4 | user_2lVzB5FW57hTuql9Etg0OM1lXVW - DOCTOR
+
+const page = async () => {
+  const fetch = await fetchHealthRecord('user_2lUZugFfUnUo3QExbro79HEpmjd')
+  console.log(fetch)
   return (
     <div>
-hi
-      
+
     </div>
   )
 }
