@@ -63,7 +63,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
           className='mx-auto'
         />
         <div className="">
-          <Label>Item's Name</Label>
+          <Label>Item Name</Label>
           <Input
             className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
             onChange={(e) =>
@@ -73,7 +73,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
           />
         </div>
     <div className="flex flex-col">
-      <Label>Item's Catalog</Label>
+      <Label>Item Catalog</Label>
       <Select required onValueChange={(value) => setValues({ ...values, catalog: value })}>
         <SelectTrigger id="catalog" className='bg-green-3 text-sm'>
           <SelectValue placeholder="e.g: Painkiller" />
