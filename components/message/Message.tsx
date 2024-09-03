@@ -41,15 +41,15 @@ const messages = [
 
 
 const Message = ({className}: {className?:string}) => {
-  const {user} = useUser()
-  const [messages, setMessages] = useState([])
-    useEffect(()=>{
-      const fetchMessages = async () => {
-        const allMessages = await getMessages(user?.id as string)
-        setMessages(allMessages)
-      }
-      fetchMessages()
-  }, [user?.id])
+  // const {user} = useUser()
+  // const [messages, setMessages] = useState([])
+  //   useEffect(()=>{
+  //     const fetchMessages = async () => {
+  //       const allMessages = await getMessages(user?.id as string)
+  //       setMessages(allMessages)
+  //     }
+  //     fetchMessages()
+  // }, [user?.id])
   return (
     <div className={cn(`w-full h-[400px] bg-white rounded-lg`, className)}>
         <h3 className="w-full text-sm  font-semibold p-3">

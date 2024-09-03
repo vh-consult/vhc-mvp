@@ -46,7 +46,7 @@ const RenderUserLanding = () => {
             {
                 title: 'Blogs',
                 description: 'Access health-related information',
-                imageSrc: '/icons/dashboard.svg',
+                imageSrc: '/icons/info.svg',
                 action: `/blogs/home`
             },
         ],
