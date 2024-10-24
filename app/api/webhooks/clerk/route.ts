@@ -79,8 +79,9 @@ export async function POST(req: Request) {
       contact: phone_numbers[0].phone_number
 
     };
-
+    console.log(user)
     const newUser = await createUser(user);
+    console.log("user created")
 
     // Set public metadata
     if (newUser) {
