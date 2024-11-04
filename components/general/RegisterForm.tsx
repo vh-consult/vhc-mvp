@@ -25,6 +25,8 @@ import { useRouter } from 'next/navigation';
 import { toast } from '../ui/use-toast';
 import { z } from 'zod';
 import Loader from './Loader';
+import RoleSelection from './RoleSelection';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 const registrationSchema = z.object({
   dateOfBirth: z.date().max(new Date(), 'Enter your date of birth').min(new Date(1960, 0, 1)),
@@ -40,8 +42,7 @@ type FormValues = z.infer<typeof registrationSchema>;
 
 
 const RegisterAccount = () => {
-  const router = useRouter();
-  const { user } = useUser();
+  const [showRoleSelection, setShowRoleSelection] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
 
@@ -84,8 +85,10 @@ const RegisterAccount = () => {
 
     setLoading(true);
     try {
-      const userToUpdate = await createUser(values);
-
+      const newUser = await createUser(values);
+      if(newUser){
+        setShowRoleSelection(true)
+      }
     } finally {
       setLoading(false);
     }
@@ -93,64 +96,87 @@ const RegisterAccount = () => {
 
   return (
     <div className='bg-green-3 min-h-screen w-full py-5 flex flex-center'>
-      <Card className={`relative w-[400px] border-none bg-white text-green-4`}>
-        <CardHeader>
-          <CardTitle>Account Activation</CardTitle>
-          <CardDescription>Fill the forms to activate your account</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex w-full flex-col gap-2.5">
-                <Label className="leading-[22.4px] text-green-4">
-                  Select Date and Time
-                </Label>
-                <ReactDatePicker
-                  required
-                  maxDate={new Date(2020, 5, 13)}
-                  minDate={new Date(2000, 0, 1)}
-                  selected={values.dateOfBirth}
-                  onChange={(date) => setValues({ ...values, dateOfBirth: date! })}
-                  dateFormat="MMMM d, yyyy"
-                  className="w-full rounded bg-green-1 p-2 focus:outline-none"
-                />
-                {errors.dateOfBirth && <span className="text-red-500">{errors.dateOfBirth}</span>}
-              </div>
+      {
+        showRoleSelection === false ? (
+        <Card className={`relative w-[400px] border-none bg-white text-green-4`}>
+          <CardHeader>
+            <CardTitle>Account Registration</CardTitle>
+            <CardDescription>Fill the forms to activate your account</CardDescription>
+          </CardHeader>
+          <CardContent>
+              <div className="grid w-full items-center gap-4">
+                <div className="flex">
+                                <div className="flex flex-col space-y-1.5">
+                                  <Label htmlFor='firstName'>FirstName</Label>
+                                  <Input
+                                    required
+                                    id='firstName'
+                                    className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                    onChange={(e) => setValues({ ...values, firstName: e.target.value })}
+                                  />
+                                  {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
+                                </div>
+                                <div className="flex flex-col space-y-1.5">
+                                  <Label htmlFor='lastName'>Lastname</Label>
+                                  <Input
+                                    required
+                                    id='lastName'
+                                    className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+                                    onChange={(e) => setValues({ ...values, lastName: e.target.value })}
+                                  />
+                                  {errors.lastName && <span className="text-red-500">{errors.lastName}</span>}
+                                </div>
+                </div>
+                <div className="flex w-full flex-col gap-2.5">
+                  <Label className="leading-[22.4px] text-green-4">
+                    Select Date and Time
+                  </Label>
+                  <ReactDatePicker
+                    required
+                    maxDate={new Date(2020, 5, 13)}
+                    minDate={new Date(2000, 0, 1)}
+                    selected={values.dateOfBirth}
+                    onChange={(date) => setValues({ ...values, dateOfBirth: date! })}
+                    dateFormat="MMMM d, yyyy"
+                    className="w-full rounded bg-green-1 p-2 focus:outline-none"
+                  />
+                  {errors.dateOfBirth && <span className="text-red-500">{errors.dateOfBirth}</span>}
+                </div>
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="gender">Gender</Label>
+                  <RadioGroup defaultValue="male" onValueChange={(value: "male" | "female" | "other") => setValues({ ...values, gender: value })}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="male" id="r1" />
+                    <Label htmlFor="r1">Male</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="female" id="r2" />
+                    <Label htmlFor="r2">Female</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="other" id="r3" />
+                    <Label htmlFor="r3">Other</Label>
+                  </div>
+                </RadioGroup>
+                  {errors.gender && <span className="text-red-500">{errors.gender}</span>}
+                </div>
 
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor='firstName'>firstName/Address</Label>
-                <Input
-                  required
-                  id='firstName'
-                  className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  onChange={(e) => setValues({ ...values, firstName: e.target.value })}
-                />
-                {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
               </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="gender">Gender</Label>
-                <Select required onValueChange={(value: "male" | "female" | "other") => setValues({ ...values, gender: value })}>
-                  <SelectTrigger id="gender" className='bg-green-1'>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.gender && <span className="text-red-500">{errors.gender}</span>}
-              </div>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button
+              onClick={handleClick}
+              className='w-full bg-green-2 text-green-1'
+            >
+              {loading ? <Loader /> : `Register`}
+            </Button>
+          </CardFooter>
+        </Card>
+        ): (
+          <RoleSelection/>
+        )
+      }
 
-            </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button
-            onClick={handleClick}
-            className='w-full bg-green-2 text-green-1'
-          >
-            {loading ? <Loader /> : `Register`}
-          </Button>
-        </CardFooter>
-      </Card>
     </div>
   );
 }

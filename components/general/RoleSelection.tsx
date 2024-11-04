@@ -21,6 +21,7 @@ import {
   import { useRouter } from 'next/navigation';
   import Loader from './Loader';
 import { roleSelection } from '@/lib/actions/user.actions'
+import { Button } from '../ui/button'
   const roleSelectionSchema = z.object({
     role: z.enum(["patient", "doctor", "pharmacyAdmin"]),
     country: z.string().min(1, 'Please select your country'),
@@ -84,7 +85,28 @@ const RoleSelection = () => {
         }
       };
   return (
-    <div>
+    <Card className={`relative w-[400px] border-none bg-white text-green-4`}>
+    <CardHeader>
+      <CardTitle>Activate Account</CardTitle>
+      <CardDescription>Tell Us More About You!</CardDescription>
+    </CardHeader>
+    <CardContent className='flex flex-col gap-y-4'>
+
+            <div className="flex flex-col space-y-1.5 ">
+                <Label htmlFor="role">What are you?</Label>
+                <Select required onValueChange={(value: "patient"|"doctor"|"pharmacyAdmin") => setValues({ ...values, role: value })}>
+                  <SelectTrigger id="role" className='bg-green-1'>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
+                    <SelectItem value="patient">Patient</SelectItem>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    {/* <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem> */}
+                    <SelectItem value="pharmacyAdmin">Pharmacy Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.role && <span className="text-red-500">{errors.role}</span>}
+              </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="country">Country</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, country: value })}>
@@ -100,24 +122,17 @@ const RoleSelection = () => {
                   </SelectContent>
                 </Select>
                 {errors.country && <span className="text-red-500">{errors.country}</span>}
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="role">What are you?</Label>
-                <Select required onValueChange={(value: "patient"|"doctor"|"pharmacyAdmin") => setValues({ ...values, role: value })}>
-                  <SelectTrigger id="role" className='bg-green-1'>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
-                    <SelectItem value="patient">Patient</SelectItem>
-                    <SelectItem value="doctor">Doctor</SelectItem>
-                    {/* <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem> */}
-                    <SelectItem value="pharmacyAdmin">Pharmacy Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.role && <span className="text-red-500">{errors.role}</span>}
-              </div>
-    </div>
-  )
+            </div>
+              </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button
+              onClick={handleClick}
+              className='w-full bg-green-2 text-green-1'
+            >
+              {loading ? <Loader /> : `Register`}
+            </Button>
+          </CardFooter>
+        </Card>  )
 }
 
 export default RoleSelection

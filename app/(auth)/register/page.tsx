@@ -1,8 +1,11 @@
+import RegisterAccount from '@/components/general/RegisterForm'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <RegisterAccount/>
+    </div>
   )
 }
 

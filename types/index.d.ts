@@ -51,6 +51,7 @@ declare type UpdateUserParams = {
   country?: string,
   gender?: string,
   role?: string,
+  email?: string;
   location?: string,
   dateOfBirth?: Date,
 };
