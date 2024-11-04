@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react'
 import { AppointmentDataType } from './DoctorDashboard'
 import RequestCard from '../consultation/RequestCard'
-import useDBUser from '@/hooks/useDBUser'
+import useDBUser from '@/hooks/useUser'
 import { fetchRequestedAppointments } from '@/lib/actions/appointment.actions'
 
 const requests = [

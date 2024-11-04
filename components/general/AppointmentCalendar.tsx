@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { AppointmentParams, fetchAcceptedAppointments } from '@/lib/actions/appointment.actions';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 import { useUser } from '@clerk/nextjs';
 
 const AppointmentCalendar = () => {

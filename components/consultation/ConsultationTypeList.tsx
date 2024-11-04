@@ -14,7 +14,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useUser } from '@clerk/nextjs';
 import {  newAppointment, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 import DoctorDashboard from '../doctor/DoctorDashboard';
 
 const initialValues = {

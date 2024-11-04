@@ -41,24 +41,24 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
     )
 }
 
-export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
-    const {user, isLoaded} = useUser();
-    if(!isLoaded || !user) return;
-    if(!apiKey) throw new Error('Stream key not found')
+// export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
+//     const {user, isLoaded} = useUser();
+//     if(!isLoaded || !user) return;
+//     if(!apiKey) throw new Error('Stream key not found')
 
-    const chatClient = new StreamChat(apiKey!)
-    chatClient.setUser(
-        {
-          id: user?.id!,
-          name: user?.fullName || user?.id,
-          image: user?.imageUrl
-        }, tokenProvider
-      )  
-    useEffect(() => {
+//     const chatClient = new StreamChat(apiKey!)
+//     chatClient.setUser(
+//         {
+//           id: user?.id!,
+//           name: user?.fullName || user?.id,
+//           image: user?.imageUrl
+//         }, tokenProvider
+//       )  
+//     useEffect(() => {
 
-    }, [])
+//     }, [])
 
-    return(
-    <></>
-    )
-}
+//     return(
+//     <></>
+//     )
+// }

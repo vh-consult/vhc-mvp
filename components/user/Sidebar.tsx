@@ -1,5 +1,5 @@
 "use client"
-import useDBUser from '@/hooks/useDBUser'
+import useDBUser from '@/hooks/useUser'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'

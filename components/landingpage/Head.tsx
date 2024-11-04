@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import MobileNav from "../user/MobileNav";
-import useDBUser from "@/hooks/useDBUser";
+import useDBUser from "@/hooks/useUser";
 
 
 interface NavLink {

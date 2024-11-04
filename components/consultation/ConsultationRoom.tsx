@@ -24,7 +24,7 @@ import { cn } from '@/lib/utils';
 import EndCallButton from './EndCallButton';
 import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 import { BiComment } from 'react-icons/bi';
 import ConsultationSummaryCard, { TConsultation } from './ConsultationSummaryCard';
 import { fetchConsultationSession } from '@/lib/actions/consultation.actions';

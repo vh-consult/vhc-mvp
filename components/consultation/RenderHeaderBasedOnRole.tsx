@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Header from '../user/Header';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 
 const consultationHeaderLinks = {
     patient: [

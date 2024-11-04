@@ -1,5 +1,5 @@
 "use client"
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 import React from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 import MedCard from '../patient/MedCard';

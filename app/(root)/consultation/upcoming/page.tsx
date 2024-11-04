@@ -1,7 +1,7 @@
 "use client"
 import CallList from '@/components/consultation/CallList';
 import UpcomingConsultationCard from '@/components/consultation/UpcomingConsultationCard';
-import useDBUser from '@/hooks/useDBUser';
+import useDBUser from '@/hooks/useUser';
 
 const UpcomingPage =  () => {
   const {role} = useDBUser()
