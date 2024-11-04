@@ -63,6 +63,16 @@ export async function createUser(user: CreateUserParams) {
   }
 }
 
+export async function login (email: string, password: string) {
+  try {
+    await connectToDatabase();
+    const existingUser = await User.findOne({email})
+    if (!existingUser) throw new Error("User not found")
+    
+  } catch (error) {
+    handleError(error)
+  }
+}
 //subscribe to newsletter
 export async function subscribeToNewsletter(id:string) {
   try {
