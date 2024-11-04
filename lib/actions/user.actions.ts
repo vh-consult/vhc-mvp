@@ -9,92 +9,11 @@ import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
 import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 
-
-// CREATE
-export async function createUser(user: CreateUserParams) {
+export async function roleSelection(id: string, userData: RoleSelectionParams) {
   try {
     await connectToDatabase();
 
-    const newUser = await User.create(user);
-    console.log("user created")
-    return JSON.parse(JSON.stringify(newUser));
-  } catch (error) {
-    handleError(error);
-  }
-}
-
-//subscribe to newsletter
-export async function subscribeToNewsletter(clerkId:string) {
-  try {
-    await connectToDatabase();
-
-    const userSubscribing = await User.findOne({clerkId});
-    if (!userSubscribing) throw new Error("User not found");
-
-    userSubscribing.subscribedToNewsletter = true
-    userSubscribing.save()
-    
-    return {message: "User added to newsletter"}
-  } catch (error) {
-    handleError(error);
-  }
-}
-
-//BUY INSURANCE
-export async function buyInsurance(clerkId: string, insurancePlanChosen: string) {
-  try {
-    await connectToDatabase();
-
-    const userBuyingInsurance = await User.findOne({clerkId});
-    if (!userBuyingInsurance) throw new Error("User not found");
-
-    userBuyingInsurance.insurance_plan = insurancePlanChosen
-    userBuyingInsurance.save()
-    
-    return JSON.parse(JSON.stringify(userBuyingInsurance));
-  } catch (error) {
-    handleError(error);
-  }
-}
-
-// READ
-export async function getUser(clerkId: string) {
-  try {
-    await connectToDatabase();
-
-    const user = await User.findOne({ clerkId }).populate("personalPhysician").populate("affiliateHospital")
-    if (!user) throw new Error("User not found");
-
-    return JSON.parse(JSON.stringify(user));
-  } catch (error) {
-    handleError(error);
-  }
-}
-
-// UPDATE
-export async function updateUser(clerkId: string, user: UpdateUserParams) {
-  try {
-    await connectToDatabase();
-
-    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
-      new: true,
-    });
-
-    if (!updatedUser) throw new Error("User update failed");
-    const userData = updatedUser.toObject()
-    delete userData.password
-
-    return JSON.parse(JSON.stringify(updatedUser));
-  } catch (error) {
-    handleError(error);
-  }
-}
-
-export async function activateAccount(clerkId: string, userData: ActivateAccountParams) {
-  try {
-    await connectToDatabase();
-
-    const findUserInDB = await User.findOne({ clerkId });
+    const findUserInDB = await User.findById(id);
     if (!findUserInDB) {
       throw new Error("User not found");
     };
@@ -104,7 +23,7 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
     try {
       const userObject = findUserInDB.toObject();
       delete userObject._id;  
-      await User.findOneAndDelete({ clerkId })
+      await User.findOneAndDelete({ id })
   
       switch (userData.role) {
         case 'patient':
@@ -131,23 +50,102 @@ export async function activateAccount(clerkId: string, userData: ActivateAccount
   }
 }
 
+// CREATE
+export async function createUser(user: CreateUserParams) {
+  try {
+    await connectToDatabase();
+    console.log(user)
+
+    const newUser = await User.create(user);
+    return JSON.parse(JSON.stringify(newUser));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+//subscribe to newsletter
+export async function subscribeToNewsletter(id:string) {
+  try {
+    await connectToDatabase();
+
+    const userSubscribing = await User.findOne({id});
+    if (!userSubscribing) throw new Error("User not found");
+
+    userSubscribing.subscribedToNewsletter = true
+    userSubscribing.save()
+    
+    return {message: "User added to newsletter"}
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+//BUY INSURANCE
+export async function buyInsurance(id: string, insurancePlanChosen: string) {
+  try {
+    await connectToDatabase();
+
+    const userBuyingInsurance = await User.findOne({id});
+    if (!userBuyingInsurance) throw new Error("User not found");
+
+    userBuyingInsurance.insurance_plan = insurancePlanChosen
+    userBuyingInsurance.save()
+    
+    return JSON.parse(JSON.stringify(userBuyingInsurance));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// READ
+export async function getUser(id: string) {
+  try {
+    await connectToDatabase();
+
+    const user = await User.findOne({ id }).populate("personalPhysician").populate("affiliateHospital")
+    if (!user) throw new Error("User not found");
+
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+// UPDATE
+export async function updateUser(id: string, user: UpdateUserParams) {
+  try {
+    await connectToDatabase();
+
+    const updatedUser = await User.findOneAndUpdate({ id }, user, {
+      new: true,
+    });
+
+    if (!updatedUser) throw new Error("User update failed");
+    const userData = updatedUser.toObject()
+    delete userData.password
+
+    return JSON.parse(JSON.stringify(updatedUser));
+  } catch (error) {
+    handleError(error);
+  }
+}
+
+
+
 // DELETE
-export async function deleteUser(clerkId: string) {
+export async function deleteUser(id: string) {
   try {
     await connectToDatabase();
 
     // Find user to delete
-    const userToDelete = await User.findOne({ clerkId });
+    const userToDelete = await User.findByIdAndDelete({id});
 
     if (!userToDelete) {
       throw new Error("User not found");
     }
 
     // Delete user
-    const deletedUser = await User.findByIdAndDelete(userToDelete._id);
     revalidatePath("/");
-
-    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
   } catch (error) {
     handleError(error);
   }

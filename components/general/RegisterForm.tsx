@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { activateAccount } from '@/lib/actions/user.actions';
+import { createUser } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
@@ -29,15 +29,17 @@ import Loader from './Loader';
 const registrationSchema = z.object({
   dateOfBirth: z.date().max(new Date(), 'Enter your date of birth').min(new Date(1960, 0, 1)),
   role: z.string().min(5, 'Please select your purpose on this app'),
-  location: z.string().min(1, 'Location is required'),
-  gender: z.string().min(4, 'Please select gender').max(6),
-  country: z.string().min(1, 'Please select your country'),
+  lastName: z.string().min(1, 'last name is required'),
+  email: z.string().min(1, 'email is required'),
+  password: z.string().min(1, 'password is required'),
+  firstName: z.string().min(1, 'first name is required'),
+  gender: z.enum(["male", "female", "other"])
 });
 
 type FormValues = z.infer<typeof registrationSchema>;
 
 
-const ActivateAccount = () => {
+const RegisterAccount = () => {
   const router = useRouter();
   const { user } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,9 +48,11 @@ const ActivateAccount = () => {
   const initialValues: FormValues = {
     dateOfBirth: new Date(1990, 0, 1),
     role: '',
-    location: '',
-    gender: '',
-    country: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    gender: 'other',
   };
 
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -80,19 +84,8 @@ const ActivateAccount = () => {
 
     setLoading(true);
     try {
-      const userToUpdate = await activateAccount(user?.id as string, values);
-      switch (userToUpdate?.userRole) {
-        case 'Patient':
-        case 'Doctor':
-          toast({title: 'Account activated successfully, you are being redirected'})
-          router.push('/landing');
-          break;
-        // case 'HospitalAdmin':
-        case 'PharmacyAdmin':
-          toast({title: 'Account activated successfully, you have to set your company up next'})
-          router.push('/company/set-up');
-          break;
-      }
+      const userToUpdate = await createUser(values);
+
     } finally {
       setLoading(false);
     }
@@ -122,35 +115,20 @@ const ActivateAccount = () => {
                 />
                 {errors.dateOfBirth && <span className="text-red-500">{errors.dateOfBirth}</span>}
               </div>
+
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="country">Country</Label>
-                <Select required onValueChange={(value) => setValues({ ...values, country: value })}>
-                  <SelectTrigger id="country" className='bg-green-1'> 
-                    <SelectValue placeholder="Select"  />
-                  </SelectTrigger>
-                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
-                    <SelectItem value="ghana">Ghana</SelectItem>
-                    <SelectItem value="dubai">Dubai</SelectItem>
-                    <SelectItem value="usa">USA</SelectItem>
-                    <SelectItem value="canada">Canada</SelectItem>
-                    <SelectItem value="france">France</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.country && <span className="text-red-500">{errors.country}</span>}
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor='location'>Location/Address</Label>
+                <Label htmlFor='firstName'>firstName/Address</Label>
                 <Input
                   required
-                  id='location'
+                  id='firstName'
                   className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
-                  onChange={(e) => setValues({ ...values, location: e.target.value })}
+                  onChange={(e) => setValues({ ...values, firstName: e.target.value })}
                 />
-                {errors.location && <span className="text-red-500">{errors.location}</span>}
+                {errors.firstName && <span className="text-red-500">{errors.firstName}</span>}
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="gender">Gender</Label>
-                <Select required onValueChange={(value) => setValues({ ...values, gender: value })}>
+                <Select required onValueChange={(value: "male" | "female" | "other") => setValues({ ...values, gender: value })}>
                   <SelectTrigger id="gender" className='bg-green-1'>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -161,21 +139,7 @@ const ActivateAccount = () => {
                 </Select>
                 {errors.gender && <span className="text-red-500">{errors.gender}</span>}
               </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="role">What are you?</Label>
-                <Select required onValueChange={(value) => setValues({ ...values, role: value })}>
-                  <SelectTrigger id="role" className='bg-green-1'>
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper" className='bg-green-1 text-green-4'>
-                    <SelectItem value="patient">Patient</SelectItem>
-                    <SelectItem value="doctor">Doctor</SelectItem>
-                    {/* <SelectItem value="hospitalAdmin">Hospital Admin</SelectItem> */}
-                    <SelectItem value="pharmacyAdmin">Pharmacy Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.role && <span className="text-red-500">{errors.role}</span>}
-              </div>
+
             </div>
         </CardContent>
         <CardFooter className="flex justify-between">
@@ -183,7 +147,7 @@ const ActivateAccount = () => {
             onClick={handleClick}
             className='w-full bg-green-2 text-green-1'
           >
-            {loading ? <Loader /> : `Activate`}
+            {loading ? <Loader /> : `Register`}
           </Button>
         </CardFooter>
       </Card>
@@ -191,4 +155,4 @@ const ActivateAccount = () => {
   );
 }
 
-export default ActivateAccount;
+export default RegisterAccount;
