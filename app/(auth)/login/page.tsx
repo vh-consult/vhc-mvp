@@ -5,6 +5,9 @@ import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { login } from '@/lib/actions/user.actions'
 import { toast } from '@/components/ui/use-toast'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -55,16 +58,26 @@ const Login = () => {
     } catch(error){
       toast({title: "Login failed"})
     };
+  }
   return (
     <Card>
       <CardHeader>
 
       </CardHeader>
       <CardContent>
-
+        <form>
+          <div>
+            <Label>Email</Label>
+            <Input/>
+          </div>
+          <div>
+            <Label>Password</Label>
+            <Input/>
+          </div>
+        </form>
       </CardContent>
       <CardFooter>
-
+        <Button>Login</Button>
       </CardFooter>
     </Card>
   )
