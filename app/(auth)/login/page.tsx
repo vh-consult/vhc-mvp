@@ -10,17 +10,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import SubmitButton from '@/components/general/SubmitButton'
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string()
-})
 
-type FormValues = z.infer<typeof loginSchema>
 
-const initialValues: FormValues = {
-  email: '',
-  password: ''
-}
 
 const Login = () => {
   const router = useRouter()
@@ -35,11 +26,13 @@ const Login = () => {
         <form action={loginAction}>
           <div>
             <Label>Email</Label>
-            <Input/>
+            <Input id='email' name='email'/>
+            {state?.errors?.email && (<p className='text-red-500'>{state.errors.email}</p>)}
           </div>
           <div>
             <Label>Password</Label>
-            <Input/>
+            <Input id='password' name='password' type='password'/>
+            {state?.errors?.email && (<p className='text-red-500'>{state.errors.email}</p>)}
           </div>
           <SubmitButton buttonText='Login' className='bg-green-2'/>
         </form>

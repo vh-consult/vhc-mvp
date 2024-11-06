@@ -8,6 +8,15 @@ import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
 import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
+import { z } from "zod";
+import * as bcrypt from "bcrypt"
+import { createSession } from "../session";
+import { redirect } from "next/navigation";
+
+const loginSchema = z.object({
+  email: z.string().email({message: "Invalid email address"}).trim(),
+  password: z.string().min(8, {message: "Password must be at least 8 characters"}).trim()
+})
 
 export async function roleSelection(id: string, userData: RoleSelectionParams) {
   try {
@@ -66,8 +75,35 @@ export async function createUser(user: CreateUserParams) {
 export async function login (prevState: any, formData: FormData) {
   try {
     await connectToDatabase();
-    const credentials = Object.fromEntries(formData)
+    const result = loginSchema.safeParse(Object.fromEntries(formData))
     
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+      }
+    }
+
+    const {email, password} = result.data
+
+    const existingUser = await User.findOne({email})
+    if (!existingUser) {
+      return {errors: {
+        email: ["Invalid email"]
+      }
+    }}
+
+    const comparison = await bcrypt.compare(password, existingUser.password)
+    
+    if (!comparison) {
+      return {errors: {
+        password: ["Invalid password"]
+      }}
+    }
+
+    await createSession(existingUser.id)
+
+    redirect('/landing')
+
   } catch (error) {
     handleError(error)
   }
