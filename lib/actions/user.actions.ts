@@ -63,16 +63,20 @@ export async function createUser(user: CreateUserParams) {
   }
 }
 
-export async function login (email: string, password: string) {
+export async function login (prevState: any, formData: FormData) {
   try {
     await connectToDatabase();
-    const existingUser = await User.findOne({email})
-    if (!existingUser) throw new Error("User not found")
+    const credentials = Object.fromEntries(formData)
     
   } catch (error) {
     handleError(error)
   }
 }
+
+export async function logout (){
+
+}
+
 //subscribe to newsletter
 export async function subscribeToNewsletter(id:string) {
   try {
@@ -170,6 +174,14 @@ export async function fetchUserHistory(userId:string) {
     if (!user) throw new Error("User not found")
     
     return JSON.parse(JSON.stringify(user.history))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+export async function currentUser () {
+  try {
+    return {id: "33yh3y"}
   } catch (error) {
     handleError(error)
   }

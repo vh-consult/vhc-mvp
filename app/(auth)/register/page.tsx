@@ -18,7 +18,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { createUser } from '@/lib/actions/user.actions';
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"

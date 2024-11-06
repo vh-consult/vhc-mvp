@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
@@ -29,32 +28,12 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <ClerkProvider
-        appearance={{
-          layout: {
-            socialButtonsVariant: "iconButton",
-            logoImageUrl: "/logo.svg",
-            
-          },
-          variables: {
-            colorText: "#041F20",
-            colorPrimary: "#00AEA8",
-            colorBackground: "#f5f5f5",
-            colorInputBackground: "#f4ffff",
-            colorInputText: "#041f20",
-            colorTextOnPrimaryBackground: "#fff",
-            colorTextSecondary: "#041F20",
-          },
-          
-        }}
-      >
-          <body className={`${inter.className} `}>
-            <Toaster />
-            <EdgeStoreProvider>
-              {children}
-            </EdgeStoreProvider>
-          </body>
-      </ClerkProvider>
+      <body className={`${inter.className} `}>
+        <Toaster />
+        <EdgeStoreProvider>
+          {children}
+        </EdgeStoreProvider>
+      </body>
     </html>
   );
 }

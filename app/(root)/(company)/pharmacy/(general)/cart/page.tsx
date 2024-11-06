@@ -4,7 +4,7 @@ import DeliveryInfoCard from '@/components/pharmacy/DeliveryInfoCard'
 import ItemsInCart from '@/components/pharmacy/ItemsInCart'
 import ShippingForm from '@/components/pharmacy/ShippingForm'
 import { fetchItemsInCart } from '@/lib/actions/order.actions'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@/lib/actions/user.actions'
 import React from 'react'
 
 const CartPage = async () => {
