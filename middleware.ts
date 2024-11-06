@@ -1,20 +1,26 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { decrypt } from "./lib/session";
 
-const protectedRoute = createRouteMatcher([
-  '/chat(.*)',
-  '/consultation(.*)',
-  '/company(.*)',
-  '/pharmacy(.*)',
-])
+const protectedRoutes = ["/landing"]
+const publicRoutes = ["/", "/register", "/login"]
 
 
-export default clerkMiddleware((auth, req)=>{
-  if (protectedRoute(req)) {
-    auth().protect()
-  };
-});
+export default async function middleware(req: NextRequest){
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path);
+  const isPublicRoute = publicRoutes.includes(path)
 
+  const cookie = cookies().get('session')?.value;
+  const session = await decrypt(cookie);
 
-export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-};
+  if(isProtectedRoute && !session?.userId){
+    return NextResponse.redirect(new URL("/login", req.nextUrl))
+  }
+
+  if (isPublicRoute && session?.userId) {
+    return NextResponse.redirect(new URL("/landing", req.nextUrl))
+  }
+
+  return NextResponse.next()
+}

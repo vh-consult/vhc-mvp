@@ -16,6 +16,10 @@ export async function createSession(userId: string){
     })
 }
 
+export async function deleteSession (){
+    cookies().delete('session')
+  }
+
 type SessionPayload = {
     userId: string;
     expiresAt: Date;

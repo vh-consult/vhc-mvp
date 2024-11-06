@@ -10,7 +10,7 @@ import Doctor from "../database/models/doctor.model";
 import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 import { z } from "zod";
 import * as bcrypt from "bcrypt"
-import { createSession } from "../session";
+import { createSession, deleteSession } from "../session";
 import { redirect } from "next/navigation";
 
 const loginSchema = z.object({
@@ -109,8 +109,10 @@ export async function login (prevState: any, formData: FormData) {
   }
 }
 
-export async function logout (){
 
+export async function logout (){
+  await deleteSession()
+  redirect("/")
 }
 
 //subscribe to newsletter
