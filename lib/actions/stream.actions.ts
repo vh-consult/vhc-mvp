@@ -1,7 +1,7 @@
 "use server"
 
-import { currentUser } from "@clerk/nextjs/server";
 import { StreamClient } from "@stream-io/node-sdk";
+import { currentUser } from "./user.actions";
 
 
 const apikey = process.env.NEXT_PUBLIC_STREAM_API_KEY;

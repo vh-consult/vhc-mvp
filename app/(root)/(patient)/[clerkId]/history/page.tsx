@@ -1,6 +1,5 @@
 import HistoryCard from '@/components/patient/HistoryCard'
-import { fetchUserHistory } from '@/lib/actions/user.actions'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser, fetchUserHistory } from '@/lib/actions/user.actions'
 import React from 'react'
 
 const userHistoryList = [

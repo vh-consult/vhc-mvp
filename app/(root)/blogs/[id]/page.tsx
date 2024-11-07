@@ -2,8 +2,8 @@ import BlogContent from '@/components/blog/BlogContent'
 import BlogPostSnippet from '@/components/blog/BlogPostSnippet'
 import NewsLetterSubscription from '@/components/general/NewsLetterSubscription'
 import { getBlogById } from '@/lib/actions/blog.actions'
+import { currentUser } from '@/lib/actions/user.actions'
 import { BlogParams } from '@/lib/database/models/blog.model'
-import { currentUser } from "@clerk/nextjs/server";
 import React from 'react'
 
 const BlogPage = async ({params}: {params: {id: string}}) => {

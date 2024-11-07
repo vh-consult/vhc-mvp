@@ -1,7 +1,7 @@
 import AppointmentCard from '@/components/consultation/AppointmentCard'
 import AppointmentCalendar from '@/components/general/AppointmentCalendar'
 import { fetchAcceptedAppointments } from '@/lib/actions/appointment.actions'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@/lib/actions/user.actions'
 import React from 'react'
 
 const AppointmentsHeader = () => {

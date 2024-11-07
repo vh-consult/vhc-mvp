@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import SubmitButton from '@/components/general/SubmitButton'
+import Link from 'next/link'
 
 
 
@@ -20,7 +21,8 @@ const Login = () => {
   return (
     <Card className='w-[300px] p-5'>
       <CardHeader>
-
+        <h1 className="text-2xl font-semibold">Sign In</h1>
+        <p className="text-sm">New here? <Link href={'/register'} className='underline text-green-2'>Create Account</Link></p>
       </CardHeader>
       <CardContent>
         <form action={loginAction}>
