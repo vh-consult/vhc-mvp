@@ -3,7 +3,6 @@ import ConsultationSummaryCard from '@/components/consultation/ConsultationSumma
 import RecordCard from '@/components/patient/RecordCard'
 import RecordList from '@/components/patient/RecordList'
 import { fetchHealthRecord } from '@/lib/actions/patient.actions'
-import { useUser } from '@clerk/nextjs'
 import React, { useState } from 'react'
 
 

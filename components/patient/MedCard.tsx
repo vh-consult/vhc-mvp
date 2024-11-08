@@ -4,7 +4,6 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import { BiCheck, BiDotsHorizontal } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
-import { useUser } from '@clerk/nextjs';
 
 export interface MedCardProps {
     imageSrc: string;

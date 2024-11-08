@@ -10,7 +10,6 @@ declare type CreateUserParams = {
   dateOfBirth: Date;
 };
 declare type UserParams = {
-  clerkId: string;
   email: string;
   firstName: string;
   lastName: string;

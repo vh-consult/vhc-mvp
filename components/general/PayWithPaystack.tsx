@@ -2,8 +2,8 @@
 import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
-import { useUser } from '@clerk/nextjs';
 import { placeOrder } from '@/lib/actions/order.actions';
+import { useUser } from '@/hooks/useUser';
 
 const PayWithPaystack = (
   {amount}: 
@@ -18,11 +18,11 @@ const PayWithPaystack = (
 
 
   const componentProps = {
-    email: user?.emailAddresses[0].emailAddress as string,
+    email: user?.emailAddress as string,
     amount: amount * 100,
     metadata: {
-      name: user?.fullName,
-      phone: user?.phoneNumbers[0].phoneNumber,
+      name: user?.firstName + user?.lastName,
+      phone: user?.phoneNumber,
       custom_fields: [],
     },
     currency: "GHS",

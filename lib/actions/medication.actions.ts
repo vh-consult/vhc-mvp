@@ -10,10 +10,10 @@ import { connectToDatabase } from "../database/mongoose"
 import { handleError } from "../utils"
 
 
-export const fetchMeds = async (clerkId: string) => {
+export const fetchMeds = async (id: string) => {
     try {
         await connectToDatabase()
-        const user = await Patient.findOne({clerkId})
+        const user = await Patient.findById(id)
         if(!user) throw new Error("User not found")
         
         const meds = await user.populate("currentMeds")
@@ -33,7 +33,7 @@ export const postMeds = async (
 ) => {
     try {
         await connectToDatabase()
-        const doctor = await Doctor.findOne({clerkId: doctorId})
+        const doctor = await Doctor.findOne({id: doctorId})
         if (!doctor) throw new Error('doctor not found')
         
         const session = await Consultation.findById(consultationId)
@@ -57,10 +57,10 @@ export const postMeds = async (
 }
 
 
-export const editsMeds = async (clerkId: string, medData: MedicationParams, medsId: string) => {
+export const editsMeds = async (id: string, medData: MedicationParams, medsId: string) => {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId})
+        const user = await User.findById(id)
         if(!user) throw new Error("User not found")
         
         const medsToUpdate = await Medication.findOneAndUpdate({_id: medsId}, medData, {new: true})

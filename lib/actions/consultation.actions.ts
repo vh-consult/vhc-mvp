@@ -57,7 +57,7 @@ export async function postConsultationForm(
 export async function editConsultationSummary(doctorId:string, formData: any, sessionId: string) {
     try {
         await connectToDatabase()
-        const doctor = await Doctor.findOne({clerkId: doctorId})
+        const doctor = await Doctor.findOne({id: doctorId})
         if (!doctor) throw new Error("Doctor not found")
         if(!doctor.consultationHistory.includes(sessionId)) throw new Error("You can't edit this session")
 

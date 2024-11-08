@@ -9,9 +9,7 @@ import Patient from "../database/models/patient.model";
 export async function fetchAffiliates(userId:string) {
     try {
       await connectToDatabase()
-      const user = await Patient.findOne(
-        {clerkId: userId}
-      ).populate("affiliateHospital").populate("personalPhysician")
+      const user = await Patient.findById(userId).populate("affiliateHospital").populate("personalPhysician")
       if (!user) throw new Error("User Not Found")
       
       const hospital = user.affiliateHospital
@@ -28,7 +26,7 @@ export async function fetchHealthRecord(patientId:string) {
     try {
       await connectToDatabase()
       console.log(patientId)
-      const user = await Patient.findOne({clerkId: patientId}).populate({
+      const user = await Patient.findById(patientId).populate({
         path: "healthRecord",
         populate: [{path: "doctor", select: "firstName lastName"}]
       })

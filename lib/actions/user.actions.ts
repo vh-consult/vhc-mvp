@@ -208,7 +208,7 @@ export async function deleteUser(id: string) {
 export async function fetchUserHistory(userId:string) {
   try {
     await connectToDatabase()
-    const user = await User.findOne({clerkId: userId}).populate("history")
+    const user = await User.findById(userId).populate("history")
     if (!user) throw new Error("User not found")
     
     return JSON.parse(JSON.stringify(user.history))

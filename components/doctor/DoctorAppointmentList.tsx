@@ -16,14 +16,14 @@ const upcoming:AppointmentDataType[] = [
     }
 ]
 
-const DoctorAppointmentList = ({ clerkId }: { clerkId: string }) => {
+const DoctorAppointmentList = ({ id }: { id: string }) => {
     // const [upcoming, setUpcoming] = useState<Array<AppointmentDataType>>([]);
     // const [loading, setLoading] = useState<boolean>(true);
 
     // useEffect(() => {
     //     const getUpcomingAppointments = async () => {
     //         try {
-    //             const upcomingAppointments = await fetchUpcoming(clerkId);
+    //             const upcomingAppointments = await fetchUpcoming(id);
     //             setUpcoming(upcomingAppointments);
     //         } catch (error) {
     //             console.error("Error fetching upcoming appointments:", error);
@@ -33,7 +33,7 @@ const DoctorAppointmentList = ({ clerkId }: { clerkId: string }) => {
     //     };
 
     //     getUpcomingAppointments();
-    // }, [clerkId]);
+    // }, [id]);
 
     // if (loading) {
     //     return <Loader/>

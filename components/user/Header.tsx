@@ -2,13 +2,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { SignedIn, UserButton, useUser } from '@clerk/nextjs'
 import MobileNav from './MobileNav'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
 import Message from '../message/Message'
+import { useUser } from '@/hooks/useUser'
+import UserButton from './UserButton'
 
 export interface NavLinkProps {
   imageURL?: string;
@@ -89,9 +90,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
             {/* </Link> */}
             {
               isLoaded? (
-              <SignedIn>
                   <UserButton/>
-              </SignedIn>
               ):
               (
                 <div 

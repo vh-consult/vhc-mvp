@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dialog"
 import PayWithPaystack from '../general/PayWithPaystack';
 import { addToCart, OrderData, placeOrder } from '@/lib/actions/order.actions';
-import { useUser } from '@clerk/nextjs';
 import { toast } from '../ui/use-toast';
+import { useUser } from '@/hooks/useUser';
 
 interface DrugProps {
   _id: string;

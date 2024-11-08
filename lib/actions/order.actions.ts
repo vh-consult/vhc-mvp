@@ -9,11 +9,11 @@ import { startSession } from "mongoose";
 import Order from "../database/models/order.model";
 
 
-export async function addToCart(clerkId: string, drugId: string) {
+export async function addToCart(id: string, drugId: string) {
     try {
         await connectToDatabase()
 
-        const userAddingItem = await User.findOne({clerkId})
+        const userAddingItem = await User.findById(id)
         if (!userAddingItem) throw new Error("User not found")
 
         const itemToAdd = await Drug.findById(drugId)
@@ -28,11 +28,11 @@ export async function addToCart(clerkId: string, drugId: string) {
     }
 }
 
-export async function removeFromCart(clerkId: string, drugId: string) {
+export async function removeFromCart(id: string, drugId: string) {
     try {
         await connectToDatabase()
 
-        const userRemovingItem = await User.findOne({clerkId})
+        const userRemovingItem = await User.findById(id)
         if (!userRemovingItem) throw new Error("User not found")
             
         const itemToRemove = await Drug.findById(drugId)
@@ -57,13 +57,13 @@ export interface OrderData {
 }
 
 export async function placeOrder(
-    clerkId: string, 
+    id: string, 
     data: OrderData, 
 ) {
     try {
         await connectToDatabase()
         
-        const userOrderingItem = await User.findOne({clerkId})
+        const userOrderingItem = await User.findById(id)
         if (!userOrderingItem) throw new Error("User not found")
 
         const shop = await Company.findOne({_id: data.shop, companyType: "Pharmacy"})
@@ -101,10 +101,10 @@ export async function placeOrder(
 }
 
 
-export async function cancelOrder(clerkId: string, orderId: string) {
+export async function cancelOrder(id: string, orderId: string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId}).populate("orders")
+        const user = await User.findById(id).populate("orders")
         if(!user) throw new Error("User not found")
         
         const order = await Order.findById(orderId)
@@ -159,10 +159,10 @@ export async function retrieveShopOrders(shopId: string) {
     }
 }
 
-export async function fetchUserOrders(clerkId:string) {
+export async function fetchUserOrders(id:string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId}).populate({
+        const user = await User.findById(id).populate({
             path: "orders", 
             populate: [
                 {path: "shop", select: "name location logo"},
@@ -178,10 +178,10 @@ export async function fetchUserOrders(clerkId:string) {
     }
 }
 
-export async function fetchItemsInCart(clerkId:string) {
+export async function fetchItemsInCart(id:string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId}).populate({
+        const user = await User.findById(id).populate({
             path: "cart", 
             populate: [
                 {path: "shop", select: "name location logo"},

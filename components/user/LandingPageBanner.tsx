@@ -35,7 +35,7 @@ const LandingPageBanner = () => {
             <div className="">
                 {
                   role === "Doctor" ? (
-                    <DoctorAppointmentList clerkId={user?.id}/>
+                    <DoctorAppointmentList id={user?.id}/>
                   ): role === "Patient"? (
                     <MedCard 
                     imageSrc={ '/images/drug 5.jpg'}

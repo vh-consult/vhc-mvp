@@ -12,7 +12,6 @@ const HistorySchema = new Schema({
 })
 
 const UserSchema = new Schema({
-    clerkId: {type: String},
     email: {type: String},
     photo: {type: String},
     firstName: {type: String},

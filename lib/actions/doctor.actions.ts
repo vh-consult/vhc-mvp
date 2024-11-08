@@ -11,7 +11,7 @@ export async function fetchAffiliateHospital(doctorId:string) {
     try {
       await connectToDatabase()
       const doctor = await Doctor.findOne(
-        {clerkId: doctorId}
+        {_id: doctorId}
       ).populate("affiliateHospital")
       if (!doctor) throw new Error("Doctor Not Found")
       
@@ -24,10 +24,10 @@ export async function fetchAffiliateHospital(doctorId:string) {
     }
 }
 
-export async function fetchDoctorClients(clerkId:string) {
+export async function fetchDoctorClients(id:string) {
     try {
       await connectToDatabase()
-      const doctor = await Doctor.findOne({clerkId}).populate(
+      const doctor = await Doctor.findOne({id}).populate(
         {path: "clients", select: "firstName lastName gender email photo dateOfBirth"}
       )
       if(!doctor) throw new Error("Doctor not found")
@@ -44,7 +44,7 @@ export async function fetchOngoing(doctorId:string) {
     try {
         await connectToDatabase()
         const doctor = await Doctor.findOne(
-            {clerkId: doctorId}
+            {id: doctorId}
         ).populate({
             path: "ongoingSession", 
             populate: [{path: "patient", select: "firstName lastName "}], 
@@ -69,7 +69,7 @@ export async function fetchUpcoming(doctorId: string) {
       await connectToDatabase();
 
       const doctor = await Doctor.findOne(
-          { clerkId: doctorId }
+          { id: doctorId }
       ).populate({
           path: "appointments",
           populate: [{ path: "patient", select: "firstName lastName healthRecord" }],
