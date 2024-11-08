@@ -1,11 +1,11 @@
 "use client"
-import useDBUser from '@/hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 import React from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 import MedCard from '../patient/MedCard';
 
 const LandingPageBanner = () => {
-  const {role, clerkId} = useDBUser()
+  const {role, user} = useUser()
   const now = new Date();
     const time = now.toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -35,7 +35,7 @@ const LandingPageBanner = () => {
             <div className="">
                 {
                   role === "Doctor" ? (
-                    <DoctorAppointmentList clerkId={clerkId}/>
+                    <DoctorAppointmentList clerkId={user?.id}/>
                   ): role === "Patient"? (
                     <MedCard 
                     imageSrc={ '/images/drug 5.jpg'}

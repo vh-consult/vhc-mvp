@@ -1,12 +1,12 @@
 'use client'
 import { landing } from "@/constants";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import MobileNav from "../user/MobileNav";
-import useDBUser from "@/hooks/useUser";
+import UserButton from "../user/UserButton";
+import { useUser } from "@/hooks/useUser";
 
 
 interface NavLink {
@@ -73,7 +73,7 @@ interface NavLink {
   };
 
 const Head = () => {
-    const {role, companyId} = useDBUser()
+    const {role, companyId} = useUser()
     useEffect(() => {
       const handleScroll = () => {
         const header:Element|null = document.querySelector('.header');
@@ -103,15 +103,12 @@ const Head = () => {
           </div>
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
-          <SignedIn>
             <Button className="bg-green-2 rounded-full text-green-1 mr-4">
               <Link href={role==="PharmacyAdmin"? `/company/${companyId}/overview` :'landing'}>
                 Go to Home
               </Link>
             </Button>
             <UserButton/>
-          </SignedIn>
-          <SignedOut>
             <Link 
               href={landing.header.login.link}
               className='text-green-2 hover:underline hover:font-md'
@@ -131,7 +128,6 @@ const Head = () => {
                 </button>
               }
             </Link>
-          </SignedOut>
           </div>
           <div className="hidden">
             <MobileNav navigations={landing.header.navLinks} />

@@ -24,10 +24,10 @@ import { cn } from '@/lib/utils';
 import EndCallButton from './EndCallButton';
 import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
-import useDBUser from '@/hooks/useUser';
 import { BiComment } from 'react-icons/bi';
 import ConsultationSummaryCard, { TConsultation } from './ConsultationSummaryCard';
 import { fetchConsultationSession } from '@/lib/actions/consultation.actions';
+import { useUser } from '@/hooks/useUser';
 
 type CallLayoutType = 'grid' | 'left' ;
 
@@ -40,7 +40,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   const { useCallCallingState } = useCallStateHooks();
   const [showConsultationForm, setShowConsultationForm] = useState<boolean>(false)
   const callingState = useCallCallingState();
-  const {role} = useDBUser()
+  const {role} = useUser()
   const [showComment, setShowComment] = useState<boolean>(false)
   
 

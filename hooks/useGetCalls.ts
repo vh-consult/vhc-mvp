@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useUser } from '@clerk/nextjs';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
+import { useUser } from './useUser';
 
 export const useGetCalls = () => {
   const { user } = useUser();

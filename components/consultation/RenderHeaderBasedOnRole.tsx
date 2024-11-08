@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Header from '../user/Header';
-import useDBUser from '@/hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 
 const consultationHeaderLinks = {
     patient: [
@@ -35,7 +35,7 @@ const consultationHeaderLinks = {
 };
 
 const RenderHeaderBasedOnRole = () => {
-    const {role} = useDBUser()
+    const {role} = useUser()
   return (
     <Header
         navigations={

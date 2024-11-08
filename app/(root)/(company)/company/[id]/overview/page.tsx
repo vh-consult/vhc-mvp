@@ -1,14 +1,14 @@
 "use client"
 import React from 'react'
 import PharmacyOverview from '@/components/company/PharmacyOverview'
-import useDBUser from '@/hooks/useUser'
 import HospitalOverview from '@/components/company/HospitalOverview'
 import Loader from '@/components/general/Loader'
 import { useParams } from 'next/navigation'
+import { useUser } from '@/hooks/useUser'
 
 
 const OverviewPage = () => {
-  const {role} = useDBUser()
+  const {role} = useUser()
   const {id} = useParams()
   console.log(id)
   return (

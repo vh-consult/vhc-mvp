@@ -1,10 +1,10 @@
 "use client"
 import CallList from '@/components/consultation/CallList';
 import UpcomingConsultationCard from '@/components/consultation/UpcomingConsultationCard';
-import useDBUser from '@/hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 
 const UpcomingPage =  () => {
-  const {role} = useDBUser()
+  const {role} = useUser()
 
   return (
     <section className="gap-10 text-green-4">

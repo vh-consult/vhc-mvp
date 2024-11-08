@@ -1,13 +1,11 @@
 'use client'
 import React, { useState } from 'react'
 import { Input } from '../ui/input';
-import { useUser } from '@clerk/nextjs';
 import { Textarea } from '../ui/textarea';
 import { createCompany } from '@/lib/actions/company.actions';
 import { toast } from '../ui/use-toast';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import useDBUser from '@/hooks/useUser';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
@@ -23,6 +21,7 @@ import Loader from '../general/Loader';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
+import { useUser } from '@/hooks/useUser';
 
 
   const setupSchema = z.object({
@@ -40,8 +39,7 @@ const RegisterCompany = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const {role} =useDBUser()
-  const {user} = useUser()
+  const {user, role} = useUser()
   const [file, setFile] = useState<File>()
   const initialValues: FormValues = {
     name: '',
