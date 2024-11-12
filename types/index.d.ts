@@ -6,7 +6,7 @@ declare type CreateUserParams = {
   gender: "male" | "female" | "other";
   password: string;
   photo?: string;
-  role: string;
+  role: "patient" | "pharmacyAdmin" | "doctor";
   dateOfBirth: Date;
 };
 declare type UserParams = {
@@ -38,7 +38,6 @@ declare type CreatePatientParams = {
 };
 
 declare type RoleSelectionParams = {
-  role: "patient" | "pharmacyAdmin" | "doctor";
   country: string;
   location: string;
 }

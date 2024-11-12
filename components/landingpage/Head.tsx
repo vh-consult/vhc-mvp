@@ -103,12 +103,12 @@ const Head = () => {
           </div>
           <Navigation/>
           <div className='hidden md:flex items-center justify-center button w-1/6'>
-            <Button className="bg-green-2 rounded-full text-green-1 mr-4">
+            {/* <Button className="bg-green-2 rounded-full text-green-1 mr-4">
               <Link href={role==="PharmacyAdmin"? `/company/${companyId}/overview` :'landing'}>
                 Go to Home
               </Link>
             </Button>
-            <UserButton/>
+            <UserButton/> */}
             <Link 
               href={landing.header.login.link}
               className='text-green-2 hover:underline hover:font-md'

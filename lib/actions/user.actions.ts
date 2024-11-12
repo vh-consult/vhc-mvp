@@ -18,54 +18,27 @@ const loginSchema = z.object({
   password: z.string().min(8, {message: "Password must be at least 8 characters"}).trim()
 })
 
-export async function roleSelection(id: string, userData: RoleSelectionParams) {
-  try {
-    await connectToDatabase();
 
-    const findUserInDB = await User.findById(id);
-    if (!findUserInDB) {
-      throw new Error("User not found");
-    };
-
-    console.log(userData, findUserInDB)
-    let userToActivateAccount;
-    try {
-      const userObject = findUserInDB.toObject();
-      delete userObject._id;  
-      await User.findOneAndDelete({ id })
-  
-      switch (userData.role) {
-        case 'patient':
-          userToActivateAccount = await Patient.create({ ...userObject, ...userData });
-          break;
-        case 'pharmacyAdmin':
-          userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
-          break;
-        case 'doctor':
-          userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
-          break;
-        default:
-          throw new Error("Invalid role");
-      }
-      
-    } catch (error) {
-      console.log("activation attempt failed")
-    }
-    console.log(userToActivateAccount)
-
-    return {userRole: userToActivateAccount.type};
-  } catch (error) {
-    handleError(error)
-  }
-}
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
     console.log(user)
-
-    const newUser = await User.create(user);
+    let newUser
+    switch (user.role) {
+      case 'patient':
+        newUser = await Patient.create(user);
+        break;
+      case 'pharmacyAdmin':
+        newUser = await PharmacyAdmin.create(user);
+        break;
+      case 'doctor':
+        newUser = await Doctor.create(user);
+        break;
+      default:
+        throw new Error("Invalid role");
+    }    
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
     handleError(error);
