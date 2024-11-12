@@ -1,27 +1,38 @@
 "use client"
 import { useUser } from '@/hooks/useUser';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 import MedCard from '../patient/MedCard';
 
 const LandingPageBanner = () => {
+  const [currentTime, setCurrentTime] = useState<string>('')
+  const [dateToday, setDateToday] = useState<string>('')
   const {role, user} = useUser()
-  const now = new Date();
-    const time = now.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-    const date = (new Intl.DateTimeFormat('en-US', {
-      dateStyle: 'full'
-    })).format(now);
+  useEffect(() => {
+    // Only set the time on the client side
+    const updateTime = () => {
+      const now = new Date()
+      setDateToday(now.toLocaleDateString())
+      setCurrentTime(now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }))
+    }
+
+    updateTime() // Initial update
+    const interval = setInterval(updateTime, 60000) // Update every minute
+
+    return () => clearInterval(interval)
+  }, [])
   return (
             <div className="flex h-[calc(100vh-90px)] flex-col  max-md:px-2 max-md:py-4 lg:p-5">
             <div  className="flex flex-col gap-2">
               <p className="text-base font-medium text-green-4 lg:text-lg leading-tight">
-                {date}
+                {dateToday}
               </p>
               <h1 className="text-2xl text-green-4 font-extrabold lg:text-3xl leading-none">
-                {time}
+                {currentTime}
               </h1>
                   <h2 className="bg-green-1 rounded py-2 text-center text-base mb-4 font-normal">
               {

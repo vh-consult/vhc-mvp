@@ -13,13 +13,14 @@ const HistorySchema = new Schema({
 
 const UserSchema = new Schema({
     email: {type: String},
+    password: {type: String},
     photo: {type: String},
     firstName: {type: String},
     lastName: {type: String},
     dateOfBirth: {type: Date},
     country: {type: String},
     location: {type: String},
-    gender: {type: String, enum: ["male", "female"]},
+    gender: {type: String, enum: ["male", "female", "other"]},
     messages: [{type: Schema.Types.ObjectId, ref: 'Message'}],
     history: [HistorySchema],
   }, options

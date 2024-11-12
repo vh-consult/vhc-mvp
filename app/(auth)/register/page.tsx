@@ -84,10 +84,8 @@ const RegisterAccount = () => {
 
     setLoading(true);
     try {
-      const newUser = await createUser(values);
-      if(newUser){
-        router.push('/landing')
-    } }finally {
+      await createUser(values);
+    }finally {
       setLoading(false);
     }
   }
@@ -95,7 +93,7 @@ const RegisterAccount = () => {
 
   return (
     <div className='bg-green-3 min-h-screen w-full py-5 flex flex-center'>
-              <Card className={`relative w-[400px] border-none bg-white text-green-4`}>
+              <Card className={`relative w-[600px] border-none bg-white text-green-4`}>
           <CardHeader>
             <CardTitle>Account Registration</CardTitle>
             <CardDescription>Already have an account? <Link href={'/login'}>Login</Link></CardDescription>
@@ -158,15 +156,26 @@ const RegisterAccount = () => {
                   {errors.gender && <span className="text-red-500">{errors.gender}</span>}
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor='email'>Email</Label>
-                    <Input
-                      required
-                      id='email'
-                      className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
-                      onChange={(e) => setValues({ ...values, email: e.target.value })}
-                    />
-                    {errors.email && <span className="text-red-500">{errors.email}</span>}
-                  </div>
+                  <Label htmlFor='email'>Email</Label>
+                  <Input
+                    required
+                    id='email'
+                    className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+                    onChange={(e) => setValues({ ...values, email: e.target.value })}
+                  />
+                  {errors.email && <span className="text-red-500">{errors.email}</span>}
+                </div>
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor='password'>Password</Label>
+                  <Input
+                    required
+                    type='password'
+                    id='password'
+                    className="border-none bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+                    onChange={(e) => setValues({ ...values, password: e.target.value })}
+                  />
+                  {errors.password && <span className="text-red-500">{errors.password}</span>}
+                </div>
                   <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="country">Country</Label>
                 <Select required onValueChange={(value) => setValues({ ...values, country: value })}>

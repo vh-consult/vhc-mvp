@@ -5,7 +5,7 @@ export const useUser = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [companyId, setCompanyId] = useState('')
     const user = {
-        id: '',
+        id: '67334b3fc5e9d73666a5e79b',
         firstName: '',
         lastName: '',
         emailAddress: '',

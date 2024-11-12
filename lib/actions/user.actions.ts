@@ -25,22 +25,28 @@ export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
     console.log(user)
+    const hashedPassword = await bcrypt.hash(user.password, 10)
     let newUser
     switch (user.role) {
       case 'patient':
-        newUser = await Patient.create(user);
+        newUser = await Patient.create({...user, password: hashedPassword});
         break;
       case 'pharmacyAdmin':
-        newUser = await PharmacyAdmin.create(user);
+        newUser = await PharmacyAdmin.create({...user, password: hashedPassword});
         break;
       case 'doctor':
-        newUser = await Doctor.create(user);
+        newUser = await Doctor.create({...user, password: hashedPassword});
         break;
       default:
         throw new Error("Invalid role");
     }    
-    return JSON.parse(JSON.stringify(newUser));
+    console.log(newUser)
+    await createSession(newUser._id)
+    return redirect('/landing')
   } catch (error) {
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error; // Let Next.js handle the redirect
+    }
     handleError(error);
   }
 }
@@ -73,11 +79,14 @@ export async function login (prevState: any, formData: FormData) {
       }}
     }
 
-    await createSession(existingUser.id)
+    await createSession(existingUser._id)
 
-    redirect('/landing')
+    return redirect('/landing')
 
   } catch (error) {
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error; // Let Next.js handle the redirect
+    }
     handleError(error)
   }
 }
