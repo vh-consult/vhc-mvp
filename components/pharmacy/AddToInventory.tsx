@@ -5,13 +5,13 @@ import { Textarea } from '../ui/textarea';
 import FormModal from '../consultation/FormModal';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { addToInventory } from '@/lib/actions/inventory.actions';
-import { useUser } from '@clerk/nextjs';
 import { toast } from '../ui/use-toast'; 
 import { useEdgeStore } from '@/lib/edgestore';
 import Loader from '../general/Loader';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
+import { useUser } from '@/hooks/useUser';
 
 const initialValues = {
   name: '',

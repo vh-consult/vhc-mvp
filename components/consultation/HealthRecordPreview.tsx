@@ -1,6 +1,5 @@
 "use client"
 import React, {useEffect, useState} from 'react'
-import HealthRecordPage from '@/app/(root)/(patient)/[clerkId]/health-record/page'
 import { fetchHealthRecord } from '@/lib/actions/patient.actions'
 import RecordList, { HealthRecordProps } from '../patient/RecordList'
 import SearchBar from '../general/SearchBar'

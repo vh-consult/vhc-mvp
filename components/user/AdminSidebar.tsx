@@ -1,5 +1,5 @@
 "use client"
-import useDBUser from '@/hooks/useDBUser'
+import { useUser } from '@/hooks/useUser'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -19,7 +19,7 @@ export interface SideNavProps {
 
 const AdminSidebar = () => {
   const pathname = usePathname()
-  const {role, companyId} = useDBUser()
+  const {role, companyId} = useUser()
 
   const renderNavigation = (nav: SideNavProps, index: number) => {
     const isActive = pathname === nav.route || pathname.startsWith(`${nav.route}/`);

@@ -1,5 +1,5 @@
 "use client"
-import useDBUser from '@/hooks/useDBUser'
+import { useUser } from '@/hooks/useUser'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
@@ -20,22 +20,22 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {role, clerkId, companyId} = useDBUser()
+    const {role, user, companyId} = useUser()
     
     const patientSidebarElements = {
       top: [
           {
-              route: `/${clerkId}/dashboard`,
+              route: `/${user?.id}/dashboard`,
               label: 'Dashboard',
               icon: RxDashboard
           },
           {
-              route: `/${clerkId}/affiliation`,
+              route: `/${user?.id}/affiliation`,
               label: `Affiliation`,
               icon: BsHospital
           },
           {
-              route: `/${clerkId}/health-record`,
+              route: `/${user?.id}/health-record`,
               label: `Record`,
               icon: BsDatabase
           },
@@ -45,12 +45,12 @@ const Sidebar = () => {
 
   const SidebarBbottomNavs = [
     {
-        route: `/${clerkId}/history`,
+        route: `/${user?.id}/history`,
         label: 'History',
         icon: AiOutlineHistory
     },
     {
-        route: `/${clerkId}/account`,
+        route: `/${user?.id}/account`,
         label: 'Account',
         icon: CgProfile
     },

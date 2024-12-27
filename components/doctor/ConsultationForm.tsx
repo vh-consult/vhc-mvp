@@ -3,12 +3,12 @@ import React, { FormEvent, useState } from 'react'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
 import Loader from '../general/Loader'
-import { useUser } from '@clerk/nextjs'
 import PrescriptionForm from '../pharmacy/PrescriptionForm'
 import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
 import { toast } from '../ui/use-toast'
+import { useUser } from '@/hooks/useUser'
 
 const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const initialValues = {

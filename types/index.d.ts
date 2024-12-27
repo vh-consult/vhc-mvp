@@ -1,14 +1,15 @@
 // ====== USER PARAMS
 declare type CreateUserParams = {
-  clerkId: string;
   email: string;
   firstName: string;
   lastName: string;
-  photo: string;
-  contact: string;
+  gender: "male" | "female" | "other";
+  password: string;
+  photo?: string;
+  role: "patient" | "pharmacyAdmin" | "doctor";
+  dateOfBirth: Date;
 };
 declare type UserParams = {
-  clerkId: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -36,12 +37,9 @@ declare type CreatePatientParams = {
   personalDoctor?: string;
 };
 
-declare type ActivateAccountParams = {
-  dateOfBirth: Date;
-  role: "patient" | "doctor" | "hospitalAdmin" | "pharmacyAdmin" | string;
-  location: string;
-  gender: "male" | "female" | string;
+declare type RoleSelectionParams = {
   country: string;
+  location: string;
 }
 
 declare type UpdateUserParams = {
@@ -51,6 +49,7 @@ declare type UpdateUserParams = {
   country?: string,
   gender?: string,
   role?: string,
+  email?: string;
   location?: string,
   dateOfBirth?: Date,
 };

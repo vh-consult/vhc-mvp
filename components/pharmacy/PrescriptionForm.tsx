@@ -9,7 +9,7 @@ import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
 import { postMeds } from '@/lib/actions/medication.actions'
-import { useUser } from '@clerk/nextjs'
+import { useUser } from '@/hooks/useUser'
 
 export interface DrugPrescriptionParams {
   drug: string;

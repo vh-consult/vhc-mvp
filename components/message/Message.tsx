@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { useUser } from '@clerk/nextjs'
 import { cn } from '@/lib/utils'
 import { getMessages } from '@/lib/actions/appointment.actions'
 import MessageCard, { MessageCardProps } from './MessageCard'

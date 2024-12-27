@@ -19,10 +19,10 @@ export interface AppointmentParams {
 }
 
 
-export async function newAppointment(clerkId: string, formData: AppointmentParams) {
+export async function newAppointment(id: string, formData: AppointmentParams) {
     try {
         await connectToDatabase()
-        const creator = await Patient.findOne({clerkId})
+        const creator = await Patient.findById({id})
         if(!creator) throw new Error("Can't book an appointment | Invalid User")
         
         console.log(creator.personalPhysician)
@@ -63,12 +63,12 @@ export async function newAppointment(clerkId: string, formData: AppointmentParam
     }
 }
 
-export async function cancelAppointment(clerkId: string, sessionId:string) {
+export async function cancelAppointment(id: string, sessionId:string) {
     try {
         await connectToDatabase()
 
         const userCancelingAppointment = await Patient.findOne({
-            clerkId,
+            id,
         }).populate("appointments")
         if (!userCancelingAppointment) throw new Error("User not found")
         if (!userCancelingAppointment.appointments.includes(sessionId)) throw new Error("Appointment session not found in user's Appointments")
@@ -131,10 +131,10 @@ export async function searchHost(query: string) {
     }
 }
 
-export async function fetchRequestedAppointments(clerkId:string) {
+export async function fetchRequestedAppointments(id:string) {
     try {
         await connectToDatabase()
-        const doctor = await Doctor.findOne({ clerkId }).populate({
+        const doctor = await Doctor.findOne({ id }).populate({
             path: "appointments",
             match: { status: "pending" },
             populate: [
@@ -151,10 +151,10 @@ export async function fetchRequestedAppointments(clerkId:string) {
     }
 }
 
-export async function fetchAcceptedAppointments(clerkId:string) {
+export async function fetchAcceptedAppointments(id:string) {
     try {
         await connectToDatabase()
-        const doctor = await Doctor.findOne({ clerkId }).populate({
+        const doctor = await Doctor.findOne({ id }).populate({
             path: "appointments",
             match: { status: "accepted" },
             populate: [
@@ -187,10 +187,10 @@ export async function fetchHospitalAppointments (hospitalId: string) {
     }
 }
 
-export async function getMessages(clerkId: string) {
+export async function getMessages(id: string) {
     try {
         await connectToDatabase()
-        const user = await User.findOne({clerkId}).populate('messages')
+        const user = await User.findById({id}).populate('messages')
         if (!user) throw new Error("User not found")
         const messages = user.messages
     

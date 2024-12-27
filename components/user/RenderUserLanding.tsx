@@ -1,12 +1,12 @@
 "use client"
 
-import useDBUser from '@/hooks/useDBUser'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import ClickableCard from '../general/ClickableCard'
 import { getAdminCompany } from '@/lib/actions/company.actions'
 import Loader from '../general/Loader'
 import LandingDashboard from '../pharmacy/LandingDashboard'
+import { useUser } from '@/hooks/useUser'
 
 export interface ClickableCardProps {
     title: string;
@@ -27,7 +27,7 @@ export interface ClickableCardDataStructure {
 
 const RenderUserLanding = () => {
     const router = useRouter()
-    const {role, clerkId, companyId} = useDBUser()
+    const {role, user, companyId} = useUser()
 
     const ClickableCardData: ClickableCardDataStructure = {
         patientAndDoctor: [
@@ -55,7 +55,7 @@ const RenderUserLanding = () => {
                 title: 'Dashboard',
                 description: 'Enter your dashboard',
                 imageSrc: '/icons/dashboard.svg',
-                action: `/${clerkId}/dashboard`
+                action: `/${user?.id}/dashboard`
             },
         ],
         doctor: [

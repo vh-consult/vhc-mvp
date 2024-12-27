@@ -23,7 +23,7 @@ export async function addToInventory(
 ) {
     try {
         await connectToDatabase();
-        const admin = await PharmacyAdmin.findOne({ clerkId: adminId }).populate('company');
+        const admin = await PharmacyAdmin.findById({id: adminId}).populate('company');
         if (!admin) throw new Error("User not found");
 
         try{
@@ -66,16 +66,16 @@ export async function addToInventory(
     }
 }
 
-export async function removeFromInventory(clerkId: string, drugId: string, shopId: string) {
+export async function removeFromInventory(id: string, drugId: string, shopId: string) {
     try {
         await connectToDatabase()
-        const admin = await PharmacyAdmin.findOne({clerkId})
+        const admin = await PharmacyAdmin.findById({id})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
         if (!shop) throw new Error("Shop not found")
 
-        if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
+        if (!shop.admins.includes(id)) throw new Error("Not an admin of pharmacy")
         
         if (!shop.inventory.includes(drugId)) throw new Error("Drug not in shop inventory")
         
@@ -101,18 +101,18 @@ export async function removeFromInventory(clerkId: string, drugId: string, shopI
 }
 
 export async function updateInventory(
-    clerkId: string, shopId: string,
+    id: string, shopId: string,
     drugData: DrugParams
 ) {
     try {
         await connectToDatabase()
-        const admin = await PharmacyAdmin.findOne({clerkId})
+        const admin = await PharmacyAdmin.findById({id})
         if (!admin) throw new Error("Admin not found")
 
         const shop = await Company.findOne({_id: shopId, companyType: "Pharmacy"})
         if (!shop) throw new Error("Shop not found")
 
-        if (!shop.admins.includes(clerkId)) throw new Error("Not an admin of pharmacy")
+        if (!shop.admins.includes(id)) throw new Error("Not an admin of pharmacy")
         
         let drugToUpdate = null;
         for (let i = 0; i < shop.inventory.length; i++) {

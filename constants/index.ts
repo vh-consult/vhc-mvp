@@ -255,11 +255,11 @@ export const landing = {
       ],
       login: {
           text: `Log in`,
-          link: `/sign-in`
+          link: `/login`
       },
       button: {
           text: `Sign up`,
-          link: `/sign-up`
+          link: `/register`
       },
       menuIcon: AiOutlineMenu
   },

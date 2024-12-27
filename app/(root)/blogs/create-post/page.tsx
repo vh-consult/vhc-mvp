@@ -3,7 +3,6 @@ import Loader from '@/components/general/Loader'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useUser } from '@clerk/nextjs'
 import React, { FormEvent, useState } from 'react'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation';
@@ -11,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { createBlog } from '@/lib/actions/blog.actions'
 import { SingleImageDropzone } from '@/components/general/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgestore';
+import { useUser } from '@/hooks/useUser'
 
 // Define Zod schema
 const blogPostSchema = z.object({

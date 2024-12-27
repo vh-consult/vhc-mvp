@@ -3,10 +3,10 @@
 
 import { tokenProvider } from '@/lib/actions/stream.actions';
 import Loader from '@/components/general/Loader';
-import { useUser } from '@clerk/nextjs';
 import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
 import { ReactNode, useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
+import { useUser } from '@/hooks/useUser';
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY; 
 
@@ -24,7 +24,7 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
             apiKey,
             user: {
                 id: user?.id,
-                name: user?.fullName || user?.id,
+                name: user?.firstName || user?.id,
                 image: user?.imageUrl
             },
             tokenProvider
@@ -41,24 +41,24 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
     )
 }
 
-export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
-    const {user, isLoaded} = useUser();
-    if(!isLoaded || !user) return;
-    if(!apiKey) throw new Error('Stream key not found')
+// export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
+//     const {user, isLoaded} = useUser();
+//     if(!isLoaded || !user) return;
+//     if(!apiKey) throw new Error('Stream key not found')
 
-    const chatClient = new StreamChat(apiKey!)
-    chatClient.setUser(
-        {
-          id: user?.id!,
-          name: user?.fullName || user?.id,
-          image: user?.imageUrl
-        }, tokenProvider
-      )  
-    useEffect(() => {
+//     const chatClient = new StreamChat(apiKey!)
+//     chatClient.setUser(
+//         {
+//           id: user?.id!,
+//           name: user?.fullName || user?.id,
+//           image: user?.imageUrl
+//         }, tokenProvider
+//       )  
+//     useEffect(() => {
 
-    }, [])
+//     }, [])
 
-    return(
-    <></>
-    )
-}
+//     return(
+//     <></>
+//     )
+// }

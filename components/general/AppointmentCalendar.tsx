@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { AppointmentParams, fetchAcceptedAppointments } from '@/lib/actions/appointment.actions';
-import useDBUser from '@/hooks/useDBUser';
-import { useUser } from '@clerk/nextjs';
+import { useUser } from '@/hooks/useUser';
+
 
 const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());

@@ -1,8 +1,8 @@
 "use client"
 import { fetchMeds } from '@/lib/actions/medication.actions'
-import { useUser } from '@clerk/nextjs'
 import React, {useEffect, useState} from 'react'
 import MedCard, { MedCardProps } from './MedCard'
+import { useUser } from '@/hooks/useUser'
 
 const data =[
   {

@@ -1,5 +1,4 @@
-import { getUser } from '@/lib/actions/user.actions'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser, getUser } from '@/lib/actions/user.actions'
 import Image from 'next/image'
 import React from 'react'
 

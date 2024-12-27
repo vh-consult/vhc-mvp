@@ -14,11 +14,11 @@ export interface CompanyProps {
     description: string;
     type: string;
 }
-export async function createCompany(clerkId: string, companyData: any){
+export async function createCompany(id: string, companyData: any){
     try {
         await connectToDatabase();
         
-        const userCreatingCompany = await User.findOne({ clerkId });
+        const userCreatingCompany = await User.findById({ id });
         if (!userCreatingCompany) throw new Error("User not found");
 
         let company:any;
@@ -47,7 +47,7 @@ export async function createCompany(clerkId: string, companyData: any){
 export async function getAdminCompany(adminId: string) {
     try {
         await connectToDatabase()
-        const userClaimingToBeAdmin = await User.findOne({clerkId: adminId})
+        const userClaimingToBeAdmin = await User.findOne({id: adminId})
         if (!userClaimingToBeAdmin) throw new Error("User not found")
         console.log(userClaimingToBeAdmin.type)
         if (

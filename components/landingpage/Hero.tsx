@@ -1,6 +1,5 @@
 import { landing } from "@/constants"
 import HeroCard from "./HeroCard"
-import { SignedIn } from "@clerk/nextjs"
 import { Button } from "../ui/button"
 import Link from "next/link"
 

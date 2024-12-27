@@ -2,7 +2,6 @@
 import React, {useEffect, useState} from 'react'
 import { AppointmentDataType } from './DoctorDashboard'
 import RequestCard from '../consultation/RequestCard'
-import useDBUser from '@/hooks/useDBUser'
 import { fetchRequestedAppointments } from '@/lib/actions/appointment.actions'
 
 const requests = [
@@ -29,16 +28,6 @@ const requests = [
 ]
 
 const AppointmentRequests = () => {
-  // const {clerkId} = useDBUser()
-  // const [requests, setRequests] = useState([])
-  // useEffect(() => {
-  //   if (!clerkId) return;
-  //   const fetch = async() => {
-  //     const requests = await fetchRequestedAppointments(clerkId)
-  //     setRequests(requests)
-  //   }
-  //   fetch()
-  // }, [clerkId])
   
   return (
     <div className="w-full grid grid-cols-2 gap-6 px-4">

@@ -1,8 +1,8 @@
 import SearchBar from '@/components/general/SearchBar'
 import PatientList from '@/components/doctor/PatientList'
 import React from 'react'
-import { currentUser } from '@clerk/nextjs/server'
 import { fetchDoctorClients } from '@/lib/actions/doctor.actions'
+import { currentUser } from '@/lib/actions/user.actions'
 
 const headers = [
   "Name", "Gender", "Age", "Email", "Actions"

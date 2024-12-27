@@ -8,27 +8,101 @@ import { handleError } from "../utils";
 import Patient from "../database/models/patient.model";
 import Doctor from "../database/models/doctor.model";
 import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
+import { z } from "zod";
+import * as bcrypt from "bcrypt"
+import { createSession, deleteSession } from "../session";
+import { redirect } from "next/navigation";
+
+const loginSchema = z.object({
+  email: z.string().email({message: "Invalid email address"}).trim(),
+  password: z.string().min(8, {message: "Password must be at least 8 characters"}).trim()
+})
+
 
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
   try {
     await connectToDatabase();
-
-    const newUser = await User.create(user);
-    console.log("user created")
-    return JSON.parse(JSON.stringify(newUser));
+    console.log(user)
+    const hashedPassword = await bcrypt.hash(user.password, 10)
+    let newUser
+    switch (user.role) {
+      case 'patient':
+        newUser = await Patient.create({...user, password: hashedPassword});
+        break;
+      case 'pharmacyAdmin':
+        newUser = await PharmacyAdmin.create({...user, password: hashedPassword});
+        break;
+      case 'doctor':
+        newUser = await Doctor.create({...user, password: hashedPassword});
+        break;
+      default:
+        throw new Error("Invalid role");
+    }    
+    console.log(newUser)
+    await createSession(newUser._id)
+    return redirect('/landing')
   } catch (error) {
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error; // Let Next.js handle the redirect
+    }
     handleError(error);
   }
 }
 
+export async function login (prevState: any, formData: FormData) {
+  try {
+    await connectToDatabase();
+    const result = loginSchema.safeParse(Object.fromEntries(formData))
+    
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+      }
+    }
+
+    const {email, password} = result.data
+
+    const existingUser = await User.findOne({email})
+    if (!existingUser) {
+      return {errors: {
+        email: ["Invalid email"]
+      }
+    }}
+
+    const comparison = await bcrypt.compare(password, existingUser.password)
+    
+    if (!comparison) {
+      return {errors: {
+        password: ["Invalid password"]
+      }}
+    }
+
+    await createSession(existingUser._id)
+
+    return redirect('/landing')
+
+  } catch (error) {
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error; // Let Next.js handle the redirect
+    }
+    handleError(error)
+  }
+}
+
+
+export async function logout (){
+  await deleteSession()
+  redirect("/")
+}
+
 //subscribe to newsletter
-export async function subscribeToNewsletter(clerkId:string) {
+export async function subscribeToNewsletter(id:string) {
   try {
     await connectToDatabase();
 
-    const userSubscribing = await User.findOne({clerkId});
+    const userSubscribing = await User.findOne({id});
     if (!userSubscribing) throw new Error("User not found");
 
     userSubscribing.subscribedToNewsletter = true
@@ -41,11 +115,11 @@ export async function subscribeToNewsletter(clerkId:string) {
 }
 
 //BUY INSURANCE
-export async function buyInsurance(clerkId: string, insurancePlanChosen: string) {
+export async function buyInsurance(id: string, insurancePlanChosen: string) {
   try {
     await connectToDatabase();
 
-    const userBuyingInsurance = await User.findOne({clerkId});
+    const userBuyingInsurance = await User.findOne({id});
     if (!userBuyingInsurance) throw new Error("User not found");
 
     userBuyingInsurance.insurance_plan = insurancePlanChosen
@@ -58,11 +132,11 @@ export async function buyInsurance(clerkId: string, insurancePlanChosen: string)
 }
 
 // READ
-export async function getUser(clerkId: string) {
+export async function getUser(id: string) {
   try {
     await connectToDatabase();
 
-    const user = await User.findOne({ clerkId }).populate("personalPhysician").populate("affiliateHospital")
+    const user = await User.findOne({ id }).populate("personalPhysician").populate("affiliateHospital")
     if (!user) throw new Error("User not found");
 
     return JSON.parse(JSON.stringify(user));
@@ -72,11 +146,11 @@ export async function getUser(clerkId: string) {
 }
 
 // UPDATE
-export async function updateUser(clerkId: string, user: UpdateUserParams) {
+export async function updateUser(id: string, user: UpdateUserParams) {
   try {
     await connectToDatabase();
 
-    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
+    const updatedUser = await User.findOneAndUpdate({ id }, user, {
       new: true,
     });
 
@@ -90,64 +164,22 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
   }
 }
 
-export async function activateAccount(clerkId: string, userData: ActivateAccountParams) {
-  try {
-    await connectToDatabase();
 
-    const findUserInDB = await User.findOne({ clerkId });
-    if (!findUserInDB) {
-      throw new Error("User not found");
-    };
-
-    console.log(userData, findUserInDB)
-    let userToActivateAccount;
-    try {
-      const userObject = findUserInDB.toObject();
-      delete userObject._id;  
-      await User.findOneAndDelete({ clerkId })
-  
-      switch (userData.role) {
-        case 'patient':
-          userToActivateAccount = await Patient.create({ ...userObject, ...userData });
-          break;
-        case 'pharmacyAdmin':
-          userToActivateAccount = await PharmacyAdmin.create({ ...userObject, ...userData });
-          break;
-        case 'doctor':
-          userToActivateAccount = await Doctor.create({ ...userObject, ...userData });
-          break;
-        default:
-          throw new Error("Invalid role");
-      }
-      
-    } catch (error) {
-      console.log("activation attempt failed")
-    }
-    console.log(userToActivateAccount)
-
-    return {userRole: userToActivateAccount.type};
-  } catch (error) {
-    handleError(error)
-  }
-}
 
 // DELETE
-export async function deleteUser(clerkId: string) {
+export async function deleteUser(id: string) {
   try {
     await connectToDatabase();
 
     // Find user to delete
-    const userToDelete = await User.findOne({ clerkId });
+    const userToDelete = await User.findByIdAndDelete({id});
 
     if (!userToDelete) {
       throw new Error("User not found");
     }
 
     // Delete user
-    const deletedUser = await User.findByIdAndDelete(userToDelete._id);
     revalidatePath("/");
-
-    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
   } catch (error) {
     handleError(error);
   }
@@ -158,10 +190,18 @@ export async function deleteUser(clerkId: string) {
 export async function fetchUserHistory(userId:string) {
   try {
     await connectToDatabase()
-    const user = await User.findOne({clerkId: userId}).populate("history")
+    const user = await User.findById(userId).populate("history")
     if (!user) throw new Error("User not found")
     
     return JSON.parse(JSON.stringify(user.history))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+export async function currentUser () {
+  try {
+    return {id: "33yh3y"}
   } catch (error) {
     handleError(error)
   }

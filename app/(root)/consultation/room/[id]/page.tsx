@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useUser } from '@clerk/nextjs';
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import { useParams } from 'next/navigation';
 
@@ -10,6 +9,7 @@ import Alert from '@/components/consultation/Alert';
 import ConsultationSetup from '@/components/consultation/ConsultationSetup';
 import ConsultationRoom from '@/components/consultation/ConsultationRoom';
 import Loader from '@/components/general/Loader';
+import { useUser } from '@/hooks/useUser';
 
 const ConsultationPage = () => {
   const { id } = useParams();

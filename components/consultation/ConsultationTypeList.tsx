@@ -11,11 +11,10 @@ import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
-import { useUser } from '@clerk/nextjs';
 import {  newAppointment, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
-import useDBUser from '@/hooks/useDBUser';
 import DoctorDashboard from '../doctor/DoctorDashboard';
+import { useUser } from '@/hooks/useUser';
 
 const initialValues = {
   date: new Date(),
@@ -40,11 +39,10 @@ const ConsultationTypeList = () => {
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call | null>(null);
   const client = useStreamVideoClient();
-  const { user } = useUser();
+  const { user, role } = useUser();
   const { toast } = useToast();
   const [hostList, setHostList] = useState<any[]>([])
   const [hostName, setHostName] = useState('')
-  const {dbUser, role} = useDBUser()
   const [hostImage, setHostImage] = useState('')
 
   useEffect(() => {
@@ -91,7 +89,7 @@ const ConsultationTypeList = () => {
               description, 
               host: hostName, 
               hostImage: hostImage,
-              hostId: dbUser?._id 
+              hostId: user?.id 
             },
           },
         });

@@ -15,10 +15,10 @@ interface BlogDataParams {
     coverImage?: string
 }
 
-export async function createBlog(clerkId:string, blogData:BlogDataParams) {
+export async function createBlog(id:string, blogData:BlogDataParams) {
     try {
         await connectToDatabase();
-        const author = await User.findOne({clerkId})
+        const author = await User.findById({id})
         if (!author) throw new Error("user not found")
         
         const newBlog = await Blog.create(blogData)
@@ -70,10 +70,10 @@ export async function getBlogById(blogId:string) {
     }
 }
 
-export async function editBlog(clerkId:string, blogId:string, blogData:BlogParams) {
+export async function editBlog(id:string, blogId:string, blogData:BlogParams) {
     try {
         await connectToDatabase();
-        const blogAuthor = await User.findOne({clerkId})
+        const blogAuthor = await User.findById({id})
         if(!blogAuthor) throw new Error("Author not found!")
         let blogToEdit
         if (blogAuthor.blogsAuthored.includes(blogId)) {
@@ -90,10 +90,10 @@ export async function editBlog(clerkId:string, blogId:string, blogData:BlogParam
     }
 }
 
-export async function deleteBlog(clerkId:string, blogId:string) {
+export async function deleteBlog(id:string, blogId:string) {
     try {
         await connectToDatabase();
-        const blogAuthor = await User.findOne({clerkId})
+        const blogAuthor = await User.findById({id})
         if(!blogAuthor) throw new Error("Author not found!")
         if (blogAuthor.blogsAuthored.includes(blogId)) {
             const blogToDelete = await Blog.findByIdAndUpdate({_id: blogId})
@@ -112,10 +112,10 @@ export async function deleteBlog(clerkId:string, blogId:string) {
 export async function shareBlog(senderId:string, blogId:string, receiverId: string) {
     try {
         await connectToDatabase();
-        const sender = await User.findOne({clerkId: senderId})
+        const sender = await User.findOne({id: senderId})
         if(!sender) throw new Error("sender not found!")
         
-        const receiver = await User.findOne({clerkId: receiverId})
+        const receiver = await User.findOne({id: receiverId})
         if(!receiver) throw new Error("receiver not found!")
         
             
@@ -134,10 +134,10 @@ export async function shareBlog(senderId:string, blogId:string, receiverId: stri
     }
 }
 
-export async function likeBlog(clerkId:string, blogId:string) {
+export async function likeBlog(id:string, blogId:string) {
     try {
         await connectToDatabase();
-        const user = await User.findOne({clerkId})
+        const user = await User.findById({id})
         if(!user) throw new Error("User not found!")
         
         const blog = await Blog.findOne({blogId})
@@ -152,10 +152,10 @@ export async function likeBlog(clerkId:string, blogId:string) {
     }
 }
 
-export async function commentOnBlog(clerkId:string, blogId:string, comment: string) {
+export async function commentOnBlog(id:string, blogId:string, comment: string) {
     try {
         await connectToDatabase();
-        const user = await User.findOne({clerkId})
+        const user = await User.findById({id})
         if(!user) throw new Error("User not found!")
         
         const blog = await Blog.findOne({blogId})
@@ -168,10 +168,10 @@ export async function commentOnBlog(clerkId:string, blogId:string, comment: stri
     }
 }
 
-export async function saveBlog(clerkId:string, blogId:string) {
+export async function saveBlog(id:string, blogId:string) {
     try {
         await connectToDatabase();
-        const user = await User.findOne({clerkId})
+        const user = await User.findById({id})
         if(!user) throw new Error("User not found!")
         
         const blog = await Blog.findOne({blogId})

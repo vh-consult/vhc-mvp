@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '../ui/button'
-import { SignOutButton } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
 const Logout = () => {
   return (
@@ -12,9 +12,9 @@ const Logout = () => {
             <Button onClick={()=>{}} className='w-full h-[40px] border hover:bg-green-400 hover:text-white font-medium border-green-400 text-green-400 rounded-lg my-3'>
                 No, cancel
             </Button>
-            <SignOutButton redirectUrl='/' >
+            <Button onClick={()=>{redirect('/')}} >
                 Yes, proceed
-            </SignOutButton>
+            </Button>
         </div>
     </div>
   )
