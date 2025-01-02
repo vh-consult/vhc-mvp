@@ -19,7 +19,7 @@ const Login = () => {
   const [state, loginAction] = useActionState(login, undefined)
 
   return (
-    <Card className='w-[300px] p-5'>
+    <Card className='w-[300px] p-5 mx-auto '>
       <CardHeader>
         <h1 className="text-2xl font-semibold">Sign In</h1>
         <p className="text-sm">New here? <Link href={'/register'} className='underline text-green-2'>Create Account</Link></p>
