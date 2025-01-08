@@ -21,25 +21,47 @@ const loginSchema = z.object({
     .trim(),
 });
 
+const registerSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+  fname: z.string({ message: "Invalid" }).trim(),
+  lname: z.string({ message: "Invalid" }).trim(),
+  country: z.string({ message: "Invalid" }).trim(),
+  dob: z.string({ message: "Invalid" }),
+  role: z.enum(["patient","pharmacyAdmin", "doctor"]),
+  gender: z.enum(["male", "female"]),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .trim(),
+});
+
 // CREATE
-export async function createUser(user: CreateUserParams) {
+export async function createUser(prevState: any, formData: FormData) {
   try {
     await connectToDatabase();
-    console.log(user);
-    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const result = registerSchema.safeParse(Object.fromEntries(formData));
+
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+      };
+    }    
+    const { fname, lname, gender, dob, country, role, email, password } = result.data;
+    const hashedPassword = await bcrypt.hash(password, 10);
     let newUser;
-    switch (user.role) {
+
+    switch (role) {
       case "patient":
-        newUser = await Patient.create({ ...user, password: hashedPassword });
+        newUser = await Patient.create({ fname, dob, country, lname, gender, email, role, password: hashedPassword });
         break;
       case "pharmacyAdmin":
         newUser = await PharmacyAdmin.create({
-          ...user,
+          fname, lname, gender, email, role, dob, country,
           password: hashedPassword,
         });
         break;
       case "doctor":
-        newUser = await Doctor.create({ ...user, password: hashedPassword });
+        newUser = await Doctor.create({ fname, dob, country, lname, gender, email, role, password: hashedPassword });
         break;
       default:
         throw new Error("Invalid role");
