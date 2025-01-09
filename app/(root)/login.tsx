@@ -54,7 +54,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               <p className="text-red-500">{state.errors.email}</p>
             )}
           </>
-          <Button type="submit">Login </Button>
+          <Button type="submit" className="bg-accent text-white">Login </Button>
         </form>
       </div>
     </FormModal>
