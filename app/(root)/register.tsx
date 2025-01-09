@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import { useFormState } from "react-dom";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
@@ -17,12 +17,12 @@ const Register = ({
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [state, action] = useFormState(createUser, undefined);
+  const [state, action] = useActionState(createUser, undefined);
   return (
     <FormModal
       isOpen={show}
       onClose={onClose}
-      title="Become An xcuxioner"
+      title="Sign Up"
       buttonText="Register Account"
     >
       <div className="grid grid-cols-2 gap-x-6">
@@ -40,7 +40,6 @@ const Register = ({
         <form action={action} className="space-y-2">
           <>
             <Input
-              id="fname"
               name="fname"
               placeholder="First name"
               value={name}
@@ -64,7 +63,6 @@ const Register = ({
           </>
           <>
             <Input
-              id="name"
               name="name"
               placeholder="Name"
               value={name}
@@ -76,7 +74,6 @@ const Register = ({
           </>
           <>
             <Input
-              id="email"
               name="email"
               placeholder="Email Address"
               type="email"
@@ -89,7 +86,6 @@ const Register = ({
           </>
           <>
             <Input
-              id="password"
               name="password"
               placeholder="Password"
               type="password"

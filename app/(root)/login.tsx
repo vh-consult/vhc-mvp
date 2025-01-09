@@ -1,20 +1,20 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
-import { useFormState } from "react-dom";
+import React, { useActionState, useState } from "react";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
 import { login } from "@/lib/actions/user.actions";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [state, action] = useFormState(login, undefined);
+  const [state, action] = useActionState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   return (
     <FormModal
       isOpen={show}
       onClose={onClose}
-      title="Sign in to Account"
+      title="Sign In"
       buttonText="Login"
     >
       <div className="grid grid-cols-2 gap-x-6">
@@ -32,7 +32,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
         <form action={action} className="space-y-2">
           <>
             <Input
-              id="email"
               name="email"
               placeholder="Email Address"
               type="email"
@@ -45,7 +44,6 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
           </>
           <>
             <Input
-              id="password"
               name="password"
               placeholder="Password"
               type="password"
