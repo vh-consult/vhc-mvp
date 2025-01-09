@@ -24,7 +24,7 @@ const CustomBlogCard = ({author, datePublished, title, snippet, coverImage}: Cus
         />
       </div>
       <div className="p-2">
-        <div className="flex flex-between items-center text-sm font-medium text-green-2">
+        <div className="flex flex-between items-center text-sm font-medium text-accent">
             <span className="">{author}</span>
             <GoDot className='mx-1'/>
             <>{new Date(datePublished).toLocaleDateString()}</>

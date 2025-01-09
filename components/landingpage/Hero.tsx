@@ -5,10 +5,10 @@ import Link from "next/link"
 
 const Hero = () => {
     return (
-      <section className={` w-full text-green-1 flex flex-center  h-[calc(100vh-64px)] bg-center bg-landingHero  bg-no-repeat bg-cover mb-2`}  id='home'
+      <section className={` w-full text-secondary flex flex-center  h-[calc(100vh-64px)] bg-center bg-landingHero  bg-no-repeat bg-cover mb-2`}  id='home'
       >
         <div className="w-full h-full relative"> 
-        <div className="absolute inset-0 bg-green-4 bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-dark bg-opacity-50"></div>
           
           <div className=" w-3/5 h-1/2 absolute left-[20%] top-[22%] md:text-center text-white">
             <h5 className='text-sm md:text-2xl font-medium '>
@@ -25,7 +25,7 @@ const Hero = () => {
   
           <div className="
             w-full card-section flex flex-row 
-            items-center justify-center  flex-wrap text-green-4
+            items-center justify-center  flex-wrap text-dark
             absolute bottom-[5px]  
           ">
             {

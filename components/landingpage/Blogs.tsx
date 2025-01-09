@@ -8,7 +8,7 @@ const Blogs = () => {
         <div className="text-center mb-4">
           <h2 className="text-xl font-semibold">{landing.blogs.title}</h2>
           <p className="text-base font-normal">{landing.blogs.content} </p>
-          <Link href={'/blogs/home'} className="underline text-sm text-green-2">Read more here</Link>
+          <Link href={'/blogs/home'} className="underline text-sm text-accent">Read more here</Link>
         </div>
         <div className="w-full  flex flex-row items-center justify-center">
           {

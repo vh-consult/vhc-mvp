@@ -32,7 +32,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
   return (
     <>
       <header className='sticky top-0 left-0'>
-        <nav className={cn('flex flex-between h-16 z-50 w-full bg-white text-green-4 px-6 py-4 lg:px-5', className)}>
+        <nav className={cn('flex flex-between h-16 z-50 w-full bg-white text-dark px-6 py-4 lg:px-5', className)}>
           <div className="w-2/5 flex flex-between ">
             <Link href={"/"} className='flex items-center gap-1'>
               <div className="w-5/6">
@@ -48,7 +48,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
             </Link>
             
             <div className=" w-1/2 ">
-              <ul className='flex flex-row flex-between  text-green-4'>
+              <ul className='flex flex-row flex-between  text-dark'>
                 {
                   navigations?.map((nav,index)=>{
                     const activeLink = pathname === nav.route
@@ -56,7 +56,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
                       <li key={index}>
                         <Link
                           href={nav.route}
-                          className={` font-normal text-sm  hover:text-green-2 ${activeLink ? `text-green-2 font-semibold`: ``}`}
+                          className={` font-normal text-sm  hover:text-accent ${activeLink ? `text-accent font-semibold`: ``}`}
                         >
                           {nav.label}
                         </Link>

@@ -22,7 +22,7 @@ const MedCard = ({
     const [drugsFinished, setDrugsFinished] = useState<boolean>(false)
   
     return(
-      <div className="w-full min-h-[150px] flex flex-col glassmorphism shadow p-2 hover:bg-green-1 ">
+      <div className="w-full min-h-[150px] flex flex-col glassmorphism shadow p-2 hover:bg-secondary ">
         <div className="flex flex-between">
           <Image 
             src={imageSrc}

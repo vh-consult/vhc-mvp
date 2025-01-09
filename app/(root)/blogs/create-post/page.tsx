@@ -102,11 +102,11 @@ const CreateBlogPostPage = () => {
         className='mx-auto'
       />
       <div className="flex w-full flex-col gap-2.5">
-        <Label className="text-base font-normal leading-[22.4px] text-green-4">
+        <Label className="text-base font-normal leading-[22.4px] text-dark">
           Title
         </Label>
         <Input
-          className="w-full rounded bg-green-1 p-2 focus:outline-none"
+          className="w-full rounded bg-secondary p-2 focus:outline-none"
           onChange={(e) => setValues({...values, title: e.target.value})}
         />
         {errors.title && <span className="text-red-500">{errors.title}</span>}
@@ -115,7 +115,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='introduction'>Introduction</Label>
         <Textarea
           id='introduction'
-          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, introduction: e.target.value })}
         />
         {errors.introduction && <span className="text-red-500">{errors.introduction}</span>}
@@ -124,7 +124,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='content'>content</Label>
         <Textarea
           id='content'
-          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, content: e.target.value })}
         />
         {errors.content && <span className="text-red-500">{errors.content}</span>}
@@ -133,7 +133,7 @@ const CreateBlogPostPage = () => {
         <Label htmlFor='conclusion'>conclusion</Label>
         <Textarea
           id='conclusion'
-          className=" bg-green-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setValues({ ...values, conclusion: e.target.value })}
         />
         {errors.conclusion && <span className="text-red-500">{errors.conclusion}</span>}
@@ -141,7 +141,7 @@ const CreateBlogPostPage = () => {
     </div>
   <Button
     onClick={handleSubmit}
-    className='w-full bg-green-2 mt-4 text-green-1'
+    className='w-full bg-accent mt-4 text-secondary'
   >
       {loading? <Loader />: `Post Blog`}
   </Button>

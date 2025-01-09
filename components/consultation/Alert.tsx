@@ -12,7 +12,7 @@ interface PermissionCardProps {
 const Alert = ({ title, iconUrl }: PermissionCardProps) => {
   return (
     <section className="flex-center h-full w-full">
-      <Card className="w-full max-w-[520px] border-none bg-white p-6 py-9 text-green-4">
+      <Card className="w-full max-w-[520px] border-none bg-white p-6 py-9 text-dark">
         <CardContent>
           <div className="flex flex-col gap-9">
             <div className="flex flex-col gap-3.5">

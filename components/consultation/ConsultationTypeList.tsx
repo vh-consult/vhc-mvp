@@ -118,7 +118,7 @@ const ConsultationTypeList = () => {
     <main className='w-full'>
         {
           role === "Patient" ? (
-            <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-green-4">
+            <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-dark">
             {ClickableCards.map((card, index) => (
               <ClickableCard
                 key={index}
@@ -145,12 +145,12 @@ const ConsultationTypeList = () => {
                   handleClick={createConsultation}
                 >
                   <div className="flex flex-col gap-2.5">
-                    <Label className="text-base font-normal leading-[22.4px] text-green-4" htmlFor="appointmentType">Appointment type</Label>
+                    <Label className="text-base font-normal leading-[22.4px] text-dark" htmlFor="appointmentType">Appointment type</Label>
                     <Select required onValueChange={(value) => setValues({ ...values, appointmentType: value })}>
-                      <SelectTrigger id="appointmentType" className='bg-green-3'>
+                      <SelectTrigger id="appointmentType" className='bg-secondary'>
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
-                      <SelectContent position="popper" className='bg-green-3 text-green-4'>
+                      <SelectContent position="popper" className='bg-secondary text-dark'>
                         <SelectItem value="inPersonGeneral">General Care - In-person</SelectItem>
                         <SelectItem value="virtual">Virtual Consultation</SelectItem>
                         <SelectItem value="lab">Lab Session</SelectItem>
@@ -159,15 +159,15 @@ const ConsultationTypeList = () => {
                     </Select>
                   </div>
                   <div className="flex flex-col gap-2.5">
-                    <Label className="text-base font-normal leading-[22.4px] text-green-4">What are some of your symptoms</Label>
+                    <Label className="text-base font-normal leading-[22.4px] text-dark">What are some of your symptoms</Label>
                     <Textarea
-                      className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
                       onChange={(e) => setValues({ ...values, problem_statement: e.target.value })}
                       placeholder='e.g: Headache and severe back pain...'
                     />
                   </div>
                   <div className="flex w-full flex-col gap-2.5">
-                    <Label className="text-base font-normal leading-[22.4px] text-green-4">Select Date and Time</Label>
+                    <Label className="text-base font-normal leading-[22.4px] text-dark">Select Date and Time</Label>
                     <ReactDatePicker
                       selected={values.date}
                       onChange={(date) => setValues({ ...values, date: date! })}
@@ -176,13 +176,13 @@ const ConsultationTypeList = () => {
                       timeIntervals={15}
                       timeCaption="time"
                       dateFormat="MMMM d, yyyy h:mm aa"
-                      className="w-full rounded bg-green-3 p-2 focus:outline-none"
+                      className="w-full rounded bg-secondary p-2 focus:outline-none"
                     />
                   </div>
                     <div>
                     <Label>Search & Select Physician</Label>
                     <Input 
-                      className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                      className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
                       placeholder='Type name...' 
                       defaultValue={''}
                       onChange={(e)=>handleSearch(e.target.value)}
@@ -195,7 +195,7 @@ const ConsultationTypeList = () => {
                               <div 
                                 key={index} 
                                 onClick={()=>{handleHostSelection(host)}} 
-                                className='p-2 cursor-pointer text-sm hover:bg-green-3'
+                                className='p-2 cursor-pointer text-sm hover:bg-secondary'
                               >
                                 {host.name}
                               </div>
@@ -233,7 +233,7 @@ const ConsultationTypeList = () => {
                 <Input
                   placeholder="Consultation link"
                   onChange={(e) => setValues({ ...values, link: e.target.value })}
-                  className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
               </FormModal>
 

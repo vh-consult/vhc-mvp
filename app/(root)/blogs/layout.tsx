@@ -20,7 +20,7 @@ const BlogLayout = ({
   children
 }: {children:ReactNode}) => {
   return (
-    <main className='bg-green-3 text-green-4 '>
+    <main className='bg-secondary text-dark '>
       <Header
         navigations={navs}
       />

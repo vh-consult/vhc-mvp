@@ -45,7 +45,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   
 
   
-  if (callingState !== CallingState.JOINED) return (<span className='bg-green-2 w-14 h-14 rounded-lg shadow-lg'>
+  if (callingState !== CallingState.JOINED) return (<span className='bg-accent w-14 h-14 rounded-lg shadow-lg'>
     <Loader/>
   </span>);
 
@@ -59,7 +59,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   };
 
   return (
-    <section className="relative h-full w-full overflow-hidden pt-2 text-green-4">
+    <section className="relative h-full w-full overflow-hidden pt-2 text-dark">
       <div className="relative flex size-full items-center justify-center">
         <div className=" flex size-full h-[500px] max-w-[1000px] items-center">
           <CallLayout /> 
@@ -99,12 +99,12 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
 
         <DropdownMenu>
           <div className="flex items-center">
-            <DropdownMenuTrigger className="cursor-pointer bg-dark-1 p-2 rounded-full
+            <DropdownMenuTrigger className="cursor-pointer bg-dark p-2 rounded-full
              hover:opacity-85  ">
-              <LayoutList size={20} className="text-green-1" />
+              <LayoutList size={20} className="text-secondary" />
             </DropdownMenuTrigger>
           </div>
-          <DropdownMenuContent className=" bg-white text-green-4">
+          <DropdownMenuContent className=" bg-white text-dark">
             {['Grid', 'Top-down'].map((item, index) => (
               <div key={index}>
                 <DropdownMenuItem
@@ -122,16 +122,16 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
 
         <button onClick={() => setShowParticipants((prev) => !prev)}>
           <div className=" cursor-pointer rounded-full bg-dark-1 p-2 hover:opacity-85  ">
-            <Users size={20} className="text-green-1" />
+            <Users size={20} className="text-secondary" />
           </div>
         </button>
         {
           role==="Doctor"? (
-            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer text-green-1 rounded-full bg-dark-1 p-2 hover:opacity-85  ">
+            <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer text-secondary rounded-full bg-dark-1 p-2 hover:opacity-85  ">
                 <FaStethoscope/>
             </button>
           ): (
-            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer text-green-1 rounded-full bg-dark-1 p-2 hover:opacity-85 ">
+            <button onClick={()=>{setShowComment((prev) => !prev)}} className=" cursor-pointer text-secondary rounded-full bg-dark-1 p-2 hover:opacity-85 ">
               <BiComment/>
             </button>
           )

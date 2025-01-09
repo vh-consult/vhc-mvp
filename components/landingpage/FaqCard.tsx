@@ -17,11 +17,11 @@ const FaqCard = ({ question, answer }: FCProps) => {
   return (
     <div className="w-full border rounded-md my-1">
       <div
-        className={`flex items-center text-sm md:text-base justify-between p-2 md:p-3 cursor-pointer ${expand? 'bg-green-1': 'bg-white'}`}
+        className={`flex items-center text-sm md:text-base justify-between p-2 md:p-3 cursor-pointer ${expand? 'bg-secondary': 'bg-white'}`}
         onClick={toggleExpand}
       >
         <span className="font-normal">{question}</span>
-        <span className='text-green-4'>
+        <span className='text-dark'>
           {expand ? <FaChevronUp /> : <FaChevronDown />}
         </span>
       </div>

@@ -7,7 +7,7 @@ const UpcomingPage =  () => {
   const {role} = useUser()
 
   return (
-    <section className="gap-10 text-green-4">
+    <section className="gap-10 text-dark">
       {
         role === "Patient" ? <CallList type="upcoming" /> : 
         role === "Doctor" ? (<div className='grid grid-cols-3 gap-6'>

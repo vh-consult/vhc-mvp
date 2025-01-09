@@ -6,7 +6,7 @@ const CreatedBlogsPage = () => {
   return (
     <div>
       <Link href={'/blogs/create-post'}>
-        <Button className='bg-green-2'>Create Blog</Button>
+        <Button className='bg-accent'>Create Blog</Button>
       </Link>
     </div>
   )

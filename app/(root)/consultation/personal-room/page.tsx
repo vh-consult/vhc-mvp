@@ -17,7 +17,7 @@ const Table = ({
 }) => {
   return (
     <div className="flex flex-col items-start gap-2 xl:flex-row">
-      <h1 className="text-base font-medium text-green-1 lg:text-xl xl:min-w-32">
+      <h1 className="text-base font-medium text-secondary lg:text-xl xl:min-w-32">
         {title}:
       </h1>
       <h1 className="truncate text-sm font-bold max-sm:max-w-[320px] w-[80%] lg:text-xl">
@@ -68,7 +68,7 @@ const PersonalRoom = () => {
           Start Consultation
         </Button>
         <Button
-          className="bg-green-1"
+          className="bg-secondary"
           onClick={() => {
             navigator.clipboard.writeText(consultationLink);
             toast({

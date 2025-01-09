@@ -19,7 +19,7 @@ const PatientList = ({
     age, imageSrc
 }: PatientProps) => {
   return (
-    <div className="grid grid-cols-5 hover:bg-gray-100 border-t border-t-green-1 h-[45px] px-5 bg-white w-full items-center ">
+    <div className="grid grid-cols-5 hover:bg-gray-100 border-t border-t-secondary h-[45px] px-5 bg-white w-full items-center ">
         <span className="flex rounded-full w-full">
             <Image
                 width={30}

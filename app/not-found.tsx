@@ -4,7 +4,7 @@ import React from "react";
 
 const NotFoundPage = () => {
   return (
-    <div className="w-full h-screen bg-green-3 text-green-4  flex flex-col flex-center">
+    <div className="w-full h-screen bg-secondary text-dark  flex flex-col flex-center">
       <Image
         src="/logo.svg"
         alt=""

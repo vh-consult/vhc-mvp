@@ -14,13 +14,13 @@ import { useUser } from '@/hooks/useUser';
 const ConsultationPage = () => {
   const { id } = useParams();
   const { isLoaded, user } = useUser();
-  const { call, isCallLoading } = useGetCallById(id);
+  const { call, isCallLoading } = useGetCallById(id!);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   if (!isLoaded || isCallLoading) return <Loader />;
 
   if (!call) return (
-    <p className="text-center text-3xl font-bold text-green-1">
+    <p className="text-center text-3xl font-bold text-secondary">
       Call Not Found
     </p>
   );
@@ -33,7 +33,7 @@ const ConsultationPage = () => {
   return (
     <main className="h-full w-full">
       <StreamCall call={call}>
-        <StreamTheme className='text-green-4 bg-green-3'>
+        <StreamTheme className='text-dark bg-secondary'>
         {!isSetupComplete ? (
           <ConsultationSetup setIsSetupComplete={setIsSetupComplete} />
         ) : (

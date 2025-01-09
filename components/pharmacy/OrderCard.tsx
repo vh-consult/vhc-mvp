@@ -61,7 +61,7 @@ const OrderCard = (
             {
               hasPaid && (
               <div className='flex flex-center mr-6'>
-                <span className={`w-3 h-3 ${hasPaid? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
+                <span className={`w-3 h-3 ${hasPaid? 'bg-accent': 'bg-red-500'} rounded-full`}></span>
                 <span className="text-sm ml-1">{hasPaid? 'Paid': 'Pending'}</span>
               </div>
               )
@@ -69,7 +69,7 @@ const OrderCard = (
             {
               deliveryStatus && (
                 <div className='flex flex-center'>
-                  <span className={`w-3 h-3 ${deliveryStatus === "delivered"? 'bg-green-2': 'bg-red-500'} rounded-full`}></span>
+                  <span className={`w-3 h-3 ${deliveryStatus === "delivered"? 'bg-accent': 'bg-red-500'} rounded-full`}></span>
                   <span className="text-sm ml-1">
                     {deliveryStatus === "delivered"? 'Delivered': 'Not delivered'}
                   </span>

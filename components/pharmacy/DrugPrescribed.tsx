@@ -19,7 +19,7 @@ const DrugPrescribed = ({drugs}: {drugs: any[]}) => {
     <div className="flex flex-col gap-2 text-sm">
       {
         drugs?.length === 0 ? 'No drugs added yet': drugs?.map((drug, index) => (
-          <div key={index} className='grid grid-cols-4 gap-x-8 bg-green-3 text-sm'>
+          <div key={index} className='grid grid-cols-4 gap-x-8 bg-secondary text-sm'>
             <span className="">{drug.drug}</span>
             <span className="">{drug.caution}</span>
             <span className="">{drug.duration}</span>

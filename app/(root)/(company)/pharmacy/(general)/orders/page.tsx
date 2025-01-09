@@ -4,6 +4,7 @@ import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
 import OrderCard from '@/components/pharmacy/OrderCard'
 import Loader from '@/components/general/Loader'
+import { useUser } from '@/hooks/useUser'
 
 const OrdersPage = () => {
   const {user} = useUser()
@@ -65,7 +66,7 @@ const OrdersPage = () => {
   return (
     <main className='w-[90%] mx-auto min-h-screen py-4 bg-white'>
       <div className="flex px-11 flex-between sticky top-[60px]">
-        <h2 className="text-2xl font-semibold text-green-4">
+        <h2 className="text-2xl font-semibold text-dark">
           All Orders
         </h2>
         <div className= "">
@@ -77,7 +78,7 @@ const OrdersPage = () => {
                   filterOrders(filter.toLowerCase())
                   
                 }}
-                className={`${active === filter.toLowerCase()? 'bg-green-2 text-green-1': 'border-2 '} hover:bg-green-2 hover:text-green-1 mx-1 rounded-full`}
+                className={`${active === filter.toLowerCase()? 'bg-accent text-secondary': 'border-2 '} hover:bg-accent hover:text-secondary mx-1 rounded-full`}
               >
                 {filter}
               </Button>

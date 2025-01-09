@@ -38,7 +38,7 @@ const MessageModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
     <DialogContent className="flex w-full max-w-[520px] flex-col 
-    gap-4 border-none bg-white px-6 py-9 text-green-4">
+    gap-4 border-none bg-white px-6 py-9 text-dark">
       <div className="flex flex-row w-full items-center">
         <Image 
           src={imageUrl}
@@ -78,7 +78,7 @@ const MessageModal = ({
           ) :
           (<Button 
           className='w-[100px] h-[40px] rounded-full 
-          border-2 border-green-1 mr-6 '
+          border-2 border-secondary mr-6 '
           onClick={()=> setShowInputField(true)}
         >
           Reply <MdReply className='ml-2'/> 

@@ -58,7 +58,7 @@ const AppointmentCalendar = () => {
           key={day}
           className={`w-full relative h-full p-1 border 
              border-gray-100 ${
-            isToday ? `bg-green-2 text-green-1` : 
+            isToday ? `bg-accent text-secondary` : 
             ``
           }`}
         >
@@ -68,7 +68,7 @@ const AppointmentCalendar = () => {
             <div className="absolute bottom-2 flex
             flex-col">
               <span className={`text-sm font-medium 
-                ${isToday ? 'text-green-4' : `text-green-2`}`}>
+                ${isToday ? 'text-dark' : `text-accent`}`}>
                 {appointment.channel}
               </span>
               <span className="text-lg ">{
@@ -110,7 +110,7 @@ const AppointmentCalendar = () => {
   };
 
   return (
-    <div className="w-full min=h-screen rounded-t-xl p-4 text-green-4">
+    <div className="w-full min=h-screen rounded-t-xl p-4 text-dark">
       <div className="w-full mt-[1%] mb-[2%] flex items-center justify-between">
         <span className="text-lg font-medium">Calendar</span>
         <span className="">

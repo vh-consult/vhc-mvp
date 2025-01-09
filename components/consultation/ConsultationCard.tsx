@@ -65,13 +65,13 @@ const ConsultationCard = ({
               </span>
             )
           }
-            <span className="text-lg font-medium text-green-4">
+            <span className="text-lg font-medium text-dark">
               {hostName}
             </span>
         </div>
         {!isPreviousConsultation && (
           <div className="flex gap-2">
-            <Button onClick={handleClick} className="rounded bg-blue-1 text-green-1 px-6">
+            <Button onClick={handleClick} className="rounded bg-blue-1 text-secondary px-6">
               {buttonIcon1 && (
                 <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}
@@ -84,7 +84,7 @@ const ConsultationCard = ({
                   title: "Link copied",
                 });
               }}
-              className="bg-green-3 px-6"
+              className="bg-secondary px-6"
             >
               <Image
                 src="/icons/copy.svg"

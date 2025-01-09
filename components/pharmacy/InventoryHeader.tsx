@@ -44,7 +44,7 @@ const InventoryHeader = () => {
         />
         <div className="flex items-center">
           <Button 
-              className='bg-green-2 h-10 mr-4 text-white' 
+              className='bg-accent h-10 mr-4 text-white' 
               onClick={()=>setShowPopup(!showPopup)}
           >
               Add Item 

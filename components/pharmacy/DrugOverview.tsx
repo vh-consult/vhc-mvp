@@ -73,7 +73,7 @@ const DrugOverview = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='w-[400px] px-4 py-3 rounded-xl 
-         bg-white text-green-4 border-none'>
+         bg-white text-dark border-none'>
         <div className="w-full flex justify-between">
           <div className="w-[70%]">
             <h3 className="text-xl font-medium">
@@ -149,7 +149,7 @@ const DrugOverview = ({
                     </span>
                     <span>
                       <Input 
-                        className="bg-green-3 rounded-md w-[150px] h-[35px] 
+                        className="bg-secondary rounded-md w-[150px] h-[35px] 
                         p-1 text-sm font-medium focus-visible:ring-0"
                         type="number"
                         min={1}
@@ -161,7 +161,7 @@ const DrugOverview = ({
                   </div>
                   <Textarea 
                     className="w-full h-[100px] p-2 
-                    rounded-lg bg-green-3 text-sm" 
+                    rounded-lg bg-secondary text-sm" 
                     placeholder="Anything we need to know before 
                     we assign the doses?"
                     onChange={(e) => setValues({...values, note: e.target.value})}
@@ -169,15 +169,15 @@ const DrugOverview = ({
                 </div>
                 <div className='flex md:flex-row md:gap-x-2'>
                   <Button  
-                    className="w-full h-[35px] border border-green-2 
-                    rounded-md  text-sm text-green-2 font-medium"
+                    className="w-full h-[35px] border border-accent 
+                    rounded-md  text-sm text-accent font-medium"
                     onClick={handleCartAddition}
                   >
                     Add to cart
                   </Button>
                   <Button
-                    className="w-full h-[35px] bg-green-2 
-                    rounded-md text-sm text-green-1 font-medium"
+                    className="w-full h-[35px] bg-accent 
+                    rounded-md text-sm text-secondary font-medium"
                     onClick={createOrder}
                   >
                     Create Order

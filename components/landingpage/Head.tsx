@@ -58,7 +58,7 @@ const Navigation = () => {
           <li key={index} className="mr-5">
             <Link
               className={`font-normal ${
-                activeLink === link.route ? "text-green-2 font-medium" : ""
+                activeLink === link.route ? "text-accent font-medium" : ""
               }`}
               href={link.route}
               onClick={(e) => {
@@ -108,14 +108,14 @@ const Head = () => {
       </div>
       <Navigation />
       <div className="hidden md:flex items-center justify-center button w-1/6">
-        {/* <Button className="bg-green-2 rounded-full text-green-1 mr-4">
+        {/* <Button className="bg-accent rounded-full text-secondary mr-4">
               <Link href={role==="PharmacyAdmin"? `/company/${companyId}/overview` :'landing'}>
                 Go to Home
               </Link>
             </Button>
             <UserButton/> */}
           <Button
-            className="text-green-2 bg-transparent hover:bg-transparent hover:underline hover:font-md"
+            className="text-accent bg-transparent hover:bg-transparent hover:underline hover:font-md"
             onClick={() => {
               setLogin(true);
             }}
@@ -126,7 +126,7 @@ const Head = () => {
           <Button
             className="
                   hidden md:block h-10 
-                  bg-green-2 w-20 rounded-lg 
+                  bg-accent w-20 rounded-lg 
                   hover:transition-all
                   hover:shadow-lg
                   text-white m-2"

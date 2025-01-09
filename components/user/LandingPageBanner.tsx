@@ -28,13 +28,13 @@ const LandingPageBanner = () => {
   return (
             <div className="flex h-[calc(100vh-90px)] flex-col  max-md:px-2 max-md:py-4 lg:p-5">
             <div  className="flex flex-col gap-2">
-              <p className="text-base font-medium text-green-4 lg:text-lg leading-tight">
+              <p className="text-base font-medium text-dark lg:text-lg leading-tight">
                 {dateToday}
               </p>
-              <h1 className="text-2xl text-green-4 font-extrabold lg:text-3xl leading-none">
+              <h1 className="text-2xl text-dark font-extrabold lg:text-3xl leading-none">
                 {currentTime}
               </h1>
-                  <h2 className="bg-green-1 rounded py-2 text-center text-base mb-4 font-normal">
+                  <h2 className="bg-secondary rounded py-2 text-center text-base mb-4 font-normal">
               {
                 role === "Patient"? (
                     "Medication Alert"

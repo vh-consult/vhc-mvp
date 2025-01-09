@@ -45,7 +45,7 @@ const BlogCard = ({
         <h3 className='text-base font-medium'>{title}</h3>
         <p className='text-sm font-normal'>{content}</p>
         <div className='absolute bottom-1 left-0'>
-          <Button className='flex flex-row items-center justify-between hover:text-green-2 
+          <Button className='flex flex-row items-center justify-between hover:text-accent 
           w-[98px] h-[30px] ml-2 ' >{buttonText} <AiOutlineArrowRight/> </Button>
         </div>
       </div>
