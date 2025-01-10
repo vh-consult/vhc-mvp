@@ -74,17 +74,30 @@ const Register = ({
               value={value.lname}
               onChange={(e) => setValue({ ...value, lname: e.target.value })}
             />
-            {state?.errors?.fname && (
-              <p className="text-red-500">{state.errors.fname}</p>
+            {state?.errors?.lname && (
+              <p className="text-red-500">{state.errors.lname}</p>
+            )}
+          </>
+          <>
+            <Input
+              name="dob"
+              type="date"
+              placeholder="Date of Birth"
+              value={value.dob}
+              onChange={(e) => setValue({ ...value, dob: e.target.value })}
+            />
+            {state?.errors?.lname && (
+              <p className="text-red-500">{state.errors.dob}</p>
             )}
           </>
           <>
             <RadioGroup
               defaultValue="male"
               className="flex mt-2 gap-x-10"
-              onValueChange={(value) => {
-                setValue({ ...initial, gender: value });
+              onValueChange={(choice) => {
+                setValue({ ...value, gender: choice });
               }}
+              name="gender"
             >
               <p className="">Gender</p>
               <span className="flex items-center space-x-2 ">
@@ -102,7 +115,30 @@ const Register = ({
           </>
           <>
             <Select
-              onValueChange={(value) => setValue({ ...initial, role: value })}
+              onValueChange={(choice) => setValue({ ...value, country: choice })}
+              name="country"
+            >
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectItem value="ghana">Ghana</SelectItem>
+                <SelectItem value="usa">United States</SelectItem>
+                <SelectItem value="India">India</SelectItem>
+                <SelectItem value="egypt">Egypt</SelectItem>
+                <SelectItem value="canada">Canada</SelectItem>
+                <SelectItem value="china">China</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {state?.errors?.role && (
+              <p className="text-sm text-red-500">{state.errors.role}</p>
+            )}
+          </>
+          <>
+            <Select
+              onValueChange={(choice) => setValue({ ...value, role: choice })}
+              name="role"
             >
               <SelectTrigger className="">
                 <SelectValue placeholder="Select" />

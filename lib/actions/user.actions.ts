@@ -12,7 +12,7 @@ import { z } from "zod";
 import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
 import { redirect } from "next/navigation";
-
+import Cookies from "js-cookie"
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -41,15 +41,19 @@ export async function createUser(prevState: any, formData: FormData) {
     console.log(formData)
     await connectToDatabase();
     const result = registerSchema.safeParse(Object.fromEntries(formData));
+    console.log(1)
 
     if (!result.success) {
       return {
         errors: result.error.flatten().fieldErrors,
       };
-    }    
+    }
+    console.log(2)
+
     const { fname, lname, gender, dob, country, role, email, password } = result.data;
     const hashedPassword = await bcrypt.hash(password, 10);
     let newUser;
+    console.log(3)
 
     switch (role) {
       case "patient":
@@ -69,7 +73,8 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(newUser);
     await createSession(newUser._id);
-    return redirect("/landing");
+    Cookies.set("user", newUser)
+    return redirect(`/${newUser._id}/`);
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
