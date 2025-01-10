@@ -38,6 +38,7 @@ const registerSchema = z.object({
 // CREATE
 export async function createUser(prevState: any, formData: FormData) {
   try {
+    console.log(formData)
     await connectToDatabase();
     const result = registerSchema.safeParse(Object.fromEntries(formData));
 

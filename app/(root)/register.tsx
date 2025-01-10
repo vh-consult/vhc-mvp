@@ -25,7 +25,7 @@ const initial = {
   password: "",
   country: "",
   role: "",
-}
+};
 
 const Register = ({
   show,
@@ -61,7 +61,7 @@ const Register = ({
               name="fname"
               placeholder="First name"
               value={value.fname}
-              onChange={(e) => setValue({...value, fname:e.target.value})}
+              onChange={(e) => setValue({ ...value, fname: e.target.value })}
             />
             {state?.errors?.fname && (
               <p className="text-red-500">{state.errors.fname}</p>
@@ -72,15 +72,15 @@ const Register = ({
               name="lname"
               placeholder="Last name"
               value={value.lname}
-              onChange={(e) => setValue({...value, lname:e.target.value})}
+              onChange={(e) => setValue({ ...value, lname: e.target.value })}
             />
             {state?.errors?.fname && (
               <p className="text-red-500">{state.errors.fname}</p>
             )}
           </>
           <>
-          <RadioGroup
-              defaultValue="no"
+            <RadioGroup
+              defaultValue="male"
               className="flex mt-2 gap-x-10"
               onValueChange={(value) => {
                 setValue({ ...initial, gender: value });
@@ -97,33 +97,36 @@ const Register = ({
               </span>
             </RadioGroup>
             {state?.errors?.gender && (
-                <p className="text-sm text-red-500">{state.errors.gender}</p>
-              )}
+              <p className="text-sm text-red-500">{state.errors.gender}</p>
+            )}
           </>
           <>
-              <Label>Role</Label>
-              <Select onValueChange={(value)=>setValue({...initial, role: value})} >
-                <SelectTrigger className="">
-                  <SelectValue placeholder="Select"/>
-                </SelectTrigger>
-                <SelectContent className="bg-white">
-                  <SelectItem value="patient">Patient</SelectItem>
-                  <SelectItem value="doctor">Doctor</SelectItem>
-                  <SelectItem value="pharmacyAdmin">Pharmacy Administrator</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select
+              onValueChange={(value) => setValue({ ...initial, role: value })}
+            >
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                <SelectItem value="patient">Patient</SelectItem>
+                <SelectItem value="doctor">Doctor</SelectItem>
+                <SelectItem value="pharmacyAdmin">
+                  Pharmacy Administrator
+                </SelectItem>
+              </SelectContent>
+            </Select>
 
-              {state?.errors?.role && (
-                <p className="text-sm text-red-500">{state.errors.role}</p>
-              )}
-            </>
+            {state?.errors?.role && (
+              <p className="text-sm text-red-500">{state.errors.role}</p>
+            )}
+          </>
           <>
             <Input
               name="email"
               placeholder="Email Address"
               type="email"
               value={value.email}
-              onChange={(e) => setValue({...value, email:e.target.value})}
+              onChange={(e) => setValue({ ...value, email: e.target.value })}
             />
             {state?.errors?.email && (
               <p className="text-red-500">{state.errors.email}</p>
@@ -135,13 +138,15 @@ const Register = ({
               placeholder="Password"
               type="password"
               value={value.password}
-              onChange={(e) => setValue({...value, password:e.target.value})}
+              onChange={(e) => setValue({ ...value, password: e.target.value })}
             />
             {state?.errors?.email && (
               <p className="text-red-500">{state.errors.password}</p>
             )}
           </>
-          <Button type="submit" className="bg-accent text-white">Register Account </Button>
+          <Button type="submit" className="bg-accent text-white">
+            Register Account{" "}
+          </Button>
         </form>
       </div>
     </FormModal>
