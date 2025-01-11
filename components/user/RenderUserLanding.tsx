@@ -25,7 +25,7 @@ export interface ClickableCardDataStructure {
 const RenderUserLanding = () => {
     const router = useRouter()
     const user = JSON.parse(Cookies.get("user") || '{}');
-
+    console.log(user)
     const ClickableCardData: ClickableCardDataStructure = {
         patientAndDoctor: [
             {

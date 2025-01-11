@@ -29,7 +29,7 @@ export async function createSession(userId: string){
 export async function deleteSession (){
     try {
         (await cookies()).delete('session')
-        // console.log("Session cookie deleted successfully.");
+        console.log("Session cookie deleted successfully.");
     } catch (error) {
         console.error("Error in deleteSession:", error);
     }

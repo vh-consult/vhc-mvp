@@ -125,6 +125,7 @@ export async function login(prevState: any, formData: FormData) {
     }
     console.log(6 )
     await createSession(existingUser._id);
+    Cookies.set("user", JSON.stringify(existingUser));
 
     return redirect("/landing");
   } catch (error) {
@@ -136,6 +137,7 @@ export async function login(prevState: any, formData: FormData) {
 }
 
 export async function logout() {
+  console.log('out')
   await deleteSession();
   redirect("/");
 }
