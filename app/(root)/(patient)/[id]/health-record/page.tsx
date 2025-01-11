@@ -4,11 +4,11 @@ import RecordCard from '@/components/patient/RecordCard'
 import RecordList from '@/components/patient/RecordList'
 import { fetchHealthRecord } from '@/lib/actions/patient.actions'
 import React, { useState } from 'react'
-
+import Cookies from "js-cookie"
 
 
 const HealthRecordPage =  () => {
-  // const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
 
 
   // const healthRecords = await fetchHealthRecord(user?.id as string)

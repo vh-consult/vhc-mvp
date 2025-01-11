@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
-import { useUser } from './useUser';
+import Cookies from "js-cookie"
 
 export const useGetCalls = () => {
-  const { user } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const client = useStreamVideoClient();
   const [calls, setCalls] = useState<Call[]>();
   const [isLoading, setIsLoading] = useState(false);

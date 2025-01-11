@@ -4,10 +4,9 @@ import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
 import OrderCard from '@/components/pharmacy/OrderCard'
 import Loader from '@/components/general/Loader'
-import { useUser } from '@/hooks/useUser'
-
+import Cookies from "js-cookie"
 const OrdersPage = () => {
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [active, setActive] = useState<string>('all')
   const [allOrders, setAllOrders] = useState([])
   const [displayOrders, setDisplayOrders] = useState(allOrders)

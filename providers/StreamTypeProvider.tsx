@@ -5,8 +5,7 @@ import { tokenProvider } from '@/lib/actions/stream.actions';
 import Loader from '@/components/general/Loader';
 import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
 import { ReactNode, useEffect, useState } from 'react';
-import { StreamChat } from 'stream-chat';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY; 
 
@@ -14,10 +13,10 @@ const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
 export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
     const [videoClient, setVideoClient] = useState<StreamVideoClient>()
-    const {user, isLoaded} = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
     
     useEffect(() => {
-        if(!isLoaded || !user) return;
+        if(user !== undefined || !user) return;
         if(!apiKey) throw new Error('Stream key not found')
  
         const client = new StreamVideoClient({
@@ -30,7 +29,7 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
             tokenProvider
         })
         setVideoClient(client)
-    }, [user, isLoaded]);
+    }, [user]);
 
     if(!videoClient) return <Loader/>
 
@@ -40,25 +39,3 @@ export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
         </StreamVideo>
     )
 }
-
-// export const StreamChatProvider = ({children}: {children: React.ReactNode}) => {
-//     const {user, isLoaded} = useUser();
-//     if(!isLoaded || !user) return;
-//     if(!apiKey) throw new Error('Stream key not found')
-
-//     const chatClient = new StreamChat(apiKey!)
-//     chatClient.setUser(
-//         {
-//           id: user?.id!,
-//           name: user?.fullName || user?.id,
-//           image: user?.imageUrl
-//         }, tokenProvider
-//       )  
-//     useEffect(() => {
-
-//     }, [])
-
-//     return(
-//     <></>
-//     )
-// }

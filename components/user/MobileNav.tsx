@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
-import { useUser } from "@/hooks/useUser"
+import Cookies from "js-cookie"
 
 const MobileNav = ({navigations}: HeaderProps) => {
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const userNavs = [
     {
       route: `${user?.id}/account`,

@@ -73,7 +73,7 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(newUser);
     await createSession(newUser._id);
-    Cookies.set("user", newUser)
+    Cookies.set("user", JSON.stringify(newUser))
     return redirect(`/${newUser._id}/`);
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
@@ -85,18 +85,24 @@ export async function createUser(prevState: any, formData: FormData) {
 
 export async function login(prevState: any, formData: FormData) {
   try {
+    console.log(formData)
     await connectToDatabase();
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
+    console.log(1)
+
       return {
         errors: result.error.flatten().fieldErrors,
       };
     }
+    console.log(2)
 
     const { email, password } = result.data;
 
     const existingUser = await User.findOne({ email });
+    console.log(3)
+
     if (!existingUser) {
       return {
         errors: {
@@ -104,17 +110,20 @@ export async function login(prevState: any, formData: FormData) {
         },
       };
     }
+    console.log(4)
 
     const comparison = await bcrypt.compare(password, existingUser.password);
 
     if (!comparison) {
+    console.log(5)
+
       return {
         errors: {
           password: ["Invalid password"],
         },
       };
     }
-
+    console.log(6 )
     await createSession(existingUser._id);
 
     return redirect("/landing");

@@ -10,8 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { createBlog } from '@/lib/actions/blog.actions'
 import { SingleImageDropzone } from '@/components/general/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgestore';
-import { useUser } from '@/hooks/useUser'
-
+import Cookies from "js-cookie"
 // Define Zod schema
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Add blog title'),
@@ -28,7 +27,7 @@ type FormValues = z.infer<typeof blogPostSchema>;
 const CreateBlogPostPage = () => {
 
   const router = useRouter();
-  const { user } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [file, setFile] = useState<File>()

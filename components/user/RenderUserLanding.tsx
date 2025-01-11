@@ -3,11 +3,8 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import ClickableCard from '../general/ClickableCard'
-import { getAdminCompany } from '@/lib/actions/company.actions'
 import Loader from '../general/Loader'
-import LandingDashboard from '../pharmacy/LandingDashboard'
-import { useUser } from '@/hooks/useUser'
-
+import Cookies from "js-cookie"
 export interface ClickableCardProps {
     title: string;
     description: string;
@@ -27,7 +24,7 @@ export interface ClickableCardDataStructure {
 
 const RenderUserLanding = () => {
     const router = useRouter()
-    const {role, user, companyId} = useUser()
+    const user = JSON.parse(Cookies.get("user") || '{}');
 
     const ClickableCardData: ClickableCardDataStructure = {
         patientAndDoctor: [
@@ -71,7 +68,7 @@ const RenderUserLanding = () => {
                 title: 'Company Profile',
                 description: 'Manage your company',
                 imageSrc: '/icons/Company.svg',
-                action: `/company/${companyId}/overview`
+                action: `/company/${user.company}/overview`
             },
         ]
     };
@@ -80,7 +77,7 @@ const RenderUserLanding = () => {
 
         <>
             {
-                role === undefined? (
+                user.role === undefined? (
                     <ClickableCard 
                     title="Activate Account"
                     description="Activate your account"
@@ -91,7 +88,7 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
-                role === "Patient" ? (
+                user.role === "Patient" ? (
                     ClickableCardData.patient.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -106,7 +103,7 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
-                role === "Patient" || role === "Doctor"  ? (
+                user.role === "Patient" || user.role === "Doctor"  ? (
                     ClickableCardData.patientAndDoctor.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -121,7 +118,7 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
-                role === "Doctor" ? (
+                user.role === "Doctor" ? (
                     ClickableCardData.doctor.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -136,7 +133,7 @@ const RenderUserLanding = () => {
                 ) : ''
             }
             {
-                role === "HospitalAdmin" || role === "PharmacyAdmin" && companyId !== undefined ? (
+                user.role === "HospitalAdmin" || user.role === "PharmacyAdmin" && user.company !== undefined ? (
                     ClickableCardData.admin.map((card, index) => (
                         <ClickableCard 
                             title={card.title}
@@ -148,7 +145,7 @@ const RenderUserLanding = () => {
                         />
         
                     ))
-                ) : (companyId === undefined && role === "PharmacyAdmin" ) ? (
+                ) : (user.company === undefined && user.role === "PharmacyAdmin" ) ? (
                     <ClickableCard 
                     title="Register Company"
                     description="Create company profile"
@@ -159,7 +156,7 @@ const RenderUserLanding = () => {
                 ) :''
             }
             {
-                role === "" ? <Loader/> : ''
+                user.role === "" ? <Loader/> : ''
             }
         </>
   )

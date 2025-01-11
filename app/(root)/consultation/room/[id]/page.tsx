@@ -9,15 +9,14 @@ import Alert from '@/components/consultation/Alert';
 import ConsultationSetup from '@/components/consultation/ConsultationSetup';
 import ConsultationRoom from '@/components/consultation/ConsultationRoom';
 import Loader from '@/components/general/Loader';
-import { useUser } from '@/hooks/useUser';
-
+import Cookies from "js-cookie"
 const ConsultationPage = () => {
   const { id } = useParams();
-  const { isLoaded, user } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const { call, isCallLoading } = useGetCallById(id!);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
-  if (!isLoaded || isCallLoading) return <Loader />;
+  if ( user !== undefined || isCallLoading) return <Loader />;
 
   if (!call) return (
     <p className="text-center text-3xl font-bold text-secondary">

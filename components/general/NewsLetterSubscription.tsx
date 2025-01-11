@@ -6,11 +6,10 @@ import { Button } from '../ui/button'
 import Loader from '../general/Loader'
 import { subscribeToNewsletter } from '@/lib/actions/user.actions'
 import { toast } from '../ui/use-toast'
-import { ToastTitle } from '../ui/toast'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 const NewsLetterSubscription = () => {
-    const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const subscribeTONewsletter = async () =>{
         try{

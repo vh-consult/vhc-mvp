@@ -9,7 +9,7 @@ import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
 import { postMeds } from '@/lib/actions/medication.actions'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 export interface DrugPrescriptionParams {
   drug: string;
@@ -30,7 +30,7 @@ const PrescriptionForm = (
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
   const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const handleDone = async (e: FormEvent) => {
     e.preventDefault()
     setPrescribedDrugs(drugsAdded)

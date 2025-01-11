@@ -21,8 +21,7 @@ import Loader from '../general/Loader';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
-import { useUser } from '@/hooks/useUser';
-
+import Cookies from "js-cookie"
 
   const setupSchema = z.object({
     name: z.string().min(1, 'company\'s name is required'),
@@ -39,7 +38,7 @@ const RegisterCompany = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const {user, role} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [file, setFile] = useState<File>()
   const initialValues: FormValues = {
     name: '',
@@ -83,7 +82,7 @@ const RegisterCompany = () => {
         logoUrl = res.url
       }
       
-      switch (role) {
+      switch (user.role) {
         case "PharmacyAdmin":
           values.type = "pharmacy"
           break;
@@ -177,7 +176,7 @@ const RegisterCompany = () => {
           }
         </div>
           {
-            role==="Patient" || role==="Doctor"? (
+            user.role==="Patient" || user.role==="Doctor"? (
               <div className="w-[80%] flex flex-row flex-between">
               <Label>Select Company Type</Label>
               <RadioGroup defaultValue="pharmacy" 

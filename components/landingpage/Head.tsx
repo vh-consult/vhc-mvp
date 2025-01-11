@@ -6,10 +6,10 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import MobileNav from "../user/MobileNav";
 import UserButton from "../user/UserButton";
-import { useUser } from "@/hooks/useUser";
 import Login from "@/app/(root)/login";
 import Register from "@/app/(root)/register";
-
+import Cookies from "js-cookie";
+import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
 interface NavLink {
   label: string;
   route: string;
@@ -76,7 +76,7 @@ const Navigation = () => {
 };
 
 const Head = () => {
-  const { role, companyId } = useUser();
+  const user:IUser = JSON.parse(Cookies.get("user") || '{}');
   const [register, setRegister] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
   useEffect(() => {
@@ -108,35 +108,46 @@ const Head = () => {
       </div>
       <Navigation />
       <div className="hidden md:flex items-center justify-center button w-1/6">
-        {/* <Button className="bg-accent rounded-full text-secondary mr-4">
-              <Link href={role==="PharmacyAdmin"? `/company/${companyId}/overview` :'landing'}>
+        {user.role !== undefined ? (
+          <>
+            <Button className="bg-accent rounded-full text-secondary mr-4">
+              <Link
+                href={
+                  user!.role === "PharmacyAdmin"
+                    ? `/company/${user!.company}/overview`
+                    : "landing"
+                }
+              >
                 Go to Home
               </Link>
             </Button>
-            <UserButton/> */}
-          <Button
-            className="text-accent bg-transparent hover:bg-transparent hover:underline hover:font-md"
-            onClick={() => {
-              setLogin(true);
-            }}
-          >
-            {landing.header.login.text}
-          </Button>
-        {
-          <Button
-            className="
+            <UserButton />
+          </>
+        ) : (
+          <>
+            <Button
+              className="text-accent bg-transparent hover:bg-transparent hover:underline hover:font-md"
+              onClick={() => {
+                setLogin(true);
+              }}
+            >
+              {landing.header.login.text}
+            </Button>
+            <Button
+              className="
                   hidden md:block h-10 
                   bg-accent w-20 rounded-lg 
                   hover:transition-all
                   hover:shadow-lg
                   text-white m-2"
-            onClick={() => {
-              setRegister(true);
-            }}
-          >
-            {landing.header.button.text}
-          </Button>
-        }
+              onClick={() => {
+                setRegister(true);
+              }}
+            >
+              {landing.header.button.text}
+            </Button>
+          </>
+        )}
       </div>
       <div className="hidden">
         <MobileNav navigations={landing.header.navLinks} />

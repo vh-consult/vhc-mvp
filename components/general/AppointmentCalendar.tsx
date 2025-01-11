@@ -1,15 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/button';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { AppointmentParams, fetchAcceptedAppointments } from '@/lib/actions/appointment.actions';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 
 const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [appointments, setAppointments] = useState<AppointmentParams[]>([]);
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   useEffect(()=> {
     const getAppointments = async () => {
       const appointments = await fetchAcceptedAppointments(user?.id as string)

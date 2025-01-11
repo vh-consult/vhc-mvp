@@ -11,7 +11,7 @@ import Loader from '../general/Loader';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const initialValues = {
   name: '',
@@ -27,7 +27,7 @@ const initialValues = {
 const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState<boolean>(false)
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const {edgestore} = useEdgeStore()
   const [file, setFile] = useState<File>()
   

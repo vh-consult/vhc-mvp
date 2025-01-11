@@ -14,7 +14,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import {  newAppointment, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import DoctorDashboard from '../doctor/DoctorDashboard';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const initialValues = {
   date: new Date(),
@@ -39,7 +39,7 @@ const ConsultationTypeList = () => {
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call | null>(null);
   const client = useStreamVideoClient();
-  const { user, role } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const { toast } = useToast();
   const [hostList, setHostList] = useState<any[]>([])
   const [hostName, setHostName] = useState('')
@@ -117,7 +117,7 @@ const ConsultationTypeList = () => {
   return (
     <main className='w-full'>
         {
-          role === "Patient" ? (
+          user.role === "Patient" ? (
             <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-dark">
             {ClickableCards.map((card, index) => (
               <ClickableCard
@@ -247,7 +247,7 @@ const ConsultationTypeList = () => {
               />
                   </section>
 
-          ): role === "Doctor"? (
+          ): user.role === "Doctor"? (
             <DoctorDashboard/>
           ): ''
         }

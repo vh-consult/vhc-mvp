@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { useGetCallById } from "@/hooks/useGetCallById";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useUser } from "@/hooks/useUser";
-
+import Cookies from "js-cookie";
 const Table = ({
   title,
   description,
@@ -29,7 +28,7 @@ const Table = ({
 
 const PersonalRoom = () => {
   const router = useRouter();
-  const { user } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const client = useStreamVideoClient();
   const { toast } = useToast();
 

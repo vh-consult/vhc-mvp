@@ -11,7 +11,7 @@ import {
 import PayWithPaystack from '../general/PayWithPaystack';
 import { addToCart, OrderData, placeOrder } from '@/lib/actions/order.actions';
 import { toast } from '../ui/use-toast';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 interface DrugProps {
   _id: string;
@@ -40,7 +40,7 @@ const DrugOverview = ({
   isOpen,
   onClose
 }: ShopDrugOverviewProps) => {
-  const { user } = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const initialFieldValues = {
     note: '',
     quantity: 1,

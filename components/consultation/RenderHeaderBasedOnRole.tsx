@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Header from '../user/Header';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const consultationHeaderLinks = {
     patient: [
@@ -35,11 +35,11 @@ const consultationHeaderLinks = {
 };
 
 const RenderHeaderBasedOnRole = () => {
-    const {role} = useUser()
-  return (
+    const user = JSON.parse(Cookies.get("user") || '{}');
+    return (
     <Header
         navigations={
-            role === "Patient" ? consultationHeaderLinks.patient: consultationHeaderLinks.doctor
+            user.role === "Patient" ? consultationHeaderLinks.patient: consultationHeaderLinks.doctor
     }
   />
   )

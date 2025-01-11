@@ -7,8 +7,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
-import Message from '../message/Message'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 import UserButton from './UserButton'
 
 export interface NavLinkProps {
@@ -27,7 +26,7 @@ export interface HeaderProps {
 
 const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) => {
   const pathname = usePathname()
-  const {isLoaded} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [showNotifications, setshowNotifications] = useState<boolean>(false)
   return (
     <>
@@ -89,7 +88,7 @@ const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) =
               />
             {/* </Link> */}
             {
-              isLoaded? (
+              user !== undefined? (
                   <UserButton/>
               ):
               (

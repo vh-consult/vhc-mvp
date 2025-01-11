@@ -8,7 +8,7 @@ import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
 import { toast } from '../ui/use-toast'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const initialValues = {
@@ -20,7 +20,7 @@ const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const [prescribedDrugs, setPrescribedDrugs] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [showPrescriptionForm, setShowPrescriptionForm] = useState<boolean>(false)
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
 
   const addConsultationPost = async (e:FormEvent) => {
     e.preventDefault()

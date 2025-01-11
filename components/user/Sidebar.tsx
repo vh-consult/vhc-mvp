@@ -1,5 +1,4 @@
 "use client"
-import { useUser } from '@/hooks/useUser'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
@@ -10,6 +9,7 @@ import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import {  MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
+import Cookies from "js-cookie"
 
 interface SideNavProps {
     icon: IconType;
@@ -20,7 +20,7 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-    const {role, user, companyId} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
     
     const patientSidebarElements = {
       top: [
@@ -95,7 +95,7 @@ const Sidebar = () => {
 
         </div>
         {
-          role === "Patient"? 
+          user.role === "Patient"? 
           patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ''
         }
       </div>

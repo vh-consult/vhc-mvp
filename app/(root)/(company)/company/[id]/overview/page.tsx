@@ -16,7 +16,7 @@ interface IHistory {
   meds: string[];
 }
 
-interface IUser {
+export interface IUser {
   email: string;
   role: string;
   firstName: string;
@@ -28,6 +28,7 @@ interface IUser {
   gender: "male" | "female" | "other";
   dateOfBirth: Date;
   country?: string;
+  company?: string;
   messages: string[];
 }
 
