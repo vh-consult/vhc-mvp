@@ -10,7 +10,7 @@ const UserButton = () => {
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <BiLogOut onClick={()=>logout()} className="w-7 h-7 cursor-pointer"/>
+      <BiLogOut onClick={async ()=>await logout()} className="w-7 h-7 cursor-pointer"/>
     </div>
   );
 };

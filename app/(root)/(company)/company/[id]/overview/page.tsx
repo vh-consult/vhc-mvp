@@ -18,11 +18,11 @@ interface IHistory {
 
 export interface IUser {
   email: string;
-  role: string;
+  type: string;
   firstName: string;
   lastName: string;
   photo: string;
-  id: string;
+  _id: string;
   history?: IHistory[];
   location?: string;
   gender: "male" | "female" | "other";
@@ -47,11 +47,11 @@ const OverviewPage = () => {
 
   return (
     <div>
-      {user!.role === undefined ? (
+      {user!.type === undefined ? (
         <Loader /> //-
-      ) : user!.role === "PharmacyAdmin" ? (
+      ) : user!.type === "PharmacyAdmin" ? (
         <PharmacyOverview id={id as string} />
-      ) : user!.role === "HospitalAdmin" ? (
+      ) : user!.type === "HospitalAdmin" ? (
         <HospitalOverview />
       ) : (
         ""

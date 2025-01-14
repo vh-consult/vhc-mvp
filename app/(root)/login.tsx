@@ -5,11 +5,23 @@ import React, { useActionState, useState } from "react";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
 import { login } from "@/lib/actions/user.actions";
+import Loader from "@/components/general/Loader";
+import { useUserStore } from "@/stores/user-store";
+import { useRouter } from "next/router";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const [state, action] = useActionState(login, undefined);
+  const {user, update} = useUserStore()
+  const [state, action, isPending] = useActionState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter()
+
+  update(state?.data).then(() => {
+    if (user) {
+      onClose();
+      router.push('/landing')
+    }
+  });
   return (
     <FormModal
       isOpen={show}
@@ -55,6 +67,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
             )}
           </>
           <Button type="submit" className="bg-accent text-white">Login </Button>
+          {isPending? <Loader/> : ''}
         </form>
       </div>
     </FormModal>

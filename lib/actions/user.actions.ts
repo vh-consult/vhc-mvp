@@ -13,6 +13,7 @@ import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
 import { redirect } from "next/navigation";
 import Cookies from "js-cookie"
+import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -52,7 +53,7 @@ export async function createUser(prevState: any, formData: FormData) {
 
     const { fname, lname, gender, dob, country, role, email, password } = result.data;
     const hashedPassword = await bcrypt.hash(password, 10);
-    let newUser;
+    let newUser:IUser;
     console.log(3)
 
     switch (role) {
@@ -73,8 +74,7 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(newUser);
     await createSession(newUser._id);
-    Cookies.set("user", JSON.stringify(newUser))
-    return redirect(`/${newUser._id}/`);
+    return {data: JSON.parse(JSON.stringify(newUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -125,9 +125,8 @@ export async function login(prevState: any, formData: FormData) {
     }
     console.log(6 )
     await createSession(existingUser._id);
-    Cookies.set("user", JSON.stringify(existingUser));
 
-    return redirect("/landing");
+    return {data: JSON.parse(JSON.stringify(existingUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -137,9 +136,13 @@ export async function login(prevState: any, formData: FormData) {
 }
 
 export async function logout() {
-  console.log('out')
-  await deleteSession();
-  redirect("/");
+  try {
+    console.log('out')
+    await deleteSession();
+    redirect("/");
+  } catch (error) {
+    handleError(error)
+  }
 }
 
 //subscribe to newsletter
