@@ -10,18 +10,24 @@ import { useUserStore } from "@/stores/user-store";
 import { useRouter } from "next/router";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const {user, update} = useUserStore()
+  const { user, update } = useUserStore();
   const [state, action, isPending] = useActionState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const router = useRouter()
+  const router = useRouter();
 
-  update(state?.data).then(() => {
-    if (user) {
-      onClose();
-      router.push('/landing')
+  const handleLogin = async () => {
+    try {
+      await update(state?.data); // Wait for the update to complete
+      if (user) {
+        onClose();
+        router.push("/landing");
+      }
+    } catch (error) {
+      console.error("Failed to update user:", error);
     }
-  });
+  };
+
   return (
     <FormModal
       isOpen={show}
@@ -40,8 +46,14 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
         </span>
       </div>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
-      <div className="">
-        <form action={action} className="space-y-2">
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+          className="space-y-2"
+        >
           <>
             <Input
               name="email"
@@ -66,8 +78,10 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               <p className="text-red-500">{state.errors.email}</p>
             )}
           </>
-          <Button type="submit" className="bg-accent text-white">Login </Button>
-          {isPending? <Loader/> : ''}
+          <Button type="submit" className="bg-accent text-white">
+            Login
+          </Button>
+          {isPending && <Loader />}
         </form>
       </div>
     </FormModal>
@@ -75,3 +89,4 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
 };
 
 export default Login;
+

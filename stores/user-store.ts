@@ -3,10 +3,13 @@ import {create} from "zustand"
 
 interface UserStore {
     user: IUser | null;
-    update: (user: IUser) => voi;
-}
+    update: (user: IUser) => Promise<void>;}
 
-export const useUserStore = create<UserStore>((set) => ({
-    user: null,
-    update: (user) => set(() => ({user}))
-}))
+    export const useUserStore = create<UserStore>((set) => ({
+        user: null,
+        update: (user) =>
+          new Promise((resolve) => {
+            set(() => ({ user }));
+            resolve();
+          }),
+      }));
