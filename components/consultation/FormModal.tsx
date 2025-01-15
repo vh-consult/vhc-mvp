@@ -28,7 +28,7 @@ const FormModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="flex w-full max-w-[520px] flex-col 
-      gap-3 border-none bg-white px-6 py-5 text-green-4">
+      gap-3 border-none bg-white px-6 py-5 text-dark">
         <div className="flex flex-col gap-2">
             {
                 image && (
@@ -53,7 +53,7 @@ const FormModal = ({
 
             { children }
             <SubmitButton 
-                className='bg-green-2 text-green-1 focus-visible:ring-0 focus-visible:ring-offset-0'
+                className='bg-accent text-secondary focus-visible:ring-0 focus-visible:ring-offset-0'
                 buttonText={buttonText!}
                 buttonIcon={buttonIcon}
                 handleClick={handleClick}

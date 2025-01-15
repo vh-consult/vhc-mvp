@@ -6,11 +6,10 @@ import { Button } from '../ui/button'
 import Loader from '../general/Loader'
 import { subscribeToNewsletter } from '@/lib/actions/user.actions'
 import { toast } from '../ui/use-toast'
-import { ToastTitle } from '../ui/toast'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 const NewsLetterSubscription = () => {
-    const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const subscribeTONewsletter = async () =>{
         try{
@@ -33,15 +32,15 @@ const NewsLetterSubscription = () => {
         of the curve with access to exclusive updates,
         expert insights, and actionable tips devlivered straight to your inbox.
       </p>
-      <div className="flex items-center my-3 pl-2 border-none rounded-lg  bg-green-1">
+      <div className="flex items-center my-3 pl-2 border-none rounded-lg  bg-secondary">
         <AiOutlineMail className='w-[24px] h-[24px]'/>
         <Input
           placeholder='Enter email address'
-          className='border bg-green-1 focus-visible:ring-0 outline-none '
+          className='border bg-secondary focus-visible:ring-0 outline-none '
         />
       </div>
       <Button
-        className='w-full h-[40px] rounded-lg bg-green-2 text-green-1'
+        className='w-full h-[40px] rounded-lg bg-accent text-secondary'
         onClick={subscribeTONewsletter}
       >
         {isLoading? <Loader/> : 'Subscribe'}

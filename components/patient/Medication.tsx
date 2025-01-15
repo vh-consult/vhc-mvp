@@ -2,7 +2,7 @@
 import { fetchMeds } from '@/lib/actions/medication.actions'
 import React, {useEffect, useState} from 'react'
 import MedCard, { MedCardProps } from './MedCard'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 const data =[
   {
@@ -57,7 +57,7 @@ const data =[
 ]
 
 const Medication = () => {
-  const {user} = useUser() 
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [currentDrugs, setCurrentDrugs] = useState()
   const fetchDrugs = async () => {
     const medDrugs = await fetchMeds(user?.id as string)

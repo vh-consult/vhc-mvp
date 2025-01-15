@@ -161,7 +161,7 @@ const userHistoryList = [
     {
       title: 'In-person Visitations',
       count: 6,
-      circleColor: 'bg-green-4'
+      circleColor: 'bg-dark'
     },
   ]
 const UserHistoryPage = async () => {

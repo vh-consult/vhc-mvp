@@ -9,7 +9,7 @@ import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
 import { postMeds } from '@/lib/actions/medication.actions'
-import { useUser } from '@/hooks/useUser'
+import Cookies from "js-cookie"
 
 export interface DrugPrescriptionParams {
   drug: string;
@@ -30,7 +30,7 @@ const PrescriptionForm = (
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
   const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const handleDone = async (e: FormEvent) => {
     e.preventDefault()
     setPrescribedDrugs(drugsAdded)
@@ -67,7 +67,7 @@ const PrescriptionForm = (
               <Input
                 onChange={(e)=> setValues({...values, drug:e.target.value})}
                 type='string'
-                className='bg-green-3 focus-visible:ring-0 border-gray-400'
+                className='bg-secondary focus-visible:ring-0 border-gray-400'
                 title='Enter name of drug'
               />
             </span>
@@ -77,7 +77,7 @@ const PrescriptionForm = (
                 onChange={(e)=> setValues({...values, dose:e.target.value as any})}
                 type='number'
                 min={1}
-                className='bg-green-3 focus-visible:ring-0 border-gray-400'
+                className='bg-secondary focus-visible:ring-0 border-gray-400'
                 title='Enter quantity to take each time'
               />
             </span>
@@ -88,7 +88,7 @@ const PrescriptionForm = (
               <Input
                 onChange={(e)=> setValues({...values, caution:e.target.value})}
                 type='string'
-                className='bg-green-3 focus-visible:ring-0 border-gray-400'
+                className='bg-secondary focus-visible:ring-0 border-gray-400'
                 title='Enter cautions. eg: 30 minutes before meal, etc'
               />
             </span>
@@ -98,13 +98,13 @@ const PrescriptionForm = (
                 onChange={(e)=> setValues({...values, duration:e.target.value as any})}
                 type='number'
                 min={0}
-                className='bg-green-3 focus-visible:ring-0 border-gray-400'
+                className='bg-secondary focus-visible:ring-0 border-gray-400'
                 title='Enter number of days to take drug'
               />
             </span>
           </div>
           <Button
-            className='w-full border-2 border-dashed bg-blue-50 text-green-4'
+            className='w-full border-2 border-dashed bg-blue-50 text-dark'
             onClick={(e) => handlePush(e, values)}
           >
             Add To Prescription

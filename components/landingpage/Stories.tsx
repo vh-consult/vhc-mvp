@@ -9,12 +9,12 @@ const Stories = () => {
         bg-story bg-no-repeat bg-cover`
       }
     >
-      <div className="absolute inset-0 bg-green-4 bg-opacity-80"></div>
+      <div className="absolute inset-0 bg-dark bg-opacity-80"></div>
       
       <div className="relative flex  flex-col md:flex-row items-center md:items-start md:justify-around w-full">
         <h3 
           className='md:w-1/6 font-medium text-lg md:text-2xl 
-          text-green-2'
+          text-accent'
         >
             {landing.stories.title}
         </h3>

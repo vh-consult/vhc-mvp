@@ -11,7 +11,7 @@ import Loader from '../general/Loader';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const initialValues = {
   name: '',
@@ -27,7 +27,7 @@ const initialValues = {
 const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState<boolean>(false)
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const {edgestore} = useEdgeStore()
   const [file, setFile] = useState<File>()
   
@@ -65,7 +65,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
         <div className="">
           <Label>Item Name</Label>
           <Input
-            className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
             onChange={(e) =>
               setValues({ ...values, name: e.target.value })
             }
@@ -75,10 +75,10 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
     <div className="flex flex-col">
       <Label>Item Catalog</Label>
       <Select required onValueChange={(value) => setValues({ ...values, catalog: value })}>
-        <SelectTrigger id="catalog" className='bg-green-3 text-sm'>
+        <SelectTrigger id="catalog" className='bg-secondary text-sm'>
           <SelectValue placeholder="e.g: Painkiller" />
         </SelectTrigger>
-        <SelectContent position="popper" className='bg-green-3 text-green-4'>
+        <SelectContent position="popper" className='bg-secondary text-dark'>
           <SelectItem value="painkiller">Painkiller</SelectItem>
           <SelectItem value="appetizer">Appetizer</SelectItem>
           <SelectItem value="antiMalaria">Anti-malaria</SelectItem>
@@ -89,7 +89,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
     <div className="flex flex-col">
       <Label>Description</Label>
       <Textarea
-        className=" bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+        className=" bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
         onChange={(e) =>
           setValues({ ...values, description: e.target.value })
         }
@@ -105,7 +105,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
             selected={values.expiryDate}
             onChange={(date) => setValues({ ...values, expiryDate: date! })}
             dateFormat="MMMM d, yyyy"
-            className="w-full rounded bg-green-3 p-2 focus:outline-none"
+            className="w-full rounded bg-secondary p-2 focus:outline-none"
       />
     </div>
     <div className="flex w-full gap-2">
@@ -116,7 +116,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
             min={0}
             placeholder='e.g: 15.99' 
             onChange={(e)=>setValues({...values, price: e.target.value as any | number })}
-            className=" w-full bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className=" w-full bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
           />
         </div>
         <div className="flex flex-col w-full">
@@ -126,7 +126,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
             min={1}
             placeholder='e.g: 50' 
             onChange={(e)=>setValues({...values, quantity: e.target.value as any | number })}
-            className=" w-full bg-green-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className=" w-full bg-secondary focus-visible:ring-0 focus-visible:ring-offset-0"
             />
         </div>
     </div>

@@ -15,7 +15,7 @@ const AppointmentCard = ({appointment}: {appointment:any}) => {
         <p className="">
           {new Date(appointment.date).toLocaleDateString()}
         </p>
-          <Button onClick={()=>{}} className='bg-blue-1 w-[100px] h-[30px] text-green-1 mt-2'>
+          <Button onClick={()=>{}} className='bg-blue-1 w-[100px] h-[30px] text-secondary mt-2'>
             <BiChat/>
             Message
           </Button>

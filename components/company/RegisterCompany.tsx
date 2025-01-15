@@ -21,8 +21,7 @@ import Loader from '../general/Loader';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
-import { useUser } from '@/hooks/useUser';
-
+import Cookies from "js-cookie"
 
   const setupSchema = z.object({
     name: z.string().min(1, 'company\'s name is required'),
@@ -39,7 +38,7 @@ const RegisterCompany = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
-  const {user, role} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const [file, setFile] = useState<File>()
   const initialValues: FormValues = {
     name: '',
@@ -83,7 +82,7 @@ const RegisterCompany = () => {
         logoUrl = res.url
       }
       
-      switch (role) {
+      switch (user.role) {
         case "PharmacyAdmin":
           values.type = "pharmacy"
           break;
@@ -107,7 +106,7 @@ const RegisterCompany = () => {
 
   return (
     <div className='h-full w-full py-5 flex flex-center'>
-    <Card className={`relative w-[600px] border-none bg-white text-green-4`}>
+    <Card className={`relative w-[600px] border-none bg-white text-dark`}>
       <CardHeader>
         <CardTitle>Company Registration Form</CardTitle>
         <CardDescription>Fill the forms to register your company</CardDescription>
@@ -136,7 +135,7 @@ const RegisterCompany = () => {
             type='text'
             name='name'
             onChange={(e) => setValues({ ...values, name: e.target.value })}
-            className='bg-green-1 text-green-4'
+            className='bg-secondary text-dark'
           />
             {errors.name && 
               <span className="text-red-500">
@@ -152,7 +151,7 @@ const RegisterCompany = () => {
             type='text'
             name='location'
             onChange={(e) => setValues({ ...values, location: e.target.value })}
-            className='bg-green-1 text-green-4'
+            className='bg-secondary text-dark'
           />
           {errors.location && 
             <span className="text-red-500">
@@ -167,7 +166,7 @@ const RegisterCompany = () => {
           <Textarea
             placeholder=''
             name='description'
-            className=' bg-green-1 text-green-4'
+            className=' bg-secondary text-dark'
             onChange={(e) => setValues({ ...values, description: e.target.value })}
           />
           {errors.description && 
@@ -177,7 +176,7 @@ const RegisterCompany = () => {
           }
         </div>
           {
-            role==="Patient" || role==="Doctor"? (
+            user.role==="Patient" || user.role==="Doctor"? (
               <div className="w-[80%] flex flex-row flex-between">
               <Label>Select Company Type</Label>
               <RadioGroup defaultValue="pharmacy" 
@@ -207,7 +206,7 @@ const RegisterCompany = () => {
         <CardFooter className="flex justify-between">
           <Button
             onClick={handleSubmit}
-            className='w-full bg-green-2 text-green-1'
+            className='w-full bg-accent text-secondary'
           >
           {loading? <Loader />: 'Register Company'}
           </Button>

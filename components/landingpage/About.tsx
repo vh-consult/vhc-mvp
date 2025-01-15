@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 const About = () => {
     return (
       <div id='about' className='md:mb-8'>
-        <section className='md:mt-0 w-full relative text-green-4 flex flex-col items-center justify-start'>
+        <section className='md:mt-0 w-full relative text-dark flex flex-col items-center justify-start'>
             <div  className='md:w-2/3 h-auto mt-4 mx-auto mb-4 '>
               <p className='text-sm md:text-base font-medium'>
                 {landing.about.subtitle}
@@ -60,8 +60,8 @@ const About = () => {
                 </p>
                 <Button 
                   variant="outline"
-                  className='border border-green-4 flex flex-row items-center justify-between 
-                  rounded-3xl hover:text-green-2 hover:border-green-2 hover:shadow-md 
+                  className='border border-dark flex flex-row items-center justify-between 
+                  rounded-3xl hover:text-accent hover:border-accent hover:shadow-md 
                   p-2 w-[120px] h-[40px]'
                 > 
                   {landing.about.button.text}
@@ -72,17 +72,17 @@ const About = () => {
         </section>
         <section className='mt-3 md:mt-[-30px]'>
           <div className='h-[350px]
-            bg-green-1 w-full 
+            bg-secondary w-full 
             flex flex-col md:flex-row justify-center md:pt-16 '
           >
             <div className='w-[90%] mx-auto md:mx-0 md:w-1/3 md:mr-52'>
               <p className='text-sm md:text-base 
-                text-green-2
+                text-accent
                 font-medium'
               >
                 {landing.awareness.subtitle}
               </p>
-              <h1 className='text-lg md:text-2xl text-green-4 
+              <h1 className='text-lg md:text-2xl text-dark 
                 font-semibold'
               >
                 {landing.awareness.title}

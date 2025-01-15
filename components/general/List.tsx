@@ -57,7 +57,7 @@ const List = ({
       {
         icons?.map((icon, index) => (
         <span key={index} className='hover:cursor-pointer border-2 
-         hover:bg-green-1 w-[45px] h-[45px] 
+         hover:bg-secondary w-[45px] h-[45px] 
         flex flex-center rounded-full' onClick={icon.action}>
           {icon.icon}
         </span>

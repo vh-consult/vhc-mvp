@@ -26,7 +26,7 @@ const ClientCard = ({
   status, gender
 }: ClientCardProps) => {
     return (
-      <div className='w-full h-10 text-sm bg-white text-green-4 flex flex-row flex-between px-4'>
+      <div className='w-full h-10 text-sm bg-white text-dark flex flex-row flex-between px-4'>
           <Image
             src={imageUrl}
             alt='client pic'
@@ -57,7 +57,7 @@ const ClientCard = ({
   
 const Header = () => {
   return(
-    <div className='w-full h-10 text-sm bg-blue-50 text-green-4 flex flex-row flex-between px-4'>
+    <div className='w-full h-10 text-sm bg-blue-50 text-dark flex flex-row flex-between px-4'>
     <span className="w-[30px] h-full "></span>
     <div className="w-[85%] grid grid-cols-4 items-center text-center ">
       <span>

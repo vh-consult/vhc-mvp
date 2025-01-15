@@ -1,4 +1,4 @@
-  "use server"
+"use server";
 
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
@@ -8,189 +8,190 @@ import { Company, Pharmacy } from "../database/models/company.model";
 import { startSession } from "mongoose";
 import Order from "../database/models/order.model";
 
-
 export async function addToCart(id: string, drugId: string) {
-    try {
-        await connectToDatabase()
+  try {
+    await connectToDatabase();
 
-        const userAddingItem = await User.findById(id)
-        if (!userAddingItem) throw new Error("User not found")
+    const userAddingItem = await User.findById(id);
+    if (!userAddingItem) throw new Error("User not found");
 
-        const itemToAdd = await Drug.findById(drugId)
-        if (!itemToAdd) throw new Error("Drug not found")
-        
-        userAddingItem.cart.push(drugId)
-        await userAddingItem.save()
+    const itemToAdd = await Drug.findById(drugId);
+    if (!itemToAdd) throw new Error("Drug not found");
 
-        return {message: 'Item added to cart'}
-    } catch (error) {
-        handleError(error)
-    }
+    userAddingItem.cart.push(drugId);
+    await userAddingItem.save();
+
+    return { message: "Item added to cart" };
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 export async function removeFromCart(id: string, drugId: string) {
-    try {
-        await connectToDatabase()
+  try {
+    await connectToDatabase();
 
-        const userRemovingItem = await User.findById(id)
-        if (!userRemovingItem) throw new Error("User not found")
-            
-        const itemToRemove = await Drug.findById(drugId)
-        if (!itemToRemove || !userRemovingItem.cart.includes(drugId)) throw new Error("Drug not found")
+    const userRemovingItem = await User.findById(id);
+    if (!userRemovingItem) throw new Error("User not found");
 
-        userRemovingItem.cart.remove(drugId)
-        await userRemovingItem.save()
+    const itemToRemove = await Drug.findById(drugId);
+    if (!itemToRemove || !userRemovingItem.cart.includes(drugId))
+      throw new Error("Drug not found");
 
-        return {message: 'Item removed from cart'}
-    } catch (error) {
-        handleError(error)
-    }
+    userRemovingItem.cart.remove(drugId);
+    await userRemovingItem.save();
+
+    return { message: "Item removed from cart" };
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 export interface OrderData {
-    item: string;
-    buyer: string;
-    note: string;
-    quantity: number;
-    shop: string;
-    amount: number;
+  item: string;
+  buyer: string;
+  note: string;
+  quantity: number;
+  shop: string;
+  amount: number;
 }
 
-export async function placeOrder(
-    id: string, 
-    data: OrderData, 
-) {
-    try {
-        await connectToDatabase()
-        
-        const userOrderingItem = await User.findById(id)
-        if (!userOrderingItem) throw new Error("User not found")
+export async function placeOrder(id: string, data: OrderData) {
+  try {
+    await connectToDatabase();
 
-        const shop = await Company.findOne({_id: data.shop, companyType: "Pharmacy"})
-        if (!shop) throw new Error("Pharmacy not found")  
+    const userOrderingItem = await User.findById(id);
+    if (!userOrderingItem) throw new Error("User not found");
 
-        const session = await startSession()
-        session.startTransaction()
+    const shop = await Company.findOne({
+      _id: data.shop,
+      companyType: "Pharmacy",
+    });
+    if (!shop) throw new Error("Pharmacy not found");
 
-        const drug = await Drug.findById(data.item)
-        if(!drug) throw new Error("Drug not found")    
-        
-        if (drug.quantity < data.quantity) throw new Error("Drug quantity exceeded")
+    const session = await startSession();
+    session.startTransaction();
 
-        const newOrder = await Order.create({...data, buyer: userOrderingItem._id})
-        newOrder.items.push(data.item)
-        await newOrder.save()
+    const drug = await Drug.findById(data.item);
+    if (!drug) throw new Error("Drug not found");
 
-        drug.quantity -= data.quantity
-        await drug.save()
+    if (drug.quantity < data.quantity)
+      throw new Error("Drug quantity exceeded");
 
-        userOrderingItem.orders.push(newOrder._id)
-        await userOrderingItem.save()
+    const newOrder = await Order.create({
+      ...data,
+      buyer: userOrderingItem._id,
+    });
+    newOrder.items.push(data.item);
+    await newOrder.save();
 
-        shop.orders.push(newOrder._id)
-        await shop.save()
+    drug.quantity -= data.quantity;
+    await drug.save();
 
-        await session.commitTransaction();
-        session.endSession();
+    userOrderingItem.orders.push(newOrder._id);
+    await userOrderingItem.save();
 
-        return {message: "Order placed successfully"}
-    } catch (error) {
- 
-        handleError(error)
-    }
+    shop.orders.push(newOrder._id);
+    await shop.save();
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return { message: "Order placed successfully" };
+  } catch (error) {
+    handleError(error);
+  }
 }
-
 
 export async function cancelOrder(id: string, orderId: string) {
-    try {
-        await connectToDatabase()
-        const user = await User.findById(id).populate("orders")
-        if(!user) throw new Error("User not found")
-        
-        const order = await Order.findById(orderId)
-        if(!order) throw new Error("Order not found")
+  try {
+    await connectToDatabase();
+    const user = await User.findById(id).populate("orders");
+    if (!user) throw new Error("User not found");
 
-        if (order.buyer !== user._id || !user.orders.includes(orderId)) throw new Error("Order not placed by user")
-            
-        const session = await startSession()
-        session.startTransaction()
+    const order = await Order.findById(orderId);
+    if (!order) throw new Error("Order not found");
 
-        order.status = "cancelled"
-        await order.save()
-        
-        await session.commitTransaction();
-        session.endSession();
-        
-        return {message: 'Order cancelled successfully'}
-    } catch (error) {
-        handleError(error)
-    }
+    if (order.buyer !== user._id || !user.orders.includes(orderId))
+      throw new Error("Order not placed by user");
+
+    const session = await startSession();
+    session.startTransaction();
+
+    order.status = "cancelled";
+    await order.save();
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return { message: "Order cancelled successfully" };
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 export async function retrieveShopOrders(shopId: string) {
-    try {
-        await connectToDatabase()
-        const shop = await Company.findOne(
-            { _id: shopId, companyType: "Pharmacy" }
-        ).populate({
-            path: 'orders',
-            populate: [
-                { path: 'buyer', select: "firstName lastName" },
-                { path: 'items', select: "name image" },
-            ]
-        })
-        
-        if (!shop) throw new Error("Shop not found")
-        
-        const orders = shop.orders.map((order: any) => {
-            const plainOrder = order.toObject()
-            // Ensure items are properly mapped
-            plainOrder.items = plainOrder.items.map((item: any) => ({
-                _id: item._id.toString(),
-                name: item.name,
-                image: item.image
-            }))
-            return plainOrder
-        })
-        // console.log(orders)
-        return JSON.parse(JSON.stringify(orders))
-    } catch (error) {
-        handleError(error)
-    }
+  try {
+    await connectToDatabase();
+    const shop = await Company.findOne({
+      _id: shopId,
+      companyType: "Pharmacy",
+    }).populate({
+      path: "orders",
+      populate: [
+        { path: "buyer", select: "firstName lastName" },
+        { path: "items", select: "name image" },
+      ],
+    });
+
+    if (!shop) throw new Error("Shop not found");
+
+    const orders = shop.orders.map((order: any) => {
+      const plainOrder = order.toObject();
+      // Ensure items are properly mapped
+      plainOrder.items = plainOrder.items.map((item: any) => ({
+        _id: item._id.toString(),
+        name: item.name,
+        image: item.image,
+      }));
+      return plainOrder;
+    });
+    // console.log(orders)
+    return JSON.parse(JSON.stringify(orders));
+  } catch (error) {
+    handleError(error);
+  }
 }
 
-export async function fetchUserOrders(id:string) {
-    try {
-        await connectToDatabase()
-        const user = await User.findById(id).populate({
-            path: "orders", 
-            populate: [
-                {path: "shop", select: "name location logo"},
-                {path: "items", select: "name price description"},
-
-            ]
-        })
-        if(!user) throw new Error("User not found")
-        const orders = user.orders
-        return JSON.parse(JSON.stringify(orders))
-    } catch (error) {
-        handleError(error) 
-    }
+export async function fetchUserOrders(id: string) {
+  try {
+    await connectToDatabase();
+    const user = await User.findById(id).populate({
+      path: "orders",
+      populate: [
+        { path: "shop", select: "name location logo" },
+        { path: "items", select: "name price description" },
+      ],
+    });
+    if (!user) throw new Error("User not found");
+    const orders = user.orders;
+    return JSON.parse(JSON.stringify(orders));
+  } catch (error) {
+    handleError(error);
+  }
 }
 
-export async function fetchItemsInCart(id:string) {
-    try {
-        await connectToDatabase()
-        const user = await User.findById(id).populate({
-            path: "cart", 
-            populate: [
-                {path: "shop", select: "name location logo"},
-            ]
-        })
-        if(!user) throw new Error("User not found")
-        const cart = user.cart
-        return JSON.parse(JSON.stringify(cart))
-    } catch (error) {
-        handleError(error) 
-    }
+export async function fetchItemsInCart(id: string) {
+  try {
+    await connectToDatabase();
+    const user = await User.findById(id).populate({
+      path: "cart",
+      populate: [{ path: "shop", select: "name location logo" }],
+    });
+    if (!user) throw new Error("User not found");
+    const cart = user.cart;
+    return JSON.parse(JSON.stringify(cart));
+  } catch (error) {
+    handleError(error);
+  }
 }

@@ -11,7 +11,7 @@ import { EdgeStoreProvider } from "@/lib/edgestore";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  manifest: '/manifest.json',
+  manifest: "/manifest.json",
   title: "V-Healthcare | Your health needs prioritized!",
   description: "Virtual Consultation Room",
   icons: {
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#161925'
-}
+  themeColor: "#161925",
+};
 
 export default function RootLayout({
   children,
@@ -30,9 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} `}>
         <Toaster />
-        <EdgeStoreProvider>
-          {children}
-        </EdgeStoreProvider>
+        <EdgeStoreProvider>{children}</EdgeStoreProvider>
       </body>
     </html>
   );

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
-import { useUser } from './useUser';
+import Cookies from "js-cookie"
 
 export const useGetCalls = () => {
-  const { user } = useUser();
+  const user = JSON.parse(Cookies.get("user") || '{}');
   const client = useStreamVideoClient();
   const [calls, setCalls] = useState<Call[]>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadCalls = async () => {
-      if (!client || !user?.id) return;
+      if (!client || !user?._id) return;
       
       setIsLoading(true);
 
@@ -21,8 +21,8 @@ export const useGetCalls = () => {
           filter_conditions: {
             starts_at: { $exists: true },
             $or: [
-              { created_by_user_id: user.id },
-              { members: { $in: [user.id] } },
+              { created_by_user_id: user._id },
+              { members: { $in: [user._id] } },
             ],
           },
         });

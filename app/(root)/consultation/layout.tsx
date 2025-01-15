@@ -8,7 +8,7 @@ const VideoLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <StreamVideoProvider>
       <RenderHeaderBasedOnRole/>
-      <div className="w-full min-h-[calc(100vh-65px)] px-10 py-4 bg-green-3">
+      <div className="w-full min-h-[calc(100vh-65px)] px-10 py-4 bg-secondary">
         {children}
       </div>
     </StreamVideoProvider>

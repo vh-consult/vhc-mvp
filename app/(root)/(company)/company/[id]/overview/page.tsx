@@ -1,25 +1,63 @@
-"use client"
-import React from 'react'
-import PharmacyOverview from '@/components/company/PharmacyOverview'
-import HospitalOverview from '@/components/company/HospitalOverview'
-import Loader from '@/components/general/Loader'
-import { useParams } from 'next/navigation'
-import { useUser } from '@/hooks/useUser'
+"use client"; //-
+import React, { useEffect, useState } from "react"; //-
+import PharmacyOverview from "@/components/company/PharmacyOverview"; //-
+import HospitalOverview from "@/components/company/HospitalOverview"; //-
+import Loader from "@/components/general/Loader"; //-
+import { useParams } from "next/navigation"; //-
+import { getUser } from "@/lib/actions/user.actions"; //-
+import Cookies from "js-cookie"; // Import the js-cookie library//+
 
-
-const OverviewPage = () => {
-  const {role} = useUser()
-  const {id} = useParams()
-  console.log(id)
-  return (
-    <div>
-      {
-        role === undefined? <Loader/> :
-        role === "PharmacyAdmin"? (<PharmacyOverview id={id as string}/>) : 
-        role === "HospitalAdmin"? (<HospitalOverview/>) : ''
-      }
-    </div>
-  )
+interface IHistory {
+  activity: string;
+  host: string;
+  hostType: string;
+  summary: string;
+  orders: string[];
+  meds: string[];
 }
 
-export default OverviewPage
+export interface IUser {
+  email: string;
+  type: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  _id: string;
+  history?: IHistory[];
+  location?: string;
+  gender: "male" | "female" | "other";
+  dateOfBirth: Date;
+  country?: string;
+  company?: string;
+  messages: string[];
+}
+
+const OverviewPage = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState<IUser>()
+  console.log(id);
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser(id as string);
+      Cookies.set("user", JSON.stringify(user));
+      setUser(user)
+    };
+    fetchData()
+  });
+
+  return (
+    <div>
+      {user!.type === undefined ? (
+        <Loader /> //-
+      ) : user!.type === "PharmacyAdmin" ? (
+        <PharmacyOverview id={id as string} />
+      ) : user!.type === "HospitalAdmin" ? (
+        <HospitalOverview />
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+export default OverviewPage;

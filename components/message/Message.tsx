@@ -40,7 +40,7 @@ const messages = [
 
 
 const Message = ({className}: {className?:string}) => {
-  // const {user} = useUser()
+  // const user = JSON.parse(Cookies.get("user") || '{}');
   // const [messages, setMessages] = useState([])
   //   useEffect(()=>{
   //     const fetchMessages = async () => {

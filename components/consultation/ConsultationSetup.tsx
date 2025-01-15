@@ -59,7 +59,7 @@ const ConsultationSetup = ({
     );
 
   return (
-    <div className="flex w-full flex-col py-4 items-center justify-center gap-1 text-green-4">
+    <div className="flex w-full flex-col py-4 items-center justify-center gap-1 text-dark">
       <h1 className="text-center text-2xl font-bold">Waiting Room</h1>
       <VideoPreview />
       <div className="flex h-10 items-center justify-center gap-1">
@@ -74,7 +74,7 @@ const ConsultationSetup = ({
         <DeviceSettings />
       </div>
       <Button
-        className="rounded-md bg-green-2 text-green-1 "
+        className="rounded-md bg-acent text-secondary "
         onClick={() => {
           call.join();
           setIsSetupComplete(true);

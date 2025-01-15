@@ -15,8 +15,8 @@ const HealthRecordPreview = ({patientId}: {patientId: string}) => {
     fetch()
   }, [patientId])
   return (
-    <main className='shadow-md bg-green-1 w-4/5 mx-auto'>
-      <div className="w-full text-sm py-3 sticky left-0 top-0 z-30 text-center text-green-4 font-medium bg-white">
+    <main className='shadow-md bg-secondary w-4/5 mx-auto'>
+      <div className="w-full text-sm py-3 sticky left-0 top-0 z-30 text-center text-dark font-medium bg-white">
         <div className="flex flex-between px-6 pb-3">
           <h1 className="text-2xl font-bold">Patient Health Record</h1>
           <SearchBar className='rounded-full bg-gray-100'/>

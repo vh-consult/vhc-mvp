@@ -2,8 +2,7 @@
 import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
-import { placeOrder } from '@/lib/actions/order.actions';
-import { useUser } from '@/hooks/useUser';
+import Cookies from "js-cookie"
 
 const PayWithPaystack = (
   {amount}: 
@@ -13,7 +12,7 @@ const PayWithPaystack = (
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
 
-  const {user} = useUser()
+  const user = JSON.parse(Cookies.get("user") || '{}');
 
 
 
@@ -37,7 +36,7 @@ const PayWithPaystack = (
   return (
 
         <PaystackButton 
-            className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium text-green-1 mt-3 bg-green-2" 
+            className="w-full mx-auto rounded-lg h-[40px] text-sm font-medium text-secondary mt-3 bg-accent" 
             {...componentProps} 
         />
   );

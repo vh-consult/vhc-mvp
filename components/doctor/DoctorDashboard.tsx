@@ -20,7 +20,7 @@ export type AppointmentDataType = {
 
 const DoctorDashboard = () => {
   return (
-    <main className='w-full h-[calc(100vh-90px)]  mx-auto text-green-4 flex flex-between'>
+    <main className='w-full h-[calc(100vh-90px)]  mx-auto text-dark flex flex-between'>
       <div className="w-[60%] h-full bg-white rounded-lg shadow-sm">
         <h3 className="text-sm opacity-75 font-semibold p-3">
           Appointment Requests

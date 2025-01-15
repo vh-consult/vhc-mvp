@@ -19,21 +19,21 @@ const ShippingForm = async () => {
         type='text'
         placeholder='Active phone number'
         name='contact'
-        className='w-[90%] bg-green-3 '
+        className='w-[90%] bg-secondary '
       />
       <Input
         type='text'
         placeholder='Home address'
         name='homeAddress'
-        className='w-[90%] bg-green-3 border-none'
+        className='w-[90%] bg-secondary border-none'
 
       />
       {  
         <Select name="pickup">
-        <SelectTrigger className='w-[90%] bg-green-3 border text-green-4' id="companyType">
+        <SelectTrigger className='w-[90%] bg-secondary border text-dark' id="companyType">
           <SelectValue  placeholder="Preferred delivery choice" />
         </SelectTrigger>
-        <SelectContent position="popper" className='bg-green-1  text-green-4'>
+        <SelectContent position="popper" className='bg-secondary  text-dark'>
           <SelectItem  value="homeDelivery">Home Delivery</SelectItem>
           <SelectItem value="inPerson ">In person </SelectItem>
         </SelectContent>

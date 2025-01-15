@@ -25,7 +25,7 @@ const ShopCard = ({
 }: PharmacyShopCardProps) => {
   return (
       <div className="w-[220px] h-[225px] cursor-pointer 
-      hover:opacity-90 bg-white text-green-4 
+      hover:opacity-90 bg-white text-dark 
       -200 rounded-lg hover:shadow-lg">
       <div className="h-[55%] w-full ">
           <Image
