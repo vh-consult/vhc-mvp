@@ -23,7 +23,7 @@ export interface ClickableCardDataStructure {
 const RenderUserLanding = () => {
   const router = useRouter();
   const {user, update} = useUserStore()
-
+  console.log(user)
   
   const ClickableCardData: ClickableCardDataStructure = {
     patientAndDoctor: [

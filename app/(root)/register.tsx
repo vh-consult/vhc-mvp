@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUserStore } from "@/stores/user-store";
 const initial = {
   fname: "",
   lname: "",
@@ -36,6 +37,15 @@ const Register = ({
 }) => {
   const [value, setValue] = useState(initial);
   const [state, action] = useActionState(createUser, undefined);
+    const formRef = useRef<HTMLFormElement>(null);
+    const { user, update } = useUserStore();
+
+    useEffect(() => {
+      if (state?.message === "success" && state?.data) {
+        update(state.data);
+        formRef.current?.reset();
+      }
+    }, []);
   return (
     <FormModal
       isOpen={show}
@@ -55,7 +65,7 @@ const Register = ({
       </div>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div className="">
-        <form action={action} className="space-y-2">
+        <form action={action} ref={formRef} className="space-y-2">
           <>
             <Input
               name="fname"

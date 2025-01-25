@@ -74,7 +74,7 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(newUser);
     await createSession(newUser._id);
-    return {data: JSON.parse(JSON.stringify(newUser))};
+    return {message: "success", data: JSON.parse(JSON.stringify(newUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -125,8 +125,8 @@ export async function login(prevState: any, formData: FormData) {
     }
     console.log(6 )
     await createSession(existingUser._id);
-
-    return {data: JSON.parse(JSON.stringify(existingUser))};
+    
+    return {message: "success", data: JSON.parse(JSON.stringify(existingUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect

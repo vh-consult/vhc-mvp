@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
 import { login } from "@/lib/actions/user.actions";
 import Loader from "@/components/general/Loader";
 import { useUserStore } from "@/stores/user-store";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const { user, update } = useUserStore();
@@ -15,18 +15,13 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
-
-  const handleLogin = async () => {
-    try {
-      await update(state?.data); // Wait for the update to complete
-      if (user) {
-        onClose();
-        router.push("/landing");
-      }
-    } catch (error) {
-      console.error("Failed to update user:", error);
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    if (state?.message === "success" && state?.data) {
+      update(state.data);
+      formRef.current?.reset();
     }
-  };
+  }, []);
 
   return (
     <FormModal
@@ -47,13 +42,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       </div>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleLogin();
-          }}
-          className="space-y-2"
-        >
+        <form ref={formRef} action={action} className="space-y-2">
           <>
             <Input
               name="email"
@@ -78,9 +67,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
               <p className="text-red-500">{state.errors.email}</p>
             )}
           </>
-          <Button type="submit" className="bg-accent text-white">
-            Login
-          </Button>
+          <Button className="bg-accent text-white">Login</Button>
           {isPending && <Loader />}
         </form>
       </div>
@@ -89,4 +76,3 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
 };
 
 export default Login;
-
