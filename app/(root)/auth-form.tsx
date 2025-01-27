@@ -19,7 +19,6 @@ const FormModal = ({
   onClose,
   children,
   title,
-  buttonText,
 }: IFormModal) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

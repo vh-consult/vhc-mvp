@@ -57,16 +57,16 @@ export async function createUser(prevState: any, formData: FormData) {
 
     switch (role) {
       case "patient":
-        newUser = await Patient.create({ firstName, dob, country, lastName, gender, email, role, password: hashedPassword });
+        newUser = await Patient.create({ firstName, dob, country, lastName, gender, email, password: hashedPassword });
         break;
       case "pharmacyAdmin":
         newUser = await PharmacyAdmin.create({
-          firstName, lastName, gender, email, role, dob, country,
+          firstName, lastName, gender, email, dob, country,
           password: hashedPassword,
         });
         break;
       case "doctor":
-        newUser = await Doctor.create({ firstName, dob, country, lastName, gender, email, role, password: hashedPassword });
+        newUser = await Doctor.create({ firstName, dob, country, lastName, gender, email, password: hashedPassword });
         break;
       default:
         throw new Error("Invalid role");

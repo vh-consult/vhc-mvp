@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useActionState, useEffect, useRef, useState } from "react";
-import { BsApple, BsGoogle } from "react-icons/bs";
+import { BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
 import { createUser } from "@/lib/actions/user.actions";
 import { Label } from "@/components/ui/label";
@@ -36,15 +36,15 @@ const Register = ({
   onClose: () => void;
 }) => {
   const [value, setValue] = useState(initial);
-  const [state, action] = useActionState(createUser, undefined);
-  const formRef = useRef<HTMLFormElement>(null);
+  const [state, action, isPending] = useActionState(createUser, undefined);
+  // const formRef = useRef<HTMLFormElement>(null);
   const { user, update } = useUserStore();
   const router = useRouter();
   useEffect(() => {
     if (state?.success && state?.data) {
       update(state.data);
       console.log(user);
-      formRef.current?.reset();
+      // formRef.current?.reset();
       router.push("/landing");
     }
   }, [state]);
@@ -61,7 +61,7 @@ const Register = ({
       </span>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div className="">
-        <form action={action} ref={formRef} className="space-y-2">
+        <form action={action} className="space-y-2">
           <>
             <Input
               name="firstName"
@@ -191,7 +191,7 @@ const Register = ({
             )}
           </>
           <Button type="submit" className="bg-accent text-white">
-            Register Account{" "}
+            {isPending ? "Loading...": "Register"}
           </Button>
         </form>
       </div>
