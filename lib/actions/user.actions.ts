@@ -12,7 +12,6 @@ import { z } from "zod";
 import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
 import { redirect } from "next/navigation";
-import Cookies from "js-cookie"
 import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -24,8 +23,8 @@ const loginSchema = z.object({
 
 const registerSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
-  fname: z.string({ message: "Invalid" }).trim(),
-  lname: z.string({ message: "Invalid" }).trim(),
+  firstName: z.string({ message: "Invalid" }).trim(),
+  lastName: z.string({ message: "Invalid" }).trim(),
   country: z.string({ message: "Invalid" }).trim(),
   dob: z.string({ message: "Invalid" }),
   role: z.enum(["patient","pharmacyAdmin", "doctor"]),
@@ -51,30 +50,30 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(2)
 
-    const { fname, lname, gender, dob, country, role, email, password } = result.data;
+    const { firstName, lastName, gender, dob, country, role, email, password } = result.data;
     const hashedPassword = await bcrypt.hash(password, 10);
-    let newUser:IUser;
+    let newUser:IUser|any;
     console.log(3)
 
     switch (role) {
       case "patient":
-        newUser = await Patient.create({ fname, dob, country, lname, gender, email, role, password: hashedPassword });
+        newUser = await Patient.create({ firstName, dob, country, lastName, gender, email, role, password: hashedPassword });
         break;
       case "pharmacyAdmin":
         newUser = await PharmacyAdmin.create({
-          fname, lname, gender, email, role, dob, country,
+          firstName, lastName, gender, email, role, dob, country,
           password: hashedPassword,
         });
         break;
       case "doctor":
-        newUser = await Doctor.create({ fname, dob, country, lname, gender, email, role, password: hashedPassword });
+        newUser = await Doctor.create({ firstName, dob, country, lastName, gender, email, role, password: hashedPassword });
         break;
       default:
         throw new Error("Invalid role");
     }
-    console.log(newUser);
+    console.log(newUser)
     await createSession(newUser._id);
-    return {message: "success", data: JSON.parse(JSON.stringify(newUser))};
+    return {success: result?.success, data: JSON.parse(JSON.stringify(newUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -139,7 +138,6 @@ export async function logout() {
   try {
     console.log('out')
     await deleteSession();
-    redirect("/");
   } catch (error) {
     handleError(error)
   }

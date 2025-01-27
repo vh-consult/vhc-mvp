@@ -18,41 +18,39 @@ interface IHistory {
 
 export interface IUser {
   email: string;
-  type: string;
+  type: "Patient" | "PharmacyAdmin" | "Doctor" | string;
   firstName: string;
   lastName: string;
-  photo: string;
+  photo?: string;
   _id: string;
   history?: IHistory[];
   location?: string;
-  gender: "male" | "female" | "other";
-  dateOfBirth: Date;
-  country?: string;
+  gender: "male" | "female";
+  dob: Date;
+  country: string;
   company?: string;
   messages: string[];
 }
 
 const OverviewPage = () => {
   const { id } = useParams();
-  const [user, setUser] = useState<IUser>()
+  const [user, setUser] = useState<IUser>();
   console.log(id);
   useEffect(() => {
     const fetchData = async () => {
       const user = await getUser(id as string);
       Cookies.set("user", JSON.stringify(user));
-      setUser(user)
+      setUser(user);
     };
-    fetchData()
+    fetchData();
   });
 
   return (
     <div>
       {user!.type === undefined ? (
         <Loader /> //-
-      ) : user!.type === "PharmacyAdmin" ? (
+      ) : user!.type === "pharmacyAdmin" ? (
         <PharmacyOverview id={id as string} />
-      ) : user!.type === "HospitalAdmin" ? (
-        <HospitalOverview />
       ) : (
         ""
       )}

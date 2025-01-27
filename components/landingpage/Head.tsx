@@ -108,12 +108,12 @@ const Head = () => {
       </div>
       <Navigation />
       <div className="hidden md:flex items-center justify-center button w-1/6">
-        {user.role !== undefined ? (
+        {user.type !== undefined ? (
           <>
             <Button className="bg-accent rounded-full text-secondary mr-4">
               <Link
                 href={
-                  user!.role === "PharmacyAdmin"
+                  user!.type === "PharmacyAdmin"
                     ? `/company/${user!.company}/overview`
                     : "landing"
                 }

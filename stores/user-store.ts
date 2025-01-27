@@ -3,14 +3,11 @@ import { create } from "zustand";
 
 interface UserStore {
   user: IUser | null;
-  update: (user: IUser) => Promise<void>;
+  update: (user: IUser) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
-  update: (user) =>
-    new Promise((resolve) => {
-      set(() => ({ user }));
-      resolve();
-    }),
+  update: (user) => set((state) => ({ ...state, user })),
+  // logout: () => set((state) => ({...state, user: null })), // Uncomment to enable logout functionality.
 }));

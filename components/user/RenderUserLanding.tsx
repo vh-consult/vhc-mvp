@@ -74,19 +74,6 @@ const RenderUserLanding = () => {
 
   return (
     <>
-      {user?.type === undefined ? (
-        <ClickableCard
-          title="Activate Account"
-          description="Activate your account"
-          imgURL="/icons/Profile.svg"
-          handleClick={() => {
-            router.push("/account-activation");
-          }}
-          className="bg-white hover:bg-gray-100 text-dark h-[250px] w-[100%]"
-        />
-      ) : (
-        ""
-      )}
       {user?.type === "Patient"
         ? ClickableCardData.patient.map((card, index) => (
             <ClickableCard

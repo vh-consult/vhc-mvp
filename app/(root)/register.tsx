@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useActionState, useEffect, useRef, useState } from "react";
-import { useFormState } from "react-dom";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import FormModal from "./auth-form";
 import { createUser } from "@/lib/actions/user.actions";
@@ -17,9 +16,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useUserStore } from "@/stores/user-store";
+import { useRouter } from "next/navigation";
 const initial = {
-  fname: "",
-  lname: "",
+  firstName: "",
+  lastName: "",
   gender: "",
   dob: "",
   email: "",
@@ -37,15 +37,17 @@ const Register = ({
 }) => {
   const [value, setValue] = useState(initial);
   const [state, action] = useActionState(createUser, undefined);
-    const formRef = useRef<HTMLFormElement>(null);
-    const { user, update } = useUserStore();
-
-    useEffect(() => {
-      if (state?.message === "success" && state?.data) {
-        update(state.data);
-        formRef.current?.reset();
-      }
-    }, []);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { user, update } = useUserStore();
+  const router = useRouter();
+  useEffect(() => {
+    if (state?.success && state?.data) {
+      update(state.data);
+      console.log(user);
+      formRef.current?.reset();
+      router.push("/landing");
+    }
+  }, [state]);
   return (
     <FormModal
       isOpen={show}
@@ -53,39 +55,35 @@ const Register = ({
       title="Sign Up"
       buttonText="Register Account"
     >
-      <div className="grid grid-cols-2 gap-x-6">
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 text-sm flex flex-center gap-x-4">
-          <BsGoogle />
-          Sign in with Google
-        </span>
-        <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 text-sm flex flex-center gap-x-4">
-          <BsApple />
-          Sign in with Apple
-        </span>
-      </div>
+      <span className="rounded-full border border-outline hover:bg-outline hover:cursor-pointer p-2 text-sm flex flex-center gap-x-4">
+        <BsGoogle />
+        Sign in with Google
+      </span>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div className="">
         <form action={action} ref={formRef} className="space-y-2">
           <>
             <Input
-              name="fname"
+              name="firstName"
               placeholder="First name"
-              value={value.fname}
-              onChange={(e) => setValue({ ...value, fname: e.target.value })}
+              value={value.firstName}
+              onChange={(e) =>
+                setValue({ ...value, firstName: e.target.value })
+              }
             />
-            {state?.errors?.fname && (
-              <p className="text-red-500">{state.errors.fname}</p>
+            {state?.errors?.firstName && (
+              <p className="text-red-500">{state.errors.firstName}</p>
             )}
           </>
           <>
             <Input
-              name="lname"
+              name="lastName"
               placeholder="Last name"
-              value={value.lname}
-              onChange={(e) => setValue({ ...value, lname: e.target.value })}
+              value={value.lastName}
+              onChange={(e) => setValue({ ...value, lastName: e.target.value })}
             />
-            {state?.errors?.lname && (
-              <p className="text-red-500">{state.errors.lname}</p>
+            {state?.errors?.lastName && (
+              <p className="text-red-500">{state.errors.lastName}</p>
             )}
           </>
           <>
@@ -96,7 +94,7 @@ const Register = ({
               value={value.dob}
               onChange={(e) => setValue({ ...value, dob: e.target.value })}
             />
-            {state?.errors?.lname && (
+            {state?.errors?.lastName && (
               <p className="text-red-500">{state.errors.dob}</p>
             )}
           </>
@@ -125,7 +123,9 @@ const Register = ({
           </>
           <>
             <Select
-              onValueChange={(choice) => setValue({ ...value, country: choice })}
+              onValueChange={(choice) =>
+                setValue({ ...value, country: choice })
+              }
               name="country"
             >
               <SelectTrigger className="">
