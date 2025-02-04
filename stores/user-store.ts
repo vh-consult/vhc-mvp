@@ -1,5 +1,23 @@
-import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
 import { create } from "zustand";
+
+export interface IUser {
+  email: string;
+  type: "Patient" | "PharmacyAdmin" | "Doctor" | string;
+  firstName: string;
+  lastName: string;
+  photo?: string;
+  _id: string;
+  history?: Array<any>;
+  location?: string;
+  gender: "male" | "female";
+  dob: Date;
+  country: string;
+  company?: string;
+  messages: string[];
+  createdAt: Date;
+  updatedAt: Date;
+  subscribedToNewsletter: boolean;
+}
 
 interface UserStore {
   user: IUser | null;
@@ -8,6 +26,10 @@ interface UserStore {
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
-  update: (user) => set((state) => ({ ...state, user })),
-  // logout: () => set((state) => ({...state, user: null })), // Uncomment to enable logout functionality.
+  update: (user) => {
+    console.log("State Before Update:", useUserStore.getState().user); // ✅ Debugging log
+    set((state) => ({ ...state, user }));
+    console.log("State After Update:", useUserStore.getState().user); // ✅ Debugging log
+  },
+  logout: () => set(() => ({ user: null })),
 }));

@@ -18,10 +18,11 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (state?.message === "success" && state?.data) {
-      update(state.data);
+      useUserStore.getState().update(state.data);
       formRef.current?.reset();
+      router.push('/landing')
     }
-  }, []);
+  }, [state]);
 
   return (
     <FormModal

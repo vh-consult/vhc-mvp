@@ -12,7 +12,8 @@ import { z } from "zod";
 import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
 import { redirect } from "next/navigation";
-import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
+import Logout from "@/components/general/Logout";
+import { IUser } from "@/stores/user-store";
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -251,3 +252,4 @@ export async function currentUser() {
     handleError(error);
   }
 }
+

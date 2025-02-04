@@ -4,7 +4,6 @@ import React from 'react'
 
 const UserHomePage = () => {
 
-
   return (
         <section className="w-full flex flex-row p-3">
           <div className=" mx-auto  w-[33%] rounded-[20px] bg-sky-2">

@@ -42,8 +42,8 @@ const Register = ({
   const router = useRouter();
   useEffect(() => {
     if (state?.success && state?.data) {
-      update(state.data);
-      console.log(user);
+   useUserStore.getState().update(state.data);      
+   console.log(user);
       // formRef.current?.reset();
       router.push("/landing");
     }

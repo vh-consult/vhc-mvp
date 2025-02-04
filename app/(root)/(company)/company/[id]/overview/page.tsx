@@ -6,6 +6,7 @@ import Loader from "@/components/general/Loader"; //-
 import { useParams } from "next/navigation"; //-
 import { getUser } from "@/lib/actions/user.actions"; //-
 import Cookies from "js-cookie"; // Import the js-cookie library//+
+import { IUser } from "@/stores/user-store";
 
 interface IHistory {
   activity: string;
@@ -16,21 +17,7 @@ interface IHistory {
   meds: string[];
 }
 
-export interface IUser {
-  email: string;
-  type: "Patient" | "PharmacyAdmin" | "Doctor" | string;
-  firstName: string;
-  lastName: string;
-  photo?: string;
-  _id: string;
-  history?: IHistory[];
-  location?: string;
-  gender: "male" | "female";
-  dob: Date;
-  country: string;
-  company?: string;
-  messages: string[];
-}
+
 
 const OverviewPage = () => {
   const { id } = useParams();

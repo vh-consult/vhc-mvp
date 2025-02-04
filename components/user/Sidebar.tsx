@@ -10,6 +10,7 @@ import { CgProfile } from 'react-icons/cg'
 import {  MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 interface SideNavProps {
     icon: IconType;
@@ -20,22 +21,22 @@ interface SideNavProps {
 const Sidebar = () => {
     const pathname = usePathname()
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
-  const user = JSON.parse(Cookies.get("user") || '{}');
-    
+    const {user} = useUserStore()    
+    console.log("user", user)
     const patientSidebarElements = {
       top: [
           {
-              route: `/${user?.id}/dashboard`,
+              route: `/${user?._id}/dashboard`,
               label: 'Dashboard',
               icon: RxDashboard
           },
           {
-              route: `/${user?.id}/affiliation`,
+              route: `/${user?._id}/affiliation`,
               label: `Affiliation`,
               icon: BsHospital
           },
           {
-              route: `/${user?.id}/health-record`,
+              route: `/${user?._id}/health-record`,
               label: `Record`,
               icon: BsDatabase
           },
@@ -45,12 +46,12 @@ const Sidebar = () => {
 
   const SidebarBbottomNavs = [
     {
-        route: `/${user?.id}/history`,
+        route: `/${user?._id}/history`,
         label: 'History',
         icon: AiOutlineHistory
     },
     {
-        route: `/${user?.id}/account`,
+        route: `/${user?._id}/account`,
         label: 'Account',
         icon: CgProfile
     },
@@ -95,7 +96,7 @@ const Sidebar = () => {
 
         </div>
         {
-          user.role === "Patient"? 
+          user?.type === "Patient"? 
           patientSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ''
         }
       </div>
