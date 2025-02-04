@@ -3,6 +3,7 @@ import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 const PayWithPaystack = (
   {amount}: 
@@ -12,16 +13,16 @@ const PayWithPaystack = (
 ) => {
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_KEY as string;
 
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
 
 
 
   const componentProps = {
-    email: user?.emailAddress as string,
+    email: user?.email as string,
     amount: amount * 100,
     metadata: {
-      name: user?.firstName + user?.lastName,
-      phone: user?.phoneNumber,
+      name: user?.firstName as string + user?.lastName,
+      // phone: user?.,
       custom_fields: [],
     },
     currency: "GHS",

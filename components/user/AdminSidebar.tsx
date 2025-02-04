@@ -9,6 +9,7 @@ import { FaAffiliatetheme } from 'react-icons/fa'
 import { MdMedicalInformation, MdMeetingRoom, MdMessage, MdOutlineHome, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 export interface SideNavProps {
   icon: IconType;
@@ -19,7 +20,7 @@ export interface SideNavProps {
 
 const AdminSidebar = () => {
   const pathname = usePathname()
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
 
   const renderNavigation = (nav: SideNavProps, index: number) => {
     const isActive = pathname === nav.route || pathname.startsWith(`${nav.route}/`);
@@ -45,22 +46,22 @@ const AdminSidebar = () => {
   const pharmacySidebarElements = {
     top: [
         {
-            route: `/company/${user.company}/overview`,
+            route: `/company/${user?.company}/overview`,
             label: `Overview`,
             icon: RxDashboard
         },
         {
-          route: `/company/${user.company}/orders`,
+          route: `/company/${user?.company}/orders`,
           label: `Orders`,
           icon: AiOutlineOrderedList
         },
         {
-          route: `/company/${user.company}/inventory`,
+          route: `/company/${user?.company}/inventory`,
           label: `Inventory`,
           icon: MdOutlineInventory
         },
         // {
-        //     route: `/company/${user.company}/messages`,
+        //     route: `/company/${user?.company}/messages`,
         //     label: `Messages`,
         //     icon: MdMessage
         // },
@@ -70,22 +71,22 @@ const AdminSidebar = () => {
   const hospitalSidebarElements = {
     top: [
         {
-            route: `/company/${user.company}/overview`,
+            route: `/company/${user?.company}/overview`,
             label: `Overview`,
             icon: RxDashboard
         },
         {
-            route: `/company/${user.company}/consultation`,
+            route: `/company/${user?.company}/consultation`,
             label: `Consultation`,
             icon: MdMeetingRoom
         },
         {
-            route: `/company/${user.company}/clients`,
+            route: `/company/${user?.company}/clients`,
             label: `Clients`,
             icon: MdPeopleOutline
         },
         {
-            route: `/company/${user.company}/affiliates`,
+            route: `/company/${user?.company}/affiliates`,
             label: `Affilates`,
             icon: FaAffiliatetheme
         },
@@ -93,7 +94,7 @@ const AdminSidebar = () => {
   }
   const bottomNav = [
     {
-        route: `/company/${user.company}/about`,
+        route: `/company/${user?.company}/about`,
         label: 'About Us',
         icon: BiSolidInstitution
     },
@@ -108,9 +109,9 @@ const AdminSidebar = () => {
     >
       <div className='w-full'>
         {
-            user.role === "HospitalAdmin"?
+            user?.type === "HospitalAdmin"?
             hospitalSidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : 
-            user.role === "PharmacyAdmin"?
+            user?.type === "PharmacyAdmin"?
             pharmacySidebarElements.top.map((nav, index) => renderNavigation(nav, index)) : ``
         }
       </div>

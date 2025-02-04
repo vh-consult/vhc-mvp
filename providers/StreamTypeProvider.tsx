@@ -1,41 +1,39 @@
+"use client";
 
-"use client"
+import { tokenProvider } from "@/lib/actions/stream.actions";
+import Loader from "@/components/general/Loader";
+import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
+import { ReactNode, useEffect, useState } from "react";
+import { useUserStore } from "@/stores/user-store";
 
-import { tokenProvider } from '@/lib/actions/stream.actions';
-import Loader from '@/components/general/Loader';
-import { StreamVideo, StreamVideoClient } from '@stream-io/video-react-sdk';
-import { ReactNode, useEffect, useState } from 'react';
-import Cookies from "js-cookie"
+const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
-const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY; 
+export const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
+  const [videoClient, setVideoClient] = useState<StreamVideoClient>();
+  const { user } = useUserStore();
 
+  useEffect(() => {
+    if (user !== undefined || !user) return;
+    if (!apiKey) throw new Error("Stream key not found");
 
+    const client = new StreamVideoClient({
+      apiKey,
+      user: {
+        //@ts-ignore
+        id: user?._id,
+        //@ts-ignore
 
-export const StreamVideoProvider = ({children}:{children: ReactNode}) => {
-    const [videoClient, setVideoClient] = useState<StreamVideoClient>()
-  const user = JSON.parse(Cookies.get("user") || '{}');
-    
-    useEffect(() => {
-        if(user !== undefined || !user) return;
-        if(!apiKey) throw new Error('Stream key not found')
- 
-        const client = new StreamVideoClient({
-            apiKey,
-            user: {
-                id: user?.id,
-                name: user?.firstName || user?.id,
-                image: user?.imageUrl
-            },
-            tokenProvider
-        })
-        setVideoClient(client)
-    }, [user]);
+        name: user?.firstName || user?.id,
+        //@ts-ignore
 
-    if(!videoClient) return <Loader/>
+        image: user?.photo,
+      },
+      tokenProvider,
+    });
+    setVideoClient(client);
+  }, [user]);
 
-    return(
-        <StreamVideo client={videoClient}>
-            {children}
-        </StreamVideo>
-    )
-}
+  if (!videoClient) return <Loader />;
+
+  return <StreamVideo client={videoClient}>{children}</StreamVideo>;
+};

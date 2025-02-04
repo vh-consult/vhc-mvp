@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { AppointmentParams, fetchAcceptedAppointments } from '@/lib/actions/appointment.actions';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 
 const AppointmentCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [appointments, setAppointments] = useState<AppointmentParams[]>([]);
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   useEffect(()=> {
     const getAppointments = async () => {
       const appointments = await fetchAcceptedAppointments(user?.id as string)

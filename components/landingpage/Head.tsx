@@ -9,7 +9,7 @@ import UserButton from "../user/UserButton";
 import Login from "@/app/(root)/login";
 import Register from "@/app/(root)/register";
 import Cookies from "js-cookie";
-import { IUser } from "@/app/(root)/(company)/company/[id]/overview/page";
+import { useUserStore } from "@/stores/user-store";
 interface NavLink {
   label: string;
   route: string;
@@ -76,7 +76,7 @@ const Navigation = () => {
 };
 
 const Head = () => {
-  const user:IUser = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [register, setRegister] = useState<boolean>(false);
   const [login, setLogin] = useState<boolean>(false);
   useEffect(() => {
@@ -108,7 +108,7 @@ const Head = () => {
       </div>
       <Navigation />
       <div className="hidden md:flex items-center justify-center button w-1/6">
-        {user.type !== undefined ? (
+        {user?.type !== undefined ? (
           <>
             <Button className="bg-accent rounded-full text-secondary mr-4">
               <Link

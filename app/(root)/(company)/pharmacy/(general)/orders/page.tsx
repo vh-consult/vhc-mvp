@@ -4,9 +4,9 @@ import { fetchUserOrders } from '@/lib/actions/order.actions'
 import React, { useEffect, useState } from 'react'
 import OrderCard from '@/components/pharmacy/OrderCard'
 import Loader from '@/components/general/Loader'
-import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 const OrdersPage = () => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [active, setActive] = useState<string>('all')
   const [allOrders, setAllOrders] = useState([])
   const [displayOrders, setDisplayOrders] = useState(allOrders)
@@ -55,13 +55,13 @@ const OrdersPage = () => {
   }
   useEffect(()=>{
     const fetchOrders = async () => {
-      const orders = await fetchUserOrders(user?.id as string)
+      const orders = await fetchUserOrders(user?._id as string)
       console.log(orders)
       setAllOrders(orders)
     }
     fetchOrders()
 
-  }, [user?.id])
+  }, [user?._id])
   return (
     <main className='w-[90%] mx-auto min-h-screen py-4 bg-white'>
       <div className="flex px-11 flex-between sticky top-[60px]">

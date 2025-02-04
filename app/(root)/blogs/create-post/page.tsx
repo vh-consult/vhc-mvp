@@ -11,6 +11,7 @@ import { createBlog } from '@/lib/actions/blog.actions'
 import { SingleImageDropzone } from '@/components/general/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgestore';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 // Define Zod schema
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Add blog title'),
@@ -27,7 +28,7 @@ type FormValues = z.infer<typeof blogPostSchema>;
 const CreateBlogPostPage = () => {
 
   const router = useRouter();
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [file, setFile] = useState<File>()
@@ -78,7 +79,7 @@ const CreateBlogPostPage = () => {
        imageUrl = res.url
       }
       const newBlog = await createBlog(
-        user?.id as string, {...values, coverImage: imageUrl}
+        user?._id as string, {...values, coverImage: imageUrl}
       )
       router.push(`/blogs/${newBlog._id}`)
     } finally {

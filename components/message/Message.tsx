@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { getMessages } from '@/lib/actions/appointment.actions'
 import MessageCard, { MessageCardProps } from './MessageCard'
+import { useUserStore } from '@/stores/user-store'
 
 
 const messages = [
@@ -40,7 +41,7 @@ const messages = [
 
 
 const Message = ({className}: {className?:string}) => {
-  // const user = JSON.parse(Cookies.get("user") || '{}');
+    // const {user} = useUserStore()
   // const [messages, setMessages] = useState([])
   //   useEffect(()=>{
   //     const fetchMessages = async () => {
@@ -48,7 +49,7 @@ const Message = ({className}: {className?:string}) => {
   //       setMessages(allMessages)
   //     }
   //     fetchMessages()
-  // }, [user?.id])
+  // }, [user?._id])
   return (
     <div className={cn(`w-full h-[400px] bg-white rounded-lg`, className)}>
         <h3 className="w-full text-sm  font-semibold p-3">

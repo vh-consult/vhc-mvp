@@ -9,6 +9,7 @@ import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
 import Cookies from "js-cookie"
 import UserButton from './UserButton'
+import { useUserStore } from '@/stores/user-store'
 
 export interface NavLinkProps {
   imageURL?: string;
@@ -26,7 +27,7 @@ export interface HeaderProps {
 
 const Header = ({navigations, seachFieldStyles, logo, className}: HeaderProps) => {
   const pathname = usePathname()
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [showNotifications, setshowNotifications] = useState<boolean>(false)
   return (
     <>

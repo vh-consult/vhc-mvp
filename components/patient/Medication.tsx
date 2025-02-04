@@ -3,6 +3,7 @@ import { fetchMeds } from '@/lib/actions/medication.actions'
 import React, {useEffect, useState} from 'react'
 import MedCard, { MedCardProps } from './MedCard'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 const data =[
   {
@@ -57,10 +58,10 @@ const data =[
 ]
 
 const Medication = () => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [currentDrugs, setCurrentDrugs] = useState()
   const fetchDrugs = async () => {
-    const medDrugs = await fetchMeds(user?.id as string)
+    const medDrugs = await fetchMeds(user?._id as string)
     setCurrentDrugs(medDrugs)
   }
   return (

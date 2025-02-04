@@ -12,6 +12,7 @@ import PayWithPaystack from '../general/PayWithPaystack';
 import { addToCart, OrderData, placeOrder } from '@/lib/actions/order.actions';
 import { toast } from '../ui/use-toast';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 interface DrugProps {
   _id: string;
@@ -40,14 +41,14 @@ const DrugOverview = ({
   isOpen,
   onClose
 }: ShopDrugOverviewProps) => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const initialFieldValues = {
     note: '',
     quantity: 1,
     amount: drug?.price,
     shop: shopId,
     item: drug._id,
-    buyer: user?.id as string
+    buyer: user?._id as string
   }
   const [values, setValues] = useState<OrderData>(initialFieldValues)
   const [isOrderCreated, setIsOrderCreated] = useState(false)
@@ -56,7 +57,7 @@ const DrugOverview = ({
 
   const createOrder = async () => {
     try {
-      const newOrder = await placeOrder(user?.id!, values)
+      const newOrder = await placeOrder(user?._id!, values)
       console.log(newOrder)
       setIsOrderCreated(true)
       toast({title: "Order placed successfully"})
@@ -66,7 +67,7 @@ const DrugOverview = ({
   }
 
   const handleCartAddition = async () => {
-    const event = await addToCart(user?.id!, drug?._id)
+    const event = await addToCart(user?._id!, drug?._id)
     toast({title: 'Item added to cart'})
   }
 

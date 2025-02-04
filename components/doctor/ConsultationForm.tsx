@@ -9,6 +9,7 @@ import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
 import { toast } from '../ui/use-toast'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const initialValues = {
@@ -20,7 +21,7 @@ const ConsultationForm = ({consultationId}: {consultationId:string}) => {
   const [prescribedDrugs, setPrescribedDrugs] = useState([])
   const [loading, setLoading] = useState<boolean>(false)
   const [showPrescriptionForm, setShowPrescriptionForm] = useState<boolean>(false)
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
 
   const addConsultationPost = async (e:FormEvent) => {
     e.preventDefault()

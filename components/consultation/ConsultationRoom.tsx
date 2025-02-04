@@ -26,8 +26,8 @@ import { FaStethoscope } from 'react-icons/fa';
 import ConsultationForm from '../doctor/ConsultationForm';
 import { BiComment } from 'react-icons/bi';
 import ConsultationSummaryCard, { TConsultation } from './ConsultationSummaryCard';
-import { fetchConsultationSession } from '@/lib/actions/consultation.actions';
-import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
+
 type CallLayoutType = 'grid' | 'left' ;
 
 const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
@@ -39,7 +39,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
   const { useCallCallingState } = useCallStateHooks();
   const [showConsultationForm, setShowConsultationForm] = useState<boolean>(false)
   const callingState = useCallCallingState();
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const [showComment, setShowComment] = useState<boolean>(false)
   
 
@@ -125,7 +125,7 @@ const ConsultationRoom = ({consultationId}:{consultationId: string}) => {
           </div>
         </button>
         {
-          user.role==="Doctor"? (
+          user?.type==="Doctor"? (
             <button onClick={()=>{setShowConsultationForm((prev) => !prev)}} className=" cursor-pointer text-secondary rounded-full bg-dark-1 p-2 hover:opacity-85  ">
                 <FaStethoscope/>
             </button>

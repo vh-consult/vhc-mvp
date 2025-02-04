@@ -15,6 +15,7 @@ import {  newAppointment, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import DoctorDashboard from '../doctor/DoctorDashboard';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 const initialValues = {
   date: new Date(),
@@ -39,7 +40,7 @@ const ConsultationTypeList = () => {
   const [values, setValues] = useState(initialValues);
   const [callDetail, setCallDetail] = useState<Call | null>(null);
   const client = useStreamVideoClient();
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const { toast } = useToast();
   const [hostList, setHostList] = useState<any[]>([])
   const [hostName, setHostName] = useState('')
@@ -74,7 +75,7 @@ const ConsultationTypeList = () => {
         return;
       }
       
-      const newCall = await newAppointment(user?.id, values)
+      const newCall = await newAppointment(user?._id, values)
         const id = newCall;
         const call = client.call('default', id);
         console.log(1)
@@ -89,7 +90,7 @@ const ConsultationTypeList = () => {
               description, 
               host: hostName, 
               hostImage: hostImage,
-              hostId: user?.id 
+              hostId: user?._id 
             },
           },
         });
@@ -117,7 +118,7 @@ const ConsultationTypeList = () => {
   return (
     <main className='w-full'>
         {
-          user.role === "Patient" ? (
+          user?.type === "Patient" ? (
             <section className="grid grid-cols-1 gap-5 md:grid-cols-2 text-dark">
             {ClickableCards.map((card, index) => (
               <ClickableCard
@@ -247,7 +248,7 @@ const ConsultationTypeList = () => {
               />
                   </section>
 
-          ): user.role === "Doctor"? (
+          ): user?.type === "Doctor"? (
             <DoctorDashboard/>
           ): ''
         }

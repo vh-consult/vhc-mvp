@@ -6,7 +6,7 @@ import Loader from "@/components/general/Loader"; //-
 import { useParams } from "next/navigation"; //-
 import { getUser } from "@/lib/actions/user.actions"; //-
 import Cookies from "js-cookie"; // Import the js-cookie library//+
-import { IUser } from "@/stores/user-store";
+import { IUser, useUserStore } from "@/stores/user-store";
 
 interface IHistory {
   activity: string;
@@ -21,17 +21,7 @@ interface IHistory {
 
 const OverviewPage = () => {
   const { id } = useParams();
-  const [user, setUser] = useState<IUser>();
-  console.log(id);
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = await getUser(id as string);
-      Cookies.set("user", JSON.stringify(user));
-      setUser(user);
-    };
-    fetchData();
-  });
-
+  const {user} = useUserStore()
   return (
     <div>
       {user!.type === undefined ? (

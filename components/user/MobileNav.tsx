@@ -7,16 +7,17 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
 import Cookies from "js-cookie"
+import { useUserStore } from "@/stores/user-store"
 
 const MobileNav = ({navigations}: HeaderProps) => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const userNavs = [
     {
-      route: `${user?.id}/account`,
+      route: `${user?._id}/account`,
       label: 'Account'
     },
     {
-      route: `${user?.id}/history`,
+      route: `${user?._id}/history`,
       label: 'History'
     },
   ]

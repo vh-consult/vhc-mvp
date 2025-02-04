@@ -7,14 +7,15 @@ import Loader from '../general/Loader'
 import { subscribeToNewsletter } from '@/lib/actions/user.actions'
 import { toast } from '../ui/use-toast'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 const NewsLetterSubscription = () => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const subscribeTONewsletter = async () =>{
         try{
             setIsLoading(true)
-            const response = await subscribeToNewsletter(user?.id as string)
+            const response = await subscribeToNewsletter(user?._id as string)
             toast({title: response?.message})
         } catch{
           toast({title: 'failed to add you to newsletter'})

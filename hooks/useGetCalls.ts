@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 export const useGetCalls = () => {
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const client = useStreamVideoClient();
   const [calls, setCalls] = useState<Call[]>();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +37,7 @@ export const useGetCalls = () => {
     };
 
     loadCalls();
-  }, [client, user?.id]);
+  }, [client, user?._id]);
 
   const now = new Date();
 
@@ -49,7 +50,7 @@ export const useGetCalls = () => {
   })
 
   const upcoming = async () => {
-    const calls = await fetchUpcoming(user?.id as string)
+    const calls = await fetchUpcoming(user?._id as string)
   }
 
   return { endedCalls, upcomingCalls, callRecordings: calls, isLoading }

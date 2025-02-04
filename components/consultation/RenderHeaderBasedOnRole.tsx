@@ -2,6 +2,7 @@
 import React from 'react'
 import Header from '../user/Header';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 const consultationHeaderLinks = {
     patient: [
@@ -35,11 +36,11 @@ const consultationHeaderLinks = {
 };
 
 const RenderHeaderBasedOnRole = () => {
-    const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
     return (
     <Header
         navigations={
-            user.role === "Patient" ? consultationHeaderLinks.patient: consultationHeaderLinks.doctor
+            user?.type === "Patient" ? consultationHeaderLinks.patient: consultationHeaderLinks.doctor
     }
   />
   )

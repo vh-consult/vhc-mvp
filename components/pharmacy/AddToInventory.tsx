@@ -12,6 +12,7 @@ import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 
 const initialValues = {
   name: '',
@@ -27,7 +28,7 @@ const initialValues = {
 const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
   const [values, setValues] = useState(initialValues);
   const [loading, setLoading] = useState<boolean>(false)
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const {edgestore} = useEdgeStore()
   const [file, setFile] = useState<File>()
   
@@ -37,7 +38,7 @@ const AddToInventory = ({show, onClose}: {show:boolean, onClose:()=>void}) => {
       const res = await edgestore.myPublicImages.upload({file})
       values.image = res.url
     }
-    await addToInventory(user?.id as string, values )
+    await addToInventory(user?._id as string, values )
     setLoading(false)
     toast({title: 'Drug uploaded successfully'})
     

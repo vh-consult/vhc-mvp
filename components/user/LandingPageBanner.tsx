@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 import MedCard from '../patient/MedCard';
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store';
 const LandingPageBanner = () => {
   const [currentTime, setCurrentTime] = useState<string>('')
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
 
   const [dateToday, setDateToday] = useState<string>('')
   useEffect(() => {
@@ -36,18 +37,18 @@ const LandingPageBanner = () => {
               </h1>
                   <h2 className="bg-secondary rounded py-2 text-center text-base mb-4 font-normal">
               {
-                user.role === "Patient"? (
+                user?.type === "Patient"? (
                     "Medication Alert"
-                  ): user!.role === "Doctor" ? ("Upcoming Appointments"
+                  ): user!.type === "Doctor" ? ("Upcoming Appointments"
                   ): ''
                 }
                   </h2> 
             </div>
             <div className="">
                 {
-                  user!.role === "Doctor" ? (
-                    <DoctorAppointmentList id={user?.id}/>
-                  ): user!.role === "Patient"? (
+                  user!.type === "Doctor" ? (
+                    <DoctorAppointmentList id={user?._id as string}/>
+                  ): user!.type === "Patient"? (
                     <MedCard 
                     imageSrc={ '/images/drug 5.jpg'}
                     drug={ 'Zimadal 50mg'}

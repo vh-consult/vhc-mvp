@@ -11,9 +11,10 @@ import PharmacyAdmin from "../database/models/pharmacyAdmin.model";
 import { z } from "zod";
 import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
-import { redirect } from "next/navigation";
-import Logout from "@/components/general/Logout";
 import { IUser } from "@/stores/user-store";
+import { cookies } from 'next/headers'
+
+const cookieStore = await cookies()
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -35,7 +36,6 @@ const registerSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters" })
     .trim(),
 });
-
 // CREATE
 export async function createUser(prevState: any, formData: FormData) {
   try {
@@ -74,6 +74,7 @@ export async function createUser(prevState: any, formData: FormData) {
     }
     console.log(newUser)
     await createSession(newUser._id);
+    cookieStore.set("userId", newUser.id, { secure: true })
     return {success: result?.success, data: JSON.parse(JSON.stringify(newUser))};
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
@@ -247,7 +248,14 @@ export async function fetchUserHistory(userId: string) {
 
 export async function currentUser() {
   try {
-    return { id: "33yh3y" };
+    const userId = cookieStore.get("userId");
+
+    if (!userId) return null;
+
+    const user = await User.findById(userId);
+    if (!user) return null;
+
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
   }

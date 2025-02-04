@@ -10,6 +10,7 @@ import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
 import { postMeds } from '@/lib/actions/medication.actions'
 import Cookies from "js-cookie"
+import { useUserStore } from '@/stores/user-store'
 
 export interface DrugPrescriptionParams {
   drug: string;
@@ -30,11 +31,11 @@ const PrescriptionForm = (
   const [values, setValues] = useState<DrugPrescriptionParams>(initialValues)
   const [loading, setLoading] = useState<boolean>(false)
   const [drugsAdded, setDrugsAdded] = useState<DrugPrescriptionParams[]>([])
-  const user = JSON.parse(Cookies.get("user") || '{}');
+  const {user} = useUserStore()
   const handleDone = async (e: FormEvent) => {
     e.preventDefault()
     setPrescribedDrugs(drugsAdded)
-    const uploadedMeda = await postMeds(user?.id as string, consultationId, drugsAdded)
+    const uploadedMeda = await postMeds(user?._id as string, consultationId, drugsAdded)
     isOpen = false
     toast({title: "drugs added"})  
   }
