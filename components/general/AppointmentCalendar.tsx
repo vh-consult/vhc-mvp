@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { AppointmentParams, fetchAcceptedAppointments } from '@/lib/actions/appointment.actions';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 

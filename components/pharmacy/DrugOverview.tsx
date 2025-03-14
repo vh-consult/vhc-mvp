@@ -11,7 +11,7 @@ import {
 import PayWithPaystack from '../general/PayWithPaystack';
 import { addToCart, OrderData, placeOrder } from '@/lib/actions/order.actions';
 import { toast } from '../ui/use-toast';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 interface DrugProps {

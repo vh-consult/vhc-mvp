@@ -9,7 +9,7 @@ import { Dialog, DialogContent } from '../ui/dialog'
 import { GoIssueOpened } from 'react-icons/go'
 import DrugPrescribed from './DrugPrescribed'
 import { postMeds } from '@/lib/actions/medication.actions'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 export interface DrugPrescriptionParams {

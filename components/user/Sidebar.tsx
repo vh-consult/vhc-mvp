@@ -9,7 +9,7 @@ import { BsDatabase, BsHospital, BsPeople } from 'react-icons/bs'
 import { CgProfile } from 'react-icons/cg'
 import {  MdMeetingRoom, MdOutlineSchedule, MdOutlineSettings } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 interface SideNavProps {

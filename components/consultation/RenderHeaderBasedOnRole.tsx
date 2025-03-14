@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Header from '../user/Header';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 const consultationHeaderLinks = {

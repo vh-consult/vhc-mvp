@@ -2,7 +2,7 @@
 import { fetchMeds } from '@/lib/actions/medication.actions'
 import React, {useEffect, useState} from 'react'
 import MedCard, { MedCardProps } from './MedCard'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 const data =[

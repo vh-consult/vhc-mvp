@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { HeaderProps } from "./Header"
-import Cookies from "js-cookie"
+
 import { useUserStore } from "@/stores/user-store"
 
 const MobileNav = ({navigations}: HeaderProps) => {

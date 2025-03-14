@@ -9,7 +9,6 @@ import Alert from '@/components/consultation/Alert';
 import ConsultationSetup from '@/components/consultation/ConsultationSetup';
 import ConsultationRoom from '@/components/consultation/ConsultationRoom';
 import Loader from '@/components/general/Loader';
-import Cookies from "js-cookie"
 import { useUserStore } from '@/stores/user-store';
 const ConsultationPage = () => {
   const { id } = useParams();

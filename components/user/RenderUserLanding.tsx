@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import ClickableCard from "../general/ClickableCard";
 import Loader from "../general/Loader";
-import Cookies from "js-cookie";
+;
 import { useUserStore } from "@/stores/user-store";
 export interface ClickableCardProps {
   title: string;

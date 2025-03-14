@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import DoctorAppointmentList from '../doctor/DoctorAppointmentList';
 import MedCard from '../patient/MedCard';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 const LandingPageBanner = () => {
   const [currentTime, setCurrentTime] = useState<string>('')

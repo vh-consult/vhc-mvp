@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import Loader from '../general/Loader'
 import { subscribeToNewsletter } from '@/lib/actions/user.actions'
 import { toast } from '../ui/use-toast'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 const NewsLetterSubscription = () => {

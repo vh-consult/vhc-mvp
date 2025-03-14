@@ -8,7 +8,7 @@ import { BiSolidInstitution } from 'react-icons/bi'
 import { FaAffiliatetheme } from 'react-icons/fa'
 import { MdMedicalInformation, MdMeetingRoom, MdMessage, MdOutlineHome, MdOutlineInventory, MdOutlineLocalPharmacy, MdOutlineSettings, MdPeopleOutline } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 export interface SideNavProps {

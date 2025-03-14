@@ -14,7 +14,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import {  newAppointment, searchHost } from '@/lib/actions/appointment.actions';
 import { useDebouncedCallback } from 'use-debounce';
 import DoctorDashboard from '../doctor/DoctorDashboard';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 const initialValues = {

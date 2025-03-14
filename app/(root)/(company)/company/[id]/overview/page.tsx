@@ -4,8 +4,6 @@ import PharmacyOverview from "@/components/company/PharmacyOverview"; //-
 import HospitalOverview from "@/components/company/HospitalOverview"; //-
 import Loader from "@/components/general/Loader"; //-
 import { useParams } from "next/navigation"; //-
-import { getUser } from "@/lib/actions/user.actions"; //-
-import Cookies from "js-cookie"; // Import the js-cookie library//+
 import { IUser, useUserStore } from "@/stores/user-store";
 
 interface IHistory {

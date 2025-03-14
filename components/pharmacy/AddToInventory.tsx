@@ -11,7 +11,7 @@ import Loader from '../general/Loader';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
 import ReactDatePicker from 'react-datepicker';
 import { Label } from '../ui/label';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 const initialValues = {

@@ -10,7 +10,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { createBlog } from '@/lib/actions/blog.actions'
 import { SingleImageDropzone } from '@/components/general/SingleImageDropzone'
 import { useEdgeStore } from '@/lib/edgestore';
-import Cookies from "js-cookie"
 import { useUserStore } from '@/stores/user-store'
 // Define Zod schema
 const blogPostSchema = z.object({

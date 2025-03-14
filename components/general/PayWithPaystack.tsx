@@ -2,7 +2,7 @@
 import React from 'react';
 import { PaystackButton } from 'react-paystack';
 import { toast } from '../ui/use-toast';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 const PayWithPaystack = (

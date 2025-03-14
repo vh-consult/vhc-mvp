@@ -1,15 +1,22 @@
+"use client"
 import BlogContent from '@/components/blog/BlogContent'
 import BlogPostSnippet from '@/components/blog/BlogPostSnippet'
 import NewsLetterSubscription from '@/components/general/NewsLetterSubscription'
 import { getBlogById } from '@/lib/actions/blog.actions'
-import { currentUser } from '@/lib/actions/user.actions'
 import { BlogParams } from '@/lib/database/models/blog.model'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
-const BlogPage = async ({params}: {params: {id: string}}) => {
-  // const user = await currentUser();
-  const blog:BlogParams|any = await getBlogById(params.id)
-
+const BlogPage =  () => {
+  const router = useRouter()
+  const [blog, setBlog] = useState<BlogParams|any>()
+  useEffect(()=>{
+    const fetch = async () => {
+      const blog:BlogParams|any = await getBlogById(router.query.id as string)
+      setBlog(blog)
+    }
+    fetch()
+  })
   return (
     <div className='relative w-full py-8 min-h-screen flex justify-center'>
       <div className="w-[60%]">

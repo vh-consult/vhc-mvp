@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useGetCallById } from "@/hooks/useGetCallById";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import Cookies from "js-cookie";
 import { useUserStore } from "@/stores/user-store";
 const Table = ({
   title,

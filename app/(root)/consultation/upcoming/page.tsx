@@ -2,7 +2,6 @@
 import CallList from '@/components/consultation/CallList';
 import UpcomingConsultationCard from '@/components/consultation/UpcomingConsultationCard';
 import { useUserStore } from '@/stores/user-store';
-import Cookies from "js-cookie"
 const UpcomingPage =  () => {
   const {user} = useUserStore()
 

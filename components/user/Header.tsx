@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import SearchBar from '../general/SearchBar'
 import { MdOutlineNotifications } from 'react-icons/md'
-import Cookies from "js-cookie"
+
 import UserButton from './UserButton'
 import { useUserStore } from '@/stores/user-store'
 

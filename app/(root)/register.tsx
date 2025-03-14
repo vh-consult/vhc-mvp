@@ -47,7 +47,7 @@ const Register = ({
       // formRef.current?.reset();
       router.push("/landing");
     }
-  }, [state]);
+  }, [state, router, user]);
   return (
     <FormModal
       isOpen={show}

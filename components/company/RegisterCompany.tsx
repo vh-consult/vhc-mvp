@@ -21,7 +21,6 @@ import Loader from '../general/Loader';
 import { useEdgeStore } from '@/lib/edgestore';
 import { Toast } from '../ui/toast';
 import { SingleImageDropzone } from '../general/SingleImageDropzone';
-import Cookies from "js-cookie"
 import { useUserStore } from '@/stores/user-store';
 
   const setupSchema = z.object({

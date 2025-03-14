@@ -20,8 +20,7 @@ const results = [
 
 
 
-const CompanyOrdersPage = ({params}:{params: {id: string}}) => {
-  // const results = await retrieveShopOrders(params.id)
+const CompanyOrdersPage = () => {
   return (
     <div className='grid grid-cols-2 gap-4'>
       {

@@ -8,7 +8,7 @@ import { BiPlus } from 'react-icons/bi'
 import { postConsultationForm } from '@/lib/actions/consultation.actions'
 import DrugPrescribed from '../pharmacy/DrugPrescribed'
 import { toast } from '../ui/use-toast'
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store'
 
 const ConsultationForm = ({consultationId}: {consultationId:string}) => {

@@ -22,7 +22,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       formRef.current?.reset();
       router.push('/landing')
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <FormModal

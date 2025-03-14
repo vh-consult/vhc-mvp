@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { fetchUpcoming } from '@/lib/actions/doctor.actions';
-import Cookies from "js-cookie"
+
 import { useUserStore } from '@/stores/user-store';
 
 export const useGetCalls = () => {

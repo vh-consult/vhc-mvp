@@ -8,7 +8,7 @@ import MobileNav from "../user/MobileNav";
 import UserButton from "../user/UserButton";
 import Login from "@/app/(root)/login";
 import Register from "@/app/(root)/register";
-import Cookies from "js-cookie";
+;
 import { useUserStore } from "@/stores/user-store";
 interface NavLink {
   label: string;
