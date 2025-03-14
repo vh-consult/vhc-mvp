@@ -38,11 +38,11 @@ const Register = ({
   const [value, setValue] = useState(initial);
   const [state, action, isPending] = useActionState(createUser, undefined);
   // const formRef = useRef<HTMLFormElement>(null);
-  const { user, update } = useUserStore();
+  const { user, setUser } = useUserStore();
   const router = useRouter();
   useEffect(() => {
     if (state?.success && state?.data) {
-   useUserStore.getState().update(state.data);      
+   useUserStore.getState().setUser(state.data);      
    console.log(user);
       // formRef.current?.reset();
       router.push("/landing");

@@ -10,7 +10,7 @@ import { useUserStore } from "@/stores/user-store";
 import { useRouter } from "next/navigation";
 
 const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const { user, update } = useUserStore();
+  const { user, setUser } = useUserStore();
   const [state, action, isPending] = useActionState(login, undefined);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -18,7 +18,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (state?.message === "success" && state?.data) {
-      useUserStore.getState().update(state.data);
+      useUserStore.getState().setUser(state.data);
       formRef.current?.reset();
       router.push('/landing')
     }

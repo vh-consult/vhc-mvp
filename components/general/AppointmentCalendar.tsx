@@ -12,7 +12,7 @@ const AppointmentCalendar = () => {
   const {user} = useUserStore()
   useEffect(()=> {
     const getAppointments = async () => {
-      const appointments = await fetchAcceptedAppointments(user?.id as string)
+      const appointments = await fetchAcceptedAppointments(user?._id as string)
       console.log(appointments)
       setAppointments(appointments)
     }
