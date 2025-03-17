@@ -27,15 +27,15 @@ const LandingPageBanner = () => {
     return () => clearInterval(interval)
   }, [])
   return (
-            <div className="flex h-[calc(100vh-90px)] flex-col  max-md:px-2 max-md:py-4 lg:p-5">
+            <div className="flex h-[calc(100vh-90px)] bg-gray-100 flex-col  max-md:px-2 max-md:py-4 lg:p-5">
             <div  className="flex flex-col gap-2">
-              <p className="text-base font-medium text-dark lg:text-lg leading-tight">
+              {/* <p className="text-base font-medium text-dark lg:text-lg leading-tight">
                 {dateToday}
               </p>
               <h1 className="text-2xl text-dark font-extrabold lg:text-3xl leading-none">
                 {currentTime}
-              </h1>
-                  <h2 className="bg-secondary rounded py-2 text-center text-base mb-4 font-normal">
+              </h1> */}
+                  <h2 className="bg-gray-50 rounded py-2 text-center text-base mb-4 font-normal">
               {
                 user?.type === "Patient"? (
                     "Medication Alert"

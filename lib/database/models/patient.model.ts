@@ -11,6 +11,14 @@ const PatientSchema = new Schema({
     orders: [{type: Schema.Types.ObjectId,ref: 'Order'}],
     savedBlogs: [{ type: Schema.Types.ObjectId, ref: 'Blog'}],
     subscribedToNewsletter: {type: Boolean, default: false},
+    history: [
+        {
+          diagnosis: String,
+          symptoms: [String],
+          medications: [String],
+          date: { type: Date, default: Date.now },
+        },
+      ],
 });
 
 const Patient =  models?.Patient || User.discriminator("Patient", PatientSchema);
