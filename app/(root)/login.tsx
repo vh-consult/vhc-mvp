@@ -43,7 +43,7 @@ const Login = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
       </div>
       <span className="flex flex-center text-lg font-semibold italic">OR</span>
       <div>
-        <form ref={formRef} action={action} className="space-y-2">
+        <form action={action} className="space-y-2">
           <>
             <Input
               name="email"

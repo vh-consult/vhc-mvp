@@ -1,17 +1,18 @@
+"use client"
 import SearchBar from '@/components/general/SearchBar'
 import PatientList from '@/components/doctor/PatientList'
 import React from 'react'
 import { fetchDoctorClients } from '@/lib/actions/doctor.actions'
-import { currentUser } from '@/lib/actions/user.actions'
+import { useUserStore } from '@/stores/user-store'
 
 const headers = [
   "Name", "Gender", "Age", "Email", "Actions"
 ]
 
 const Clients = async () => {
-  const user = await currentUser()
+  const {user} = useUserStore()
 
-  const clients = await fetchDoctorClients(user?.id!)
+  const clients = await fetchDoctorClients(user?._id!)
   return (
     <div className='px-16'>
       <div className="flex items-center justify-between mb-2">

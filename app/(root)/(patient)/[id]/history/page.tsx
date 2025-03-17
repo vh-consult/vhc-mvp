@@ -1,6 +1,8 @@
+"use client"
 import HistoryCard from '@/components/patient/HistoryCard'
-import { currentUser, fetchUserHistory } from '@/lib/actions/user.actions'
-import React from 'react'
+import { fetchUserHistory } from '@/lib/actions/user.actions'
+import { useUserStore } from '@/stores/user-store'
+import React, { useEffect, useState } from 'react'
 
 const userHistoryList = [
     {
@@ -165,8 +167,23 @@ const userHistoryList = [
     },
   ]
 const UserHistoryPage = async () => {
-  const user = await currentUser()
-  const history = await fetchUserHistory(user?.id as string)
+  const [records, setRecords] = useState()
+  const {user} =  useUserStore()
+  useEffect(()=>{
+    if(!user) return
+    const fetch = async () => {
+      const response = await fetchUserHistory(user?._id as string)
+      return response
+    }
+    fetch()
+     .then(data => {
+        setRecords(data)
+      })
+     .catch(error => {
+        console.error('Error fetching user history:', error)
+      })
+  }, [])
+  const history = await fetchUserHistory(user?._id as string)
   return (
     <div>
     <div className='w-full flex  items-center px-6 sticky top-[64px]  h-[70px] mb-2 bg-white rounded-lg'>

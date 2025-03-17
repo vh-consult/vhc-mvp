@@ -1,15 +1,16 @@
+"use client"
 import PayWithPaystack from '@/components/general/PayWithPaystack'
 import CheckoutSummary from '@/components/pharmacy/CheckoutSummary'
 import DeliveryInfoCard from '@/components/pharmacy/DeliveryInfoCard'
 import ItemsInCart from '@/components/pharmacy/ItemsInCart'
 import ShippingForm from '@/components/pharmacy/ShippingForm'
 import { fetchItemsInCart } from '@/lib/actions/order.actions'
-import { currentUser } from '@/lib/actions/user.actions'
+import { useUserStore } from '@/stores/user-store'
 import React from 'react'
 
 const CartPage = async () => {
-  const user = await currentUser()
-  const cartItems = await fetchItemsInCart(user?.id as string)
+  const {user} = useUserStore()
+  const cartItems = await fetchItemsInCart(user?._id as string)
   return (
     <div className='py-3 px-10 flex justify-between'>
       <div className="w-[67%] flex flex-col flex-between">

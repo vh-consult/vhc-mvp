@@ -19,6 +19,9 @@ export interface IUser {
   createdAt: Date;
   updatedAt: Date;
   subscribedToNewsletter: boolean;
+  affiliateHospital: string | null;
+  personalPhysician: string | null;
+
 }
 
 interface UserStore {

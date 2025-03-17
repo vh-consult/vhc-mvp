@@ -2,6 +2,7 @@
 
 import { StreamClient } from "@stream-io/node-sdk";
 import { currentUser } from "./user.actions";
+import { IUser } from "@/stores/user-store";
 
 const apikey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 const apiSecret = process.env.STREAM_SECRET;

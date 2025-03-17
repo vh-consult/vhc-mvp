@@ -1,20 +1,12 @@
+"use client"
 import AppointmentCard from '@/components/consultation/AppointmentCard'
-import AppointmentCalendar from '@/components/general/AppointmentCalendar'
 import { fetchAcceptedAppointments } from '@/lib/actions/appointment.actions'
-import { currentUser } from '@/lib/actions/user.actions'
+import { useUserStore } from '@/stores/user-store'
 import React from 'react'
 
-const AppointmentsHeader = () => {
-  return(
-    <>
-    
-    </>
-  )
-}
-
 const AppointmentsPage = async () => {
-  const user =await currentUser()
-  const allAppointments = await fetchAcceptedAppointments(user?.id!)
+  const {user} = useUserStore()
+  const allAppointments = await fetchAcceptedAppointments(user?._id!)
   return (
     <main className="">
       <h1 className="text-4xl font-semibold">Booked Appointments</h1>

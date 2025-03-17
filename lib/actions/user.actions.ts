@@ -12,9 +12,8 @@ import { z } from "zod";
 import * as bcrypt from "bcrypt";
 import { createSession, deleteSession } from "../session";
 import { IUser } from "@/stores/user-store";
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
-const cookieStore = await cookies()
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
   password: z
@@ -29,7 +28,7 @@ const registerSchema = z.object({
   lastName: z.string({ message: "Invalid" }).trim(),
   country: z.string({ message: "Invalid" }).trim(),
   dob: z.string({ message: "Invalid" }),
-  role: z.enum(["patient","pharmacyAdmin", "doctor"]),
+  role: z.enum(["patient", "pharmacyAdmin", "doctor"]),
   gender: z.enum(["male", "female"]),
   password: z
     .string()
@@ -39,43 +38,70 @@ const registerSchema = z.object({
 // CREATE
 export async function createUser(prevState: any, formData: FormData) {
   try {
-    console.log(formData)
+    const cookieStore = await cookies();
+
+    console.log(formData);
     await connectToDatabase();
     const result = registerSchema.safeParse(Object.fromEntries(formData));
-    console.log(1)
+    console.log(1);
 
     if (!result.success) {
       return {
         errors: result.error.flatten().fieldErrors,
       };
     }
-    console.log(2)
+    console.log(2);
 
-    const { firstName, lastName, gender, dob, country, role, email, password } = result.data;
+    const { firstName, lastName, gender, dob, country, role, email, password } =
+      result.data;
     const hashedPassword = await bcrypt.hash(password, 10);
-    let newUser:IUser|any;
-    console.log(3)
+    let newUser: IUser | any;
+    console.log(3);
 
     switch (role) {
       case "patient":
-        newUser = await Patient.create({ firstName, dob, country, lastName, gender, email, password: hashedPassword });
+        newUser = await Patient.create({
+          firstName,
+          dob,
+          country,
+          lastName,
+          gender,
+          email,
+          password: hashedPassword,
+        });
         break;
       case "pharmacyAdmin":
         newUser = await PharmacyAdmin.create({
-          firstName, lastName, gender, email, dob, country,
+          firstName,
+          lastName,
+          gender,
+          email,
+          dob,
+          country,
           password: hashedPassword,
         });
         break;
       case "doctor":
-        newUser = await Doctor.create({ firstName, dob, country, lastName, gender, email, password: hashedPassword });
+        newUser = await Doctor.create({
+          firstName,
+          dob,
+          country,
+          lastName,
+          gender,
+          email,
+          password: hashedPassword,
+        });
         break;
       default:
         throw new Error("Invalid role");
     }
-    console.log(newUser)
+    console.log(newUser);
     await createSession(newUser._id);
-    cookieStore.set("userId", newUser.id, { secure: true })
-    return {success: result?.success, data: JSON.parse(JSON.stringify(newUser))};
+    cookieStore.set("userId", newUser.id, { secure: true });
+    return {
+      success: result?.success,
+      data: JSON.parse(JSON.stringify(newUser)),
+    };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -86,23 +112,23 @@ export async function createUser(prevState: any, formData: FormData) {
 
 export async function login(prevState: any, formData: FormData) {
   try {
-    console.log(formData)
+    console.log(formData);
     await connectToDatabase();
     const result = loginSchema.safeParse(Object.fromEntries(formData));
 
     if (!result.success) {
-    console.log(1)
+      console.log(1);
 
       return {
         errors: result.error.flatten().fieldErrors,
       };
     }
-    console.log(2)
+    console.log(2);
 
     const { email, password } = result.data;
 
     const existingUser = await User.findOne({ email });
-    console.log(3)
+    console.log(3);
 
     if (!existingUser) {
       return {
@@ -111,12 +137,12 @@ export async function login(prevState: any, formData: FormData) {
         },
       };
     }
-    console.log(4)
+    console.log(4);
 
     const comparison = await bcrypt.compare(password, existingUser.password);
 
     if (!comparison) {
-    console.log(5)
+      console.log(5);
 
       return {
         errors: {
@@ -124,10 +150,13 @@ export async function login(prevState: any, formData: FormData) {
         },
       };
     }
-    console.log(6 )
+    console.log(6);
     await createSession(existingUser._id);
-    
-    return {message: "success", data: JSON.parse(JSON.stringify(existingUser))};
+
+    return {
+      message: "success",
+      data: JSON.parse(JSON.stringify(existingUser)),
+    };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error; // Let Next.js handle the redirect
@@ -138,10 +167,10 @@ export async function login(prevState: any, formData: FormData) {
 
 export async function logout() {
   try {
-    console.log('out')
+    console.log("out");
     await deleteSession();
   } catch (error) {
-    handleError(error)
+    handleError(error);
   }
 }
 
@@ -248,6 +277,8 @@ export async function fetchUserHistory(userId: string) {
 
 export async function currentUser() {
   try {
+    const cookieStore = await cookies();
+
     const userId = cookieStore.get("userId");
 
     if (!userId) return null;
@@ -260,4 +291,3 @@ export async function currentUser() {
     handleError(error);
   }
 }
-

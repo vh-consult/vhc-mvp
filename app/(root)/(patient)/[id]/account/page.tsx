@@ -1,25 +1,25 @@
-import { currentUser, getUser } from '@/lib/actions/user.actions'
+"use client"
+import { useUserStore } from '@/stores/user-store'
 import Image from 'next/image'
 import React from 'react'
 
-const Account = async () => {
-  const user = await currentUser()
-  const fetchedUser = await getUser(user?.id as string)
+const Account = () => {
+  const {user} = useUserStore()
   const cardsContent = {
     personalDetails: {
       header: 'Personal Details',
       contents: [
         {
           title: 'Full Name',
-          body: fetchedUser?.firstName + ' ' + fetchedUser?.lastName
+          body: user?.firstName + ' ' + user?.lastName
         },
         {
           title: 'Date of Birth',
-          body: new Date(fetchedUser?.dateOfBirth).toLocaleDateString()
+          body: new Date(user?.dob as Date).toLocaleDateString()
         },
         {
           title: 'Gender',
-          body: fetchedUser?.gender
+          body: user?.gender
         },
         {
           title: 'Language(s) Spoken',
@@ -27,7 +27,7 @@ const Account = async () => {
         },
         {
           title: 'Country',
-          body: fetchedUser?.country
+          body: user?.country
         },
         {
           title: 'National ID',
@@ -40,11 +40,11 @@ const Account = async () => {
     contents: [
       {
         title: 'hospital of affiliation',
-        body: fetchedUser?.affiliateHospital
+        body: user?.affiliateHospital
       },
       {
         title: 'personal physician',
-        body: fetchedUser?.personalPhysician
+        body: user?.personalPhysician
       },
       {
         title: 'insurance subscription',
@@ -112,7 +112,7 @@ const Account = async () => {
           <Image
             width={150}
             height={150} 
-            src={fetchedUser?.photo} 
+            src={user?.photo as string} 
             alt="" 
             className='w-[185px] h-[185px] object-cover 
             rounded-full'
