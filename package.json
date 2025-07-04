@@ -41,7 +41,7 @@
     "leaflet-geosearch": "^4.0.0",
     "lucide-react": "^0.383.0",
     "mongoose": "^8.4.1",
-    "next": "^15.1.6",
+    "next": "^15.3.5",
     "next-auth": "^5.0.0-beta.25",
     "qs": "^6.12.1",
     "react": "^18",
