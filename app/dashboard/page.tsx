@@ -15,7 +15,13 @@ import {
   AlertTriangle,
   CheckCircle,
   Clock,
-  Pill
+  Pill,
+  Activity,
+  Calendar,
+  Star,
+  Heart,
+  Shield,
+  Zap
 } from "lucide-react"
 import { 
   BarChart, 
@@ -76,6 +82,34 @@ const lowStockItems = [
   { name: "Ibuprofen 200mg", current: 12, min: 25, status: "warning" },
   { name: "Paracetamol 500mg", current: 8, min: 30, status: "critical" },
   { name: "Vitamin D3", current: 15, min: 20, status: "warning" },
+]
+
+/**
+ * Expiring medications that need attention
+ */
+const expiringMedications = [
+  { name: "Insulin Glargine", expiry: "2024-02-15", daysLeft: 15, status: "warning" },
+  { name: "Amoxicillin 500mg", expiry: "2024-02-20", daysLeft: 20, status: "warning" },
+  { name: "Metformin 850mg", expiry: "2024-02-25", daysLeft: 25, status: "warning" },
+]
+
+/**
+ * Top selling products data
+ */
+const topProducts = [
+  { name: "Paracetamol 500mg", sales: 245, revenue: 1225 },
+  { name: "Ibuprofen 400mg", sales: 189, revenue: 945 },
+  { name: "Vitamin C 1000mg", sales: 156, revenue: 780 },
+  { name: "Aspirin 75mg", sales: 134, revenue: 670 },
+]
+
+/**
+ * Recent prescriptions data
+ */
+const recentPrescriptions = [
+  { id: 1, patient: "Sarah Johnson", medication: "Metformin 500mg", doctor: "Dr. Smith", status: "filled" },
+  { id: 2, patient: "Mike Wilson", medication: "Lisinopril 10mg", doctor: "Dr. Brown", status: "pending" },
+  { id: 3, patient: "Lisa Davis", medication: "Atorvastatin 20mg", doctor: "Dr. Lee", status: "filled" },
 ]
 
 /**
@@ -175,6 +209,65 @@ export default function DashboardPage() {
               <div className="text-2xl font-bold">1,234</div>
               <p className="text-xs text-muted-foreground">
                 <span className="text-red-600">-2.1%</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Metrics Row */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* Today's Revenue */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Today's Revenue</CardTitle>
+              <Activity className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">$2,847</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">+8.5%</span> vs yesterday
+              </p>
+            </CardContent>
+          </Card>
+          
+          {/* Pending Prescriptions */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Pending Rx</CardTitle>
+              <Clock className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">23</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-orange-600">3 urgent</span>
+              </p>
+            </CardContent>
+          </Card>
+          
+          {/* Customer Satisfaction */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Satisfaction</CardTitle>
+              <Star className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">4.8</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">+0.2</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+          
+          {/* System Health */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">System Health</CardTitle>
+              <Shield className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">99.9%</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">All systems operational</span>
               </p>
             </CardContent>
           </Card>
@@ -290,6 +383,97 @@ export default function DashboardPage() {
                         Reorder
                       </Button>
                     </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Dashboard Sections */}
+        <div className="grid gap-4 md:grid-cols-3">
+          {/* Expiring Medications */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-orange-500" />
+                Expiring Medications
+              </CardTitle>
+              <CardDescription>Medications expiring soon</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {expiringMedications.map((med, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">{med.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Expires: {med.expiry} ({med.daysLeft} days)
+                      </p>
+                    </div>
+                    <Badge variant="outline" className="text-xs">
+                      {med.status}
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Top Selling Products */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4 text-green-500" />
+                Top Products
+              </CardTitle>
+              <CardDescription>Best selling items this month</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {topProducts.map((product, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">{product.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {product.sales} units sold
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium">${product.revenue}</p>
+                      <p className="text-xs text-muted-foreground">revenue</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent Prescriptions */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Pill className="h-4 w-4 text-blue-500" />
+                Recent Prescriptions
+              </CardTitle>
+              <CardDescription>Latest prescription orders</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {recentPrescriptions.map((prescription) => (
+                  <div key={prescription.id} className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">{prescription.patient}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {prescription.medication} - {prescription.doctor}
+                      </p>
+                    </div>
+                    <Badge 
+                      variant={prescription.status === "filled" ? "default" : "secondary"}
+                      className="text-xs"
+                    >
+                      {prescription.status}
+                    </Badge>
                   </div>
                 ))}
               </div>
