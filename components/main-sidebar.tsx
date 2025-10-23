@@ -26,10 +26,16 @@ const navigation = [
     description: "Point of sale interface for processing transactions"
   },
   {
+    name: "Products",
+    href: "/products",
+    icon: Package,
+    description: "Product catalog and inventory management"
+  },
+  {
     name: "Inventory",
     href: "/inventory",
     icon: Package,
-    description: "Manage stock levels, suppliers, and product information"
+    description: "Stock levels, suppliers, and warehouse management"
   },
   {
     name: "Customers",
